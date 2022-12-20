@@ -76,6 +76,17 @@ nav ul li {
 	display: inline;
 	list-style-type: none;
 }
+.button {
+	border: solid 1px;
+	border-radius: 12px;
+	display: inline-block;
+	font-weight: bold;
+	padding: .5em 1em .5em 1em;
+	text-decoration: none;
+}
+.button.green {
+	color: var(--color-green);
+}
 #colophon {
 	background: var(--color-green);
 	color: var(--color-white);

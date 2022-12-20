@@ -33,3 +33,26 @@
     font-size: var(--font-size-big);
     margin-left: 64px;
 }
+.countup-box-stage {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding: 120px 0 120px 0;
+}
+.countup-boxes {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 120px;
+}
+.box {
+    text-align: center;
+}
+.box h4 {
+    font-size: var(--font-size-jumbo);
+}
+.box .label {
+    font-size: var(--font-size-body);
+}
+.countup-text {
+    font-size: var(--font-size-big);
+    line-height: 1.5em;
+}

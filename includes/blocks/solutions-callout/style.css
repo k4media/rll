@@ -1,0 +1,41 @@
+.solutions-callout-stage {
+    background-color: #F4F7F7;
+    padding: 120px 0 120px 0;
+    text-align: center;
+}
+.solutions-callout h2 {
+    font-size: var(--font-size-huge);
+    font-weight: 700;
+}
+.solutions-callout h3 {
+    color: var(--color-gray);
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.4em;
+    margin: 1em auto 2em auto;
+    width: 24em;
+}
+.solutions-callout .solutions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    text-align: left;
+}
+.solution {
+    align-items: center;
+    display: flex;
+    height: 48px;
+}
+.solution a {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-large);
+    text-decoration: none;
+}
+.solution img {
+    height: 16px;
+    margin-right: 1em;
+    width: 16px;
+}
+.solutions-callout-stage .button {
+    margin: 2em auto 0 auto;
+}
