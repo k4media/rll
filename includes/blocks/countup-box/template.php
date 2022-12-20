@@ -1,7 +1,6 @@
 <?php
 
      // https://github.com/DarioCorno/counterUp
-     // wp_enqueue_script('countup', get_stylesheet_directory_uri() . '/assets/js/countup.js', array(), false, true );
 
      // get fields
      if ( function_exists('get_fields') ) {
@@ -55,18 +54,21 @@
 </div>
 <script src='<?php  echo get_stylesheet_directory_uri() ?>/assets/js/countup.js' id='countup'></script>
 <script>
-     var cu = new counterUp({
-        selector: '.countup',
-        duration: 1000,
-        intvalues: true,
-        prepend: '',
-        append: '',
-        interval:50
-    });
-    var stage = document.getElementById("countup-boxes");
-     window.onscroll = function() {
-          if ( isScrolledIntoView(stage) ) {
+var cu = new counterUp({
+     selector: '.countup',
+     duration: 2000,
+     intvalues: true,
+     prepend: '',
+     append: '',
+     interval:50
+});
+const observer = new IntersectionObserver(entries => {
+     entries.forEach(entry => {
+          const intersecting = entry.isIntersecting;
+          if ( entry.isIntersecting ) {
                cu.start();
           }
-     };
+     })
+}, { threshold: .5 } )
+observer.observe(document.getElementById("countup-boxes"))
 </script>

@@ -6,7 +6,7 @@
 .countup-boxes {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 120px;
+    padding-bottom: 120px;
 }
 .box {
     text-align: center;
