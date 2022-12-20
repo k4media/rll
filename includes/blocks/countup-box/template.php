@@ -21,6 +21,7 @@
      }
 
 ?>
-<div id="page-hero" class="<?php echo $class ?>" style="background-image:url(<?php if ( isset($image['url']) ) { echo $image['url']; } ?>)">
+
+<div id="page-hero" class="<?php echo $class ?>" style="background-image:url(<?php if ( isset($image['url']) ) { echo $image['url'] } ?>)">
      <div class="fp-hero-title"><h2><?php echo $title ?></h2></div>
 </div>

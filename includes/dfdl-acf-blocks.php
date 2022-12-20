@@ -13,3 +13,12 @@ function register_acf_blocks() {
 		register_block_type( $file );
 	}
 }
+
+// Add DFDL block category
+add_filter( 'block_categories_all' , function( $categories ) {
+	$categories[] = array(
+		'slug'  => 'dfdl-block',
+		'title' => 'DFDL'
+	);
+	return $categories;
+} );

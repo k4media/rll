@@ -1,25 +1,11 @@
 <?php
 
 /**
- * Enqueue scripts and styles.
+ * Functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
  */
-add_action( 'wp_enqueue_scripts', 'dfdl_scripts' );
-function dfdl_scripts() {
-
-	// Theme Stylesheet
-	$filetime = filemtime( get_stylesheet_directory() . '/style.css');
-	wp_enqueue_style('dfdl', get_stylesheet_directory_uri() . '/style.css', false, $filetime, 'all');
-
-	// Theme JavaScript
-	$filetime = filemtime( get_stylesheet_directory() . '/assets/js/dfdl.js');
-	wp_enqueue_script('dfdl', get_stylesheet_directory_uri() . '/assets/js/dfdl.js', array(), $filetime, true );
-
-	$params = array(
-		'ajaxurl' => admin_url( 'admin-ajax.php' )
-	);
-	wp_localize_script( 'dfdl', 'ajax_object', $params);
-
-}
 
 /**
  * Theme setup
@@ -53,8 +39,8 @@ function dfdl_theme_setup() {
 	);
 
 	/*
-	 * Switch default core markup for search form, comment form, and comments
-	 * to output valid HTML5.
+	 * Switch default core markup for search form, comment form,
+	 * and comments to output valid HTML5.
 	 */
 	add_theme_support(
 		'html5',
@@ -77,45 +63,45 @@ function dfdl_theme_setup() {
 		'editor-font-sizes',
 		array(
 			array(
-				'name'      => esc_html__( 'Extra small', 'dfdl' ),
-				'shortName' => esc_html_x( 'XS', 'Font size', 'dfdl' ),
-				'size'      => 16,
+				'name'      => esc_html__( 'Small', 'dfdl' ),
+				'shortName' => esc_html_x( 'S', 'Font size', 'dfdl' ),
+				'size'      => 14,
 				'slug'      => 'extra-small',
 			),
 			array(
-				'name'      => esc_html__( 'Small', 'dfdl' ),
-				'shortName' => esc_html_x( 'S', 'Font size', 'dfdl' ),
-				'size'      => 18,
-				'slug'      => 'small',
-			),
-			array(
-				'name'      => esc_html__( 'Normal', 'dfdl' ),
+				'name'      => esc_html__( 'Body', 'dfdl' ),
 				'shortName' => esc_html_x( 'M', 'Font size', 'dfdl' ),
-				'size'      => 20,
-				'slug'      => 'normal',
+				'size'      => 16,
+				'slug'      => 'small',
 			),
 			array(
 				'name'      => esc_html__( 'Large', 'dfdl' ),
 				'shortName' => esc_html_x( 'L', 'Font size', 'dfdl' ),
-				'size'      => 24,
-				'slug'      => 'large',
+				'size'      => 18,
+				'slug'      => 'normal',
 			),
 			array(
-				'name'      => esc_html__( 'Extra large', 'dfdl' ),
+				'name'      => esc_html__( 'Big', 'dfdl' ),
 				'shortName' => esc_html_x( 'XL', 'Font size', 'dfdl' ),
-				'size'      => 40,
-				'slug'      => 'extra-large',
+				'size'      => 28,
+				'slug'      => 'large',
 			),
 			array(
 				'name'      => esc_html__( 'Huge', 'dfdl' ),
 				'shortName' => esc_html_x( 'XXL', 'Font size', 'dfdl' ),
-				'size'      => 96,
+				'size'      => 32,
+				'slug'      => 'extra-large',
+			),
+			array(
+				'name'      => esc_html__( 'Jumbo', 'dfdl' ),
+				'shortName' => esc_html_x( 'XXXL', 'Font size', 'dfdl' ),
+				'size'      => 56,
 				'slug'      => 'huge',
 			),
 			array(
-				'name'      => esc_html__( 'Gigantic', 'dfdl' ),
-				'shortName' => esc_html_x( 'XXXL', 'Font size', 'dfdl' ),
-				'size'      => 144,
+				'name'      => esc_html__( 'Super Jumbo', 'dfdl' ),
+				'shortName' => esc_html_x( 'XXXXL', 'Font size', 'dfdl' ),
+				'size'      => 72,
 				'slug'      => 'gigantic',
 			),
 		)
@@ -186,6 +172,32 @@ function dfdl_theme_setup() {
 	// Remove feed icon link from legacy RSS widget.
 	add_filter( 'rss_widget_feed_link', '__return_false' );
 	
+}
+
+/**
+ * Enqueue scripts and styles.
+ */
+add_action( 'wp_enqueue_scripts', 'dfdl_scripts' );
+function dfdl_scripts() {
+
+	// Theme Stylesheet
+	$filetime = filemtime( get_stylesheet_directory() . '/style.css');
+	wp_enqueue_style('dfdl', get_stylesheet_directory_uri() . '/style.css', false, $filetime, 'all');
+
+	// Theme JS
+	$filetime = filemtime( get_stylesheet_directory() . '/assets/js/dfdl.js');
+	wp_enqueue_script('dfdl', get_stylesheet_directory_uri() . '/assets/js/dfdl.js', array(), $filetime, true );
+
+	$params = array(
+		'ajaxurl' => admin_url( 'admin-ajax.php' )
+	);
+	wp_localize_script( 'dfdl', 'ajax_object', $params);
+
+}
+
+add_action( 'admin_enqueue_scripts', 'enqueuing_admin_scripts' );
+function enqueuing_admin_scripts(){
+    wp_enqueue_style('dfdl', get_template_directory_uri().'/assets/css/admin.css');
 }
 
 add_action( 'after_setup_theme', 'dfdl_custom_logo_setup' );

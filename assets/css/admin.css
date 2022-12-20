@@ -1,0 +1,35 @@
+/* Variables */
+:root {
+	/* Colors */
+	--color-black: #000;
+	--color-dark-gray: #131313;
+	--color-gray: #7D7D7D;
+	--color-light-gray: #F6F6F6;
+	--color-whisper: #E7E7E7;
+	--color-green: #004C45;
+	--color-bright-green: #10B565;
+	--color-red: #66000;
+	--color-yellow: #FFBD5C;
+	--color-white: #fff;
+	--setting-silo-max-width: 1312px;
+	--font-size-small: 14px;
+	--font-size-body: 16px;
+	--font-size-large: 18px;
+	--font-size-larger: 22px;
+	--font-size-big: 28px;
+	--font-size-huge: 32px;
+	--font-size-jumbo: 56px;
+	--font-size-super-jumbo: 72px;
+}
+#page-hero {
+    align-items: flex-end;
+	background-color: var(--color-whisper);
+    background-position: 50% 50%;
+    display: flex;
+    height: 200px;
+}
+.fp-hero-title {
+    color: var(--color-white);
+    font-size: var(--font-size-big);
+    margin-left: 64px;
+}

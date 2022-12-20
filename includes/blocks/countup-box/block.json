@@ -1,11 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
-    "name": "acf/dfdl-page-hero",
-    "title": "Page Hero",
-    "description": "Hero image with big title",
+    "name": "acf/dfdl-pcountup-box",
+    "title": "Countup Box",
+    "description": "Four-column countup block",
     "style": [ "file:./style.css" ],
     "category": "dfdl-block",
-    "icon": "money",
+    "icon": "superhero",
     "acf": {
         "mode": "preview",
         "renderTemplate": "template.php"
