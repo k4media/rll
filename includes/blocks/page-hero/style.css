@@ -1,0 +1,6 @@
+#page-hero {
+    align-items: baseline;
+    background-position: 50% 50%;
+    display: flex;
+    height: 95vh;
+}

@@ -1,0 +1,152 @@
+@charset "UTF-8";
+/*
+Theme Name: DFDL
+Theme URI: https://www.dfdl.com/
+Author: k4media
+Author URI: https://k4media.com/
+Description: Twenty Twenty-One is a blank canvas for your ideas and it makes the block editor your best brush. With new block patterns, which allow you to create a beautiful layout in a matter of seconds, this theme’s soft colors and eye-catching — yet timeless — design will let your work shine. Take it for a spin! See how Twenty Twenty-One elevates your portfolio, business website, or personal blog.
+Requires at least: 5.0
+Tested up to: 6.2
+Requires PHP: 7.4
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: dfdl
+Tags: one-column, accessibility-ready, custom-colors, custom-menu, custom-logo, editor-style, featured-images, footer-widgets, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready
+DFDL Theme, (C) 2022 DFDL
+*/
+@font-face {
+    font-family: 'praxis';
+    src: url('praxis_lt_regular-webfont.woff2') format('woff2'),
+         url('praxis_lt_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+/* Variables */
+:root {
+	/* Colors */
+	--color-black: #000;
+	--color-dark-gray: #131313;
+	--color-gray: #7D7D7D;
+	--color-light-gray: #F6F6F6;
+	--color-whisper: #E7E7E7;
+	--color-green: #004C45;
+	--color-bright-green: #10B565;
+	--color-red: #66000;
+	--color-yellow: #FFBD5C;
+	--color-white: #fff;
+	--setting-silo-max-width: 1312px;
+	--font-size-small: 14px;
+	--font-size-body: 16px;
+	--font-size-large: 18px;
+	--font-size-larger: 22px;
+	--font-size-big: 28px;
+	--font-size-huge: 32px;
+	--font-size-jumbo: 56px;
+	--font-size-super-jumbo: 72px;
+}
+body {
+	color: var(--color-dark-gray);
+	font-family: Calibri, sans-serif;
+	font-size: var(--font-size-body);
+	margin: 0;
+	max-width: 100%;
+	overflow-x: hidden;
+	padding: 0;
+}
+.silo {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--setting-silo-max-width);
+	width: 100%;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+}
+nav ul li {
+	display: inline;
+	list-style-type: none;
+}
+#colophon {
+	background: var(--color-green);
+	color: var(--color-white);
+	padding: 48px 0 32px 0 ;
+}
+#colophon nav a {
+	color: var(--color-white);
+	padding-bottom: .15em;
+	text-decoration: none;
+}
+.footer-nav a {
+	margin-right: 1em;
+}
+#colophon nav a:hover {
+	border-bottom: dotted 1px var(--color-light-gray);
+}
+.site-info {
+	display: flex;
+	padding: 0 0 48px 0;
+}
+.site-info > div {
+	flex: 1 0 50%;
+}
+.newsletter-signup {
+	display: flex;
+	justify-content: center;
+}
+.newsletter-signup form {
+	position: relative;
+}
+.newsletter-signup label {
+	color: var(--color-white);
+	display: block;
+	font-variant: small-caps;
+	margin-bottom: 0.25em;
+}
+.newsletter-signup input[type=email] {
+	background: transparent;
+	border: solid 1px var(--color-whisper);
+	border-radius: 8px;
+	padding: .7em;
+	position: relative;
+	width: 24em;
+}
+.newsletter-signup input[type=image] {
+	position: absolute;
+	right: 1em;
+    top: 2.6em;
+}
+.newsletter-signup input[type=email]::placeholder {
+	color: var(--color-whisper);
+}
+#colophon .site-name {
+	margin-bottom: 16px;
+}
+#fineprint {
+	border-top: solid 1px var(--color-white);
+	display: flex;
+	font-size: var(--font-size-small);
+	justify-content: space-between;
+	padding: 32px 0 0 0;
+}
+#fineprint > div {
+	flex: 1 1 33.33%;
+}
+#fineprint img {
+	height: 16px;
+	width: 16px;
+}
+.social-links {
+	display: flex;
+    justify-content: space-between;
+	max-width: 120px;
+}
+.legal-nav {
+	text-align: right;
+}
+.legal-nav a {
+	margin-left: 1em;
+}
