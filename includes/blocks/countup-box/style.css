@@ -1,11 +1,23 @@
-#page-hero {
-    align-items: flex-end;
-    background-position: 50% 50%;
-    display: flex;
-    height: 95vh;
-}
-.fp-hero-title {
+.countup-box-stage {
+    background-color: var(--color-green);
     color: var(--color-white);
-    font-size: var(--font-size-super-jumbo);
-    margin-left: 64px;
+    padding: 120px 0 120px 0;
+}
+.countup-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 120px;
+}
+.box {
+    text-align: center;
+}
+.box h4 {
+    font-size: var(--font-size-jumbo);
+}
+.box .label {
+    font-size: var(--font-size-body);
+}
+.countup-text {
+    font-size: var(--font-size-big);
+    line-height: 1.5em;
 }
