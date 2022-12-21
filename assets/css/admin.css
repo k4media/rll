@@ -21,8 +21,23 @@
 	--font-size-jumbo: 56px;
 	--font-size-super-jumbo: 72px;
 }
+html :where(.wp-block) {
+	max-width: 1040px;
+}
+.button {
+	border: solid 1px;
+	border-radius: 12px;
+	display: inline-block;
+	font-weight: bold;
+	padding: .5em 1em .5em 1em;
+	text-decoration: none;
+}
+.button.green {
+	border: solid 1px var(--color-green);
+	color: var(--color-green);
+}
 #page-hero {
-    align-items: flex-end;
+    align-items: center;
 	background-color: var(--color-whisper);
     background-position: 50% 50%;
     display: flex;
@@ -30,29 +45,48 @@
 }
 .fp-hero-title {
     color: var(--color-white);
-    font-size: var(--font-size-big);
-    margin-left: 64px;
+    font-size: var(--font-size-larger);
+	padding: 0;
+}
+.fp-hero-title h2 {
+	margin: 0;
 }
 .countup-box-stage {
     background-color: var(--color-green);
     color: var(--color-white);
-    padding: 120px 0 120px 0;
+    padding: 1em;
 }
 .countup-boxes {
     display: flex;
+	font-size: var(--font-size-body);
     justify-content: space-between;
-    padding-bottom: 120px;
+	padding: 0;
 }
 .box {
     text-align: center;
 }
 .box h4 {
-    font-size: var(--font-size-jumbo);
+	font-size: var(--font-size-big);
+	margin: 0;
 }
 .box .label {
     font-size: var(--font-size-body);
 }
 .countup-text {
-    font-size: var(--font-size-big);
+	font-size: var(--font-size-body);
     line-height: 1.5em;
+}
+.solutions-callout-stage {
+    background-color: #F4F7F7;
+    padding: 1em;
+    text-align: center;
+}
+.solutions-callout h2, .solutions-callout h3 {
+	margin: 0 auto 0 auto;
+}
+.solutions-callout .solutions a {
+	font-size: var(--font-size-small);
+}
+.solutions-callout-stage .button {
+	margin-top: 0;
 }
