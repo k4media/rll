@@ -32,11 +32,11 @@
      }
 
 ?>
-<div class="solutions-callout-stage">
+<div class="solutions-callout-stage callout">
      <div class="solutions-callout silo">
-          <div class="title"><h2><?php echo $title ?></h2></div>
-          <div class="subtitle"><h3><?php echo $subtitle ?></h3></div>
-          <div class="solutions"><?php echo implode($solutions) ?></div>
+          <h2><?php echo $title ?></h2>
+          <h3><?php echo $subtitle ?></h3>
+          <div class="solutions stage"><?php echo implode($solutions) ?></div>
      </div>
      <a class="button green ghost" href="<?php echo get_permalink(get_page_by_path( 'solutions' )) ?>">Learn More</a>
 </div>

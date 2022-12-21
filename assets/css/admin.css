@@ -76,17 +76,32 @@ html :where(.wp-block) {
 	font-size: var(--font-size-body);
     line-height: 1.5em;
 }
+
+.callout h2 {
+	margin: 0 auto 0 auto;
+}
+.callout h3 {
+    color: var(--color-gray);
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.4em;
+    margin: 0 auto 1em auto;
+    width: 24em;
+}
+.callout .stage a {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-small);
+    text-decoration: none;
+}
+.callout .button {
+    margin-top: 1em;
+}
+
 .solutions-callout-stage {
     background-color: #F4F7F7;
     padding: 1em;
     text-align: center;
 }
-.solutions-callout h2, .solutions-callout h3 {
-	margin: 0 auto 0 auto;
-}
-.solutions-callout .solutions a {
-	font-size: var(--font-size-small);
-}
-.solutions-callout-stage .button {
-	margin-top: 0;
+.our-desks-callout-stage {
+	padding: 60px 0 60px 0;
 }

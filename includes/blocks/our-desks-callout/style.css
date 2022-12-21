@@ -1,0 +1,35 @@
+.our-desks-callout-stage {
+    background-color: var(--color-white);
+    padding: 120px 0 120px 0;
+    text-align: center;
+}
+.our-desks-callout .our-desks {
+    display: flex;
+    justify-content: space-around;
+}
+.our-desks img {
+    display: block;
+    height: 60px;
+    width: auto;
+}
+
+
+/*
+.solution {
+    align-items: center;
+    display: flex;
+    height: 48px;
+}
+.solution a {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-large);
+    text-decoration: none;
+}
+.solution img {
+    height: 16px;
+    margin-right: 1em;
+    width: 16px;
+}
+.solutions-callout-stage .button {
+    margin: 4em auto 0 auto;
+} */

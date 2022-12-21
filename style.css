@@ -87,6 +87,29 @@ nav ul li {
 .button.green {
 	color: var(--color-green);
 }
+
+.callout h2 {
+    font-size: var(--font-size-huge);
+    font-weight: 700;
+}
+.callout h3 {
+    color: var(--color-gray);
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: 1.4em;
+    margin: 1em auto 2em auto;
+    width: 24em;
+}
+.callout .stage a {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-large);
+    text-decoration: none;
+}
+.callout .button {
+    margin: 4em auto 0 auto;
+}
+
+
 #colophon {
 	background: var(--color-green);
 	color: var(--color-white);
