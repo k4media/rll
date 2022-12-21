@@ -2,11 +2,28 @@
     align-items: flex-end;
     background-position: 50% 50%;
     display: flex;
+}
+.hero.front-page {
     height: 90vh;
+}
+.hero.page {
+    height: 536px;
+}
+.hero .overlay {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
 }
 .fp-hero-title {
     color: var(--color-white);
     font-size: var(--font-size-super-jumbo);
     margin-left: 64px;
-    padding-bottom:1em; 
+    padding-bottom:1em;
+    position: relative;
+    z-index: 1;
+}
+.fp-hero-title h2 {
+    font-size: var(--font-size-super-jumbo);
+    font-weight: 700;
 }

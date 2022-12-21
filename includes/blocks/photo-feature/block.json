@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-photo-feature",
+    "title": "Photo Feature",
+    "description": "Photo with title, subtitle and link",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "cover-image",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}

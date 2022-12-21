@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-page-lead",
+    "title": "Page Lead",
+    "description": "Page intro text with large first paragraph",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "edit",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}

@@ -43,13 +43,21 @@ html :where(.wp-block) {
     display: flex;
     height: 200px;
 }
+.hero .overlay {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
 .fp-hero-title {
     color: var(--color-white);
-    font-size: var(--font-size-larger);
 	padding: 0;
+    position: relative;
+    z-index: 1;
 }
 .fp-hero-title h2 {
 	margin: 0;
+	font-size: var(--font-size-larger);
 }
 .countup-box-stage {
     background-color: var(--color-green);
@@ -76,7 +84,6 @@ html :where(.wp-block) {
 	font-size: var(--font-size-body);
     line-height: 1.5em;
 }
-
 .callout h2 {
 	margin: 0 auto 0 auto;
 }

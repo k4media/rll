@@ -1,0 +1,23 @@
+.photo-feature, .photo-feature .copy-stage {
+    background-color: var(--color-bright-green);
+    background-image: url(assets/media/logo-art.svg);
+    display: flex;
+}
+.photo-feature > div {
+    flex: 1 1 50%;
+}
+.photo-feature img {
+    max-width: 100%;
+}
+.photo-feature .copy-stage {
+    align-items: center;
+    color: var(--color-white);
+    justify-content: center;
+}
+.photo-feature .copy-stage .copy {
+    max-width: 32em;
+    width: 100%;
+}
+.photo-feature .button {
+    margin-top: 2em;
+}

@@ -1,19 +1,19 @@
 <?php
 
-     $height = "536";
-     $title  = "";
-     $image  = "";
-     $class  = "";
+     $title   = "";
+     $image   = "";
+     $class   = "";
+     $overlay = "";
 
      // get fields via acf
      if ( function_exists('get_field') ) {
-          $title = get_field('title');
-          $image = get_field('image');
+          $title   = get_field('title');
+          $image   = get_field('image');
+          $overlay = get_field('overlay');
      }
-     if ( is_front_page() ) {
-          $height = "844";
-          $class  = "front-page";
-     }
+
+     // set css class
+     $class = ( is_front_page() ) ? "front-page" : "page" ;
 
      // validate fields
      if ( "" === $title ) {
@@ -21,6 +21,11 @@
      }
 
 ?>
-<div id="page-hero" class="<?php echo $class ?>" style="background-image:url(<?php if ( isset($image['url']) ) { echo $image['url']; } ?>)">
+<div id="page-hero" class="hero <?php echo $class ?>" style="background-image:url(<?php if ( isset($image['url']) ) { echo $image['url']; } ?>)">
+     
+     <?php if( isset($overlay) ) : ?>
+          <div class="overlay" style="background-color:<?php echo $overlay ?>"></div>
+     <?php endif; ?>
+
      <div class="fp-hero-title"><h2><?php echo $title ?></h2></div>
 </div>
