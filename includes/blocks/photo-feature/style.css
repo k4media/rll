@@ -1,8 +1,9 @@
-.photo-feature, .photo-feature .copy-stage {
+.photo-feature {
     background-color: var(--color-bright-green);
-    background-image: url(assets/media/logo-art.svg);
     display: flex;
+    position: relative;
 }
+
 .photo-feature > div {
     flex: 1 1 50%;
 }
@@ -11,9 +12,24 @@
 }
 .photo-feature .copy-stage {
     align-items: center;
+    display: flex;
     color: var(--color-white);
-    justify-content: center;
 }
+
+.photo-feature::after {
+    background: url(../../../assets/media/logo-art-reverse.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    content: ' ';
+    height: 125px;
+    position: absolute;
+    right: 0;
+    width: 150px;
+}
+
+
+
 .photo-feature .copy-stage .copy {
     max-width: 32em;
     width: 100%;
