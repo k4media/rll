@@ -57,7 +57,7 @@ html :where(.wp-block) {
 }
 .fp-hero-title h2 {
 	margin: 0;
-	font-size: var(--font-size-larger);
+	font-size: var(--font-size-jumbo);
 }
 .countup-box-stage {
     background-color: var(--color-green);
@@ -103,7 +103,6 @@ html :where(.wp-block) {
 .callout .button {
     margin-top: 1em;
 }
-
 .solutions-callout-stage {
     background-color: #F4F7F7;
     padding: 1em;
@@ -111,4 +110,15 @@ html :where(.wp-block) {
 }
 .our-desks-callout-stage {
 	padding: 60px 0 60px 0;
+}
+#page-lead {
+    padding: 1em ;
+}
+#page-lead .lead {
+    font-size: var(--font-size-larger);
+}
+#page-lead p {
+    line-height: 1.6em;
+    max-width: 1024px;
+    margin: 1em auto 1em auto;
 }

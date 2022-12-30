@@ -1,6 +1,7 @@
 #page-hero {
     align-items: flex-end;
     background-position: 50% 50%;
+    background-size: cover;
     display: flex;
 }
 .hero.front-page {
