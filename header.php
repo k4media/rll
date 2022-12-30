@@ -20,4 +20,46 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<header>
+	<div class="header-stage silo">
+		<div class="left">
+			<button class="hamburger hamburger--slider" type="button"
+        aria-label="Menu" aria-controls="navigation">
+				<span class="hamburger-box">
+					<span class="hamburger-inner"></span>
+				</span>
+			</button>
+			<nav id="site-navigation" class="main-navigation">
+				<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'primary',
+							'menu_id'        => 'primary',
+							'fallback_cb'	 => false,
+							'container'		 => ''
+						)
+					);
+				?>
+			</nav><!-- #site-navigation -->
+		</div>
+		<div class="site-branding">
+			<?php do_action("dfdl_logo") ?>
+		</div><!-- .site-branding -->
+		<div class="right">
+			<nav id="site-navigation" class="secondary-navigation">
+				<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'secondary',
+							'menu_id'        => 'secondary',
+							'fallback_cb'	 => false,
+							'container'		 => ''
+						)
+					);
+				?>
+			</nav><!-- #site-navigation -->
+		</div>
+	</div>
+</header>
+
 <div id="page" class="site">

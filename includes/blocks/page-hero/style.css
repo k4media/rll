@@ -3,6 +3,7 @@
     background-position: 50% 50%;
     background-size: cover;
     display: flex;
+    position: relative;
 }
 .hero.front-page {
     height: 90vh;

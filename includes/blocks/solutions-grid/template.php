@@ -1,6 +1,5 @@
 <?php
 
-
      // get solutions pages
      $page      = get_page_by_path( 'solutions' );
      $args = array(

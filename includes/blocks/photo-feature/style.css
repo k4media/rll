@@ -3,7 +3,6 @@
     display: flex;
     position: relative;
 }
-
 .photo-feature > div {
     flex: 1 1 50%;
 }
@@ -15,7 +14,6 @@
     display: flex;
     color: var(--color-white);
 }
-
 .photo-feature::after {
     background: url(../../../assets/media/logo-art-reverse.svg);
     background-repeat: no-repeat;
@@ -27,9 +25,6 @@
     right: 0;
     width: 150px;
 }
-
-
-
 .photo-feature .copy-stage .copy {
     max-width: 32em;
     width: 100%;
