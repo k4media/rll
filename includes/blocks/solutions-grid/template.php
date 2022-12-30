@@ -24,6 +24,7 @@
 ?>
 <div class="solutions-grid-stage">
      <div class="solutions-grid silo">
+          <?php do_action("dfdl_solutions_country_nav"); ?>
           <div class="solutions stage"><?php echo implode($solutions) ?></div>
      </div>
 </div>
