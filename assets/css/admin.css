@@ -28,7 +28,7 @@ html :where(.wp-block) {
 	border: solid 1px;
 	border-radius: 12px;
 	display: inline-block;
-	font-weight: bold;
+	font-weight: 400;
 	padding: .5em 1em .5em 1em;
 	text-decoration: none;
 }

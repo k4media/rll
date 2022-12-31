@@ -11,6 +11,5 @@
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
-
 // DFDL theme init
 require get_template_directory() . '/includes/dfdl.php';
