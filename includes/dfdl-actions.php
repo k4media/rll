@@ -22,6 +22,14 @@ function dfdl_solutions_country_nav() {
 
     global $wp;
 
+    $pieces     = explode("/", $wp->request ) ;
+    $sections   = array("solutions", "teams", "awards");
+    $section    = array_values(array_intersect( $pieces, $sections ));
+    $section    = $section[0];
+
+    /**
+     * Locations, as determined from subpages
+     */
     $locations = get_page_by_path("locations");
     $args = array(
         'post_type'      => 'page',
@@ -32,29 +40,31 @@ function dfdl_solutions_country_nav() {
      );
     $pages = new WP_Query( $args );
 
-    $ul = array();
+    $ul       = array();
     $home_url = get_home_url(NULL);
-
-    $pieces = explode("/", $wp->request);
 
     foreach($pages->posts as $page) {
         if ( in_array(strtolower($page->post_name), $pieces)  ) {
-            $ul[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/solutions/">' . $page->post_title . '</a></li>' ;
+            $ul[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
         } else {
-            $ul[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/solutions/">' . $page->post_title . '</a></li>' ;
+            $ul[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
         }
     }
 
     $output   = array();
-    $output[] = '<div class="country-nav-stage"><ul class="solutions-country-nav country-nav">';
+    $output[] = '<div class="country-nav-stage"><ul class="' . $section . '-country-nav country-nav">';
     if ( 1 === count($pieces) ) {
-        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/solutions/' . '">All</a></li>';
+        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/' . '">All</a></li>';
     } else {
-        $output[] = '<li><a href="' . $home_url . '/solutions/' . '">All</a></li>';
+        $output[] = '<li><a href="' . $home_url . '/' . $section . '/' . '">All</a></li>';
     }
     
     $output[] = implode("", $ul);
-    $output[] = '</ul></div>';
+    $output[] = '</ul>';
+    if ( "teams" === $section ) {
+        $output[] = dfdl_team_filter();
+    }
+    $output[] = '</div>';
 
     echo implode("", $output);
 }

@@ -1,41 +1,46 @@
 <?php
 
-     $title     = "";
-     $subtitle  = "";
-
-     // get fields
-     if ( function_exists('get_fields') ) {
-          $title = get_field('title');
-          $subtitle = get_field('subtitle');
-     }
-
-     // get solutions pages
-     $page      = get_page_by_path( 'solutions' );
+     // get users...
+     
      $args = array(
-          'post_type'      => 'page',
-          'posts_per_page' => -1,
-          'child_of'       => $page->ID,
-          'order'          => 'ASC',
-          'orderby'        => 'menu_order'
+          'number'        => 16
      );
-     $pages = get_pages($args);
-     foreach( $pages as $p ) {
-          $solution = '<div class="solution ' . $p->post_title . ' ">';
-          $icon = get_stylesheet_directory() . '/assets/media/si-' . $p->post_name . '.svg';
-          $solution .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $p->post_name . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-missing.svg">' ;
-          $solution .= '<a href="' . get_permalink($p->ID) . '">'  ;
-          $solution .= $p->post_title;
-          $solution .= '</a>';
-          $solution .= '</div>';
-          $solutions[] = $solution;
+     $users  = get_users($args);
+     $output = array();
+     foreach( $users as $u ) {
+          
+          $position    = get_user_meta( $u->data->ID, 'position', true);
+          $locations   = array();
+          $country_ids = get_user_meta( $u->data->ID, '_dfdl_user_country'); 
+          foreach( $country_ids as $c ) {
+               $country = get_term( $c, 'dfdl_countries', true);
+               $locations[] = $country->name;
+          }
+
+          $member_slug = sanitize_title($u->data->user_nicename);
+
+          $output[] = '<div class="team-member">';
+               $output[] = '<a href="' . get_home_url(null, 'teams/members/' . $member_slug . '/' ) . '">';
+               $output[] = '<img src="' . get_avatar_url($u->data->ID, array('size' => 320)) . '">';
+               $output[] = '<div class="details-stage"><div class="details">';
+                    $output[] = '<div class="name">' . $u->data->display_name . '</div>';
+                    if (isset($position)) {
+                          $output[] = '<div class="position">' . $position . '</div>'; 
+                    }
+                    if ( count($locations) > 0 ) {
+                            $output[] = '<div class="location">' . implode(", ", $locations) . '</div>'; 
+                    }
+                $output[] = '</div></div>';
+                $output[] = '</a>';
+          $output[] = '</div>';
+          
      }
 
 ?>
 <div class="team-feature-stage">
      <div class="team-feature silo">
-          <h2><?php echo $title ?></h2>
-          <h3><?php echo $subtitle ?></h3>
           <?php do_action("dfdl_solutions_country_nav"); ?>
-          <div class="team stage"><?php echo implode($solutions) ?></div>
+          <div class="team-stage"><?php echo implode($output) ?></div>
+          <a class="button green ghost" href="<?php echo get_permalink(get_page_by_path( 'teams/all' )) ?>">See All</a>
      </div>
 </div>
