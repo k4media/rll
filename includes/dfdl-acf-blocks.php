@@ -1,7 +1,7 @@
 <?php
 
 /*
-* Devine Cellars ACF Blocks
+* DFDL ACF Blocks
 *
 * Gutenberg blocks created with Advanced Custom Fields Pro
 * https://www.advancedcustomfields.com/blog/the-state-of-acf-in-a-gutenberg-world/
