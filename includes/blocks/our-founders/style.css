@@ -1,0 +1,36 @@
+#our-founders {
+    background-color: #F4F7F7;
+    padding: 120px 0 120px 0;
+}
+.our-founders h2 {
+    text-align: center;
+}
+.founders {
+    display: flex;
+    justify-content: center;
+    margin: auto
+}
+.founders > div {
+    margin-right: 48px;
+}
+.founders > div:last-child {
+    margin-right: 0;
+}
+.founder {
+    background-color: var(--color-white);
+    box-shadow: 0 0 6px rgba(200,200,200, .5);
+}
+.founder .details-stage {
+    align-items: center;
+    display: flex;
+    padding: 1em;
+}
+.founder .details .name {
+    font-size: var(--font-size-large);
+    font-weight: 700;
+    margin-bottom: .5em;
+}
+.founder .details .position,
+.founder .details .location {
+    color: var(--color-gray);
+}

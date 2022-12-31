@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-our-founders",
+    "title": "Our Founders",
+    "description": "",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "groups",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
