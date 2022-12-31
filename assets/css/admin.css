@@ -122,3 +122,6 @@ html :where(.wp-block) {
     max-width: 1024px;
     margin: 1em auto 1em auto;
 }
+.text-feature-stage {
+    padding: 1em;
+}

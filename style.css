@@ -45,6 +45,7 @@ DFDL Theme, (C) 2022 DFDL
 	--font-size-jumbo: 56px;
 	--font-size-super-jumbo: 72px;
 	--setting-silo-max-width: 1312px;
+	--setting-narrow-max-width: 1090px;
 	--setting-border-radius: 8px;
 	--setting-button-padding: .5em 1em .5em 1em;
 }
@@ -64,6 +65,11 @@ body {
 	max-width: var(--setting-silo-max-width);
 	padding-left: 16px;
 	padding-right: 16px;
+}
+.narrow {
+	margin-left: auto;
+	margin-right: auto;
+	max-width: var(--setting-narrow-max-width);
 }
 h1, h2, h3, h4 {
 	font-family: 'praxis';

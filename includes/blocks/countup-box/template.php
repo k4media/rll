@@ -30,7 +30,7 @@
 
 ?>
 <div class="countup-box-stage" >
-     <div id="countup-boxes" class="countup-boxes silo">
+     <div id="countup-boxes" class="countup-boxes narrow">
           <div class="box box-1">
                <h4 class="countup" cup-end="<?php echo $boxes[1]['number'] ?>"><?php echo $boxes[1]['number'] ?></h4>
                <div class="label"><?php echo $boxes[1]['label'] ?></div>
@@ -49,7 +49,7 @@
           </div>
      </div>
      <?php if (isset($text)) : ?>
-          <div class="countup-text silo"><?php echo $text ?></div>
+          <div class="countup-text narrow"><?php echo $text ?></div>
      <?php endif; ?>
 </div>
 <script src='<?php  echo get_stylesheet_directory_uri() ?>/assets/js/countup.js' id='countup'></script>

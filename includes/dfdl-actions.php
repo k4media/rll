@@ -60,6 +60,28 @@ function dfdl_solutions_country_nav() {
 }
 
 /**
+ * ACF Color Palette
+ *
+ * Add default color palatte to ACF color picker for branding
+ * Match these colors to colors in /functions.php & /assets/scss/partials/base/variables.scss
+ *
+*/
+add_action( 'acf/input/admin_footer', 'wd_acf_color_palette' );
+function wd_acf_color_palette() { ?>
+<script type="text/javascript">
+(function($) {
+     acf.add_filter('color_picker_args', function( args, $field ){
+          // add the hexadecimal codes here for the colors you want to appear as swatches
+          args.palettes = ['#000000', '131313', '#7D7D7D', '#F6F6F6', '#004C45', '#10B565', '#66000', '#FFBD5C', '#ffffff']
+          // return colors
+          return args;
+     });
+})(jQuery);
+</script>
+<?php }
+
+
+/**
  * Footer actions
  */
 add_action('footer_logo', 'footer_logo');
