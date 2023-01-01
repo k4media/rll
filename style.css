@@ -31,6 +31,8 @@ DFDL Theme, (C) 2022 DFDL
 	--color-light-gray: #F6F6F6;
 	--color-whisper: #E7E7E7;
 	--color-green: #004C45;
+
+	
 	--color-bright-green: #10B565;
 	--color-red: #66000;
 	--color-yellow: #FFBD5C;
@@ -220,7 +222,8 @@ nav ul li {
 .header-stage .right a {
 	margin-left: 1.5em;
 }
-.header-stage .current_page_item a {
+.header-stage .current_page_item a,
+.header-stage .current-page-parent {
 	color: var(--color-green);
 	font-weight: 700;
 }
@@ -241,6 +244,9 @@ nav ul li {
 	width: 2em;
     position: absolute;
 }
+.callout {
+	padding: 120px 0 120px 0;
+}
 .callout h2 {
     font-size: var(--font-size-huge);
     font-weight: 700;
@@ -254,7 +260,7 @@ nav ul li {
     line-height: 1.4em;
     margin: 1em auto 2em auto;
 	text-align: center;
-    width: 24em;
+    max-width: 24em;
 }
 .callout .stage a {
     color: var(--color-dark-gray);
@@ -367,4 +373,61 @@ nav ul li {
 	border-radius: var(--setting-border-radius);
 	color: var(--color-white);
 	padding: var(--setting-button-padding);
+}
+.dfdl-single-member {
+	margin: 120px auto 120px auto;
+}
+.dfdl-single-member, .details-stage {
+	align-items: center;
+	display: flex;
+}
+.dfdl-single-member .details-stage {
+	color: var(--color-green);
+	margin: 0 2em 0 2em;
+}
+.dfdl-single-member .avatar {
+	max-width: 320px;
+	width: 100%;
+}
+.dfdl-single-member .name {
+	font-size: var(--font-size-larger);
+	font-weight: 700;
+	margin-bottom: .5em;
+}
+.dfdl-single-member .position,
+.dfdl-single-member .location {
+	color: #66948F;
+	font-size: var(--font-size-small);
+	line-height: 1.5em;
+}
+.dfdl-single-member .bio {
+	margin-top: 1em;
+}
+.dfdl-single-member .contact-details {
+	border-top: solid 1px var(--color-green);
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1em;
+	padding-top: 1em;
+}
+.dfdl-single-member .contact-details a {
+	color: var(--color-green);
+}
+.dfdl-single-member .contact-details .telephone,
+.dfdl-single-member .contact-details .mobile,
+.dfdl-single-member .contact-details .email,
+.dfdl-single-member .contact-details .linkedin {
+	text-indent: 1.5em;
+}
+.dfdl-single-member .telephone {
+	background: url(assets/media/icon-telephone.svg) no-repeat center left;
+}
+.dfdl-single-member .mobile {
+	background: url(assets/media/icon-mobile.svg) no-repeat center left;
+}
+.dfdl-single-member .email {
+	background: url(assets/media/icon-email.svg) no-repeat center left;
+}
+.dfdl-single-member .linkedin {
+	background: url(assets/media/icon-linkedin-green.svg) no-repeat center left;
 }

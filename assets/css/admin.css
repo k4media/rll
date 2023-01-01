@@ -86,6 +86,7 @@ html :where(.wp-block) {
 }
 .callout h2 {
 	margin: 0 auto 0 auto;
+	text-align: center;
 }
 .callout h3 {
     color: var(--color-gray);
@@ -93,7 +94,8 @@ html :where(.wp-block) {
     font-weight: 400;
     line-height: 1.4em;
     margin: 0 auto 1em auto;
-    width: 24em;
+	text-align: center;
+    max-width: 24em;
 }
 .callout .stage a {
     color: var(--color-dark-gray);
@@ -123,4 +125,26 @@ html :where(.wp-block) {
 #our-founders,
 .text-feature-stage {
     padding: 1em;
+}
+.country-nav-stage {
+	font-size: smaller;
+	text-align: center;
+}
+.country-nav {
+	margin-top: 2em;
+	padding: 0;
+}
+.country-nav li {
+	display: inline;
+	list-style-type: none;
+	margin-right: 1.5em;
+}
+.country-nav li a {
+	color: var(--color-dark-gray);
+}
+.country-nav li:last-child {
+	margin-right: 0;
+}
+.country-contacts-stage {
+	padding: 3em 1em 2em 1em;
 }

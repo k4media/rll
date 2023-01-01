@@ -1,0 +1,66 @@
+<?php
+
+     $title    = "";
+     $subtitle = "";
+     $user     = "";
+
+     // get fields
+     if ( function_exists('get_fields') ) {
+          $title    = get_field('title');
+          $subtitle = get_field('subtitle');
+          $user     = get_field('user');
+
+          if ( false === $user ) {
+               $user = 1;
+          }
+
+          $meta = get_user_meta($user['ID']);
+          $locations   = array();
+          if ( is_array($meta['_dfdl_user_country']) ) {
+               foreach( $meta['_dfdl_user_country'] as $c ) {
+                    $country = get_term( $c, 'dfdl_countries', true);
+                    $locations[] = $country->name;
+               }
+          }
+          
+     }
+
+?>
+<div class="country-team-lead-stage callout">
+     <div class="country-team-lead narrow">
+          <h2><?php echo $title ?></h2>
+          <h3><?php echo $subtitle ?></h3>
+          <div class="lead-team-member dfdl-single-member">
+               <div class="avatar"><img src="<?php echo get_avatar_url($user['ID'], array('size' => 320)) ?>"></div>
+               <div class="details-stage">
+                    <div class="member">
+                         <span>Regional Key Contact</span>
+                         <div class="name"><?php echo $user['display_name'] ?></div>
+                         <?php if( isset($meta['position'][0]) ) : ?>
+                              <div class="position"><?php echo $meta['position'][0] ?></div> 
+                         <?php endif; ?>
+                         <?php if( is_array($locations) && count($locations) > 0 ) : ?>
+                              <div class="location"><?php echo implode(", ", $locations) ?></div>
+                         <?php endif; ?>
+                         <?php if( $user['user_description'] ) : ?>
+                              <div class="bio"><?php echo $user['user_description'] ?></div>
+                         <?php endif; ?>
+                         <div class="contact-details">
+                              <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>
+                              <div class="telephone"><?php echo $meta['tel'][0] ?></div>
+                              <?php endif; ?>
+                              <?php if ( isset($meta['mob']) && ! empty($meta['mob'][0]) ) : ?>
+                              <div class="mobile"><?php echo $meta['mob'][0] ?></div>
+                              <?php endif; ?>
+                              <?php if ( isset($meta['email']) && ! empty($meta['email'][0]) ) : ?>
+                              <div class="email"><a href="mailto:<?php echo $meta['email'][0] ?>">email</a></div>
+                              <?php endif; ?>
+                              <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) ) : ?>
+                              <div class="linkedin"><a href="<?php echo $meta['linkedin'][0] ?>">linkedIn</a></div>
+                              <?php endif; ?>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+</div>

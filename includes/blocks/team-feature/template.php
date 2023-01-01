@@ -41,6 +41,6 @@
      <div class="team-feature silo">
           <?php do_action("dfdl_solutions_country_nav"); ?>
           <div class="team-stage"><?php echo implode($output) ?></div>
-          <a class="button green ghost" href="<?php echo get_permalink(get_page_by_path( 'teams/all' )) ?>">See All</a>
+          <a class="button green ghost" href="<?php echo get_home_url(null, 'teams/all/') ?>">See All</a>
      </div>
 </div>

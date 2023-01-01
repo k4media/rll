@@ -16,13 +16,18 @@
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
 }
+.team-member a {
+    color: var(--color-gray);
+    text-decoration: none;
+}
 .team-member .details-stage {
     align-items: center;
     display: flex;
-    padding: 1em;
+    padding: 1.5em;
     text-align: left;
 }
 .team-member .details .name {
+    color: var(--color-dark-gray);
     font-size: var(--font-size-large);
     font-weight: 700;
     margin-bottom: .5em;

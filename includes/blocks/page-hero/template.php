@@ -1,5 +1,7 @@
 <?php
 
+     global $post;
+
      $title   = "";
      $image   = "";
      $class   = "";
@@ -15,8 +17,9 @@
      // set css class
      $class = ( is_front_page() ) ? "front-page" : "page" ;
 
+     
      // validate fields
-     if ( "" === $title ) {
+     if ( "Page Hero Title" === $title ) {
           $title = $post->post_title;
      }
 

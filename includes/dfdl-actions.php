@@ -1,21 +1,7 @@
 <?php
 
 /**
- * DFDL Logo
- */
-add_action('dfdl_logo', 'dfdl_logo');
-function dfdl_logo() {
-    $custom_logo_id = get_theme_mod( 'custom_logo' );
-    $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-    if ( is_front_page() ) {
-        echo '<div class="site-name"><img src="' . $image[0]. '"></div>';
-    } else {
-        echo '<div class="site-name"><a href="' . get_home_url(). '"><img src="' . $image[0] . '"></a></div>';
-    }    
-}
-
-/**
- * Solutions Country Nav
+ * Country Nav
  */
 add_action('dfdl_solutions_country_nav', 'dfdl_solutions_country_nav');
 function dfdl_solutions_country_nav() {
@@ -25,8 +11,16 @@ function dfdl_solutions_country_nav() {
     $pieces     = explode("/", $wp->request ) ;
     $sections   = array("solutions", "teams", "awards");
     $section    = array_values(array_intersect( $pieces, $sections ));
-    $section    = $section[0];
 
+    if ( isset($section[0]) ) {
+        $section = $section[0];
+    } else {
+        /**
+         * Set fallback for is_admin()
+         */
+        $section = "#";
+    }
+    
     /**
      * Locations, as determined from subpages
      */
@@ -40,33 +34,40 @@ function dfdl_solutions_country_nav() {
      );
     $pages = new WP_Query( $args );
 
-    $ul       = array();
+
+    $nav       = array();
     $home_url = get_home_url(NULL);
 
     foreach($pages->posts as $page) {
         if ( in_array(strtolower($page->post_name), $pieces)  ) {
-            $ul[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
         } else {
-            $ul[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+            $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
         }
     }
 
+    /**
+     * Prepare html output
+     */
     $output   = array();
     $output[] = '<div class="country-nav-stage"><ul class="' . $section . '-country-nav country-nav">';
-    if ( 1 === count($pieces) ) {
-        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/' . '">All</a></li>';
+    if ( "all" === end($pieces) ) {
+        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {
-        $output[] = '<li><a href="' . $home_url . '/' . $section . '/' . '">All</a></li>';
+        $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     }
-    
-    $output[] = implode("", $ul);
+    $output[] = implode("", $nav);
     $output[] = '</ul>';
+
+    // Add teams filter
     if ( "teams" === $section ) {
         $output[] = dfdl_team_filter();
     }
     $output[] = '</div>';
 
+    // output
     echo implode("", $output);
+
 }
 
 /**
@@ -90,6 +91,19 @@ function wd_acf_color_palette() { ?>
 </script>
 <?php }
 
+/**
+ * DFDL Logo
+ */
+add_action('dfdl_logo', 'dfdl_logo');
+function dfdl_logo() {
+    $custom_logo_id = get_theme_mod( 'custom_logo' );
+    $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+    if ( is_front_page() ) {
+        echo '<div class="site-name"><img src="' . $image[0]. '"></div>';
+    } else {
+        echo '<div class="site-name"><a href="' . get_home_url(). '"><img src="' . $image[0] . '"></a></div>';
+    }    
+}
 
 /**
  * Footer actions

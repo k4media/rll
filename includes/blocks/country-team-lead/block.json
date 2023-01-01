@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-country-team-lead",
+    "title": "Country Team Lead",
+    "description": "Country team callout with lead contact details",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "businesswoman",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}

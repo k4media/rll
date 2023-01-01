@@ -6,14 +6,21 @@
     text-align: center;
 }
 .founders {
-    display: flex;
-    justify-content: center;
-    margin: auto
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) ;
+    margin-top: 60px;
 }
 .founders > div {
-    margin-right: 48px;
+    max-width: 320px;
+}
+.founders > div:first-child {
+    justify-self: end;
+}
+.founders > div:nth-child(2) {
+    justify-self: center;
 }
 .founders > div:last-child {
+    justify-self: start;
     margin-right: 0;
 }
 .founder {
