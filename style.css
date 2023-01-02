@@ -31,8 +31,8 @@ DFDL Theme, (C) 2022 DFDL
 	--color-light-gray: #F6F6F6;
 	--color-whisper: #E7E7E7;
 	--color-green: #004C45;
-
-	
+	--color-green-10: #F4F7F7;
+	--color-green-70:#708E8C;
 	--color-bright-green: #10B565;
 	--color-red: #66000;
 	--color-yellow: #FFBD5C;
@@ -244,9 +244,6 @@ nav ul li {
 	width: 2em;
     position: absolute;
 }
-.callout {
-	padding: 120px 0 120px 0;
-}
 .callout h2 {
     font-size: var(--font-size-huge);
     font-weight: 700;
@@ -375,7 +372,7 @@ nav ul li {
 	padding: var(--setting-button-padding);
 }
 .dfdl-single-member {
-	margin: 120px auto 120px auto;
+	/* margin: 120px auto 120px auto; */
 }
 .dfdl-single-member, .details-stage {
 	align-items: center;
@@ -396,7 +393,7 @@ nav ul li {
 }
 .dfdl-single-member .position,
 .dfdl-single-member .location {
-	color: #66948F;
+	color: var(--color-green-70);
 	font-size: var(--font-size-small);
 	line-height: 1.5em;
 }

@@ -16,11 +16,28 @@ function dfdl_get_countries() {
     return $countries->posts;
 }
 
+/**
+ * DFDL section
+ * 
+ * Return an array with section info
+ * 
+ * 1. solutions
+ * 2. locations/country
+ */
 function dfdl_get_section() {
+    
     global $wp;
-    $pieces     = explode("/", $wp->request ) ;
-    $sections   = array( "awards", "desks", "insights", "solutions", "teams" );
-    $section    = array_values(array_intersect( $pieces, $sections ));
-    if ( is_array($section) && isset($section[0]) )
-        return $section[0];
+
+    $return = array();
+    $pieces = explode("/", $wp->request ) ;
+
+    if ( in_array($pieces[0], DFDL_SECTONS) ) {
+        $return[0] = $pieces[0];
+    }
+    if ( isset($pieces[1]) && "locations" === $return[0] && in_array($pieces[1], DFDL_COUNTRIES) ) {
+        $return[1] = $pieces[1];
+    }
+
+    return $return;
+
 }

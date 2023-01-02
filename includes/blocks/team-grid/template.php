@@ -1,10 +1,38 @@
 <?php
 
-     // get users...
-     
-     $args = array(
-          'number'        => 16
-     );
+     $sections = dfdl_get_section();
+
+     /**
+      * Block css class
+      *
+      * Class based on section and subsection
+      */
+      $block_classes = array( $sections[0] );
+     if ( "locations" === $sections[0] && isset($sections[1]) ) {
+          $block_classes[] = "country ";
+          $block_classes[] = $sections[1];
+     }
+
+     /**
+      * User query args
+      */
+     $args = array();
+     $args['number'] = 12;
+     if ( "locations" === $sections[0] ) {
+          $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
+          $args['meta_key'] = '_dfdl_user_country';
+          $args['meta_value'] = $term->term_id;
+
+          // $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+
+     }
+     if ( is_admin() ) {
+          $args['number'] = 4;
+     }
+
+     /**
+      * User query
+      */
      $users  = get_users($args);
      $output = array();
      foreach( $users as $u ) {
@@ -37,10 +65,16 @@
      }
 
 ?>
-<div class="team-feature-stage">
-     <div class="team-feature silo">
-          <?php do_action("dfdl_solutions_country_nav"); ?>
-          <div class="team-stage"><?php echo implode($output) ?></div>
-          <a class="button green ghost" href="<?php echo get_home_url(null, 'teams/all/') ?>">See All</a>
+<div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
+     <div class="team-grid silo">
+          <?php if ( "locations" !== $sections[0] ) : ?>
+               <?php do_action("dfdl_solutions_country_nav") ?>
+          <?php endif; ?>   
+          <div class="team-stage">
+               <?php echo implode($output) ?>
+          </div>
+          <?php if ( "locations" !== $sections[0] ) : ?>
+               <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
+          <?php endif; ?>
      </div>
 </div>

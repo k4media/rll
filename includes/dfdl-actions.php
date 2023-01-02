@@ -49,22 +49,33 @@ function dfdl_solutions_country_nav() {
     /**
      * Prepare html output
      */
+    $class = is_admin() ? "admin" : "" ;
+
     $output   = array();
-    $output[] = '<div class="country-nav-stage"><ul class="' . $section . '-country-nav country-nav">';
-    if ( "all" === end($pieces) ) {
-        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+
+    if ( is_admin() ) {
+
+        $output[] = '<div class="country-nav-stage"><ul class="country-nav"><li>[country navigation may appear here, depending on section]</li></ul></div>';
+
     } else {
-        $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
-    }
-    $output[] = implode("", $nav);
-    $output[] = '</ul>';
 
-    // Add teams filter
-    if ( "teams" === $section ) {
-        $output[] = dfdl_team_filter();
-    }
-    $output[] = '</div>';
+        $output[] = '<div class="country-nav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
+        if ( "all" === end($pieces) ) {
+            $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+        } else {
+            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+        }
+        $output[] = implode("", $nav);
+        $output[] = '</ul>';
 
+        // Add teams filter
+        if ( "teams" === $section ) {
+            $output[] = dfdl_team_filter();
+        }
+        $output[] = '</div>';
+
+    }
+    
     // output
     echo implode("", $output);
 

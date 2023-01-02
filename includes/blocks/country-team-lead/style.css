@@ -1,24 +1,10 @@
-.country-contacts-stage {
-    background-color: #708E8C;
-    color: var(--color-white);
-    padding: 120px 0 120px 0;
-    text-align: center;
+.country-team-lead-stage {
+	background-color: var(--color-green-10);
+	padding: 120px 0 0 0 ;
 }
-.country-contacts {
-    display: flex;
-    justify-content: space-evenly;
+.country-team-lead .member .slug {
+	color: var(--color-green-70);
+	font-size: var(--font-size-small);
+    margin-bottom: 1em;
+	text-transform: uppercase;
 }
-.country-contacts > div {
-    flex: 1 1 33%;
-}
-.callout .country-contacts h3 {
-    color: var(--color-white);
-    font-size: var(--font-size-larger);
-    font-weight: 700;
-    margin-bottom: 0;
-}
-.callout .country-contacts p {
-    margin-top: .15em;
-    line-height: 1.5em;
-}
-

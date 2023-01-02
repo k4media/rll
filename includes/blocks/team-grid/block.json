@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-team-grid",
+    "title": "Team Grid",
+    "description": "Smart 4-x-N grid of Team Members, filtered by section, ordered by ??",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "grid-view",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
