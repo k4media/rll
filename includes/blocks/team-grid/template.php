@@ -19,8 +19,10 @@
      $args = array();
 
      $args['no_found_rows']          = true;
+     $args['ignore_sticky_posts']    = true;
      $args['update_post_meta_cache'] = false;
      $args['update_post_term_cache'] = false;
+
      $args['number']                 = 12;
 
      if ( "locations" === $sections[0] ) {
@@ -78,8 +80,8 @@
           <div class="team-stage">
                <?php echo implode($output) ?>
           </div>
-          <?php if ( "locations" !== $sections[0] ) : ?>
+          <?php /* if ( "locations" !== $sections[0] ) : ?>
                <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
-          <?php endif; ?>
+          <?php endif; */?>
      </div>
 </div>

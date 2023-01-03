@@ -14,7 +14,8 @@
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
         'orderby'   => 'user_nicename',
         'order'     => 'ASC',
-        'no_found_rows'  => true,
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
     );

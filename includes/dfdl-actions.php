@@ -31,7 +31,8 @@ function dfdl_solutions_country_nav() {
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',
-        'no_found_rows'  => true,
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
      );

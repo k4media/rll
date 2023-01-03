@@ -10,7 +10,11 @@
         'post_parent'    => $desks->ID,
         'orderby'        => 'title',
         'order'          => 'ASC',
-        'no_found_rows'  => true
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+        'fields'                 => 'ids'
      );
     $pages = new WP_Query( $args );
 
