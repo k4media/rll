@@ -12,35 +12,40 @@
           $block_classes[] = "country ";
           $block_classes[] = $sections[1];
      }
+     if ( "desks" === $sections[0] && isset($sections[1]) ) {
+          $block_classes[] = "desks ";
+          $block_classes[] = $sections[1];
+     }
 
      /**
       * User query args
       */
      $args = array();
 
-     $args['no_found_rows']          = true;
-     $args['ignore_sticky_posts']    = true;
-     $args['update_post_meta_cache'] = false;
-     $args['update_post_term_cache'] = false;
-
-     $args['number']                 = 12;
+     $args['number'] = 8;
 
      if ( "locations" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
           $args['meta_key'] = '_dfdl_user_country';
           $args['meta_value'] = $term->term_id;
-
-          // $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
-
+     }
+     if ( "desks" === $sections[0] ) {
+          $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_desks');
+          $args['meta_key'] = '_dfdl_user_desks';
+          $args['meta_value'] = $term->term_id;
      }
      if ( is_admin() ) {
           $args['number'] = 4;
      }
+
+     // $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+     $jump = "#";
      
      /**
       * User query
       */
-     $users  = get_users($args);
+     $users = get_users($args);
+
      $output = array();
      foreach( $users as $u ) {
           
@@ -74,14 +79,14 @@
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
      <div class="team-grid silo">
-          <?php if ( "locations" !== $sections[0] ) : ?>
+          <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
                <?php do_action("dfdl_solutions_country_nav") ?>
           <?php endif; ?>   
           <div class="team-stage">
                <?php echo implode($output) ?>
           </div>
-          <?php /* if ( "locations" !== $sections[0] ) : ?>
+          <?php if ( count($users) > $args['number'] ) : ?>
                <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
-          <?php endif; */?>
+          <?php endif; ?>
      </div>
 </div>

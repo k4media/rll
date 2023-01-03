@@ -90,15 +90,18 @@ function dfdl_get_section() {
         return array("admin");
     
     $return = array();
-    $pieces = explode("/", $wp->request ) ;
+    $pieces = explode("/", $wp->request ) ; 
 
     if ( in_array($pieces[0], DFDL_SECTONS) ) {
+
         $return[0] = $pieces[0];
+
+        if ( isset($pieces[1]) ) {
+            $return[1] = $pieces[1];
+        }
+
     }
-    if ( isset($pieces[1]) && "locations" === $return[0] && in_array($pieces[1], DFDL_COUNTRIES) ) {
-        $return[1] = $pieces[1];
-    }
-    
+
     return $return;
 
 }
