@@ -21,12 +21,20 @@
 define('DFDL_SECTONS', array( "awards", "desks", "insights", "locations", "solutions", "teams") );
 
 /**
- * DFDL_COUNTRIES
+ * DFDL COUNTRIES
  * 
  * Array of valid countries, used mostly for validation.
  * Ex: locations, solutions, teams, insights, etc.
  */
 define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr", "myanmar", "philippines", "thailand", "vietnam") );
+
+/**
+ * DFDL DESKS
+ * 
+ * Array of valid desks, used mostly for validation.
+ * Ex: china, france, india, usa, etc.
+ */
+define('DFDL_DESKS', array( "china", "france", "india", "usa" ) );
 
 // DFDL theme bootstrap
 require get_template_directory() . '/includes/dfdl.php';

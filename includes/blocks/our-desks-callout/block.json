@@ -1,8 +1,8 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "name": "acf/dfdl-our-desks-callout",
-    "title": "Our Desks Callout",
-    "description": "Our desks callout for front page",
+    "title": "Desks Callout",
+    "description": "Show Desks and flags",
     "style": [ "file:./style.css" ],
     "category": "dfdl-block",
     "icon": "groups",

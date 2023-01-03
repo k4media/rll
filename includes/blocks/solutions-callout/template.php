@@ -25,6 +25,10 @@
           'fields'                 => 'ids'
      );
      $pages = get_pages($args);
+     
+     // this function doesn't work. why??
+     // $pages = dfdl_get_solutions();
+
      foreach( $pages as $pid ) {
 
           $page_title = get_the_title($pid);

@@ -347,25 +347,23 @@ nav ul li {
 .legal-nav a {
 	margin-left: 1em;
 }
-.country-nav-stage {
+.country-subnav-stage {
 	text-align: center;
-}
-.country-nav {
 	margin-top: 2em;
 	padding: 0;
 }
-.country-nav li {
+.country-subnav-stage li {
 	display: inline;
 	list-style-type: none;
 	margin-right: 1.5em;
 }
-.country-nav li a {
+.country-subnav-stage li a {
 	color: var(--color-dark-gray);
 }
-.country-nav li:last-child {
+.country-subnav-stage li:last-child {
 	margin-right: 0;
 }
-.country-nav .current-menu-item {
+.country-subnav-stage .current-menu-item {
 	background-color: var(--color-bright-green);
 	border-radius: var(--setting-border-radius);
 	color: var(--color-white);
@@ -427,4 +425,7 @@ nav ul li {
 }
 .dfdl-single-member .linkedin {
 	background: url(assets/media/icon-linkedin-green.svg) no-repeat center left;
+}
+#colophon .current-menu-item a {
+	font-weight: 700;
 }

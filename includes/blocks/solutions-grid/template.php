@@ -7,7 +7,11 @@
           'posts_per_page' => -1,
           'child_of'       => $page->ID,
           'order'          => 'ASC',
-          'orderby'        => 'menu_order'
+          'orderby'        => 'menu_order',
+          'no_found_rows'          => true,
+          'ignore_sticky_posts'    => true,
+          'update_post_meta_cache' => false, 
+          'update_post_term_cache' => false,
      );
      $pages = get_pages($args);
      foreach( $pages as $p ) {

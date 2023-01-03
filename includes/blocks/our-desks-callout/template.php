@@ -10,24 +10,8 @@
           $subtitle = get_field('subtitle');
      }
 
-     $title = ( "" === $title) ? "Our Desks" : $title ;
-     $subtitle = ( "" ===  $subtitle ) ? "" : $subtitle ;
+     $pages = dfdl_get_desks();
 
-     // get desks
-     $page = get_page_by_path( 'desks' );
-     $args = array(
-          'post_type'      => 'page',
-          'posts_per_page' => -1,
-          'child_of'       => $page->ID,
-          'order'          => 'ASC',
-          'orderby'        => 'menu_order',
-          'no_found_rows'          => true,
-          'ignore_sticky_posts'    => true,
-          'update_post_meta_cache' => false, 
-          'update_post_term_cache' => false,
-          'fields'                 => 'ids'
-     );
-     $pages = get_pages($args);
      foreach( $pages as $pid ) {
 
           $page_title = get_the_title($pid);

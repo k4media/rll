@@ -216,3 +216,28 @@ html :where(.wp-block) {
 .country-team-lead-stage .dfdl-single-member {
 	margin: 0;
 }
+.country-subnav-stage {
+	text-align: center;
+	margin-top: 2em;
+	padding: 0;
+}
+.country-subnav-stage li {
+	display: inline;
+	list-style-type: none;
+	margin-right: 1.5em;
+}
+.country-subnav-stage li a {
+	color: var(--color-dark-gray);
+}
+.country-subnav-stage li:last-child {
+	margin-right: 0;
+}
+.country-subnav-stage .current-menu-item {
+	background-color: var(--color-bright-green);
+	border-radius: var(--setting-border-radius);
+	color: var(--color-white);
+	padding: var(--setting-button-padding);
+}
+.desks-subnav {
+    margin-bottom: 2em;
+}

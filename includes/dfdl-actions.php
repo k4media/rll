@@ -42,10 +42,14 @@ function dfdl_solutions_country_nav() {
     $home_url = get_home_url(NULL);
 
     foreach($pages->posts as $page) {
-        if ( in_array(strtolower($page->post_name), $pieces)  ) {
-            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+        if ( is_admin() ) {
+            $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
         } else {
-            $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+            if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+            } else {
+                $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+            }
         }
     }
 
@@ -58,11 +62,11 @@ function dfdl_solutions_country_nav() {
 
     if ( is_admin() ) {
 
-        $output[] = '<div class="country-nav-stage"><ul class="country-nav"><li>[country navigation may appear here, depending on section]</li></ul></div>';
+        $output[] = '<nav class="country-subnav-stage"><ul><li>[country navigation may appear here, depending on section]</li></ul></nav>';
 
     } else {
 
-        $output[] = '<div class="country-nav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
+        $output[] = '<nav class="country-subnav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
         if ( "all" === end($pieces) ) {
             $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
         } else {
@@ -75,7 +79,7 @@ function dfdl_solutions_country_nav() {
         if ( "teams" === $section ) {
             $output[] = dfdl_team_filter();
         }
-        $output[] = '</div>';
+        $output[] = '</nav>';
 
     }
     
