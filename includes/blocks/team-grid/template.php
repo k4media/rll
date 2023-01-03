@@ -17,7 +17,12 @@
       * User query args
       */
      $args = array();
-     $args['number'] = 12;
+
+     $args['no_found_rows']          = true;
+     $args['update_post_meta_cache'] = false;
+     $args['update_post_term_cache'] = false;
+     $args['number']                 = 12;
+
      if ( "locations" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
           $args['meta_key'] = '_dfdl_user_country';
@@ -29,7 +34,7 @@
      if ( is_admin() ) {
           $args['number'] = 4;
      }
-
+     
      /**
       * User query
       */

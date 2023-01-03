@@ -3,6 +3,11 @@
 
 function dfdl_team_filter() {}
 
+/*
+* DFDL Countries
+*
+* @return array of IDs
+*/
 function dfdl_get_countries() {
     $locations = get_page_by_path("locations");
     $args = array(
@@ -10,7 +15,11 @@ function dfdl_get_countries() {
         'posts_per_page' => -1,
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
-        'orderby'        => 'menu_order'
+        'orderby'        => 'menu_order',
+        'no_found_rows'          => true,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
+        'fields'                 => 'ids'
      );
     $countries = new WP_Query( $args );
     return $countries->posts;

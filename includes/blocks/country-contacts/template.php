@@ -13,7 +13,7 @@
 
 ?>
 <div class="country-contacts-stage callout">
-     <div class="country-contacts narrow">
+     <div class="country-contacts silo">
           <div class="address">
                <h3>Address</h3>
                <?php echo $address ?>

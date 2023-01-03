@@ -15,12 +15,26 @@
      $countries = dfdl_get_countries();
 
      foreach( $countries as $c ) {
+
+          $post_title = get_the_title($c);
+          $post_slug = sanitize_title($post_title);
+
+          $output[] = '<li class="country-' . $post_slug . ' country">';
+          $output[] = '<a href="' . get_permalink($c) . '">'  ;
+          $output[] = $post_title;
+          $output[] = '</a>';
+          $output[] = '</li>';
+     }
+
+     /*
+     foreach( $countries as $c ) {
           $output[] = '<li class="country-' . $c->post_title . ' country">';
           $output[] = '<a href="' . get_permalink($c->ID) . '">'  ;
           $output[] = $c->post_title;
           $output[] = '</a>';
           $output[] = '</li>';
      }
+     */
 
 ?>
 <div class="dfdl-countries-stage callout">

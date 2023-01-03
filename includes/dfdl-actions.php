@@ -30,10 +30,12 @@ function dfdl_solutions_country_nav() {
         'posts_per_page' => -1,
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
-        'orderby'        => 'menu_order'
+        'orderby'        => 'menu_order',
+        'no_found_rows'  => true,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
      );
     $pages = new WP_Query( $args );
-
 
     $nav       = array();
     $home_url = get_home_url(NULL);

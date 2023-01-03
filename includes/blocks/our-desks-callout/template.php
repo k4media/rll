@@ -20,15 +20,28 @@
           'posts_per_page' => -1,
           'child_of'       => $page->ID,
           'order'          => 'ASC',
-          'orderby'        => 'menu_order'
+          'orderby'        => 'menu_order',
+          'no_found_rows'          => true,
+          'update_post_meta_cache' => false, 
+          'update_post_term_cache' => false,
+          'fields'                 => 'ids'
      );
      $pages = get_pages($args);
-     foreach( $pages as $p ) {
-          $desk = '<div class="desk ' . $p->post_title . ' ">';
-          $desk .= '<a href="' . get_permalink($p->ID) . '">'  ;
-          $icon = get_stylesheet_directory() . '/assets/media/di-' . $p->post_name . '.svg';
-          $desk .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $p->post_name . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/di-missing.svg">' ;
-          $desk .= $p->post_title;
+     foreach( $pages as $pid ) {
+
+          $page_title = get_the_title($pid);
+          $page_slug  = sanitize_title($page_title);
+
+          $icon = get_stylesheet_directory_uri() . '/assets/media/di-missing.svg';
+          if ( function_exists('get_fields') ) {
+               $flag = get_field('flag', $pid);
+               $icon = ( isset($flag['url']) ) ? $flag['url'] : get_stylesheet_directory_uri() . '/assets/media/di-missing.svg';
+          }
+
+          $desk = '<div class="desk ' . $page_slug . ' ">';
+          $desk .= '<a href="' . get_permalink($pid) . '">';
+          $desk .= '<img src="' . $icon . '">';
+          $desk .= $page_title;
           $desk .= '</a>';
           $desk .= '</div>';
           $desks[] = $desk;

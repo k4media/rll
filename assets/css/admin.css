@@ -210,3 +210,9 @@ html :where(.wp-block) {
 .team-stage {
 	pointer-events: none;
 }
+.country-team-lead-stage {
+	padding: 1em ;
+}
+.country-team-lead-stage .dfdl-single-member {
+	margin: 0;
+}

@@ -11,21 +11,29 @@
      }
 
      // get solutions pages
-     $page      = get_page_by_path( 'solutions' );
+     $page = get_page_by_path( 'solutions' );
      $args = array(
           'post_type'      => 'page',
           'posts_per_page' => -1,
           'child_of'       => $page->ID,
           'order'          => 'ASC',
-          'orderby'        => 'menu_order'
+          'orderby'        => 'menu_order',
+          'no_found_rows'          => true,
+          'update_post_meta_cache' => false, 
+          'update_post_term_cache' => false,
+          'fields'                 => 'ids'
      );
      $pages = get_pages($args);
-     foreach( $pages as $p ) {
-          $solution = '<div class="solution ' . $p->post_title . ' ">';
-          $icon = get_stylesheet_directory() . '/assets/media/si-' . $p->post_name . '.svg';
-          $solution .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $p->post_name . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-missing.svg">' ;
-          $solution .= '<a href="' . get_permalink($p->ID) . '">'  ;
-          $solution .= $p->post_title;
+     foreach( $pages as $pid ) {
+
+          $page_title = get_the_title($pid);
+          $page_slug  = sanitize_title($page_title);
+
+          $solution = '<div class="solution ' . $page_slug . ' ">';
+          $icon = get_stylesheet_directory() . '/assets/media/si-' . $page_slug. '.svg';
+          $solution .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $page_slug . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-missing.svg">' ;
+          $solution .= '<a href="' . get_permalink($pid) . '">'  ;
+          $solution .= $page_title;
           $solution .= '</a>';
           $solution .= '</div>';
           $solutions[] = $solution;

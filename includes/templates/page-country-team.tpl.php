@@ -13,7 +13,10 @@
         'number'    => -1,
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
         'orderby'   => 'user_nicename',
-        'order'     => 'ASC'
+        'order'     => 'ASC',
+        'no_found_rows'  => true,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
     );
 
     if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {

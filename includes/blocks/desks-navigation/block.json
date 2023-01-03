@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-desks-nav",
+    "title": "Desks Navigation",
+    "description": "Navigation elements for Desks",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "filter",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
