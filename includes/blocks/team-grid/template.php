@@ -16,14 +16,17 @@
           $block_classes[] = "desks ";
           $block_classes[] = $sections[1];
      }
+     if ( "teams" === $sections[0] ) {
+          $block_classes[] = "teams ";
+     }
 
      /**
       * User query args
       */
-     $args = array();
-
-     $args['number'] = 8;
-
+     $args                = array();
+     $args['number']      = 8;
+     $args['count_total'] = false;
+     
      if ( "locations" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
           $args['meta_key'] = '_dfdl_user_country';
@@ -33,6 +36,9 @@
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_desks');
           $args['meta_key'] = '_dfdl_user_desks';
           $args['meta_value'] = $term->term_id;
+     }
+     if ( "teams" === $sections[0] ) {
+          $args['fields'] = 'all_with_meta';
      }
      if ( is_admin() ) {
           $args['number'] = 4;
@@ -46,45 +52,27 @@
       */
      $users = get_users($args);
 
-     $output = array();
-     foreach( $users as $u ) {
-          
-          $position    = get_user_meta( $u->data->ID, 'position', true);
-          $locations   = array();
-          $country_ids = get_user_meta( $u->data->ID, '_dfdl_user_country'); 
-          foreach( $country_ids as $c ) {
-               $country = get_term( $c, 'dfdl_countries', true);
-               $locations[] = $country->name;
-          }
-
-          $member_slug = sanitize_title($u->data->display_name);
-
-          $output[] = '<div class="team-member">';
-               $output[] = '<a href="' . get_home_url(null, 'teams/members/' . $member_slug . '/' . $u->data->ID . '/') . '">';
-               $output[] = '<img src="' . get_avatar_url($u->data->ID, array('size' => 320)) . '">';
-               $output[] = '<div class="details-stage"><div class="details">';
-                    $output[] = '<div class="name">' . $u->data->display_name . '</div>';
-                    if (isset($position)) {
-                          $output[] = '<div class="position">' . $position . '</div>'; 
-                    }
-                    if ( count($locations) > 0 ) {
-                            $output[] = '<div class="location">' . implode(", ", $locations) . '</div>'; 
-                    }
-                $output[] = '</div></div>';
-                $output[] = '</a>';
-          $output[] = '</div>';
-          
-     }
-
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
      <div class="team-grid silo">
           <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
                <?php do_action("dfdl_solutions_country_nav") ?>
-          <?php endif; ?>   
+          <?php endif; ?>  
           <div class="team-stage">
-               <?php echo implode($output) ?>
+               <?php
+                    if ( isset($users) ) {
+                         foreach( $users as $user ) {
+                              set_query_var("user", $user);
+                              get_template_part( 'includes/template-parts/content/member' );
+                         }
+                    }
+               ?>
           </div>
+          <?php
+               if ( is_admin() ) {
+                    echo "<h4>Showing only 4 of possibly many users</h4>";
+               }
+          ?>
           <?php if ( count($users) > $args['number'] ) : ?>
                <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
           <?php endif; ?>

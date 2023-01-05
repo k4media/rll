@@ -50,10 +50,8 @@
                         <div class="linkedin"><a href="<?php echo $meta['linkedin'][0] ?>">linkedIn</a></div>
                     <?php endif; ?>
                  </div>
-
              </div>
         </div>
-
     </div>
 </div>
 

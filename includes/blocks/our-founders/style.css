@@ -5,39 +5,23 @@
 .our-founders h2 {
     text-align: center;
 }
-.founders {
+.founders-stage {
     display: grid;
     grid-template-columns: repeat(3, 1fr) ;
     margin-top: 60px;
 }
-.founders > div {
-    max-width: 320px;
-}
-.founders > div:first-child {
-    justify-self: end;
-}
-.founders > div:nth-child(2) {
-    justify-self: center;
-}
-.founders > div:last-child {
-    justify-self: start;
-    margin-right: 0;
-}
-.founder {
+.founders-stage > article {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
+    max-width: 320px;
 }
-.founder .details-stage {
-    align-items: center;
-    display: flex;
-    padding: 1em;
+.founders-stage > article:first-child {
+    justify-self: end;
 }
-.founder .details .name {
-    font-size: var(--font-size-large);
-    font-weight: 700;
-    margin-bottom: .5em;
+.founders-stage > article:nth-child(2) {
+    justify-self: center;
 }
-.founder .details .position,
-.founder .details .location {
-    color: var(--color-gray);
+.founders-stage > article:last-child {
+    justify-self: start;
+    margin-right: 0;
 }
