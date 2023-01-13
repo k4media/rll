@@ -4,12 +4,12 @@
      $lcol = null;
      $rcol = null;
 
-     // get fields via acf
      if ( function_exists('get_field') ) {
           $title   = get_field('title');
           $lcol   = get_field('lcol');
           $rcol   = get_field('rcol');
      }
+     
 ?>
 <div class="text-feature-stage">
      <div class="text-feature narrow">

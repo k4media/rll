@@ -1,8 +1,8 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "name": "acf/dfdl-our-founders",
-    "title": "Our Founders",
-    "description": "",
+    "title": "Founders",
+    "description": "3 x 1 row of selected Team Members",
     "style": [ "file:./style.css" ],
     "category": "dfdl-block",
     "icon": "groups",
