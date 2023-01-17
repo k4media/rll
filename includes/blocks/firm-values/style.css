@@ -1,0 +1,17 @@
+#page-lead {
+    background-color: var(--color-green);
+    color: var(--color-white);
+    padding: 120px 0 120px 0;
+}
+#page-lead .lead {
+    font-size: var(--font-size-big);
+    line-height: 1.5em;
+    margin: 0 auto 1em auto;
+}
+#page-lead .lead + p {
+    margin-top: 4em;
+}
+#page-lead p {
+    line-height: 1.6em;
+    margin: 1em auto 1em auto;
+}

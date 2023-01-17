@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-awards-grid",
+    "title": "Award Grid",
+    "description": "A content-aware, filterable list of awards.",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "awards",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}

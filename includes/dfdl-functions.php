@@ -13,8 +13,8 @@ function dfdl_get_solutions() {
     $solutions = get_page_by_path( 'solutions' );
     $args = array(
         'post_type'      => 'page',
-        'posts_per_page' => 24,
-        'child_of'       => $solutions->ID,
+        'posts_per_page' => -1,
+        'post_parent'       => $solutions->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',
         'no_found_rows'          => true,
@@ -37,7 +37,7 @@ function dfdl_get_desks() {
     $desks = get_page_by_path("desks");
     $args = array(
         'post_type'      => 'page',
-        'posts_per_page' => -1,
+        'posts_per_page' => 24,
         'post_parent'    => $desks->ID,
         'orderby'        => 'post_title',
         'order'          => 'ASC',
@@ -60,7 +60,7 @@ function dfdl_get_countries() {
     $locations = get_page_by_path("locations");
     $args = array(
         'post_type'      => 'page',
-        'posts_per_page' => -1,
+        'posts_per_page' => 24,
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',

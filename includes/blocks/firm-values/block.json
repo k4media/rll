@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-firm-values",
+    "title": "Firm Values",
+    "description": "Three-column page lead with titles and excerpts.",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "edit",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
