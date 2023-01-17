@@ -33,10 +33,8 @@
 
           $page_title = get_the_title($pid);
           $page_slug  = sanitize_title($page_title);
-
           $solution = '<div class="solution ' . $page_slug . ' ">';
-          $icon = get_stylesheet_directory() . '/assets/media/si-' . $page_slug. '.svg';
-          $solution .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $page_slug . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-missing.svg">' ;
+          $solution .= '<span>&#x2022;</span>';
           $solution .= '<a href="' . get_permalink($pid) . '">'  ;
           $solution .= $page_title;
           $solution .= '</a>';

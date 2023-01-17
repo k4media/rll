@@ -10,12 +10,11 @@
     text-align: left;
 }
 .solution {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     height: 48px;
 }
-.solution img {
-    height: 16px;
-    margin-right: 1em;
-    width: 16px;
+.solution span {
+    font-size: var(--font-size-large);
+    padding-right: .5em;
 }
