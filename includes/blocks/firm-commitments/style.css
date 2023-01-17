@@ -1,0 +1,31 @@
+#firm-commitments {
+    background-color: #F4F7F7;
+    padding: 120px 0 120px 0;
+}
+#firm-commitments .commitment h2 {
+    font-size: var(--font-size-larger);
+    margin-bottom: 1em;
+    text-align: left;
+}
+#firm-commitments .commitments-stage {
+    margin:auto;
+    width: 100%;
+}
+#firm-commitments .commitment {
+    background-color: var(--color-white);
+    box-shadow: 0 0 6px rgb(200 200 200 / 50%);
+    float: left;
+    height: auto;
+    margin: 20px 0 20px 0;
+    overflow: hidden;
+    padding: 2.5em 1.5em 2.5em 1.5em;
+    width: 460px;
+}
+
+/* clearfix */
+.commitments-stage:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+

@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-firm-commitments",
+    "title": "Firm Commitments",
+    "description": "Title and repeatable blocks",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "performance",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}

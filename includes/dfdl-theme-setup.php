@@ -188,6 +188,10 @@ function dfdl_scripts() {
 	$filetime = filemtime( get_stylesheet_directory() . '/assets/js/dfdl.js');
 	wp_enqueue_script('dfdl', get_stylesheet_directory_uri() . '/assets/js/dfdl.js', array(), $filetime, true );
 
+	// Masonry for Our Commitments
+	if ( is_page('our-firm') ) { wp_enqueue_script('masonry'); }
+
+	// Localize script for ajax calls
 	$params = array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' )
 	);

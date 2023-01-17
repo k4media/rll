@@ -1,17 +1,23 @@
-#page-lead {
+#firm-values {
     background-color: var(--color-green);
     color: var(--color-white);
     padding: 120px 0 120px 0;
 }
-#page-lead .lead {
-    font-size: var(--font-size-big);
+#firm-values .narrow {
+    display: flex;
+    justify-content: space-between;
+}
+#firm-values .col {
+    max-width: 240px;
+    text-align: center;
+}
+#firm-values h2 {
+    font-size: var(--font-size-larger);
+    font-weight: 700;
     line-height: 1.5em;
-    margin: 0 auto 1em auto;
+    margin-bottom: .25em;
 }
-#page-lead .lead + p {
-    margin-top: 4em;
-}
-#page-lead p {
-    line-height: 1.6em;
-    margin: 1em auto 1em auto;
-}
+
+
+
+

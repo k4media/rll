@@ -1,21 +1,24 @@
 <?php
 
-     $lead = null;
-     $text = null;
+     $values  = null;
+     $output  = array();
+     $counter = 0;
 
      // get fields via acf
      if ( function_exists('get_field') ) {
-          $lead   = get_field('lead');
-          $text   = get_field('text');
+          $values   = get_field('values');
+          foreach ( $values as $v ) {
+               $counter++;
+               $output[] = '<div class="col col' . $counter . '">';
+               $output[] = '<h2 class="title">' . $v['title'] . '</h2>';
+               $output[] = '<div class="excerpt">' . $v['text']. '</div>';
+               $output[]= '</div>';
+          }
      }
+
 ?>
 <div id="firm-values">
      <div class="narrow">
-          <?php if( isset($lead) ) : ?>
-               <div class="lead"><?php echo apply_filters( 'the_content', wp_kses_post( $lead ) ); ?></div>
-          <?php endif; ?>
-          <?php if( isset($text) ) : ?>
-               <?php echo apply_filters( 'the_content', wp_kses_post( $text ) ); ?>
-          <?php endif; ?>
+          <?php echo implode($output); ?>
      </div>
 </div>
