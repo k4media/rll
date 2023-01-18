@@ -1,7 +1,7 @@
 <?php
 
      // get solutions pages
-     $page      = get_page_by_path( 'solutions' );
+     $page = get_page_by_path( 'solutions' );
      $args = array(
           'post_type'      => 'page',
           'posts_per_page' => -1,
@@ -14,14 +14,29 @@
           'update_post_term_cache' => false,
      );
      $pages = get_pages($args);
-     foreach( $pages as $p ) {
-          $solution = '<div class="solution ' . $p->post_title . ' ">';
-          $icon = get_stylesheet_directory() . '/assets/media/si-' . $p->post_name . '.svg';
-          $solution .= ( file_exists($icon) ) ? '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-' . $p->post_name . '.svg' . '">' : '<img src="' . get_stylesheet_directory_uri() . '/assets/media/si-missing.svg">' ;
-          $solution .= '<a href="' . get_permalink($p->ID) . '">'  ;
-          $solution .= $p->post_title;
-          $solution .= '</a>';
+
+     foreach( $pages as $post ) {
+
+          // image
+          $image   = get_block_data($post, 'acf/dfdl-page-hero', 'image');
+          $image   = wp_get_attachment_image_url($image, 'medium');
+
+          // overlay
+          $overlay = get_block_data($post, 'acf/dfdl-page-hero', 'overlay');
+
+          // output
+          
+          $solution = '<a href="' . get_permalink($post->ID) . '">'  ;
+          $solution .= '<div class="solution ' . sanitize_title($post->post_title). ' ">';
+
+               // image thumbnail
+               $solution .= '<div class="thumbnail" style="background-image:url(' . $image . ')">';
+               $solution .= '<div class="overlay" style="background-color:' . $overlay . '"></div>';
+               $solution .= '</div>';
+
+          $solution .= "<h3>" . esc_attr($post->post_title) . "</h3>";
           $solution .= '</div>';
+          $solution .= '</a>';
           $solutions[] = $solution;
      }
 

@@ -1,0 +1,32 @@
+.solutions.stage {
+    display: grid;
+    column-gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 40px;
+}
+.solutions-grid .solution {
+    box-shadow: 0 0 6px rgb(200 200 200 / 50%);
+    display: block;
+    height: 180px;
+    margin-bottom: 20px;
+}
+.solution .thumbnail {
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 90px;
+    position: relative;
+    width: 100%;
+}
+.solution .overlay {
+    bottom: 0;
+    left:0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.solutions-grid .solution h3 {
+    color: var(--color-black);
+    margin: 1em;
+}

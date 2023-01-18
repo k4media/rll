@@ -5,7 +5,6 @@ function dfdl_team_filter() {}
 
 /*
 * DFDL Solutions.
-* doesn't work! not in use yet.
 *
 * @return array of IDs
 */
@@ -14,7 +13,7 @@ function dfdl_get_solutions() {
     $args = array(
         'post_type'      => 'page',
         'posts_per_page' => -1,
-        'post_parent'       => $solutions->ID,
+        'post_parent'    => $solutions->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',
         'no_found_rows'          => true,
@@ -24,7 +23,6 @@ function dfdl_get_solutions() {
         'fields'                 => 'ids'
     );
     $pages = new WP_Query( $args );
-    // var_dump( $pages->posts );
     return $pages->posts;
 }
 
@@ -104,4 +102,26 @@ function dfdl_get_section() {
 
     return $return;
 
+}
+
+
+/**
+ * Get Block Data
+ * 
+ * RGet block date from page
+ * 
+ */
+function get_block_data($post, $block_name = 'core/heading', $field_name = "" ){
+	$content = "";
+	if ( has_blocks( $post->post_content ) && !empty($field_name )) {
+	    $blocks = parse_blocks( $post->post_content );
+	    foreach($blocks as $block){
+		    if ( $block['blockName'] === $block_name ) {
+		    	if(isset($block["attrs"]["data"][$field_name ])){
+                   $content = $block["attrs"]["data"][$field_name ];
+		    	}
+		    }	    	
+	    }  
+	}
+	return $content;
 }
