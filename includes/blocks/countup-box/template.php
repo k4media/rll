@@ -28,8 +28,10 @@
           }
      }
 
+     $front = ( is_front_page() ) ? "frontpage" : "" ; 
+
 ?>
-<div class="countup-box-stage" >
+<div class="countup-box-stage <?php echo $front ?>">
      <div id="countup-boxes" class="countup-boxes narrow">
           <div class="box box-1">
                <h4 class="countup" cup-end="<?php echo $boxes[1]['number'] ?>"><?php echo $boxes[1]['number'] ?></h4>

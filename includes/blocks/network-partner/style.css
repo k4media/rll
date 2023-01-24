@@ -4,6 +4,7 @@
     margin: 24px auto 24px auto;
     max-width: 860px;
     padding: 24px;
+    width: 100%;
 }
 .network-partner .brand {
     flex: 1 1 15%;
@@ -31,4 +32,11 @@
 }
 .network-partner .details .name a {
     font-size: var(--font-size-large);
+}
+
+@media screen and ( max-width: 1000px ) {
+    .network-partner {
+        margin: 24px 16px 24px 16px;
+        width: auto;
+    }
 }

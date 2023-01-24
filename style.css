@@ -443,4 +443,6 @@ nav ul li {
 	max-width: var(--setting-silo-max-width);
 	width: 100%;
 }
-
+.admin-bar #menu-side-close {
+	margin-top: 48px;
+}
