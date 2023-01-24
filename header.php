@@ -23,12 +23,7 @@
 <header>
 	<div class="header-stage silo">
 		<div class="left">
-			<button class="hamburger hamburger--slider" type="button"
-        aria-label="Menu" aria-controls="navigation">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
-			</button>
+			<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>
 			<nav id="site-navigation" class="main-navigation">
 				<?php
 					wp_nav_menu(

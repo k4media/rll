@@ -20,12 +20,14 @@
                 <?php do_action('newsletter_signup') ?>
             </div>
         </div>
-        <div id="fineprint" class="silo">
+        <div class="fineprint silo">
             <?php do_action('copyright_notice') ?>
             <?php do_action('social_links') ?>
             <?php do_action('legal_nav') ?>
         </div>
     </div>
+
+    <?php get_template_part("includes/template-parts/menus/menu", "side"); ?>
 
 </div><!-- /page -->
 
