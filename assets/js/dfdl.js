@@ -1,12 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
+    var body      = document.getElementById("hamburger");
     var hamburger = document.getElementById("hamburger");
     var side_menu = document.getElementById("menu-side");
     var close     = document.getElementById("menu-side-close");
     hamburger.addEventListener("click", function() {
         side_menu.classList.toggle("is-active");
+        document.body.classList.toggle("noscroll");
     });
     close.addEventListener("click", function() {
         side_menu.classList.toggle("is-active");
+        document.body.classList.toggle("noscroll");
     });
 
 }, false);
