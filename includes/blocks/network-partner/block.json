@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-network-partner",
+    "title": "Network Partner",
+    "description": "Partner block for Network page, with title, image and description",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "groups",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
