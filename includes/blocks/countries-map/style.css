@@ -1,7 +1,22 @@
 .dfdl-countries-stage {
     padding: 120px 0 120px 0;
 }
-.countries-map {
-    padding: 120px 0 120px 0;
-    text-align: center;
+.dfdl-countries .stage {
+    display: flex;
+    width: 100%;
+}
+.dfdl-countries .map {
+    flex: 1 1 75%;
+}
+.dfdl-countries .map img {
+    height: auto;
+    width: 100%;
+}
+.dfdl-countries .countries {
+    flex: 1 1 25%;
+}
+.dfdl-countries .countries li {
+    line-height: 2em;
+    list-style-type: none;
+    text-align: right;
 }
