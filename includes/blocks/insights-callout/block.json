@@ -5,7 +5,7 @@
     "description": "Insights callout -- placeholder",
     "style": [ "file:./style.css" ],
     "category": "dfdl-block",
-    "icon": "awards",
+    "icon": "dashicons-buddicons-topics",
     "acf": {
         "mode": "preview",
         "renderTemplate": "template.php"

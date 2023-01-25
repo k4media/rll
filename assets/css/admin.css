@@ -212,6 +212,7 @@ html :where(.wp-block) {
 }
 .country-team-lead-stage,
 .team-member-stage,
+.team-grid,
 .team-member-stage .dfdl-single-member,
 #firm-values {
 	padding: 1em;

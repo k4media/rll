@@ -41,7 +41,7 @@ function dfdl_solutions_country_nav() {
      );
     $pages = new WP_Query( $args );
 
-    $nav       = array();
+    $nav      = array();
     $home_url = get_home_url(NULL);
 
     foreach($pages->posts as $page) {
@@ -81,6 +81,17 @@ function dfdl_solutions_country_nav() {
     // output
     echo implode("", $output);
 
+}
+
+/**
+ * Get resuable block by ID
+ */
+add_action( 'dfdl_reusable_block', 'dfdl_reusable_block', 10, 1);
+function dfdl_reusable_block( int $id ) {
+    if ( ! isset($id) ) 
+        return;
+    $block = get_post( $id );
+    echo apply_filters( 'the_content', $block->post_content);
 }
 
 /**

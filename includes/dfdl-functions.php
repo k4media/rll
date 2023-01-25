@@ -1,6 +1,5 @@
 <?php
 
-
 function dfdl_team_filter() {}
 
 /*
@@ -104,11 +103,10 @@ function dfdl_get_section() {
 
 }
 
-
 /**
  * Get Block Data
  * 
- * RGet block date from page
+ * Get block data from page
  * 
  */
 function get_block_data($post, $block_name = 'core/heading', $field_name = "" ){

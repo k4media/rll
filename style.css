@@ -107,9 +107,6 @@ nav ul li {
 	float: right;
 	margin: 0 0 32px 16px;
 }
-.alignnone {
-
-}
 #hamburger {
 	background-color: transparent;
 	background-image: url(assets/media/icon-hamburger.svg);
@@ -459,4 +456,38 @@ nav ul li {
 }
 .admin-bar #menu-side-close {
 	margin-top: 48px;
+}
+.contact-callout {
+    background-color: var(--color-bright-green);
+    display: flex;
+    position: relative;
+}
+.contact-callout > div {
+    flex: 1 1 50%;
+}
+.contact-callout img {
+    max-width: 100%;
+}
+.contact-callout .copy-stage {
+    align-items: center;
+    display: flex;
+    color: var(--color-white);
+}
+.contact-callout::after {
+    background: url(../../../assets/media/logo-art-reverse.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    bottom: 0;
+    content: ' ';
+    height: 125px;
+    position: absolute;
+    right: 0;
+    width: 150px;
+}
+.contact-callout .copy-stage .copy {
+    max-width: 32em;
+    width: 100%;
+}
+.contact-callout .button {
+    margin-top: 2em;
 }

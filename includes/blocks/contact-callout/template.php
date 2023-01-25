@@ -6,17 +6,18 @@
      $button_link = "";
      $image       = "";
 
+     
      // get fields
      if ( function_exists('get_fields') ) {
           $title       = get_field('title');
           $text        = get_field('text');
           $button_text = get_field('btext');
           $button_link = get_field('link');
-          $image       = get_field('image');
+          $image       = get_field('image'); 
      }
 ?>
-<div class="photo-feature-stage">
-     <div class="photo-feature">
+<div class="contact-callout-stage">
+     <div class="contact-callout">
           <?php if ( isset($image['url']) ) : ?>
                <div class="image"><img src="<?php echo $image['url'] ?>"></div>
           <?php endif; ?>

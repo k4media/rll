@@ -1,11 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
-    "name": "acf/dfdl-photo-feature",
-    "title": "Photo Feature",
-    "description": "Photo with title, subtitle and link",
+    "name": "acf/dfdl-contact-callout",
+    "title": "Contact Callout",
+    "description": "Contact DFDL callout with image and text",
     "style": [ "file:./style.css" ],
     "category": "dfdl-block",
-    "icon": "cover-image",
+    "icon": "dashicons-megaphone",
     "acf": {
         "mode": "preview",
         "renderTemplate": "template.php"

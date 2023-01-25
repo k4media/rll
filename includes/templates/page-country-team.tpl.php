@@ -46,4 +46,12 @@
         ?>
     </div>
 </div>
+
+<?php
+    /**
+     * Show reusable "contact" block, ID 700
+     */
+     do_action("dfdl_reusable_block", 700);
+?>
+
 <?php get_footer();

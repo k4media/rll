@@ -24,7 +24,7 @@
       * User query args
       */
      $args                = array();
-     $args['number']      = 8;
+     $args['number']      = 4;
      $args['count_total'] = false;
      
      if ( "locations" === $sections[0] ) {
@@ -42,10 +42,17 @@
      }
      if ( is_admin() ) {
           $args['number'] = 4;
+          $jump = "#";
      }
 
-     // $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
-     $jump = "#";
+     /**
+      * View All Link
+      */
+     if ( "teams" === $sections[0] ) {
+          $jump = get_home_url(null, '/teams/all/');
+     } else {
+          $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+     }
      
      /**
       * User query
@@ -73,8 +80,6 @@
                     echo "<h4>Showing only 4 of possibly many users</h4>";
                }
           ?>
-          <?php if ( count($users) > $args['number'] ) : ?>
-               <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
-          <?php endif; ?>
+          <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
      </div>
 </div>
