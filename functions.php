@@ -26,7 +26,7 @@ define('DFDL_SECTONS', array( "awards", "desks", "insights", "locations", "solut
  * Array of valid countries, used mostly for validation.
  * Ex: locations, solutions, teams, insights, etc.
  */
-define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr", "myanmar", "philippines", "thailand", "vietnam") );
+define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr", "myanmar", "philippines", "singapore", "thailand", "vietnam") );
 
 /**
  * DFDL DESKS

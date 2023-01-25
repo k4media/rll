@@ -211,6 +211,8 @@ html :where(.wp-block) {
 	pointer-events: none;
 }
 .country-team-lead-stage,
+.team-member-stage,
+.team-member-stage .dfdl-single-member,
 #firm-values {
 	padding: 1em;
 }

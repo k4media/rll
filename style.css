@@ -96,6 +96,20 @@ nav ul li {
 	list-style-type: none;
 	position: relative;
 }
+.aligncenter {
+	margin: auto;
+}
+.alignleft {
+	float: left;
+	margin: 0 16px 32px 0;
+}
+.alignright {
+	float: right;
+	margin: 0 0 32px 16px;
+}
+.alignnone {
+
+}
 #hamburger {
 	background-color: transparent;
 	background-image: url(assets/media/icon-hamburger.svg);
