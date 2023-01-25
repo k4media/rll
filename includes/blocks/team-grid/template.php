@@ -26,7 +26,12 @@
      $args                = array();
      $args['number']      = 4;
      $args['count_total'] = false;
-     
+
+     if ( "solutions" === $sections[0] ) {
+          $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_solutions');
+          $args['meta_key'] = '_dfdl_user_solutions';
+          $args['meta_value'] = $term->term_id;
+     }
      if ( "locations" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
           $args['meta_key'] = '_dfdl_user_country';
@@ -67,11 +72,13 @@
           <?php endif; ?>  
           <div class="team-stage">
                <?php
-                    if ( isset($users) ) {
+                    if ( count($users) > 0) {
                          foreach( $users as $user ) {
                               set_query_var("user", $user);
                               get_template_part( 'includes/template-parts/content/member' );
                          }
+                    } else {
+                         echo "<p>No Team Members Found.</p>";
                     }
                ?>
           </div>
@@ -80,6 +87,8 @@
                     echo "<h4>Showing only 4 of possibly many users</h4>";
                }
           ?>
-          <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
+          <?php if ( count($users) > 0) : ?>
+               <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
+          <?php endif; ?>
      </div>
 </div>
