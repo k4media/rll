@@ -9,7 +9,7 @@ function dfdl_solutions_country_nav() {
     global $wp;
 
     $pieces     = explode("/", $wp->request ) ;
-    $sections   = array("solutions", "teams", "awards");
+    $sections   = array("teams", "awards");
     $section    = array_values(array_intersect( $pieces, $sections ));
 
     if ( isset($section[0]) ) {
@@ -18,7 +18,10 @@ function dfdl_solutions_country_nav() {
         /**
          * Set fallback for is_admin()
          */
-        $section = "#";
+        if ( is_admin() ) {
+            echo '<nav class="country-subnav-stage"><ul><li>[country navigation may appear here, depending on section]</li></ul></nav>';
+        }
+        return;
     }
     
     /**
@@ -60,29 +63,21 @@ function dfdl_solutions_country_nav() {
 
     $output   = array();
 
-    if ( is_admin() ) {
-
-        $output[] = '<nav class="country-subnav-stage"><ul><li>[country navigation may appear here, depending on section]</li></ul></nav>';
-
+    $output[] = '<nav class="country-subnav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
+    if ( "all" === end($pieces) ) {
+        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {
-
-        $output[] = '<nav class="country-subnav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
-        if ( "all" === end($pieces) ) {
-            $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
-        } else {
-            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
-        }
-        $output[] = implode("", $nav);
-        $output[] = '</ul>';
-
-        // Add teams filter
-        if ( "teams" === $section ) {
-            $output[] = dfdl_team_filter();
-        }
-        $output[] = '</nav>';
-
+        $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     }
-    
+    $output[] = implode("", $nav);
+    $output[] = '</ul>';
+
+    // Add teams filter
+    if ( "teams" === $section ) {
+        $output[] = dfdl_team_filter();
+    }
+    $output[] = '</nav>';
+
     // output
     echo implode("", $output);
 
