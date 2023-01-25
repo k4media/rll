@@ -12,7 +12,9 @@
     column-gap: 16px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;
-    margin-bottom: 120px;
     margin-top: 60px;
     row-gap: 16px;
+}
+.team-stage.silo {
+    margin-bottom: 120px;
 }

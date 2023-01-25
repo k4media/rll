@@ -209,6 +209,10 @@ html :where(.wp-block) {
 }
 .team-stage {
 	pointer-events: none;
+	margin: 0;
+}
+.team-grid .button {
+	margin-top: 0;
 }
 .country-team-lead-stage,
 .team-member-stage,
