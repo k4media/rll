@@ -1,6 +1,6 @@
 .country-team-lead-stage {
 	background-color: var(--color-green-10);
-	padding: 120px 0 0 0 ;
+	padding: 120px 0 120px 0 ;
 }
 .country-team-lead .member .slug {
 	color: var(--color-green-70);

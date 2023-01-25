@@ -6,17 +6,23 @@
      $image   = "";
      $class   = "";
      $overlay = "";
+     $size    = "";
 
      // get fields via acf
      if ( function_exists('get_field') ) {
           $title   = get_field('title');
           $image   = get_field('image');
           $overlay = get_field('overlay');
+          $size    = get_field('size');
      }
 
-     // set css class
+     // set css classes
      $class = ( is_front_page() ) ? "front-page" : "page" ;
 
+     // hero image height
+     if ( isset($size) ) {
+          $class .= ( "landing page" === strtolower($size) ) ? " landing " : "" ;
+     }
      
      // validate fields
      if ( "Page Hero Title" === $title ) {

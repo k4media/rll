@@ -315,7 +315,7 @@ nav ul li {
 	padding: var(--setting-button-padding);
 }
 .dfdl-single-member {
-	/* margin: 120px auto 120px auto; */
+	margin: 120px auto 120px auto;
 }
 .dfdl-single-member, .details-stage {
 	align-items: center;

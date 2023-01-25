@@ -1,0 +1,45 @@
+.text-feature-stage {
+    padding: 120px 0 120px 0;
+}
+.text-feature .columns {
+    color: var(--color-dark-gray);
+    display: flex;
+}
+.text-feature .columns > div {
+    flex: 1 1 50%;
+    line-height: 1.75em;
+}
+.text-feature .columns.single-column > div {
+    flex: 1 1 100%;
+    line-height: 1.75em;
+    margin: auto;
+    max-width: 860px;
+}
+.text-feature .columns.single-column .rcol {
+    display: none;
+}
+
+.text-feature .title {
+    font-size: var(--font-size-larger);
+    font-weight: 700;
+}
+.text-feature .columns h1,
+.text-feature .columns h2,
+.text-feature .columns h3,
+.text-feature .columns h4 {
+    color: var(--color-black);
+    font-weight: 700;
+}
+.text-feature .columns h1 {
+    font-size: var(--font-size-big);
+}
+.text-feature .columns h2 {
+    font-size: var(--font-size-larger);
+}
+.text-feature .columns h3 {
+    font-size: var(--font-size-large);
+}
+.text-feature .columns h4 {
+
+}
+

@@ -8,13 +8,11 @@
      if ( function_exists('get_fields') ) {
           $title    = get_field('title');
           $subtitle = get_field('subtitle');
-          $user     = get_field('user');
+          $user     = ( get_field('user') ) ? get_field('user') : 1 ;
 
-          if ( false === $user ) {
-               $user = 1;
-          }
+          $user = get_user_by("id", $user);
+          $meta = get_user_meta($user->ID);
 
-          $meta = get_user_meta($user['ID']);
           $locations   = array();
           if ( isset($meta['_dfdl_user_country']) ) {
                foreach( $meta['_dfdl_user_country'] as $c ) {
@@ -31,19 +29,19 @@
           <h2><?php echo $title ?></h2>
           <h3><?php echo $subtitle ?></h3>
           <div class="lead-team-member dfdl-single-member">
-               <div class="avatar"><img src="<?php echo get_avatar_url($user['ID'], array('size' => 320)) ?>"></div>
+               <div class="avatar"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></div>
                <div class="details-stage">
                     <div class="member">
                          <div class="slug">Regional Key Contact</div>
-                         <div class="name"><?php echo $user['display_name'] ?></div>
+                         <div class="name"><?php echo $user->display_name ?></div>
                          <?php if( isset($meta['position'][0]) ) : ?>
                               <div class="position"><?php echo $meta['position'][0] ?></div> 
                          <?php endif; ?>
                          <?php if( is_array($locations) && count($locations) > 0 ) : ?>
                               <div class="location"><?php echo implode(", ", $locations) ?></div>
                          <?php endif; ?>
-                         <?php if( $user['user_description'] ) : ?>
-                              <div class="bio"><?php echo $user['user_description'] ?></div>
+                         <?php if( $user->user_description ) : ?>
+                              <div class="bio"><?php echo $user->user_description ?></div>
                          <?php endif; ?>
                          <div class="contact-details">
                               <div class="telephone">

@@ -9,6 +9,9 @@
     height: 90vh;
 }
 .hero.page {
+    height: 436px;
+}
+.hero.page.landing {
     height: 536px;
 }
 .hero .overlay {
