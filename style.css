@@ -335,6 +335,10 @@ nav ul li {
 .dfdl-single-member .details-stage {
 	color: var(--color-green);
 	margin: 0 2em 0 2em;
+	width: 100%;
+}
+.dfdl-single-member .details-stage .member {
+	width: 100%;
 }
 .dfdl-single-member .avatar {
 	max-width: 320px;
@@ -357,9 +361,11 @@ nav ul li {
 .dfdl-single-member .contact-details {
 	border-top: solid 1px var(--color-green);
 	display: flex;
-	justify-content: space-between;
 	margin-top: 1em;
 	padding-top: 1em;
+}
+.dfdl-single-member .contact-details > div {
+	width: 25%;
 }
 .dfdl-single-member .contact-details a {
 	color: var(--color-green);
@@ -490,4 +496,39 @@ nav ul li {
 }
 .contact-callout .button {
     margin-top: 2em;
+}
+#dfdl-member-xtra {
+	background-color: var(--color-green-70);
+}
+.member.text-feature .columns > div {
+	color: var(--color-white);
+    flex: 1 1 50%;
+    line-height: 1.75em;
+}
+.member.text-feature .columns h1,
+.member.text-feature .columns h2,
+.member.text-feature .columns h3,
+.member.text-feature .columns h4 {
+	color: var(--color-white);
+	font-family: Calibri, sans-serif;
+}
+.member .solutions {
+	font-size: var(--font-size-small);
+}
+.member .bio {
+	color: var(--color-white);
+	columns: 2;
+	line-height: 1.4em;
+	margin-top: 32px;
+}
+.member .bio p {
+	display: inline-block;
+}
+.dfdl-single-member-stage .xtra {
+	padding: 60px 0 60px 0;
+}
+.dfdl-single-member-stage .xtra h2 {
+	color: var(--color-black);
+	font-size: var(--font-size-larger);
+	font-weight: 700;
 }
