@@ -24,8 +24,8 @@
      }
 
 ?>
-<div class="country-team-lead-stage callout">
-     <div class="country-team-lead narrow">
+<div class="team-lead-stage callout">
+     <div class="team-lead narrow">
           <h2><?php echo $title ?></h2>
           <h3><?php echo $subtitle ?></h3>
           <div class="lead-team-member dfdl-single-member">

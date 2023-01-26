@@ -9,6 +9,7 @@
 
  $position  = "";
  $locations = array();
+ $expertise = array();
  $solutions = array();
 
  $user = get_user_by('id', $GLOBALS['wp_query']->query_vars['dfdl_member']) ;
@@ -19,7 +20,7 @@
     $position = $meta['position'][0];
  }
 
- // countries
+ // office location
  if ( is_array($meta['_dfdl_user_country']) ) {
     foreach( $meta['_dfdl_user_country'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
@@ -27,6 +28,14 @@
      }
  }
  
+  // country expertise
+  if ( is_array($meta['_dfdl_user_country_expertise']) ) {
+    foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
+        $country = get_term( $c, 'dfdl_countries', true);
+        $expertise[] = $country->name;
+     }
+ }
+
  // solutions
  if ( is_array($meta['_dfdl_user_solutions']) ) {
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
@@ -81,7 +90,7 @@
                 </div>
                 <div class="rcol">
                     <h3>Country of expertise</h3>
-                    <?php echo implode(", ", $locations) ?>
+                    <?php echo implode(", ", $expertise) ?>
                 </div>
             </div>
             <div class="bio">

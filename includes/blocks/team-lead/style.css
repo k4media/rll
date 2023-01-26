@@ -1,10 +1,13 @@
-.country-team-lead-stage {
+.team-lead-stage {
 	background-color: var(--color-green-10);
 	padding: 120px 0 120px 0 ;
 }
-.country-team-lead .member .slug {
+.team-lead .member .slug {
 	color: var(--color-green-70);
 	font-size: var(--font-size-small);
     margin-bottom: 1em;
 	text-transform: uppercase;
+}
+.lead-team-member .member .bio {
+	color: var(--color-green);
 }
