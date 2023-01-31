@@ -25,7 +25,7 @@ function dfdl_add_rewrite_rules() {
 
     /* country/teams rewrite */
 	add_rewrite_rule(
-        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|thailand|vietnam)/teams/?$',
+        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/teams/?$',
         'index.php?pagename=countryteam&dfdl_country=$matches[1]',
         'top'
     );
@@ -36,6 +36,14 @@ function dfdl_add_rewrite_rules() {
         'index.php?pagename=member&dfdl_member=$matches[3]',
         'top'
     );
+
+    /* awards/country */
+	add_rewrite_rule(
+        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/awards/?$',
+        'index.php?pagename=country_awards&dfdl_country=$matches[1]',
+        'top'
+    );
+
 }
 
 /**
@@ -82,5 +90,17 @@ function dfdl_member_template_include($template) {
 		exit;
     }
 
+    /**
+     * Awards Page
+     * /country/awards
+     */
+	if ( "country_awards" == $query_vars['pagename']  ) {
+		$page_template = get_stylesheet_directory() . '/includes/templates/page-awards-country.tpl.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+    
     return $template;
 }

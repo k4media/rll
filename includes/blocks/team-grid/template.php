@@ -78,13 +78,13 @@
                               get_template_part( 'includes/template-parts/content/member' );
                          }
                     } else {
-                         echo "<p>No Team Members Found.</p>";
+                         echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                     }
                ?>
           </div>
           <?php
                if ( is_admin() ) {
-                    echo "<h4>Showing only 4 of possibly many users</h4>";
+                    echo "<h4>Showing 4 of possibly many users</h4>";
                }
           ?>
           <?php if ( count($users) > 0) : ?>

@@ -41,7 +41,7 @@
                     get_template_part( 'includes/template-parts/content/member' );
                 }
             } else {
-                echo 'No users found.';
+                echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
             }
         ?>
     </div>

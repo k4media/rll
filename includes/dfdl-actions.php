@@ -42,7 +42,7 @@ function dfdl_solutions_country_nav() {
     $locations = get_page_by_path("locations");
     $args = array(
         'post_type'      => 'page',
-        'posts_per_page' => -1,
+        'posts_per_page' => 12,
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',
@@ -56,12 +56,15 @@ function dfdl_solutions_country_nav() {
     $nav      = array();
     $home_url = get_home_url(NULL);
 
+    /**
+     * Make navigation links
+     */
     foreach($pages->posts as $page) {
         if ( is_admin() ) {
             $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
         } else {
             if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
             } else {
                 $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
             }
@@ -71,15 +74,22 @@ function dfdl_solutions_country_nav() {
     /**
      * Prepare html output
      */
-    $class = is_admin() ? "admin" : "" ;
-
-    $output   = array();
+    $class  = is_admin() ? "admin" : "" ;
+    $output = array();
 
     $output[] = '<nav class="country-subnav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
     if ( "all" === end($pieces) ) {
         $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {
-        $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+        if( "awards" === $section ) {
+            if ( count($pieces) == 1 ) {
+                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
+            } else {
+                $output[] = '<li><a href="' . $home_url . '/' . $section . '/">All</a></li>';
+            }
+        } else {
+            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+        }
     }
     $output[] = implode("", $nav);
     $output[] = '</ul>';
