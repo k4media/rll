@@ -1,14 +1,13 @@
 <?php
 
-     /**
-      * Cache results
-      *
-      */
-     $key = "dfdl-awards";
-     $K4 = new K4;
-     //$K4->fragment_cache( $key, function() { 
-
-          $awards = dfdl_get_awards();
+/**
+ * Cache results
+ *
+ */
+$key = "dfdl-awards";
+$K4 = new K4;
+$K4->fragment_cache( $key, function() { 
+      $awards = dfdl_get_awards();
 ?>
 <div class="award-grid-stage">
      <div class="award-grid silo">
@@ -18,4 +17,4 @@
           </div>
      </div>
 </div>
-<?php //}); // close K4 fragment ?>
+<?php }); // close K4 fragment ?>

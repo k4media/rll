@@ -20,6 +20,11 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php
+
+$key = "dfdl-header";
+$K4 = new K4;
+$K4->fragment_cache( $key, function() { ?>
 <header>
 	<div class="header-stage silo">
 		<div class="left">
@@ -56,5 +61,6 @@
 		</div>
 	</div>
 </header>
+<?php }); // close K4 fragment ?>
 
 <div id="page" class="site">

@@ -8,7 +8,10 @@
  *
  */
 ?>
-
+<?php
+$key = "dfdl-footer";
+$K4 = new K4;
+$K4->fragment_cache( $key, function() { ?>
     <div id="colophon" class="site-footer">
         <div class="site-info silo">
             <div class="about-dfld">
@@ -26,12 +29,9 @@
             <?php do_action('legal_nav') ?>
         </div>
     </div>
-
     <?php get_template_part("includes/template-parts/menus/menu", "side"); ?>
-
+<?php }); // close K4 fragment ?>
 </div><!-- /page -->
-
 <?php wp_footer(); ?>
-
 </body>
 </html>
