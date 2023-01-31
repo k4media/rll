@@ -59,8 +59,28 @@
                               $header_added = true;
                               $div_open = true;
                          }
+
+                         $count = 0;
                          foreach ( $awards->posts as $p ) {
-                              $output[] = "<li>" . $p->post_title . "</li>";
+
+                              $pieces = explode("–", $p->post_title);
+                              $title = '<div class="entry"><span>' . array_shift($pieces);
+                              
+                              if ( count($pieces) > 0 ) {
+                                   $title .= " –</span>"; 
+                              } else {
+                                   $title .= "</span>"; 
+                              }
+                              $title .= '<span>' . implode("– ", $pieces) . '</span></div>';
+                              
+                              if ( "award" === $type ) {
+                                   $output[] = '<li class="award">';
+                              } else {
+                                   $output[] = "<li>";
+                              }
+                              $output[] = $title;
+                              $output[] = "</li>";
+                              
                          }
                     }
                }
