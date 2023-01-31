@@ -1,5 +1,9 @@
 <?php
 
+$K4  = new K4;
+$key = $K4->cache_key("block-page-hero");
+$K4->fragment_cache( $key, function() {
+
      global $post;
 
      $title   = "";
@@ -31,10 +35,9 @@
 
 ?>
 <div id="page-hero" class="hero <?php echo $class ?>" style="background-image:url(<?php if ( isset($image['url']) ) { echo $image['url']; } ?>)">
-     
      <?php if( isset($overlay) ) : ?>
           <div class="overlay" style="background-color:<?php echo $overlay ?>"></div>
      <?php endif; ?>
-
      <div class="fp-hero-title"><h2><?php echo $title ?></h2></div>
 </div>
+<?php }); // close K4 fragment ?>

@@ -1,5 +1,9 @@
 <?php
 
+$K4  = new K4;
+$key = $K4->cache_key("block-page-lead");
+$K4->fragment_cache( $key, function() {
+
      $lead = null;
      $text = null;
 
@@ -19,3 +23,4 @@
           <?php endif; ?>
      </div>
 </div>
+<?php }); // close K4 fragment ?>

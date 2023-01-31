@@ -36,7 +36,7 @@ final class K4 {
 		/**
 	 	 * Clear cache on 'post_updated'
 	 	 */
-		add_action( 'post_updated', array($this, 'empty_cache') );
+		add_action( 'post_updated', array($this, 'empty_cache'), 10, 3 );
 
     }
 
@@ -128,7 +128,26 @@ final class K4 {
 
 	}
 
-	private function elapsed_date(string $a) {
+	// $key = get_post_type() . "-" . get_queried_object_id() . "-block-page-lead-" . md5(get_permalink());
+
+	public function cache_key( string $key ): string {
+		
+		return get_post_type() . "-" . get_queried_object_id() . "-" . $key . "-" . md5(get_permalink());
+
+	}
+
+	public function empty_cache( string $post_id, string $post_before, string $post_after): void {
+		$files = glob( $this->cache_file_dir . '/*' );
+		foreach( $files as $file ){
+			if( is_file($file) ) {
+				if ( "dfdl_awards" === get_post_type() && str_contains($file, "dfdl-award") ) {
+					unlink($file);
+				}
+			}
+		}
+	}
+
+	private function elapsed_date(string $a): string {
 		//get current timestampt
 		$b = strtotime("now"); 
 		//get timestamp when tweet created
@@ -162,15 +181,10 @@ final class K4 {
 		}
 	}
 
-	private function empty_cache(){
-		$files = glob($this->$cache_file_dir);
-		foreach( $files as $file ){
-			if( is_file($file) ) {
-				unlink($file);
-			}
-		}
-	}
+	
 
 }
+
+$K4 = new K4;
 
 ?>
