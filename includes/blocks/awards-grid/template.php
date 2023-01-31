@@ -1,11 +1,19 @@
 <?php
 
+     /**
+      * Cache results
+      *
+      */
+     $key = "dfdl-awards";
+     $K4 = new K4;
+     $K4->fragment_cache( $key, function() { 
+
 
      $years        = dfdl_get_award_years();
      $award_bodies = dfdl_get_award_bodies();
      $award_types  = array("award", "ranking");
 
-     $output = array() ;
+     $output       = array() ;
 
      foreach ($years as $year ) {
           foreach ($award_bodies as $body ) {
@@ -45,16 +53,22 @@
                     $awards = new WP_Query( $args );
                     if ( count($awards->posts) > 0 ) {
                          if ( false == $header_added ) {
+                              $output[] = '<div class="award-entry">';
                               $output[] = "<h4>" . $year->name . " " . $body->name . "</h4>";
                               $output[] = "<ul>";
                               $header_added = true;
+                              $div_open = true;
                          }
                          foreach ( $awards->posts as $p ) {
                               $output[] = "<li>" . $p->post_title . "</li>";
                          }
                     }
                }
-               $output[] = "</ul>";
+               if ( isset($div_open) && true === $div_open) {
+                    $output[] = "</ul></div>";
+                    $div_open = false;
+               }
+               
           }
      }
 ?>
@@ -68,3 +82,4 @@
           </div>
      </div>
 </div>
+<?php }); // close K4 fragment ?>
