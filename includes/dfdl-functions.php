@@ -93,23 +93,29 @@ function dfdl_get_awards( string $country = ""): string {
                     }
                     foreach ( $awards->posts as $p ) {
 
-                        $pieces = explode("–", $p->post_title);
-                        $title = '<div class="entry"><span>' . array_shift($pieces);
-                        
-                        if ( count($pieces) > 0 ) {
-                            $title .= " –</span>"; 
-                        } else {
-                            $title .= "</span>"; 
-                        }
-                        $title .= '<span>' . implode("– ", $pieces) . '</span></div>';
-                        
                         if ( "award" === $type ) {
                             $output[] = '<li class="award">';
                         } else {
                             $output[] = "<li>";
                         }
+
+
+                        $pieces = explode("–", $p->post_title);
+                        $title = '<div class="entry"><span>' . array_shift($pieces);
+                        
+                        if ( count($pieces) > 0 ) {
+                            $title .= " –</span>";
+                            $title .= '<span>' . implode("– ", $pieces) ;
+                        }
+                        if ( isset($p->post_content) ) {
+                            $title .= "<br>" . $p->post_content;
+                        } 
+                        $title .= "</span>"; 
+                        
+                        
+                        
                         $output[] = $title;
-                        $output[] = "</li>";
+                        $output[] = "</div></li>";
                         
                     }
                 }

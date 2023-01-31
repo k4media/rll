@@ -1,6 +1,7 @@
 <?php
 
 // add_action( 'pre_get_posts', 'dfdl_awards_sort' );
+/*
 function dfdl_awards_sort( $query ) {
     if ( $query->is_main_query() && !is_admin() ) {
         if ( $query->is_tax() || $query->is_post_type_archive() ) {
@@ -10,7 +11,7 @@ function dfdl_awards_sort( $query ) {
         }       
     }
 } 
-
+*/
 
 /**
  * Country Nav

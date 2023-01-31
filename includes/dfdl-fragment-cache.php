@@ -36,7 +36,7 @@ final class K4 {
 		/**
 	 	 * Clear cache on 'post_updated'
 	 	 */
-		add_action( 'post_updated', array($this, 'empty_cache'), 10, 3 );
+		add_action( 'save_post', array($this, 'empty_cache'), 10, 3 );
 
     }
 
@@ -128,15 +128,14 @@ final class K4 {
 
 	}
 
-	// $key = get_post_type() . "-" . get_queried_object_id() . "-block-page-lead-" . md5(get_permalink());
-
+	/**
+	* SCreate cache key
+	*/
 	public function cache_key( string $key ): string {
-		
 		return get_post_type() . "-" . get_queried_object_id() . "-" . $key . "-" . md5(get_permalink());
-
 	}
 
-	public function empty_cache( string $post_id, string $post_before, string $post_after): void {
+	public function empty_cache( string $post_id, $post_before, $post_after): void {
 		$files = glob( $this->cache_file_dir . '/*' );
 		foreach( $files as $file ){
 			if( is_file($file) ) {
