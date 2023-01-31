@@ -517,6 +517,7 @@ nav ul li {
 }
 .member .bio {
 	color: var(--color-white);
+	column-fill: balance;
 	columns: 2;
 	line-height: 1.4em;
 	margin-top: 32px;

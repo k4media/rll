@@ -1,5 +1,17 @@
 <?php
 
+// add_action( 'pre_get_posts', 'dfdl_awards_sort' );
+function dfdl_awards_sort( $query ) {
+    if ( $query->is_main_query() && !is_admin() ) {
+        if ( $query->is_tax() || $query->is_post_type_archive() ) {
+            $query->set('orderby', 'dfdl_award_years');  
+            $query->set('meta_key', 'sort_order');  
+            $query->set('order', 'ASC'); 
+        }       
+    }
+} 
+
+
 /**
  * Country Nav
  */

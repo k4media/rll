@@ -21,7 +21,7 @@
  }
 
  // office location
- if ( is_array($meta['_dfdl_user_country']) ) {
+ if ( array_key_exists('_dfdl_user_country', $meta) ) {
     foreach( $meta['_dfdl_user_country'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $locations[] = $country->name;
@@ -29,19 +29,23 @@
  }
  
   // country expertise
-  if ( is_array($meta['_dfdl_user_country_expertise']) ) {
+  if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
     foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $expertise[] = $country->name;
      }
+ } else {
+    $expertise[] = "Regional Expert";
  }
 
  // solutions
- if ( is_array($meta['_dfdl_user_solutions']) ) {
+ if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
         $solutions[] = $solution->name;
      }
+ } else {
+    $solutions[] = "General Law Expert";
  }
 
 ?>
@@ -89,7 +93,11 @@
                     <div class="solutions"><?php echo implode(", ", $solutions) ?></div>
                 </div>
                 <div class="rcol">
-                    <h3>Country of expertise</h3>
+                    <?php if ( count($expertise) > 1 ) : ?>
+                        <h3>Countries of expertise</h3>
+                    <?php else: ?>
+                        <h3>Country of expertise</h3>
+                    <?php endif; ?>
                     <?php echo implode(", ", $expertise) ?>
                 </div>
             </div>

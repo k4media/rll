@@ -2,6 +2,49 @@
 
 function dfdl_team_filter() {}
 
+/** 
+ * DFDL Award Types.
+ *
+ * @return array of terms
+*/
+function dfdl_get_award_types() {
+    return get_terms(array(
+        'taxonomy' => 'dfdl_award_types',
+        'hide_empty' => false,
+        'orderby'  => 'name',
+        'order'    => 'ASC'
+    ));
+}
+
+/** 
+ * DFDL Award Bodies.
+ *
+ * @return array of terms
+*/
+function dfdl_get_award_bodies() {
+    return get_terms(array(
+        'taxonomy' => 'dfdl_award_bodies',
+        'hide_empty' => false,
+        'orderby'  => 'name',
+        'order'    => 'ASC'
+    ));
+
+}
+
+/** 
+ * DFDL Award Years.
+ *
+ * @return array of terms
+*/
+function dfdl_get_award_years() {
+    return get_terms(array(
+        'taxonomy' => 'dfdl_award_years',
+        'hide_empty' => false,
+        'orderby'  => 'id',
+        'order'    => 'DESC'
+    ));
+}
+
 /*
 * DFDL Solutions.
 *

@@ -18,7 +18,6 @@
 .text-feature .columns.single-column .rcol {
     display: none;
 }
-
 .text-feature .title {
     font-size: var(--font-size-larger);
     font-weight: 700;

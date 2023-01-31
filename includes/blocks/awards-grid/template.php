@@ -1,80 +1,70 @@
 <?php
 
-     $sections = dfdl_get_section();
 
-     /**
-      * Block css class
-      *
-      * Class based on section and subsection
-      */
-      $block_classes = array( $sections[0] );
-     if ( "locations" === $sections[0] && isset($sections[1]) ) {
-          $block_classes[] = "country ";
-          $block_classes[] = $sections[1];
-     }
-     if ( "desks" === $sections[0] && isset($sections[1]) ) {
-          $block_classes[] = "desks ";
-          $block_classes[] = $sections[1];
-     }
-     if ( "teams" === $sections[0] ) {
-          $block_classes[] = "teams ";
-     }
+     $years        = dfdl_get_award_years();
+     $award_bodies = dfdl_get_award_bodies();
+     $award_types  = array("award", "ranking");
 
-     /**
-      * User query args
-      */
-     $args                = array();
-     $args['number']      = 8;
-     $args['count_total'] = false;
-     
-     if ( "locations" === $sections[0] ) {
-          $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
-          $args['meta_key'] = '_dfdl_user_country';
-          $args['meta_value'] = $term->term_id;
-     }
-     if ( "desks" === $sections[0] ) {
-          $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_desks');
-          $args['meta_key'] = '_dfdl_user_desks';
-          $args['meta_value'] = $term->term_id;
-     }
-     if ( "teams" === $sections[0] ) {
-          $args['fields'] = 'all_with_meta';
-     }
-     if ( is_admin() ) {
-          $args['number'] = 4;
-     }
+     $output = array() ;
 
-     // $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
-     $jump = "#";
-     
-     /**
-      * User query
-      */
-     $users = get_users($args);
-
-?>
-<div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
-     <div class="team-grid silo">
-          <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
-               <?php do_action("dfdl_solutions_country_nav") ?>
-          <?php endif; ?>  
-          <div class="team-stage">
-               <?php
-                    if ( isset($users) ) {
-                         foreach( $users as $user ) {
-                              set_query_var("user", $user);
-                              get_template_part( 'includes/template-parts/content/member' );
+     foreach ($years as $year ) {
+          foreach ($award_bodies as $body ) {
+               $header_added = false;
+               foreach ($award_types as $type ) {
+                    $args = array(
+                         'post_type'      => 'dfdl_awards',
+                         'post_status'    => 'publish',
+                         'posts_per_page' => 99,
+                         'orderby' => 'post_title',
+                         'order'   => 'ASC',
+                         'no_found_rows'          => true,
+                         'ignore_sticky_posts'    => true,
+                         'update_post_meta_cache' => false, 
+                         'update_post_term_cache' => false,
+                         'tax_query' => array(
+                              'relation' => 'AND',
+                              array(
+                                   'taxonomy' => 'dfdl_award_bodies',
+                                   'field' => 'id',
+                                   'terms' => array( $body->term_id )
+                              ),
+                              array(
+                                   'taxonomy' => 'dfdl_award_years',
+                                   'field' => 'id',
+                                   'terms' => array( $year->term_id ),
+                              )
+                         ),
+                         'meta_query' => array(
+                              array(
+                                  'key'     => 'type',
+                                  'value'   =>  $type,
+                                  'compare' => 'LIKE',
+                              ),
+                          ),
+                    );
+                    $awards = new WP_Query( $args );
+                    if ( count($awards->posts) > 0 ) {
+                         if ( false == $header_added ) {
+                              $output[] = "<h4>" . $year->name . " " . $body->name . "</h4>";
+                              $output[] = "<ul>";
+                              $header_added = true;
+                         }
+                         foreach ( $awards->posts as $p ) {
+                              $output[] = "<li>" . $p->post_title . "</li>";
                          }
                     }
+               }
+               $output[] = "</ul>";
+          }
+     }
+?>
+<div class="award-grid-stage">
+     <div class="award-grid silo">
+          <?php do_action("dfdl_solutions_country_nav") ?>
+          <div class="award-stage">
+               <?php
+                    echo implode($output);
                ?>
           </div>
-          <?php
-               if ( is_admin() ) {
-                    echo "<h4>Showing only 4 of possibly many users</h4>";
-               }
-          ?>
-          <?php if ( count($users) > $args['number'] ) : ?>
-               <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
-          <?php endif; ?>
      </div>
 </div>
