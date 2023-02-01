@@ -189,6 +189,22 @@ function dfdl_get_solutions(): array {
 }
 
 /*
+* DFDL Solutions Tax.
+*
+* Return dfdl_solutions taxonomy
+* 
+* @return array of IDs
+*/
+function dfdl_get_solutions_tax(): array {
+    return get_terms(array(
+        'taxonomy' => 'dfdl_solutions',
+        'hide_empty' => false,
+        'orderby'  => 'title',
+        'order'    => 'ASC'
+    ));
+}
+
+/*
 * DFDL Countries.
 *
 * @return array of IDs

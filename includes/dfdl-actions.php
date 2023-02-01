@@ -26,36 +26,31 @@ function dfdl_awards_sort( $query ) {
 add_action('dfdl_filter', 'dfdl_filter', 1);
 function dfdl_filter( string $filter ): void {
 
+    /* enqueue select2 for filters */
+    wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
+    wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
+
     switch($filter) {
 
         case "award_bodies":
             $options = dfdl_get_award_bodies();
             break;
         case "award_solutions":
-            $options = dfdl_get_solutions();
+            $options = dfdl_get_solutions_tax();
             break;
         case "award_years":
             $options = dfdl_get_award_years();
             break;
         default:
-
+            // no default
     }
 
-    $select = array();
-    $select[] = '<select id="' . $filter . '" name="' . $filter . '">';
-
-    if ( "award_solutions" === $filter ) {
-        foreach( $options as $option ) {
-            
-        }
+    $select   = array();
+    $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
+    // $select[] = '<option name="all" value="all" selected>All</option>'; 
+    foreach( $options as $option ) {
+        $select[] = '<option name="' . $option->slug. '" value="' . $option->term_id. '">' .  $option->name . '</option>'; 
     }
-    if ( "award_bodies" === $filter || "award_years" === $filter ) {
-        $select[] = '<option name="" value="">All</option>'; 
-        foreach( $options as $option ) {
-            $select[] = '<option name="' . $option->slug. '" value="' . $option->term_id. '">' .  $option->name . '</option>'; 
-        }
-    }
-
     $select[] = '</select>';
 
     echo implode($select);
