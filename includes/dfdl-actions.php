@@ -14,6 +14,55 @@ function dfdl_awards_sort( $query ) {
 */
 
 /**
+ * DFDL Award Filter
+ * 
+ * Return HTML select2 for filter facet
+ * 
+ * @type Filter facet: type, solution, year
+ * 
+ * @return string
+ * 
+ */
+add_action('dfdl_filter', 'dfdl_filter', 1);
+function dfdl_filter( string $filter ): void {
+
+    switch($filter) {
+
+        case "award_bodies":
+            $options = dfdl_get_award_bodies();
+            break;
+        case "award_solutions":
+            $options = dfdl_get_solutions();
+            break;
+        case "award_years":
+            $options = dfdl_get_award_years();
+            break;
+        default:
+
+    }
+
+    $select = array();
+    $select[] = '<select id="' . $filter . '" name="' . $filter . '">';
+
+    if ( "award_solutions" === $filter ) {
+        foreach( $options as $option ) {
+            
+        }
+    }
+    if ( "award_bodies" === $filter || "award_years" === $filter ) {
+        $select[] = '<option name="" value="">All</option>'; 
+        foreach( $options as $option ) {
+            $select[] = '<option name="' . $option->slug. '" value="' . $option->term_id. '">' .  $option->name . '</option>'; 
+        }
+    }
+
+    $select[] = '</select>';
+
+    echo implode($select);
+
+}
+
+/**
  * Country Nav
  */
 add_action('dfdl_solutions_country_nav', 'dfdl_solutions_country_nav');
@@ -72,6 +121,19 @@ function dfdl_solutions_country_nav() {
         }
     }
 
+    // Add teams filter
+    if ( "teams" === $section ) {
+        ob_start();
+            get_template_part("includes/template-parts/filters/filter", "awards");
+        $nav[] = ob_get_clean();
+    }
+    // Add awards filter
+    if ( "awards" === $section ) {
+        ob_start();
+            get_template_part("includes/template-parts/filters/filter", "awards");
+        $nav[] = ob_get_clean();
+    }
+
     /**
      * Prepare html output
      */
@@ -92,13 +154,11 @@ function dfdl_solutions_country_nav() {
             $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
         }
     }
+
     $output[] = implode("", $nav);
     $output[] = '</ul>';
 
-    // Add teams filter
-    if ( "teams" === $section ) {
-        $output[] = dfdl_team_filter();
-    }
+    
     $output[] = '</nav>';
 
     // output

@@ -1,7 +1,5 @@
 <?php
 
-function dfdl_team_filter() {}
-
 /** 
  * DFDL Get Awards.
  *
@@ -98,11 +96,8 @@ function dfdl_get_awards( string $country = ""): string {
                         } else {
                             $output[] = "<li>";
                         }
-
-
                         $pieces = explode("–", $p->post_title);
                         $title = '<div class="entry"><span>' . array_shift($pieces);
-                        
                         if ( count($pieces) > 0 ) {
                             $title .= " –</span>";
                             $title .= '<span>' . implode("– ", $pieces) ;
@@ -111,9 +106,6 @@ function dfdl_get_awards( string $country = ""): string {
                             $title .= "<br>" . $p->post_content;
                         } 
                         $title .= "</span>"; 
-                        
-                        
-                        
                         $output[] = $title;
                         $output[] = "</div></li>";
                         
