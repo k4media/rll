@@ -47,7 +47,6 @@ function dfdl_filter( string $filter ): void {
 
     $select   = array();
     $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
-    // $select[] = '<option name="all" value="all" selected>All</option>'; 
     foreach( $options as $option ) {
         $select[] = '<option name="' . $option->slug. '" value="' . $option->term_id. '">' .  $option->name . '</option>'; 
     }
