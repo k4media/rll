@@ -603,7 +603,14 @@ nav ul li {
 .award-stage .entry p {
 	margin: 0;
 }
-
+.award-entry {
+	border-left: solid 1px var(--color-green);
+	margin-left: 1em;
+	padding-left: 1em;
+}
+.award-entry li div {
+	margin: 0.5em 0 0.5em 0;
+}
 .country-nav {
 	position: relative;
 }
@@ -626,7 +633,6 @@ nav ul li {
 }
 .awards-filters-stage.is-active {
 	display: block;
-	
 }
 .awards-filters {
 	display: flex;

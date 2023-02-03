@@ -147,8 +147,6 @@ function dfdl_solutions_country_nav() {
 
     $output[] = implode("", $nav);
     $output[] = '</ul>';
-
-    
     $output[] = '</nav>';
 
     // output
