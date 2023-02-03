@@ -646,8 +646,6 @@ nav ul li {
 	border-radius: 8px;
 	color: var(--color-dark-gray);
 	font-size: var(--font-size-body);
-	width:15%;
-	min-width: 15%;
 }
 
 
