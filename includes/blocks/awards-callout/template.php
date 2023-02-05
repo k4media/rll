@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Cache results
+ *
+ */
+$key = "dfdl-awards-callout-" . md5(get_permalink()) ;
+$K4 = new K4;
+$K4->fragment_cache( $key, function() { 
+
      global $post;
 
      if ( is_admin() ) {
@@ -45,3 +53,4 @@
           </div>
      <?php endif; ?>    
 <?php endif; ?>
+<?php }); // close K4 fragment ?>

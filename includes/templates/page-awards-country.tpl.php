@@ -9,7 +9,7 @@
  */
 $key = "dfdl-awards-" . $GLOBALS['wp_query']->query_vars['dfdl_country'];
 $K4 = new K4;
-//$K4->fragment_cache( $key, function() { 
+$K4->fragment_cache( $key, function() { 
     $awards  = dfdl_get_awards(array('country'=>$GLOBALS['wp_query']->query_vars['dfdl_country']));
 ?>
 <input type="hidden" id="dfdl_award_country" name="dfdl_award_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
@@ -29,6 +29,6 @@ $K4 = new K4;
         </div>
     </div>
 </div>
-<?php //}); // close K4 fragment ?>
+<?php }); // close K4 fragment ?>
 
 <?php get_footer();
