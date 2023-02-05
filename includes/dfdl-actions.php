@@ -130,9 +130,7 @@
  */
 add_action('dfdl_filter', 'dfdl_filter', 1);
 function dfdl_filter( string $filter ): void {
-
     switch($filter) {
-
         case "award_bodies":
             $options = dfdl_get_award_bodies();
             break;
@@ -145,16 +143,13 @@ function dfdl_filter( string $filter ): void {
         default:
             // no default
     }
-
     $select   = array();
     $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
     foreach( $options as $option ) {
         $select[] = '<option data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
     }
     $select[] = '</select>';
-
     echo implode($select);
-
 }
 
 /**

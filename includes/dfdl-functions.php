@@ -5,9 +5,10 @@
  *
  * Return html for awards, possibly sorted
  * 
- * @country  string  countries
- * @bodies   array   award bodies
- * @years    array   years
+ * @country    string  countries
+ * @solutions  array   dfdl solutions
+ * @bodies     array   award bodies
+ * @years      array   years
  * 
  * @return string
 */
@@ -47,6 +48,7 @@ function dfdl_get_awards( array $args=array() ): string {
                         ),
                     )
                 );
+
                 if ( "" !== $args['country'] && in_array( $args['country'], constant('DFDL_COUNTRIES')) ) {
 
                     $query_args['tax_query'] = array(

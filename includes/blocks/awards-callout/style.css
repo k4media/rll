@@ -3,4 +3,10 @@
     margin-bottom: 120px;
     padding: 1em;
 }
-
+.callout .award-grid h2 {
+    font-size: var(--font-size-larger);
+    text-align: left;
+}
+.callout .award-stage {
+    min-height: auto;
+}

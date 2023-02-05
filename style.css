@@ -618,12 +618,12 @@ nav ul li {
 .award-stage > div .entry p {
 	margin: 0;
 }
-.award-entry > div > div {
+.award-entry {
 	border-left: solid 1px var(--color-green);
 	margin-left: 1em;
 	padding-left: 1em;
 }
-.award-entry > div li div {
+.award-entry li div {
 	margin: 0.5em 0 0.5em 0;
 }
 
