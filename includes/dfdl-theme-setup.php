@@ -201,7 +201,8 @@ function dfdl_scripts() {
 	
 	// Localize script for ajax calls
 	$params = array(
-		'ajaxurl' => admin_url( 'admin-ajax.php' )
+		'ajaxurl' => admin_url( 'admin-ajax.php' ),
+		'awards_nonce' => wp_create_nonce('dfdl_awards')
 	);
 	wp_localize_script( 'dfdl', 'ajax_object', $params);
 

@@ -23,16 +23,57 @@ function isScrolledIntoView(el) {
     return top >= 0 && bottom <= window.innerHeight
 }
 
+jQuery("#award_years, #award_solutions, #award_bodies").on("change", debounce(function() {
+    updateAwards()
+}, 700));
 
-
-jQuery("#award_years, #award_solutions, #award_bodies").on("change", function () {
-
-    var awardsFiltersType = jQuery("#award_bodies");
-    var awardsFiltersSolutions = jQuery("#award_solutions");
-    var awardsFiltersYears = jQuery("#award_years");
-
-    console.log(awardsFiltersType.select2('data'));
-    console.log(awardsFiltersSolutions.select2('data'));
-    console.log(awardsFiltersYears.select2('data'));
-
- });
+function updateAwards() {
+    console.log("loading results");
+    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading</div>" );
+    postAjax(
+        ajax_object.ajaxurl, {
+            action: "filter_awards",
+            nonce: ajax_object.awards_nonce,
+            fTypes:jQuery('#award_bodies').select2("val"),
+            fSolutions:jQuery('#award_solutions').select2("val"),
+            fYears: jQuery('#award_years').select2("val"),
+            fCountry: jQuery('#dfdl_award_country').val()
+        }, function(data){
+            data = JSON.parse(data);
+            if ( data.code === 200 ) {
+                jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
+            } else {
+                jQuery("#results_stage > div ").replaceWith( "<div class='no-awards not-found'><p>No awards just yet</p></div>" );
+                console.log(data);
+            }
+            console.log("results loaded");
+        }
+    )
+}
+function postAjax(url, data, success) {
+    var params = typeof data == 'string' ? data : Object.keys(data).map(
+            function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]) }
+        ).join('&');
+    var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP");
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState>3 && xhr.status==200) { success(xhr.responseText); }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(params);
+    return xhr;
+}
+function debounce(cb, interval, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+        timeout = null;
+        if (!immediate) cb.apply(context, args);
+    };          
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, interval);
+    if (callNow) cb.apply(context, args); };
+};

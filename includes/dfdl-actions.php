@@ -1,17 +1,122 @@
 <?php
 
-// add_action( 'pre_get_posts', 'dfdl_awards_sort' );
-/*
-function dfdl_awards_sort( $query ) {
-    if ( $query->is_main_query() && !is_admin() ) {
-        if ( $query->is_tax() || $query->is_post_type_archive() ) {
-            $query->set('orderby', 'dfdl_award_years');  
-            $query->set('meta_key', 'sort_order');  
-            $query->set('order', 'ASC'); 
-        }       
+/**
+ * DFDL Award Filter Ajax
+ * 
+ * Return HTML results
+ * 
+ * @filter_types
+ * @filter_solutions
+ * @filter_years
+ * 
+ * @return string
+ * 
+ */
+
+ add_action('wp_ajax_filter_awards', 'dfdl_ajax_awards_filter');
+ add_action('wp_ajax_nopriv_filter_awards', 'dfdl_ajax_awards_filter');
+ function dfdl_ajax_awards_filter() {
+
+    /**
+     * Validate nonce
+     */
+    if ( ! wp_verify_nonce( $_POST['nonce'], "dfdl_awards" )) {
+        $response["status"]	= "invalid nonce";
+        echo json_encode($response);
+        exit;
     }
-} 
-*/
+    
+    /**
+     * Response 
+    */
+    $response = array();
+    $response['code']    = 0;
+    $response['message'] = '';
+    $response['status']  = '';
+    $response['html']    = '';
+
+    /**
+     * Valid input values
+     */
+    $valid = array();
+    $valid['bodies']    = dfdl_get_award_bodies('slug');
+    $valid['solutions'] = dfdl_get_solutions('slug');
+    $valid['years']     = dfdl_get_award_years('slug');
+
+    /**
+     * Buffer for clean post inputs
+     */
+    $clean = array();
+
+    /**
+     * Validate $_POST vars
+     */
+    $post_bodies  = explode(',', $_POST['fTypes']);
+    foreach( $post_bodies as $p ) {
+        if ( in_array($p, $valid['bodies'])) {
+            $clean['bodies'][] = $p;
+        }
+    }
+    $post_solutions  = explode(',', $_POST['fSolutions']);
+    foreach( $post_solutions as $p ) {
+        if ( in_array($p, $valid['solutions'])) {
+            $clean['solutions'][] = $p;
+        }
+    }
+    $post_years  = explode(',', $_POST['fYears']);
+    foreach( $post_years as $p ) {
+        if ( in_array($p, $valid['years'])) {
+            $clean['years'][] = $p;
+        }
+    }
+    $clean_country  = sanitize_text_field($_POST['fCountry']);
+
+    /**
+     * Get Awards.
+     */
+    $args = array(
+        'country'   => $clean_country,
+        'bodies'    => $clean['bodies'],
+        'solutions' => $clean['solutions'],
+        'years'     => $clean['years'],
+    );
+
+    $awards = dfdl_get_awards($args);
+
+    /**
+     * Validate response
+     */
+    if ( ! empty($awards) ) {
+
+        $response['code']    = 200;
+        $response['status']  = 'success';
+        $response['html']  = $awards;
+        
+
+    } else {
+
+        $response['code']   = 400;
+        $response['status'] = 'empty result set';
+
+    }
+
+    /**
+     * Debug info
+     */
+    $response['debug']  = $args;
+
+    /**
+     * Send response
+     */
+    echo json_encode($response);
+
+    /**
+     * Exit
+     */
+    exit;
+     
+ }
+
 
 /**
  * DFDL Award Filter
@@ -44,7 +149,7 @@ function dfdl_filter( string $filter ): void {
     $select   = array();
     $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
     foreach( $options as $option ) {
-        $select[] = '<option name="' . $option->slug. '" value="' . $option->term_id. '">' .  $option->name . '</option>'; 
+        $select[] = '<option data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
     }
     $select[] = '</select>';
 

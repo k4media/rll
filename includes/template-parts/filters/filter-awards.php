@@ -1,6 +1,4 @@
 <li class="filter-button"><button id="awards-filters-toggle" class="button filter awards-filter">Filter</button></li>
-
-
 <div id="awards-filters-stage" class="awards-filters-stage filters-stage silo">
     <div class="stage">
         <div class="awards-filters">
@@ -26,9 +24,9 @@ jQuery( document ).ready(function() {
     jQuery("#award_bodies, #award_solutions, #award_years").select2({
 		closeOnSelect : false,
 		allowHtml: true,
-		allowClear: true,
+		allowClear: false,
         placeholder: "All",
-        tags: false
+        tags: true
 	});
 });
 </script>
