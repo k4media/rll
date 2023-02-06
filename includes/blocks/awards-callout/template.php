@@ -4,7 +4,9 @@
  * Cache results
  *
  */
-$key = "dfdl-awards-callout-" . md5(get_permalink()) ;
+
+ global $post;
+$key = "dfdl-awards-callout-" . $post->post_name ;
 $K4 = new K4;
 $K4->fragment_cache( $key, function() { 
 

@@ -29,7 +29,8 @@ jQuery("#award_years, #award_solutions, #award_bodies").on("change", debounce(fu
 
 function updateAwards() {
     console.log("loading results");
-    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading</div>" );
+    jQuery("#results_stage").addClass("no-results");
+    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading ...</div>" );
     postAjax(
         ajax_object.ajaxurl, {
             action: "filter_awards",
@@ -41,9 +42,10 @@ function updateAwards() {
         }, function(data){
             data = JSON.parse(data);
             if ( data.code === 200 ) {
+                jQuery("#results_stage").removeClass("no-results");
                 jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
             } else {
-                jQuery("#results_stage > div ").replaceWith( "<div class='no-awards not-found'><p>No awards just yet</p></div>" );
+                jQuery("#results_stage > div ").replaceWith( '<div><p class="no-awards not-found">No awards just yet</p></div>' );
                 console.log(data);
             }
             console.log("results loaded");
