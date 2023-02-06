@@ -7,6 +7,7 @@
 }
 .dfdl-countries .map {
     flex: 1 1 75%;
+    position: relative;
 }
 .dfdl-countries .map img {
     height: auto;
@@ -19,4 +20,65 @@
     line-height: 2em;
     list-style-type: none;
     text-align: right;
+}
+
+.other {
+    fill:none;
+    stroke:#10B565;
+    stroke-width:0.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    transition: all .25s;
+}
+.other.disabled {
+    stroke:#cccccc;
+    transition: all .25s;
+}
+.country {
+    fill:#EFFEF7;
+    stroke:#10B565;
+    stroke-width:0.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    transition: all .25s;
+}
+.country.disabled {
+    fill:#ececec;
+    stroke:#cccccc;
+    transition: all .25s;
+}
+.st3 {
+    fill:#004C45;
+}
+.map-pin {
+    cursor: pointer;
+}
+.map-pin.disabled path {
+    fill:#666666;
+}
+.callout .stage .countries ul .hilite a {
+    color: var(--color-dark-gray);
+}
+.callout .stage .countries ul a {
+    color: var(--color-gray-disabled);
+}
+
+#popup {
+    background-color: var(--color-white);
+    box-shadow: 0 0 6px rgba(200,200,200, .5);
+    padding: 1em 5em .5em 1em;
+    pointer-events: none;
+    position: absolute;
+    opacity: 0;
+}
+#popup h4 {
+    font-size: var(--font-size-small);
+}
+#popup ul {
+    color: var(--color-dark-gray);
+    font-size: var(--font-size-smaller);
+}
+#popup.show{
+    opacity: 1;
+    pointer-events: initial;
 }
