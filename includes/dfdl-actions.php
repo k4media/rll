@@ -293,11 +293,14 @@ add_action('dfdl_logo', 'dfdl_logo');
 function dfdl_logo() {
     $custom_logo_id = get_theme_mod( 'custom_logo' );
     $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+    /*
     if ( is_front_page() ) {
         echo '<div class="site-name"><img src="' . $image[0]. '"></div>';
     } else {
         echo '<div class="site-name"><a href="' . get_home_url(). '"><img src="' . $image[0] . '"></a></div>';
-    }    
+    }
+    */
+    echo '<div class="site-name"><a href="' . get_home_url(). '"><img src="' . $image[0] . '"></a></div>';
 }
 
 /**
