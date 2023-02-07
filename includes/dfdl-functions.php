@@ -114,15 +114,14 @@ function dfdl_get_awards( array $args=array() ): string {
                             $output[] = "<li>";
                         }
                         $pieces = explode("–", $p->post_title);
-                        $title = '<div class="entry"><span>' . array_shift($pieces);
-                        if ( count($pieces) > 0 ) {
-                            $title .= " –</span>";
-                            $title .= '<span>' . implode("– ", $pieces) ;
+                        $title = '<div class="entry">';
+                                                
+                        if ( count($pieces) > 1 ) {
+                            $title .= '<span>' . array_shift($pieces) . ' –</span>';
+                            $title .= '<span>' . implode("– ", $pieces) . '</span>';
+                        } else {
+                            $title .= array_shift($pieces);
                         }
-                        if ( isset($p->post_content) ) {
-                            $title .= "<br>" . $p->post_content;
-                        } 
-                        $title .= "</span>"; 
                         $output[] = $title;
                         $output[] = "</div></li>";
                         
