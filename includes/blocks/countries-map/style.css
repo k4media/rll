@@ -62,7 +62,6 @@
 .callout .stage .countries ul a {
     color: var(--color-gray-disabled);
 }
-
 #popup {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
@@ -71,14 +70,10 @@
     padding: 1em 5em .5em 1em;
     pointer-events: none;
     position: absolute;
-    
 }
 #popup ul {
     margin-left: 0;
     padding-left: 1.5em;
-}
-#popup li::marker {
-
 }
 #popup h4 {
     font-size: var(--font-size-small);
