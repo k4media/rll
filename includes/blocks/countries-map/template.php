@@ -1,20 +1,46 @@
 <?php
 
+/**
+ * Cache results
+ */
+$key = "dfdl-front-page-map";
+$K4 = new K4;
+$K4->fragment_cache( $key, function() { 
+
      $title     = "";
      $subtitle  = "";
      $offices   = "";
      $countries = array();
+     $popups    = array();
      $output    = array();
 
      // get fields
      if ( function_exists('get_fields') ) {
+          
           $title = get_field('title');
           $subtitle = get_field('subtitle');
-
           $offices = get_field('offices');
 
-          
-
+          /**
+           * Make html for office popups
+           */
+          foreach ( $offices as $key => $o ) {
+               if ("singapore" === $key) {
+                    $key = "singapore_city";
+               }
+               $popups[$key] = "";
+               $popups[$key] .= '<h4>' . $o['title'] . '</h4>';
+               // $popups[$key] .= '<p>' . $o['address'] . '</p>';
+               if ( array_key_exists( 'solutions', $o ) && is_array($o['solutions']) ) {
+                    $popups[$key] .= '<ul>';
+                    foreach( $o['solutions'] as $s ) {
+                         if ( isset($s['solution']->post_title) && "" !== $s['solution']->post_title ) {
+                              $popups[$key] .= '<li><a href="'. get_permalink($s['solution']->ID) . '">' . esc_attr($s['solution']->post_title) . '</a></li>';
+                         }
+                    }
+                    $popups[$key] .= '</ul>';
+               }
+          }
      }
 
      // get countires
@@ -22,7 +48,6 @@
 
      foreach( $countries as $c ) {
           $post_title = get_the_title($c);
-          $post_slug = sanitize_title($post_title);
           $country = str_replace(" ", "_", strtolower($post_title));
           $output[] = '<li id="link-' . $country . '">';
           $output[] = '<a data-country="' . $country . '" href="' . get_permalink($c) . '">'  ;
@@ -57,6 +82,8 @@
 
 window.addEventListener("load", function() {
 
+     var popups = <?php echo json_encode($popups) ?>
+     
      var dfdl_offices = {
           'bangladesh': ['dhaka'],
           'cambodia': ['phnom_penh'],
@@ -97,7 +124,6 @@ window.addEventListener("load", function() {
      });
 
      function do_map(el) {
-          console.log(el);
           svg.querySelectorAll('.country').forEach(function(el) {
                el.classList.add("disabled");
           });
@@ -134,7 +160,9 @@ window.addEventListener("load", function() {
           var box_half  = popup_coords.width/2;
           popup.style.top =  pin.top + pin.height + 4 + "px";
           popup.style.left = pin_center - box_half + "px";
+          popup.innerHTML = popups[el.id];
           popup.classList.add("show"); 
      }
 });
 </script>
+<?php }); // close K4 fragment ?>
