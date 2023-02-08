@@ -139,170 +139,37 @@ function dfdl_get_awards( array $args=array() ): string {
 
 }
 
-/*
-function __dfdl_award_args( array $args): array {
+/** 
+ * DFDL Teams Sort.
+ * 
+ * @return array of psuedo-terms
+*/
+function dfdl_get_teams_sort(): array {
+    
+    $output = array();
 
-    $return = array(
-        'post_type'      => 'dfdl_awards',
-        'post_status'    => 'publish',
-        'posts_per_page' => 99,
-        'orderby' => 'post_title',
-        'order'   => 'ASC',
-        'no_found_rows'          => true,
-        'ignore_sticky_posts'    => true,
-        'update_post_meta_cache' => false, 
-        'update_post_term_cache' => false
-    );
+    $class = new stdClass;
+    $class->term_id = 1;
+    $class->slug   = "a-z";
+    $class->name   = "A–Z";
 
-    if ( empty($args['countries']) && empty($args['bodies']) && empty($args['years']) ) {
+    $output[] = $class;
+    
+    $class = new stdClass;
+    $class->term_id = 2;
+    $class->slug    = "z-a";
+    $class->name    = "Z–A";
 
-        $return['tax_query'] = array(
-            'relation' => 'AND',
-            array(
-                'taxonomy' => 'dfdl_award_bodies',
-                'field' => 'id',
-                'terms' => array( $body->term_id )
-            ),
-            array(
-                'taxonomy' => 'dfdl_award_years',
-                'field' => 'id',
-                'terms' => array( $year->term_id ),
-            ),
-        );
-    }
+    $output[] = $class;
 
-
+    return $output;
 }
-
-function __dfdl_get_awards( $args ): string {
-
-    $defaults = array(
-        'countries' => array(),
-        'bodies'    => dfdl_get_award_bodies(),
-        'years'     => dfdl_get_award_years(),
-    );
-
-    $args   = wp_parse_args( $args, $defaults );
-
-    var_dump( $args );
-
-    $types  = array("award", "ranking");
-    $output = array() ;
-
-    foreach ($args['years'] as $year ) {
-        foreach ($args['bodies'] as $body ) {
-            $header_added = false;
-            foreach ($types as $type ) {
-                $args = array(
-                        'post_type'      => 'dfdl_awards',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => 99,
-                        'orderby' => 'post_title',
-                        'order'   => 'ASC',
-                        'no_found_rows'          => true,
-                        'ignore_sticky_posts'    => true,
-                        'update_post_meta_cache' => false, 
-                        'update_post_term_cache' => false,
-                        'meta_query' => array(
-                            array(
-                                'key'     => 'type',
-                                'value'   =>  $type,
-                                'compare' => 'LIKE',
-                            ),
-                        )
-                );
-
-                // $args = args_add_award_bodies();
-
-                if ( "" !== $country && in_array( $country, constant('DFDL_COUNTRIES')) ) {
-
-                    $args['tax_query'] = array(
-                        'relation' => 'AND',
-                        array(
-                            'taxonomy' => 'dfdl_award_bodies',
-                            'field' => 'id',
-                            'terms' => array( $body->term_id )
-                        ),
-                        array(
-                            'taxonomy' => 'dfdl_award_years',
-                            'field' => 'id',
-                            'terms' => array( $year->term_id ),
-                        ),
-                        array(
-                            'taxonomy' => 'dfdl_countries',
-                            'field' => 'slug',
-                            'terms' => array( $country )
-                        ),
-                    );
-
-                } else {
-
-                    $args['tax_query'] = array(
-                        'relation' => 'AND',
-                        array(
-                            'taxonomy' => 'dfdl_award_bodies',
-                            'field' => 'id',
-                            'terms' => array( $body->term_id )
-                        ),
-                        array(
-                            'taxonomy' => 'dfdl_award_years',
-                            'field' => 'id',
-                            'terms' => array( $year->term_id ),
-                        ),
-                    );
-                }
-
-                $awards = new WP_Query( $args );
-
-                if ( count($awards->posts) > 0 ) {
-                    if ( false == $header_added ) {
-                        $output[] = '<div class="award-entry">';
-                        $output[] = "<h4>" . $year->name . " " . $body->name . "</h4>";
-                        $output[] = "<ul>";
-                        $header_added = true;
-                        $div_open = true;
-                    }
-                    foreach ( $awards->posts as $p ) {
-
-                        if ( "award" === $type ) {
-                            $output[] = '<li class="award">';
-                        } else {
-                            $output[] = "<li>";
-                        }
-                        $pieces = explode("–", $p->post_title);
-                        $title = '<div class="entry"><span>' . array_shift($pieces);
-                        if ( count($pieces) > 0 ) {
-                            $title .= " –</span>";
-                            $title .= '<span>' . implode("– ", $pieces) ;
-                        }
-                        if ( isset($p->post_content) ) {
-                            $title .= "<br>" . $p->post_content;
-                        } 
-                        $title .= "</span>"; 
-                        $output[] = $title;
-                        $output[] = "</div></li>";
-                        
-                    }
-                }
-            }
-            if ( isset($div_open) && true === $div_open) {
-                $output[] = "</ul></div>";
-                $div_open = false;
-            }
-        }
-    }
-
-    return implode($output);
-
-}
- */
-
-
 
 /** 
  * DFDL Award Types.
  * 
  * ! in use??? might be hardcoded and this is not needed.
+ * Only two options: award, ranking
  * 
  * @return array of terms
 */

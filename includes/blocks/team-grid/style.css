@@ -5,15 +5,18 @@
     padding: 60px 0 120px 0;
     text-align: center;
 }
-.team-grid .button {
+.team-grid .button.see-all {
     margin: 4em auto 0 auto;
 }
-.team-stage {
+.team-stage > div {
     column-gap: 16px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;
     margin-top: 60px;
     row-gap: 16px;
+}
+.team-stage > .loading {
+    display: block;
 }
 .team-stage.silo {
     margin-bottom: 120px;

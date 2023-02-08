@@ -32,18 +32,21 @@
 ?>
 <div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" >
     <?php do_action("dfdl_solutions_country_nav"); ?>
-    <div class="team-stage <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?> silo">
-        <?php
-            // The Loop
-            if ( ! empty( $user_query->get_results() ) ) {
-                foreach ( $user_query->get_results() as $user ) {
-                    set_query_var("user", $user);
-                    get_template_part( 'includes/template-parts/content/member' );
+    <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
+    <div id="results_stage" class="team-stage <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?> silo">
+        <div>
+            <?php
+                // The Loop
+                if ( ! empty( $user_query->get_results() ) ) {
+                    foreach ( $user_query->get_results() as $user ) {
+                        set_query_var("user", $user);
+                        get_template_part( 'includes/template-parts/content/member' );
+                    }
+                } else {
+                    echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                 }
-            } else {
-                echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
-            }
-        ?>
+            ?>
+        </div>
     </div>
 </div>
 

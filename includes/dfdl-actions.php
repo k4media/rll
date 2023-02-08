@@ -1,5 +1,144 @@
 <?php
 
+
+/**
+ * DFDL Teams Filter Ajax
+ * 
+ * Return HTML results
+ * 
+ * @teams_solutions
+ * @teams_ysort
+ * 
+ * @return string
+ * 
+ */
+add_action('wp_ajax_filter_teams', 'dfdl_ajax_teams_filter');
+add_action('wp_ajax_nopriv_filter_teams', 'dfdl_ajax_teams_filter');
+function dfdl_ajax_teams_filter() {
+
+    /**
+    * Response 
+    */
+    $response = array();
+    $response['code']    = 0;
+    $response['message'] = '';
+    $response['status']  = '';
+    $response['html']    = '';
+
+    /**
+    * Validate nonce
+    */
+    if ( ! wp_verify_nonce( $_POST['nonce'], "dfdl_teams" )) {
+        $response["status"]	= "invalid nonce";
+        echo json_encode($response);
+        exit;
+    }
+
+    /**
+    * Valid input values
+    */
+    $valid = array();
+    $valid['solutions'] = dfdl_get_solutions('slug');
+
+    /**
+    * Buffer for clean post inputs
+    */
+    $clean = array();
+
+    /**
+    * Validate $_POST vars
+    */
+    $post_solutions  = explode(',', $_POST['tSolutions']);
+    foreach( $post_solutions as $p ) {
+        if ( in_array($p, $valid['solutions'])) {
+            $term = get_term_by("slug", $p, 'dfdl_solutions');
+            $clean['solutions'][] = $term->term_id;
+        }
+    }
+    $clean_country = sanitize_text_field($_POST['tCountry']);
+    $clean_sort    = sanitize_text_field($_POST['tSort']);
+
+    /**
+     * Team Members query args
+    */
+    $args                = array();
+    $args['number']      = 16;
+    $args['count_total'] = true;
+    $args['orderby']     = "display_name";
+    $args['order']       = ( "a-z" == $clean_sort ) ? "ASC" : "DESC" ;
+    
+    // define relation
+    if ( ! empty($clean['solutions']) && "undefined" !== $clean_country ) {
+        $args['meta_query']['relation'] = "AND";
+    } else {
+        $args['meta_query']['relation'] = "OR";
+    }
+    
+    // add solutions
+    if ( ! empty($clean['solutions']) ) {
+        $args['meta_query'][] = array(
+            'key' => '_dfdl_user_solutions',
+            'value' => $clean['solutions'],
+            'compare' => 'IN'
+        );
+    }
+
+    // add country
+    if ( "undefined" !== $clean_country ) {
+        $term = get_term_by('slug', $clean_country, 'dfdl_countries');
+        $args['meta_query'][] = array(
+            'key' => '_dfdl_user_country',
+            'value' => $term->term_id,
+        );
+    }
+
+    // limit members in admin
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+        $args['number'] = 4;
+    }
+
+    /**
+     * User query
+     */
+    $users  = new WP_User_Query($args);
+    if ( ! empty( $users->get_results() ) ) {
+        ob_start();
+        foreach ( $users->get_results() as $user ) {
+            set_query_var("user", $user);
+            get_template_part( 'includes/template-parts/content/member' );
+        }
+        $output = ob_get_clean();
+    }
+    
+    /**
+    * Validate response
+    */
+    if ( isset($output) && "" !== $output ) {
+        $response['code']   = 200;
+        $response['status'] = 'success';
+        $response['html']   = $output;
+    } else {
+        $response['code']   = 400;
+        $response['status'] = 'empty result set';
+    }
+
+   /**
+    * Debug info
+    */
+    $response['debug']  = $args;
+
+   /**
+    * Send response
+    */
+    echo json_encode($response);
+
+   /**
+    * Exit
+    */
+    exit;
+    
+}
+
 /**
  * DFDL Award Filter Ajax
  * 
@@ -12,10 +151,18 @@
  * @return string
  * 
  */
-
  add_action('wp_ajax_filter_awards', 'dfdl_ajax_awards_filter');
  add_action('wp_ajax_nopriv_filter_awards', 'dfdl_ajax_awards_filter');
  function dfdl_ajax_awards_filter() {
+
+    /**
+     * Response 
+    */
+    $response = array();
+    $response['code']    = 0;
+    $response['message'] = '';
+    $response['status']  = '';
+    $response['html']    = '';
 
     /**
      * Validate nonce
@@ -25,15 +172,6 @@
         echo json_encode($response);
         exit;
     }
-    
-    /**
-     * Response 
-    */
-    $response = array();
-    $response['code']    = 0;
-    $response['message'] = '';
-    $response['status']  = '';
-    $response['html']    = '';
 
     /**
      * Valid input values
@@ -80,24 +218,18 @@
         'solutions' => $clean['solutions'],
         'years'     => $clean['years'],
     );
-
     $awards = dfdl_get_awards($args);
 
     /**
      * Validate response
      */
     if ( ! empty($awards) ) {
-
         $response['code']    = 200;
         $response['status']  = 'success';
         $response['html']  = $awards;
-        
-
     } else {
-
         $response['code']   = 400;
         $response['status'] = 'empty result set';
-
     }
 
     /**
@@ -135,18 +267,31 @@ function dfdl_filter( string $filter ): void {
             $options = dfdl_get_award_bodies();
             break;
         case "award_solutions":
+        case "teams_solutions":
             $options = dfdl_get_solutions_tax();
             break;
         case "award_years":
             $options = dfdl_get_award_years();
             break;
+        case "teams_sort":
+                $options = dfdl_get_teams_sort();
+                break;
         default:
             // no default
     }
     $select   = array();
-    $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
+    if ( "teams_sort" === $filter ) {
+        $select[] = '<select id="' . $filter . '" name="' . $filter . '">';
+    } else {
+        $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
+    }
     foreach( $options as $option ) {
-        $select[] = '<option data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
+        if ( "teams_sort" === $filter && 1 === $option->term_id) {
+            $selected = 'selected="selected"';
+        } else {
+            $selected = "";
+        }
+        $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
     }
     $select[] = '</select>';
     echo implode($select);
@@ -211,13 +356,19 @@ function dfdl_solutions_country_nav() {
         }
     }
 
-    // Add teams filter
+    // enqueue filter scripts
+    if ( "teams" === $section || "awards" === $section ) {
+        wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
+		wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
+    }
+
+    // Add teams filter html
     if ( "teams" === $section ) {
         ob_start();
-            get_template_part("includes/template-parts/filters/filter", "awards");
+            get_template_part("includes/template-parts/filters/filter", "teams");
         $nav[] = ob_get_clean();
     }
-    // Add awards filter
+    // Add awards filter html
     if ( "awards" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "awards");

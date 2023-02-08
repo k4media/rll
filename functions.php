@@ -13,6 +13,13 @@
 //error_reporting(E_ALL);
 
 /**
+ * DFDL FRAGMENT CACHE
+ * 
+ * Use fragment caching? True of false
+ */
+define('DFDL_FRAGMENT_CACHE_ENABLED', false );
+
+/**
  * DFDL SECTIONS
  * 
  * Array of valid site sections, used mostly for validation.

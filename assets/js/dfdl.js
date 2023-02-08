@@ -10,12 +10,21 @@ document.addEventListener('DOMContentLoaded', function () {
         side_menu.classList.toggle("is-active");
         document.body.classList.toggle("noscroll");
     });
+
+    var teams_toggle = document.getElementById("teams-filters-toggle");
+    var teams_filters = document.getElementById("teams-filters-stage");
+    teams_toggle && teams_toggle.addEventListener("click", function() {
+        teams_toggle.classList.toggle("is-active");
+        teams_filters.classList.toggle("is-active");
+    });
+
     var award_toggle = document.getElementById("awards-filters-toggle");
     var awards_filters = document.getElementById("awards-filters-stage");
     award_toggle && award_toggle.addEventListener("click", function() {
         award_toggle.classList.toggle("is-active");
         awards_filters.classList.toggle("is-active");
     });
+    
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {
@@ -23,9 +32,40 @@ function isScrolledIntoView(el) {
     return top >= 0 && bottom <= window.innerHeight
 }
 
-jQuery("#award_years, #award_solutions, #award_bodies").on("change", debounce(function() {
-    updateAwards()
-}, 700));
+if (jQuery().jquery) {
+    jQuery("#award_years, #award_solutions, #award_bodies").on("change", debounce(function() {
+        updateAwards()
+    }, 700));
+    jQuery("#teams_solutions, #teams_sort").on("change", debounce(function() {
+        filterTeams()
+    }, 700));
+}
+
+
+function filterTeams() {
+    console.log("loading results");
+    jQuery("#results_stage").addClass("no-results");
+    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading ...</div>" );
+    postAjax(
+        ajax_object.ajaxurl, {
+            action: "filter_teams",
+            nonce: ajax_object.teams_nonce,
+            tSolutions:jQuery('#teams_solutions').select2("val"),
+            tSort: jQuery('#teams_sort').select2("val"),
+            tCountry: jQuery('#dfdl_teams_country').val()
+        }, function(data){
+            data = JSON.parse(data);
+            if ( data.code === 200 ) {
+                jQuery("#results_stage").removeClass("no-results");
+                jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
+            } else {
+                jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
+                console.log(data);
+            }
+            console.log("results loaded");
+        }
+    )
+}
 
 function updateAwards() {
     console.log("loading results");

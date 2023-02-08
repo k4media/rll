@@ -21,6 +21,15 @@
      }
 
      /**
+      * View All Link
+      */
+      if ( "teams" === $sections[0] ) {
+          $jump = get_home_url(null, '/teams/all/');
+     } else {
+          $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+     }
+
+     /**
       * User query args
       */
      $args                = array();
@@ -51,15 +60,6 @@
      }
 
      /**
-      * View All Link
-      */
-     if ( "teams" === $sections[0] ) {
-          $jump = get_home_url(null, '/teams/all/');
-     } else {
-          $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
-     }
-     
-     /**
       * User query
       */
      $users = get_users($args);
@@ -70,17 +70,19 @@
           <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
                <?php do_action("dfdl_solutions_country_nav") ?>
           <?php endif; ?>  
-          <div class="team-stage">
-               <?php
-                    if ( count($users) > 0) {
-                         foreach( $users as $user ) {
-                              set_query_var("user", $user);
-                              get_template_part( 'includes/template-parts/content/member' );
+          <div id="results_stage" class="team-stage">
+               <div>
+                    <?php
+                         if ( count($users) > 0) {
+                              foreach( $users as $user ) {
+                                   set_query_var("user", $user);
+                                   get_template_part( 'includes/template-parts/content/member' );
+                              }
+                         } else {
+                              echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
-                    } else {
-                         echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
-                    }
-               ?>
+                    ?>
+               </div>
           </div>
           <?php
                if ( is_admin() ) {
@@ -88,7 +90,7 @@
                }
           ?>
           <?php if ( count($users) > 0) : ?>
-               <a class="button green ghost" href="<?php echo $jump ?>">See All</a>
+               <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
           <?php endif; ?>
      </div>
 </div>

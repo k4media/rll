@@ -188,21 +188,16 @@ function dfdl_scripts() {
 
 	// Theme JS
 	$filetime = filemtime( get_stylesheet_directory() . '/assets/js/dfdl.js');
-	wp_enqueue_script('dfdl', get_stylesheet_directory_uri() . '/assets/js/dfdl.js', array(), $filetime, true );
+	wp_enqueue_script('dfdl', get_stylesheet_directory_uri() . '/assets/js/dfdl.js', array("jquery"), $filetime, true );
 
 	// Masonry for Our Commitments
 	if ( is_page('our-firm') ) { wp_enqueue_script('masonry'); }
-
-	if ( in_array("awards", $section ) ) {
-		// enqueue select2 for filters
-		wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
-		wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
-	}
 	
 	// Localize script for ajax calls
 	$params = array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
-		'awards_nonce' => wp_create_nonce('dfdl_awards')
+		'awards_nonce' => wp_create_nonce('dfdl_awards'),
+		'teams_nonce' => wp_create_nonce('dfdl_teams')
 	);
 	wp_localize_script( 'dfdl', 'ajax_object', $params);
 

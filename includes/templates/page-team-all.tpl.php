@@ -15,7 +15,7 @@
     );
 
     // The Query
-    $user_query = new WP_User_Query( $args );
+    $user_query = new WP_User_Query($args);
 
 ?>
 <div id="team-all" >

@@ -9,9 +9,8 @@
  */
 ?>
 <?php
-$key = "dfdl-footer";
 $K4 = new K4;
-$K4->fragment_cache( $key, function() { ?>
+$K4->fragment_cache( "page-footer", function() { ?>
     <div id="colophon" class="site-footer">
         <div class="site-info silo">
             <div class="about-dfld">

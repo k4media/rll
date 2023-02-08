@@ -14,6 +14,7 @@
 
 final class K4 {
 
+	private bool $enabled;
 	private int $ttl;
 	private string $cache_file_dir;
 
@@ -24,9 +25,14 @@ final class K4 {
     public function init() {
 
 		/**
+	 	 * Cache Enabled?
+	 	 */
+		$this->enabled = constant('DFDL_FRAGMENT_CACHE_ENABLED');
+		  
+		/**
 	 	 * Cache TTL
 	 	 */
-		$this->ttl = 7 * DAY_IN_SECONDS;
+		$this->ttl = 7 * constant('DAY_IN_SECONDS');
 
 		/**
 		 * Cache directory
@@ -40,19 +46,18 @@ final class K4 {
 
     }
 
-	private function get_cache_dir() {
-		return $this->cache_file_dir;
-	}
-
-	private function get_ttl() {
-		return $this->ttl;
-	}
-
 	/**
 	 * Fragment Cache
 	 */
 	public function fragment_cache(string $key, $function) {
 
+		/**
+		 * Bail if cache not enabled
+		 */
+		if ( false === $this->enabled ) {
+			return call_user_func($function);
+		}
+		
 		/**
 		 * Cache file path
 		 */
@@ -92,7 +97,7 @@ final class K4 {
 			
 		}
 		
-		if ( $use_cache == true ) {
+		if ( true === $use_cache ) {
 					
 			/* stop timer */
 			$time_end = microtime(true);
@@ -129,21 +134,31 @@ final class K4 {
 	}
 
 	/**
-	* SCreate cache key
+	* Create cache key
 	*/
 	public function cache_key( string $key ): string {
+		global $wp_query;
 		return get_post_type() . "-" . get_queried_object_id() . "-" . $key . "-" . md5(get_permalink());
 	}
 
+	/**
+	* Empty cache
+	*/
 	public function empty_cache( string $post_id, $post_before, $post_after): void {
 		$files = glob( $this->cache_file_dir . '/*' );
 		foreach( $files as $file ){
 			if( is_file($file) ) {
-				if ( "dfdl_awards" === get_post_type() && str_contains($file, "dfdl-award") ) {
-					unlink($file);
-				}
+				unlink($file);
 			}
 		}
+	}
+	
+	private function get_cache_dir() {
+		return $this->cache_file_dir;
+	}
+
+	private function get_ttl() {
+		return $this->ttl;
 	}
 
 	private function elapsed_date(string $a): string {

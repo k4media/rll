@@ -22,9 +22,8 @@
 
 <?php
 
-$key = "dfdl-header";
 $K4 = new K4;
-$K4->fragment_cache( $key, function() { ?>
+$K4->fragment_cache( "page-header", function() { ?>
 <header>
 	<div class="header-stage silo">
 		<div class="left">
