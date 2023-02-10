@@ -653,51 +653,51 @@
 </g>
 
 
-<a xlink:href="locations/myanmar/" target="_top">
+<a xlink:href="/locations/myanmar/" target="_top">
 	<g id="yangoon" class="yangoon map-pin" data-country="myanmar" data-city="yangoon"><path class="st3" d="M276.9,192.9c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C289.9,198.7,284.1,192.9,276.9,192.9
 		z M276.9,210.5c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C281.6,208.4,279.5,210.5,276.9,210.5z"/></g>
 </a>
-<a xlink:href="locations/laos-pdr/" target="_top">
+<a xlink:href="/locations/laos-pdr/" target="_top">
 	<g id="vientiane" class="vientiane map-pin" data-country="laos_pdr" data-city="vientiane"><path class="st3" d="M377.5,181.4c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C390.5,187.2,384.7,181.4,377.5,181.4
 		z M377.5,199c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C382.2,196.9,380.1,199,377.5,199z"/></g>
 </a>
-<a xlink:href="locations/singapore/" target="_top">
+<a xlink:href="/locations/singapore/" target="_top">
 	<g id="singapore_city" class="singaore_city map-pin" data-country="singapore" data-city="singapore_city"><path class="st3" d="M394.3,459.8c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C407.2,465.6,401.4,459.8,394.3,459.8
 		z M394.3,477.4c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C398.9,475.3,396.8,477.4,394.3,477.4z"/></g>
 </a>
-<a xlink:href="locations/cambodia/" target="_top">
+<a xlink:href="/locations/cambodia/" target="_top">
 	<g id="phnom_penh" class="phnompenh map-pin" data-country="cambodia" data-city="phnom_penh"><path class="st3" d="M407.6,291.2c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C420.6,297,414.8,291.2,407.6,291.2z
 		 M407.6,308.8c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C412.2,306.7,410.2,308.8,407.6,308.8z"/></g>
 </a>
-<a xlink:href="locations/philippines/" target="_top">
+<a xlink:href="/locations/philippines/" target="_top">
 	<g id="manilla" class="manilla map-pin" data-country="philippines" data-city="manilla"><path class="st3" d="M678.2,248.4c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C691.1,254.2,685.4,248.4,678.2,248.4
 		z M678.2,266c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C682.8,263.9,680.7,266,678.2,266z"/></g>
 </a>
-<a xlink:href="locations/thailand/" target="_top">
+<a xlink:href="/locations/thailand/" target="_top">
 	<g id="koh_samui" class="kohsamui map-pin" data-country="thailand" data-city="koh_samui"><path class="st3" d="M332.4,325.9c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C345.4,331.7,339.6,325.9,332.4,325.9
 		z M332.4,343.5c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C337.1,341.4,335,343.5,332.4,343.5z"/></g>
 </a>
-<a xlink:href="locations/myanmar/" target="_top">
+<a xlink:href="/locations/myanmar/" target="_top">
 	<g id="naypyidaw" class="naypyidaw map-pin" data-country="myanmar" data-city="naypyidaw"><path class="st3" d="M266.5,143.2c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C279.5,149,273.7,143.2,266.5,143.2z
 		 M266.5,160.8c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C271.2,158.7,269.1,160.8,266.5,160.8z"/></g>
 </a>
-<a xlink:href="locations/indonesia/" target="_top">
+<a xlink:href="/locations/indonesia/" target="_top">
 	<g id="jakarta" class="jakarta map-pin" data-country="indonesia" data-city="jakarta"><path class="st3" d="M446.9,587.3c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C459.9,593.1,454.1,587.3,446.9,587.3
 		z M446.9,604.8c-2.6,0-4.6-2.1-4.6-4.6s2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6S449.5,604.8,446.9,604.8z"/></g>
 </a>
-<a xlink:href="locations/vietnam/" target="_top"><g id="ho_chi_minh" class="hochiminh map-pin" data-country="vietnam" data-city="ho_chi_minh">
+<a xlink:href="/locations/vietnam/" target="_top"><g id="ho_chi_minh" class="hochiminh map-pin" data-country="vietnam" data-city="ho_chi_minh">
 	<path class="st3" d="M446.9,303.9c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C459.9,309.7,454.1,303.9,446.9,303.9
 		z M446.9,321.5c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C451.5,319.5,449.5,321.5,446.9,321.5z"/></g>
 </a>
-<a xlink:href="locations/vietnam/" target="_top"><g id="hanoi" class="hanoi map-pin" data-country="vietnam" data-city="hanoi">
+<a xlink:href="/locations/vietnam/" target="_top"><g id="hanoi" class="hanoi map-pin" data-country="vietnam" data-city="hanoi">
 	<path class="st3" d="M434.2,130.5c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C447.2,136.3,441.4,130.5,434.2,130.5
 		z M434.2,148.1c-2.6,0-4.6-2.1-4.6-4.6s2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6S436.8,148.1,434.2,148.1z"/></g>
 </a>
-<a xlink:href="locations/bangladesh/" target="_top">
+<a xlink:href="/locations/bangladesh/" target="_top">
 	<g id="dhaka" class="dhaka map-pin" data-country="bangladesh" data-city="dhaka"><path class="st3" d="M174,85.4c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C187,91.2,181.2,85.4,174,85.4z M174,103
 		c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6c2.6,0,4.6,2.1,4.6,4.6C178.6,100.9,176.6,103,174,103z"/></g>
 </a>
-<a xlink:href="locations/thailand/" target="_top">
+<a xlink:href="/locations/thailand/" target="_top">
 	<g id="bangkok" class="bangkok map-pin" data-country="thailand" data-city="bangkok"><path class="st3" d="M339.4,255.4c-7.2,0-13,5.8-13,13c0,9.7,13,24.1,13,24.1s13-14.3,13-24.1C352.3,261.2,346.5,255.4,339.4,255.4
 		z M339.4,273c-2.6,0-4.6-2.1-4.6-4.6c0-2.6,2.1-4.6,4.6-4.6s4.6,2.1,4.6,4.6C344,270.9,341.9,273,339.4,273z"/></g>
 </a>
