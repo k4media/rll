@@ -9,6 +9,7 @@
 }
 .our-desks img {
     display: block;
-    height: 60px;
+    height: 48px;
+    margin-bottom: .666666em;
     width: auto;
 }

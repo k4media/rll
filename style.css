@@ -50,7 +50,7 @@ DFDL Theme, (C) 2022 DFDL
 	--setting-silo-max-width: 1312px;
 	--setting-narrow-max-width: 1090px;
 	--setting-border-radius: 8px;
-	--setting-button-padding: .5em 1em .5em 1em;
+	--setting-button-padding: .65em 1.2em .65em 1.2em;
 }
 body {
 	color: var(--color-dark-gray);
@@ -165,9 +165,13 @@ nav ul li {
 	background-image: url(assets/media/icon-filter-active.svg);
 }
 
-
-.header-stage, .header-stage .left {
-	background-color: var(--color-white);
+header {
+	background-color: rgba(255,255,255,.75);
+	position: absolute;
+	width: 100%;
+	z-index: 99;
+}
+.header-stage .left {
 	height: 80px;
 	position: relative;
 }
@@ -244,7 +248,7 @@ nav ul li {
     font-size: var(--font-size-body);
     font-weight: 400;
     line-height: 1.4em;
-    margin: 1em auto 2em auto;
+    margin: 1em auto 4em auto;
 	text-align: center;
     max-width: 24em;
 }
@@ -259,12 +263,15 @@ nav ul li {
 #colophon {
 	background: var(--color-green);
 	color: var(--color-white);
-	padding: 48px 0 32px 0 ;
+	padding: 4em 0 32px 0 ;
 }
 #colophon nav a, .legal-nav a {
 	color: var(--color-white);
 	padding-bottom: .15em;
 	text-decoration: none;
+}
+#menu-footer-menu {
+	margin: 4em 0 4em 0;
 }
 .footer-nav a {
 	margin-right: 1em;
@@ -274,7 +281,6 @@ nav ul li {
 }
 .site-info {
 	display: flex;
-	padding: 0 0 48px 0;
 }
 .site-info > div {
 	flex: 1 0 50%;
