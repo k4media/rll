@@ -33,8 +33,8 @@
       * User query args
       */
      $args                = array();
-     $args['number']      = 4;
-     $args['count_total'] = false;
+     $args['number']      = 16;
+     $args['count_total'] = true;
 
      if ( "solutions" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_solutions');
@@ -54,6 +54,8 @@
      if ( "teams" === $sections[0] ) {
           $args['fields'] = 'all_with_meta';
      }
+
+     // limit members in admin
      if ( is_admin() ) {
           $args['number'] = 4;
           $jump = "#";
@@ -63,6 +65,10 @@
       * User query
       */
      $users = get_users($args);
+
+     //echo "<pre>";
+     //var_dump($users );
+     //echo "</pre>";
 
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
@@ -89,7 +95,7 @@
                     echo "<h4>Showing 4 of possibly many users</h4>";
                }
           ?>
-          <?php if ( count($users) > 0) : ?>
+          <?php if ( count($users) > $args['number'] ) : ?>
                <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
           <?php endif; ?>
      </div>

@@ -16,6 +16,7 @@
 }
 .box h4 {
     font-size: var(--font-size-jumbo);
+    font-weight: 900;
 }
 .box .label {
     font-size: var(--font-size-body);
