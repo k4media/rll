@@ -1,6 +1,14 @@
 <?php
 
 
+//add_action('dfdl_contacts_country_nav', 'dfdl_contacts_country_nav');
+function dfdl_contacts_country_nav() {
+
+    $countries = constant('DFDL_COUNTRIES');
+    foreach( $countries as $c ) {
+        echo $c;
+    }
+}
 /**
  * DFDL Teams Filter Ajax
  * 
@@ -381,7 +389,7 @@ function dfdl_solutions_country_nav() {
     $class  = is_admin() ? "admin" : "" ;
     $output = array();
 
-    $output[] = '<nav class="country-subnav-stage"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
+    $output[] = '<nav class="country-subnav-stage silo"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
     if ( "all" === end($pieces) ) {
         $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {

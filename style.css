@@ -168,8 +168,12 @@ nav ul li {
 header {
 	background-color: rgba(255,255,255,.75);
 	position: absolute;
+	top: 0;
 	width: 100%;
 	z-index: 99;
+}
+.admin-bar header {
+	margin-top: 30px;
 }
 .header-stage .left {
 	height: 80px;
@@ -218,6 +222,9 @@ header {
 .header-stage .current_page_item a,
 .header-stage .current-page-parent {
 	color: var(--color-green);
+	font-weight: 700;
+}
+.menu .current-page-ancestor {
 	font-weight: 700;
 }
 .header-stage .search {
@@ -436,6 +443,14 @@ header {
 .member-loop {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
+}
+#team-all,
+.teams-country-stage {
+	margin-top: 80px;
+    overflow: hidden;
+}
+.country-subnav-stage.desks-subnav {
+	margin-top: 100px;
 }
 .team-member a {
     color: var(--color-gray);
@@ -767,7 +782,6 @@ header {
 	background-color: #eaeaeb;
 	color: #272727;
 }
-
 .select2-container--default .select2-selection--multiple {
 	margin-bottom: 10px;
 }
@@ -811,4 +825,7 @@ header {
 }
 .select2-search__field:placeholder-shown {
     width: 100% !important; 
+}
+#contact-dfdl {
+	margin-top: 140px;
 }

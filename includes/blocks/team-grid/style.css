@@ -19,5 +19,7 @@
     display: block;
 }
 .team-stage.silo {
-    margin-bottom: 120px;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin: 64px auto 120px auto;
 }

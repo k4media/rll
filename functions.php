@@ -17,7 +17,7 @@
  * 
  * Use fragment caching? True of false
  */
-define('DFDL_FRAGMENT_CACHE_ENABLED', true );
+define('DFDL_FRAGMENT_CACHE_ENABLED', false );
 
 /**
  * DFDL SECTIONS

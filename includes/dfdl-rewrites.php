@@ -44,6 +44,13 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
+    /* contact/country */
+	add_rewrite_rule(
+        '^contact/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'index.php?pagename=country_contact&dfdl_country=$matches[1]',
+        'top'
+    );
+
 }
 
 /**
@@ -96,6 +103,18 @@ function dfdl_member_template_include($template) {
      */
 	if ( "country_awards" == $query_vars['pagename']  ) {
 		$page_template = get_stylesheet_directory() . '/includes/templates/page-awards-country.tpl.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+
+    /**
+     * Contacts Page
+     * /contact/country/
+     */
+	if ( "country_contact" == $query_vars['pagename'] || "contact-us" == $query_vars['pagename'] ) {
+		$page_template = get_stylesheet_directory() . '/includes/templates/page-contact.tpl.php' ;				
 		$wp_query->is_404 = false;
 		status_header('200');
 		require_once($page_template);

@@ -9,11 +9,12 @@
     height: 90vh;
 }
 .hero.page {
-    height: 436px;
+    height: 516px;
 }
 .hero.page.landing {
-    height: 536px;
+    height: 616px;
 }
+
 .hero .overlay {
     height: 100%;
     position: absolute;

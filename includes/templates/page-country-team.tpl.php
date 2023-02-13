@@ -30,7 +30,7 @@
     $user_query = new WP_User_Query( $args );
 
 ?>
-<div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" >
+<div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" class="teams-country-stage">
     <?php do_action("dfdl_solutions_country_nav"); ?>
     <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
     <div id="results_stage" class="team-stage <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?> silo">
