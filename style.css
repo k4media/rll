@@ -20,8 +20,16 @@ DFDL Theme, (C) 2022 DFDL
          url('assets/fonts/praxis_lt_regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+@font-face {
+    font-family: 'praxis_lt_regularbold';
+    src: url('assets/fonts/praxis-lt-bold-webfont.woff2') format('woff2'),
+         url('assets/fonts/praxis-lt-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
 }
+
 /* Variables */
 :root {
 	/* Colors */
@@ -78,7 +86,7 @@ body.noscroll {
 	max-width: var(--setting-narrow-max-width);
 }
 h1, h2, h3, h4 {
-	font-family: 'praxis';
+	font-family: 'praxis_lt_regularbold';
 	font-weight: 100;
 	margin: 0;
 }
@@ -171,6 +179,9 @@ header {
 	top: 0;
 	width: 100%;
 	z-index: 99;
+}
+.header-stage {
+	position: relative;
 }
 .admin-bar header {
 	margin-top: 30px;
@@ -445,10 +456,12 @@ header {
     box-shadow: 0 0 6px rgba(200,200,200, .5);
 }
 #team-all,
+#contact-dfdl,
 .teams-country-stage {
 	margin-top: 80px;
     overflow: hidden;
 }
+#award-grid-stage,
 .country-subnav-stage.desks-subnav {
 	margin-top: 100px;
 }
@@ -826,6 +839,6 @@ header {
 .select2-search__field:placeholder-shown {
     width: 100% !important; 
 }
-#contact-dfdl {
-	margin-top: 140px;
+.contact-stage .copy-stage {
+	margin-top: 64px;
 }

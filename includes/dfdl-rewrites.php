@@ -18,12 +18,12 @@ function dfdl_add_rewrite_rules() {
 
     /* teams/all rewrite */
 	add_rewrite_rule(
-        '^(.*)teams/all/?$',
+        '^teams/all/?$',
         'index.php?pagename=teamsall',
         'top'
     );
 
-    /* country/teams rewrite */
+    /* /locations/[country]/teams/ rewrite */
 	add_rewrite_rule(
         '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/teams/?$',
         'index.php?pagename=countryteam&dfdl_country=$matches[1]',
@@ -32,21 +32,21 @@ function dfdl_add_rewrite_rules() {
 
     /* member page rewrite */
 	add_rewrite_rule(
-        '^(.*)/members/(.*)/(.*)?$',
-        'index.php?pagename=member&dfdl_member=$matches[3]',
+        '^teams/members/(.*)/(.*)/?$',
+        'index.php?pagename=member&dfdl_member=$matches[2]',
         'top'
     );
 
-    /* awards/country */
+    /* locations/[country]/awards/ */
 	add_rewrite_rule(
         '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/awards/?$',
         'index.php?pagename=country_awards&dfdl_country=$matches[1]',
         'top'
     );
 
-    /* contact/country */
+    /* locations/[country]/contact-us/ */
 	add_rewrite_rule(
-        '^contact/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/contact-us/?$',
         'index.php?pagename=country_contact&dfdl_country=$matches[1]',
         'top'
     );
@@ -63,7 +63,7 @@ function dfdl_member_template_include($template) {
 
      /**
      * Country Team Page
-     * /country/team/
+     * /locations/[country]/team/
      */
     if ( "countryteam" == $query_vars['pagename']  ) {
 		$page_template = get_stylesheet_directory() . '/includes/templates/page-country-team.tpl.php' ;				
@@ -99,7 +99,7 @@ function dfdl_member_template_include($template) {
 
     /**
      * Awards Page
-     * /country/awards
+     * /locations/[country]/awards/
      */
 	if ( "country_awards" == $query_vars['pagename']  ) {
 		$page_template = get_stylesheet_directory() . '/includes/templates/page-awards-country.tpl.php' ;				
@@ -111,7 +111,7 @@ function dfdl_member_template_include($template) {
 
     /**
      * Contacts Page
-     * /contact/country/
+     * /locations/[country]/contact-us
      */
 	if ( "country_contact" == $query_vars['pagename'] || "contact-us" == $query_vars['pagename'] ) {
 		$page_template = get_stylesheet_directory() . '/includes/templates/page-contact.tpl.php' ;				

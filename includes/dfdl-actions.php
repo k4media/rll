@@ -1,14 +1,5 @@
 <?php
 
-
-//add_action('dfdl_contacts_country_nav', 'dfdl_contacts_country_nav');
-function dfdl_contacts_country_nav() {
-
-    $countries = constant('DFDL_COUNTRIES');
-    foreach( $countries as $c ) {
-        echo $c;
-    }
-}
 /**
  * DFDL Teams Filter Ajax
  * 
@@ -314,7 +305,7 @@ function dfdl_solutions_country_nav() {
     global $wp;
 
     $pieces     = explode("/", $wp->request ) ;
-    $sections   = array("teams", "awards");
+    $sections   = array("teams", "awards", "contact-us");
     $section    = array_values(array_intersect( $pieces, $sections ));
 
     if ( isset($section[0]) ) {
@@ -393,11 +384,18 @@ function dfdl_solutions_country_nav() {
     if ( "all" === end($pieces) ) {
         $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {
+
         if( "awards" === $section ) {
             if ( count($pieces) == 1 ) {
                 $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
             } else {
                 $output[] = '<li><a href="' . $home_url . '/' . $section . '/">All</a></li>';
+            }
+        } elseif ( "contact-us" === end($pieces) ) {
+            if ( count($pieces) == 1 ) {
+                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/contact-us/">Regional</a></li>';
+            } else {
+                $output[] = '<li><a href="' . $home_url . '/contact-us/">Regional</a></li>';
             }
         } else {
             $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';

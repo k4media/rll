@@ -14,7 +14,7 @@ $K4->fragment_cache( $key, function() {
     $class = ( ! isset($awards) || "" === $awards ) ? "no-results" : "" ;
 ?>
 <input type="hidden" id="dfdl_award_country" name="dfdl_award_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
-<div id="award-grid-stage awards-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" >
+<div id="award-grid-stage" class="awards-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" >
     <div class="award-grid silo">
         <?php do_action("dfdl_solutions_country_nav"); ?>
         <div id="results_stage" class="award-stage <?php echo $class ?>">

@@ -3,7 +3,7 @@
     "name": "acf/dfdl-team-member",
     "title": "Team Member",
     "description": "Single team lead with iright-aligned photo",
-    "style": [ "file:./style.css" ],
+    "style": [ "style.css" ],
     "category": "dfdl-block",
     "icon": "businessman",
     "acf": {
