@@ -2,6 +2,10 @@
 /**
  * Contact Us page(s) template
  */
+
+ // Validator.js
+ wp_enqueue_script('validator', get_stylesheet_directory_uri() . '/assets/js/validator.min.js', null, null, true );
+ 
  get_header();
 
  $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
@@ -30,7 +34,7 @@ $K4->fragment_cache( $key, function() {
 
 ?>
 <div id="contact-dfdl">
-    <div class="contact-stage silo">
+    <div class="contact-stage narrow">
         <?php do_action("dfdl_solutions_country_nav"); ?>
         <div class="copy-stage">
             <div class="copy">
@@ -45,7 +49,9 @@ $K4->fragment_cache( $key, function() {
                     <div class="email"><?php echo $contacts[$country]["email"]; ?></div>
                 <?php endif; ?>
             </div>
-            <div class="form"></div>
+            <div class="form">
+                <?php do_action("dfdl_contact_form"); ?>
+            </div>
         </div>
     </div>
 

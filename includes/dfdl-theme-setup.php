@@ -180,21 +180,9 @@ function dfdl_theme_setup() {
 add_action( 'wp_enqueue_scripts', 'dfdl_scripts' );
 function dfdl_scripts() {
 
-	$section = dfdl_get_section();
-
 	// Theme Stylesheet
 	$filetime = filemtime( get_stylesheet_directory() . '/style.css');
 	wp_enqueue_style('dfdl', get_stylesheet_directory_uri() . '/style.css', false, $filetime, 'all');
-
-	// Block Styles
-
-	wp_register_style( 'block-awards-callout', get_template_directory_uri() . '/includes/blocks/awards-callout/style.css' );
-	wp_register_style( 'block-awards-grid', get_template_directory_uri() . '/includes/blocks/awards-grid/style.css' );
-	wp_register_style( 'block-contact-callout', get_template_directory_uri() . '/includes/blocks/contact-callout/style.css' );
-	wp_register_style( 'block-countries-map', get_template_directory_uri() . '/includes/blocks/countries-map/style.css' );
-	wp_register_style( 'block-country-contacts', get_template_directory_uri() . '/includes/blocks/country-contacts/style.css' );
-	wp_register_style( 'block-desks-callout', get_template_directory_uri() . '/includes/blocks/desks-callout/style.css' );
-
 
 	// Theme JS
 	$filetime = filemtime( get_stylesheet_directory() . '/assets/js/dfdl.js');

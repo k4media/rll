@@ -1,6 +1,13 @@
 <?php
 
 /**
+ * Contact Form
+ */
+add_action('dfdl_contact_form', 'dfdl_contact_form');
+function dfdl_contact_form(): void {
+    get_template_part( 'includes/template-parts/forms/form', 'contact' );
+}
+/**
  * DFDL Teams Filter Ajax
  * 
  * Return HTML results
@@ -13,7 +20,7 @@
  */
 add_action('wp_ajax_filter_teams', 'dfdl_ajax_teams_filter');
 add_action('wp_ajax_nopriv_filter_teams', 'dfdl_ajax_teams_filter');
-function dfdl_ajax_teams_filter() {
+function dfdl_ajax_teams_filter(): array {
 
     /**
     * Response 

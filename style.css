@@ -27,7 +27,6 @@ DFDL Theme, (C) 2022 DFDL
          url('assets/fonts/praxis-lt-bold-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-
 }
 
 /* Variables */
@@ -59,10 +58,11 @@ DFDL Theme, (C) 2022 DFDL
 	--setting-narrow-max-width: 1090px;
 	--setting-border-radius: 8px;
 	--setting-button-padding: .65em 1.2em .65em 1.2em;
+	--setting-body-font: Calibri, sans-serif;
 }
 body {
 	color: var(--color-dark-gray);
-	font-family: Calibri, sans-serif;
+	font-family: var(--setting-body-font);
 	font-size: var(--font-size-body);
 	font-weight: 400;
 	margin: 0;
@@ -131,7 +131,8 @@ nav ul li {
 	border: solid 1px;
 	border-radius: var(--setting-border-radius);
 	display: inline-block;
-	font-weight: bold;
+	font-size: 1em;
+	font-weight: 700;
 	padding: var(--setting-button-padding);
 	text-decoration: none;
 }
@@ -160,7 +161,7 @@ nav ul li {
 	height: 24px;
 	left: 14px;
 	position: absolute;
-	top: 13px;
+	top: 16px;
 	width: 24px;
 }
 .button.filter:hover,
@@ -172,7 +173,12 @@ nav ul li {
 .button.filter.is-active:before {
 	background-image: url(assets/media/icon-filter-active.svg);
 }
-
+.button.disabled {
+	background: var(--color-gray-disabled);
+	border: solid 1px var(--color-gray-disabled);
+	color: var(--color-white);
+	pointer-events: none;
+}
 header {
 	background-color: rgba(255,255,255,.75);
 	position: absolute;
@@ -760,7 +766,8 @@ header {
 	padding-right: 20px;
 	vertical-align: middle;
 }
-.select2-results__option:before {
+.select2-results__option:before,
+input[type=checkbox] {
 	content: "";
 	display: inline-block;
 	position: relative;
@@ -774,9 +781,10 @@ header {
 }
 .select2-results__option[aria-selected=true]:before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 50% 50%;
+	background-size: 90%;
+	border: solid 2px var(--color-green);
 	content: " ";
 	color: var(--color-white);
-	border: solid 2px var(--color-green);
 	display: inline-block;
 }
 .select2-container--default .select2-results__option[aria-selected=true] {
@@ -840,5 +848,127 @@ header {
     width: 100% !important; 
 }
 .contact-stage .copy-stage {
+	display: flex;
 	margin-top: 64px;
+}
+.contact-stage .copy-stage .copy {
+	flex: 1 1 30%;
+}
+.contact-stage .copy-stage .form {
+	flex: 1 1 70%;
+}
+
+.contact-form .details label,
+.contact-form h4 {
+	color: var(--color-gray);
+    font-variant: small-caps;
+	font-weight: 400;
+}
+.contact-form .solutions label {
+	cursor: pointer;
+}
+.contact-form h4 {
+	font-family: var(--setting-body-font);
+	margin: 2em 0 .5em 1em;
+}
+
+
+.contact-form input[type=text],
+.contact-form input[type=email] {
+	display: block;
+	border: solid 1px var(--color-whisper);
+	border-radius: 8px;
+	font-size: 1em;
+	padding: .7em;
+	position: relative;
+	width: 100%;
+}
+
+
+input {
+	font-family: var(--setting-body-font);
+}
+.checkbox-control {
+	display: grid;
+	grid-template-columns: 1em auto;
+	gap: 0.75em;
+}
+input[type=checkbox] {
+	/* Add if not using autoprefixer */
+	-webkit-appearance: none;
+	/* Remove most all native input styles */
+	-moz-appearance: none;
+		 appearance: none;
+	/* For iOS < 15 */
+	background-color: var(--form-background);
+	/* Not removed via appearance */
+	margin: 0;
+	font: inherit;
+	color: currentColor;
+	width: 1.15em;
+	height: 1.15em;
+	border: 1px solid var(--color-gray);
+	border-radius: 2px;
+	display: grid;
+	place-content: center;
+  }
+  input[type=checkbox]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	-webkit-clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+			clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+	transform: scale(0);
+	box-shadow: inset 1em 1em var(--color-green);
+	/* Windows High Contrast Mode */
+	background-color: CanvasText;
+  }
+  input[type=checkbox]:checked {
+	border: solid 2px var(--color-green);
+  }
+  input[type=checkbox]:checked::before {
+	transform: scale(1);
+  }
+  
+
+
+/*
+.contact-form input[type=text]:focus,
+.contact-form input[type=email]:focus {
+	border: solid 1px var(--color-green-70);
+	outline: 0;
+}
+*/
+
+
+
+
+
+
+.contact-form .details,
+.contact-form .solutions {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+.contact-form .details div {
+	padding: 1em;
+}
+.contact-form .solutions label {
+	padding: .75em 1em .75em 1em;
+}
+#contact-dfdl .team-lead-stage {
+	margin-top: 128px;
+}
+.contact-form .message {
+	height: 6em;
+	border: solid 1px var(--color-whisper);
+	border-radius: 8px;
+	font-family: var(--setting-body-font);
+	font-size: 16px;
+	margin-left: 1em;
+	padding: .7em;
+	width: 100%;
+}
+.contact-form .button.submit {
+	margin: 2.5em 0 0 1em;
 }
