@@ -179,7 +179,7 @@ nav ul li {
 	color: var(--color-white);
 	pointer-events: none;
 }
-header {
+header.main {
 	background-color: rgba(255,255,255,.75);
 	position: absolute;
 	top: 0;
@@ -263,7 +263,6 @@ header {
 }
 .callout h2 {
     font-size: var(--font-size-huge);
-    font-weight: 700;
 	text-align: center;
 	margin: auto;
 }
@@ -971,4 +970,53 @@ input[type=checkbox] {
 }
 .contact-form .button.submit {
 	margin: 2.5em 0 0 1em;
+}
+
+
+
+#insights .country-subnav-stage {
+	margin-top: 100px;
+}
+#insights .callout {
+	padding: 4em 0 4em 0;
+}
+#insights .callout h2 {
+	font-size: var(--font-size-larger);
+	margin-bottom: 1em;
+	text-align: left;
+	text-transform: capitalize;
+}
+.callout .posts {
+	column-gap: 1.5em;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.posts .card {
+	box-shadow: 0 0 6px rgba(200,200,200, .5);
+	padding: 1em;
+}
+.posts .card .meta {
+	display: flex;
+	font-size: var(--font-size-small);
+	font-weight: 400;
+	justify-content: space-between;
+	margin-bottom: 1em;
+}
+.posts .card .section {
+	color: var(--color-green);
+	text-transform: capitalize;
+}
+.posts .card .date {
+	color: var(--color-green-70);
+}
+.posts .card h4 a {
+	color: var(--color-dark-gray);
+	font-size: var(--font-size-large);
+	font-weight: 700;
+	line-height: 1.4em;
+}
+.posts .card .excerpt {
+	color: var(--color-gray);
+	margin-top: 1em;
 }

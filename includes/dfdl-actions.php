@@ -1,12 +1,67 @@
 <?php
 
 /**
+ * DFDL News
+ */
+add_action('dfdl_news_callout', 'dfdl_news_callout');
+function dfdl_news_callout( array $args ): void {
+
+    if ( ! isset($args['category']) ) {
+        echo "dfdl_news_callout requires a category slug";
+        return;
+    }
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'category_name'  => $args['category'],
+        'posts_per_page' => 4,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
+     );
+    $posts = new WP_Query( $query_args );
+
+    if ( ! empty( $posts->posts ) ) {
+
+        /**
+         * Queue up news cards
+         */
+        ob_start();
+        foreach ( $posts->posts as $post ) {
+            /**
+             * will need terms in future
+             */
+            set_query_var("story", $post);
+            set_query_var("section", $args['category']);
+            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+        }
+        $news = ob_get_clean();
+
+        /**
+         * Insert cards into template
+         */
+        ob_start();
+            get_template_part( 'includes/template-parts/content/insights', 'callout' );
+        $template = ob_get_clean();
+        $output   = str_replace("{posts}", $news, $template);
+
+        echo $output;
+
+    }
+ 
+}
+
+/**
  * Contact Form
  */
 add_action('dfdl_contact_form', 'dfdl_contact_form');
 function dfdl_contact_form(): void {
     get_template_part( 'includes/template-parts/forms/form', 'contact' );
 }
+
 /**
  * DFDL Teams Filter Ajax
  * 
@@ -312,7 +367,7 @@ function dfdl_solutions_country_nav() {
     global $wp;
 
     $pieces     = explode("/", $wp->request ) ;
-    $sections   = array("teams", "awards", "contact-us");
+    $sections   = array("teams", "awards", "contact-us", "insights");
     $section    = array_values(array_intersect( $pieces, $sections ));
 
     if ( isset($section[0]) ) {
@@ -322,7 +377,7 @@ function dfdl_solutions_country_nav() {
          * Set fallback for is_admin()
          */
         if ( is_admin() ) {
-            echo '<nav class="country-subnav-stage"><ul><li>[country navigation may appear here, depending on section]</li></ul></nav>';
+            echo '<nav class="country-subnav-stage"><ul><li>[country navigation may depending on section]</li></ul></nav>';
         }
         return;
     }
@@ -349,16 +404,39 @@ function dfdl_solutions_country_nav() {
 
     /**
      * Make navigation links
+     * 
+     * Insight post links are different to others
+     * /insights/[category]/[country]
+     * 
+     * Other pages are:
+     * /locations/[country]/(.*)
+     * 
+     * Full details in dfdl-rewrites.php
+     * 
      */
     foreach($pages->posts as $page) {
         if ( is_admin() ) {
             $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
         } else {
-            if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+
+            /** 
+             * insights urls are a different format
+             * /insights/[category]/[country]
+             */
+            if ( "insights" === "section" ) {
+
             } else {
-                $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                /** 
+                 * /locations/[country]/(.*)
+                 * ie /locations/cambodia/[teams|awards|etc]
+                 */
+                if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                    $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                } else {
+                    $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                }
             }
+            
         }
     }
 

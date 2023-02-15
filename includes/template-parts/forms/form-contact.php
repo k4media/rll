@@ -2,8 +2,11 @@
     <form id="dfdl-contact" method="post"action="">
     <?php
         global $post;
+        $sections = dfdl_get_section();
+        $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
         wp_nonce_field( 'comment-form_'.$post->ID );
     ?>
+    <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
     <div class="details">
         <div>
             <label>Name
@@ -49,29 +52,11 @@
 
     <h4>Message</h4>
     <textarea id="message" name="message" class="message"></textarea>
-    <button type="submit" name="submit" value="contact-form-submit" class="button submit">Submit</button>
+    <button type="submit" name="submit" value="contact-form-submit" class="button submit disabled">Submit</button>
 
 </div>
 <script>
 (function() {
-    var validator = new Validator({
-        form: document.getElementById('dfdl-contact'),
-        rules: {
-            email: {
-            validate: (val) => val ? '' : 'Please enter a valid email address',
-            },
-        }
-        });
-
-        validator.form.onsubmit = (evn) => {
-        evn.preventDefault();
-        const values = validator.getValues();
-        console.log(values);
-        }
-
-        validator.form.onreset = (evn) => {
-        const data = validator.reset();
-        console.log(data);
-    }
+    
 })();
 </script>

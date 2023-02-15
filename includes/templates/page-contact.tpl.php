@@ -4,7 +4,7 @@
  */
 
  // Validator.js
- wp_enqueue_script('validator', get_stylesheet_directory_uri() . '/assets/js/validator.min.js', null, null, true );
+ wp_enqueue_script('parsely', get_stylesheet_directory_uri() . '/assets/js/parsely.min.js', null, null, true );
  
  get_header();
 

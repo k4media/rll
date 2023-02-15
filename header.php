@@ -24,7 +24,7 @@
 
 $K4 = new K4;
 $K4->fragment_cache( "page-header", function() { ?>
-<header>
+<header class="main">
 	<div class="header-stage silo">
 		<div class="left">
 			<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>
