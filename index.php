@@ -24,13 +24,13 @@ get_header();
 
 	<p style='text-align: center; margin: 120px 0 120px 0'>featured post slider</p>
 
-	<?php do_action("dfdl_news_callout", array('category' => 'news') ); ?>
+	<?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
 
-	<?php do_action("dfdl_news_callout", array('category' => 'legal-tax-updates') ); ?>
+	<?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
 
-	<?php do_action("dfdl_news_callout", array('category' => 'events') ); ?>
+	<?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
 
-	<?php do_action("dfdl_news_callout", array('category' => 'content-hub') ); ?>
+	<?php do_action("dfdl_insights_callout", array('category' => 'content-hub') ); ?>
 
 
 </div>

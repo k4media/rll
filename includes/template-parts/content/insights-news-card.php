@@ -1,8 +1,8 @@
 <div class="card news">
     <div class="meta">
         <div class="tax">
-            <?php if ( isset($section) ) : ?>
-                <span class="section"><?php echo $section ?></span>
+            <?php if ( isset($term) ) : ?>
+                <span class="section"><?php echo $term->name ?></span>
             <?php endif; ?>
             <?php if ( isset($category) ) : ?>
                 <span class="category"><?php echo $category ?></span>

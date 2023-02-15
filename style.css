@@ -980,9 +980,17 @@ input[type=checkbox] {
 #insights .callout {
 	padding: 4em 0 4em 0;
 }
+#insights .callout header {
+	display: flex;
+	justify-content: space-between;
+}
+#insights .callout header a {
+	color: var(--color-green);
+	font-weight: 700;
+}
 #insights .callout h2 {
 	font-size: var(--font-size-larger);
-	margin-bottom: 1em;
+	margin: 0 0 1em 0;
 	text-align: left;
 	text-transform: capitalize;
 }
@@ -994,7 +1002,7 @@ input[type=checkbox] {
 
 .posts .card {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
-	padding: 1em;
+	padding: 1.5em;
 }
 .posts .card .meta {
 	display: flex;
@@ -1019,4 +1027,12 @@ input[type=checkbox] {
 .posts .card .excerpt {
 	color: var(--color-gray);
 	margin-top: 1em;
+}
+
+
+.single.narrow {
+	max-width: 866px;
+}
+.single .entry-content {
+	font-size: var(--font-size-large);
 }

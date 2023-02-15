@@ -3,11 +3,11 @@
 /**
  * DFDL News
  */
-add_action('dfdl_news_callout', 'dfdl_news_callout');
-function dfdl_news_callout( array $args ): void {
+add_action('dfdl_insights_callout', 'dfdl_insights_callout');
+function dfdl_insights_callout( array $args ): void {
 
     if ( ! isset($args['category']) ) {
-        echo "dfdl_news_callout requires a category slug";
+        echo "<p>A category slug is required.</p>";
         return;
     }
 
@@ -27,6 +27,11 @@ function dfdl_news_callout( array $args ): void {
     if ( ! empty( $posts->posts ) ) {
 
         /**
+         * Term object
+         */
+        $term = get_term_by("slug", $args['category'], "category");
+
+        /**
          * Queue up news cards
          */
         ob_start();
@@ -35,7 +40,7 @@ function dfdl_news_callout( array $args ): void {
              * will need terms in future
              */
             set_query_var("story", $post);
-            set_query_var("section", $args['category']);
+            set_query_var("term", $term);
             get_template_part( 'includes/template-parts/content/insights', 'news-card' );
         }
         $news = ob_get_clean();
