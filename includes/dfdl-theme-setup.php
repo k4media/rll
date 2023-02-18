@@ -195,7 +195,8 @@ function dfdl_scripts() {
 	$params = array(
 		'ajaxurl' => admin_url( 'admin-ajax.php' ),
 		'awards_nonce' => wp_create_nonce('dfdl_awards'),
-		'teams_nonce' => wp_create_nonce('dfdl_teams')
+		'teams_nonce' => wp_create_nonce('dfdl_teams'),
+		'insights_nonce' => wp_create_nonce('insights_nonce')
 	);
 	wp_localize_script( 'dfdl', 'ajax_object', $params);
 

@@ -41,7 +41,13 @@ function dfdl_insights_callout( array $args ): void {
              */
             set_query_var("story", $post);
             set_query_var("term", $term);
-            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+
         }
         $news = ob_get_clean();
 
@@ -334,10 +340,14 @@ function dfdl_filter( string $filter ): void {
             break;
         case "award_solutions":
         case "teams_solutions":
+        case "insights_solutions":
             $options = dfdl_get_solutions_tax();
             break;
         case "award_years":
             $options = dfdl_get_award_years();
+            break;
+        case "insights_years":
+            $options = dfdl_get_insights_years();
             break;
         case "teams_sort":
                 $options = dfdl_get_teams_sort();
@@ -351,6 +361,7 @@ function dfdl_filter( string $filter ): void {
     } else {
         $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
     }
+
     foreach( $options as $option ) {
         if ( "teams_sort" === $filter && 1 === $option->term_id) {
             $selected = 'selected="selected"';
@@ -428,8 +439,19 @@ function dfdl_solutions_country_nav() {
              * insights urls are a different format
              * /insights/[category]/[country]
              */
-            if ( "insights" === "section" ) {
+            if ( "insights" === $section ) {
 
+                // if no category, ie /insights/
+                if ( 1 === count($pieces) ) {
+                    $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                } else {
+                    if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    } else {
+                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    }
+                }
+                
             } else {
                 /** 
                  * /locations/[country]/(.*)
@@ -445,24 +467,38 @@ function dfdl_solutions_country_nav() {
         }
     }
 
+    /**
+     * Section Filters & Sorts
+     */
+
     // enqueue filter scripts
-    if ( "teams" === $section || "awards" === $section ) {
+    if ( "teams" === $section || "awards" === $section || "insights" === $section ) {
         wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
 		wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
     }
-
-    // Add teams filter html
+    // Teams filter
     if ( "teams" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "teams");
         $nav[] = ob_get_clean();
     }
-    // Add awards filter html
+    // Awards filter
     if ( "awards" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "awards");
         $nav[] = ob_get_clean();
     }
+    // Insights filter
+    if ( "insights" === $section ) {
+        ob_start();
+            if ( isset($pieces[1]) ) {
+                get_template_part("includes/template-parts/filters/filter", $pieces[1]);
+            } else {
+                get_template_part("includes/template-parts/filters/filter", "insights");
+            }
+        $nav[] = ob_get_clean();
+    }
+
 
     /**
      * Prepare html output
@@ -487,8 +523,16 @@ function dfdl_solutions_country_nav() {
             } else {
                 $output[] = '<li><a href="' . $home_url . '/contact-us/">Regional</a></li>';
             }
+        } elseif ( "insights" === $section ) {
+
+            if ( count($pieces) > 1 ) {
+                $output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
+            }
+
         } else {
-            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+
+             $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+            
         }
     }
 

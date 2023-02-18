@@ -205,6 +205,64 @@ function dfdl_get_award_bodies( string $return=""): array {
 }
 
 /** 
+ * DFDL Insights Years.
+ * 
+ * Oldest year by post category
+ * news, legal-and-tax, events, etc
+ *
+ * @return array of terms
+*/
+function dfdl_get_insights_years(): array {
+
+    global $wp;
+
+    $pieces   = explode("/", $wp->request ) ;
+    $category = end($pieces);
+
+    if ( "insights" === $category ) {
+        $loop = get_posts( 'numberposts=1&order=ASC' );
+    } else {
+        $loop = get_posts( 'numberposts=1&category=' . $category . '&order=ASC' );
+    }
+    
+    $oldest_post_date = $loop[0]->post_date; 
+
+    if ( isset($oldest_post_date) ) {
+
+        $current_year = intval(date("Y"));
+        $pieces       = explode("-", $oldest_post_date);
+        $oldest_year  = intval($pieces[0]);
+        
+        if ( $current_year - 3 > $oldest_year ) {
+            $oldest_year = $current_year - 3;
+            $truncate = true;
+        }
+
+        $options = array();
+
+        for ( $i = $current_year ; $i >= $oldest_year ; $i-- ) {
+            $obj = (object)[];
+            $obj->term_id = $i;
+            $obj->name = $i;
+            $obj->slug = $i;
+            $options[] = $obj;
+        }
+
+        if ( true === $truncate ) {
+            $obj = (object)[];
+            $obj->term_id = 0;
+            $obj->name = 'Older';
+            $obj->slug = 'older';
+            $options[] = $obj;
+        }
+
+        return $options;
+
+    }
+    
+}
+
+/** 
  * DFDL Award Years.
  *
  * @return array of terms

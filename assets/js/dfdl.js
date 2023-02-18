@@ -39,8 +39,35 @@ if (jQuery().jquery) {
     jQuery("#teams_solutions, #teams_sort").on("change", debounce(function() {
         filterTeams()
     }, 700));
+    jQuery("#insights_solutions, #insights_categories, #insights_years").on("change", debounce(function() {
+        filterInsights()
+    }, 700));
 }
 
+function filterInsights() {
+    console.log("loading results");
+    jQuery("#results_stage").addClass("no-results");
+    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading ...</div>" );
+    postAjax(
+        ajax_object.ajaxurl, {
+            action: "filter_insights",
+            nonce: ajax_object.insights_nonce,
+            iSolutions:jQuery('#insights_solutions').select2("val"),
+            iCategories: jQuery('#insights_categories').select2("val"),
+            iYears: jQuery('#insights_years').val()
+        }, function(data){
+            data = JSON.parse(data);
+            if ( data.code === 200 ) {
+                jQuery("#results_stage").removeClass("no-results");
+                jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
+            } else {
+                jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
+                console.log(data);
+            }
+            console.log("results loaded");
+        }
+    )
+}
 
 function filterTeams() {
     console.log("loading results");

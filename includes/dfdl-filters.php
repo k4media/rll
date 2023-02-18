@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Remove "Category:" from Archive pages
+ */
+add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
+
+/**
  * Add current-page-parent class to nav parents
  */
 add_filter( 'nav_menu_link_attributes', 'dfdl_add_menu_link_class', 1, 3 );
