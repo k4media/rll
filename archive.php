@@ -49,6 +49,8 @@ $term = get_category( get_query_var( 'cat' ) );
 			<?php get_template_part( 'includes/template-parts/content/content-none' ); ?>
 		<?php endif; ?>
 	</div>
+
+	<div class="pagination"><?php the_posts_pagination(); ?></div>
 </section>
 
 

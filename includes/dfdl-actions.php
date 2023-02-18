@@ -355,23 +355,26 @@ function dfdl_filter( string $filter ): void {
         default:
             // no default
     }
+
     $select   = array();
     if ( "teams_sort" === $filter ) {
         $select[] = '<select id="' . $filter . '" name="' . $filter . '">';
     } else {
         $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
     }
-
-    foreach( $options as $option ) {
-        if ( "teams_sort" === $filter && 1 === $option->term_id) {
-            $selected = 'selected="selected"';
-        } else {
-            $selected = "";
+    if ( isset($options) ) {
+        foreach( $options as $option ) {
+            if ( "teams_sort" === $filter && 1 === $option->term_id) {
+                $selected = 'selected="selected"';
+            } else {
+                $selected = "";
+            }
+            $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
         }
-        $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
     }
     $select[] = '</select>';
     echo implode($select);
+    
 }
 
 /**

@@ -27,7 +27,7 @@ get_header();
 
         <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
 
-        <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax') ); ?>
+        <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
 
         <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
 

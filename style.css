@@ -1056,7 +1056,17 @@ article + #insights {
 .single.narrow {
 	max-width: 866px;
 }
+.single .entry-meta {
+	color: var(--color-gray);
+	margin: 1em 0 1em 0;
+}
+.single .category {
+	color: var(--color-green);
+	font-size: var(--font-size-large);
+}
 .single .entry-content {
 	font-size: var(--font-size-large);
 }
-
+.single h1 {
+	font-size: var(--font-size-huge)
+}

@@ -218,6 +218,7 @@ function dfdl_get_insights_years(): array {
 
     $pieces   = explode("/", $wp->request ) ;
     $category = end($pieces);
+    $truncate = null;
 
     if ( "insights" === $category ) {
         $loop = get_posts( 'numberposts=1&order=ASC' );

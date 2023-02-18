@@ -7,24 +7,40 @@
  */
 
 get_header();
-?>
-<div id="insights" class="single narrow">
 
-	<?php
-	/* Start the Loop */
-	while ( have_posts() ) :
-		the_post();
+$sections = dfdl_get_section();
+$category = end($sections);
 
-		get_template_part( 'includes/template-parts/content/content-single' );
+$term = get_category_by_slug($category);
+$url  = get_category_link($term->term_id);
 
-		// If comments are open or there is at least one comment, load up the comment template.
-		//if ( comments_open() || get_comments_number() ) {
-			//comments_template();
-		//}
-
-	endwhile; // End of the loop.
 ?>
 
+
+
+<div id="insights" class="<?php echo $term->slug ?> silo">
+
+	<nav class="country-subnav-stage">
+		<ul class="country-nav">
+			<li class="back"><a href="<?php echo $url ?>">Back</a></li>
+		</ul>
+	</nav>
+
+	<div class="single narrow">
+		<?php if ( isset($term->name) ) : ?>
+			<div class="category"><?php echo $term->name ?></div>
+		<?php endif; ?>
+		<?php
+			/* Start the Loop */
+			while ( have_posts() ) :
+				the_post();
+
+				get_template_part( 'includes/template-parts/content/content-single' );
+
+			endwhile; // End of the loop.
+		?>
+	</div>
+	
 </div>
 
 <?php get_footer();
