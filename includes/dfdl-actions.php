@@ -548,6 +548,22 @@ function dfdl_solutions_country_nav() {
 
 }
 
+
+add_action( 'pre_get_posts', 'new_sort_order'); 
+function new_sort_order($query){
+
+    if ( ! is_admin() && $query->is_main_query() ) {
+        if ( is_category() ) {
+            echo "HERE";
+            $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+		    $query->set( 'paged', $paged );
+        }  
+    }
+  
+};
+
+
+
 /**
  * Get resuable block by ID
  */

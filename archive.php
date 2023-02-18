@@ -6,15 +6,17 @@
  *
  */
 
+ 
+
 get_header();
 
-global $post;
+// global $post;
 
 $term = get_category( get_query_var( 'cat' ) );
 
 ?>
-
-<section id="insights" class="<?php echo esc_attr($term->slug) ?> callout silo">
+Archive
+<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive callout silo">
 
 	<?php
 		/**
@@ -50,7 +52,22 @@ $term = get_category( get_query_var( 'cat' ) );
 		<?php endif; ?>
 	</div>
 
-	<div class="pagination"><?php the_posts_pagination(); ?></div>
+	<div class="pagination">
+	<?php
+		global $wp_query;
+
+		$big = 999999999; // need an unlikely integer
+		$translated = __( 'Page', 'dfdl' ); // Supply translatable string
+
+		echo paginate_links( array(
+			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+			'format' => '?paged=%#%',
+			'current' => max( 1, get_query_var('paged') ),
+			'total' => $wp_query->max_num_pages,
+				'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
+		) );
+		?>	
+	</div>
 </section>
 
 
