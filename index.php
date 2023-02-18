@@ -21,6 +21,7 @@ get_header();
 	<?php endwhile; ?>
 <?php endif; ?>
 
+<!--
 <section id="insights" class="">
 
 	<?php
@@ -42,6 +43,6 @@ get_header();
 
 
 </section>
-
+	-->
 
 <?php get_footer();

@@ -212,7 +212,7 @@ function dfdl_get_award_bodies( string $return=""): array {
  *
  * @return array of terms
 */
-function dfdl_get_insights_years(): array {
+function dfdl_get_insights_years() {
 
     global $wp;
 

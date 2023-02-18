@@ -8,24 +8,25 @@
 
 get_header();
 
-$sections = dfdl_get_section();
-$category = end($sections);
+//$sections = dfdl_get_section();
+//$category = end($sections);
+//$term = get_category_by_slug($category);
+//$url  = get_category_link($term->term_id);
 
-$term = get_category_by_slug($category);
-$url  = get_category_link($term->term_id);
-
+global $post;
+$terms = wp_get_post_terms($post->ID, 'category');
+$classes = array();
+foreach( $terms as $term ) {
+	$classes[] = esc_attr($term->slug);
+}
 ?>
 
-
-
-<div id="insights" class="<?php echo $term->slug ?> silo">
-
+<div id="insights" class="<?php echo implode(" ", $classes) ?> silo">
 	<nav class="country-subnav-stage">
 		<ul class="country-nav">
-			<li class="back"><a href="<?php echo $url ?>">Back</a></li>
+			<li class="back"><a href="javascript:history.back()">Back</a></li>
 		</ul>
 	</nav>
-
 	<div class="single narrow">
 		<?php if ( isset($term->name) ) : ?>
 			<div class="category"><?php echo $term->name ?></div>
@@ -40,7 +41,5 @@ $url  = get_category_link($term->term_id);
 			endwhile; // End of the loop.
 		?>
 	</div>
-	
 </div>
-
 <?php get_footer();
