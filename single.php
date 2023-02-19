@@ -40,6 +40,8 @@ foreach( $terms as $term ) {
 
 			endwhile; // End of the loop.
 		?>
+		<?php get_template_part( 'includes/template-parts/content/single-social-share' ); ?>
 	</div>
+	<?php do_action("dfdl_related_stories"); ?>
 </div>
 <?php get_footer();

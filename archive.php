@@ -6,11 +6,23 @@
  *
  */
 
+/**
+ * Handle country endpoints
+ */
+
+global $wp;
+
+$url    = home_url( $wp->request );
+$pieces = parse_url($url); 
+
+var_dump($pieces);
+
 get_header();
 
-// global $post;
 
-$term = get_category( get_query_var( 'cat' ) );
+
+// global $post;
+// $term = get_category( get_query_var( 'cat' ) );
 
 ?>
 

@@ -1,5 +1,21 @@
 <?php
 
+/*
+function dfdl_search_related($where, $wp_query){
+    global $wpdb;
+
+    if( $search_term = $wp_query->get( 's' )){
+        // using the esc_like() instead of other esc_sql()
+        $search_term = $wpdb->esc_like($search_term);
+        $search_term = ' \'%' . $search_term . '%\'';
+        $where .= ' AND ' . $wpdb->posts . '.post_title LIKE '.$search_term;
+    }
+
+    return $where;
+}
+*/
+
+
 /**
  * Insert author box into content
  */
@@ -90,8 +106,7 @@ function dfdl_author_callout( string $content )  {
 /**
  * Remove "category" from Archive urls
  */
-// add_filter( 'user_trailingslashit', 'dfdl_remove_category', 100, 2);
-/*
+add_filter( 'user_trailingslashit', 'dfdl_remove_category', 100, 2);
 function dfdl_remove_category( $string, $type )  {       
     if ( $type != 'single' && $type == 'category' && ( strpos( $string, 'category' ) !== false ) ) {
         $url_without_category = str_replace( "/category/", "/", $string ); 
@@ -99,7 +114,7 @@ function dfdl_remove_category( $string, $type )  {
     }
     return $string;
 }
-*/
+
 
 
 /**

@@ -1086,3 +1086,41 @@ article + #insights {
 	color: var(--color-whisper);
 	padding: .25em;
 }
+
+.social-share {
+	align-items: center;
+	display: flex;
+	margin-top: 4em;
+}
+.social-share label {
+	color: var(--color-gray);
+	margin-right: 1em;
+}
+.social-share button {
+	background: transparent;
+	border: 0;
+}
+.social-share img {
+	cursor: pointer;
+	height: auto;
+	padding: 0 .5em 0 .5em;
+	width: 16px;
+	
+}
+
+.related-posts {
+	margin: 4em 0 4em 0;
+}
+
+@media print {
+	.header-stage .left,
+	.header-stage .right,
+	.country-subnav-stage,
+	.social-share,
+	#colophon {
+		display: none;
+	}
+	.site-branding {
+		text-align: left;
+	}
+ }

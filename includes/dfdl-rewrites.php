@@ -11,6 +11,18 @@ function dfdl_add_member_query_vars( $query_vars ) {
 } 
 
 /**
+ * Enpoints
+ * 
+ * Country endpoints to handle insights and post categories
+ */
+add_action( 'init', 'makeplugins_add_json_endpoint' );
+function makeplugins_add_json_endpoint() {
+    foreach( constant('DFDL_COUNTRIES') as $c) {
+        add_rewrite_endpoint( $c, EP_PERMALINK );
+    }
+}
+
+/**
  * Rewrite rules
  */
 add_action( 'init', 'dfdl_add_rewrite_rules', 10 );
@@ -51,6 +63,19 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
+     /* insights/[country]/ */
+	add_rewrite_rule(
+        'insights/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'index.php?pagename=dfdl_insights&dfdl_country=$matches[1]',
+        'top'
+    );
+
+    /* insights/[category]/[country]/ */
+	add_rewrite_rule(
+        'insights/(.*)/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'index.php?pagename=dfdl_insights&category=$matches[1]&dfdl_country=$matches[2]',
+        'top'
+    );
 }
 
 /**
@@ -61,7 +86,7 @@ function dfdl_member_template_include($template) {
     global $wp_query;
 	$query_vars = $GLOBALS['wp_query']->query_vars;
 
-     /**
+    /**
      * Country Team Page
      * /locations/[country]/team/
      */
@@ -73,7 +98,7 @@ function dfdl_member_template_include($template) {
 		exit;
     }
 
-     /**
+    /**
      * Team All Page
      * /teams/all
      */
@@ -121,5 +146,19 @@ function dfdl_member_template_include($template) {
 		exit;
     }
     
+    /**
+     * Insights 
+     * /insights/[country]/
+     * /insights/[category]/[country]/
+     */
+	if ( "dfdl_insights" == $query_vars['pagename'] ) {
+        $page_template = get_stylesheet_directory() . '/archive.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+
     return $template;
+    
 }

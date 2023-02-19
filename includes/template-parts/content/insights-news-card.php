@@ -1,9 +1,3 @@
-<?php
-
-
-
-?>
-
 <div class="card news">
     <div class="meta">
         <div class="tax">
