@@ -87,21 +87,20 @@ function dfdl_author_callout( string $content )  {
     return $content;
 }   
 
-
-
-
-
 /**
  * Remove "category" from Archive urls
  */
 // add_filter( 'user_trailingslashit', 'dfdl_remove_category', 100, 2);
+/*
 function dfdl_remove_category( $string, $type )  {       
     if ( $type != 'single' && $type == 'category' && ( strpos( $string, 'category' ) !== false ) ) {
         $url_without_category = str_replace( "/category/", "/", $string ); 
         return trailingslashit( $url_without_category );
     }
     return $string;
-}    
+}
+*/
+
 
 /**
  * Remove "Category:" from Archive pages

@@ -6,8 +6,6 @@
  *
  */
 
- 
-
 get_header();
 
 // global $post;
@@ -15,7 +13,7 @@ get_header();
 $term = get_category( get_query_var( 'cat' ) );
 
 ?>
-Archive
+
 <section id="insights" class="<?php echo esc_attr($term->slug) ?> archive callout silo">
 
 	<?php
@@ -52,24 +50,7 @@ Archive
 		<?php endif; ?>
 	</div>
 
-	<div class="pagination">
-	<?php
-		global $wp_query;
-
-		$big = 999999999; // need an unlikely integer
-		$translated = __( 'Page', 'dfdl' ); // Supply translatable string
-
-		echo paginate_links( array(
-			'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
-			'format' => '?paged=%#%',
-			'current' => max( 1, get_query_var('paged') ),
-			'total' => $wp_query->max_num_pages,
-				'before_page_number' => '<span class="screen-reader-text">'.$translated.' </span>'
-		) );
-		?>	
-	</div>
+	<div class="pagination"><?php echo paginate_links(); ?>	</div>
 </section>
 
-
-<?php
-get_footer();
+<?php get_footer();

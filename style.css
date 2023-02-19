@@ -1070,3 +1070,19 @@ article + #insights {
 .single h1 {
 	font-size: var(--font-size-huge)
 }
+
+.pagination {
+	margin: 4em 0 4em 0;
+	text-align: center;
+}
+.pagination a {
+	color: var(--color-gray);
+	font-size: var(--font-size-large);
+	padding: .25em;
+}
+.pagination .current {
+	background-color: var(--color-black);
+	border-radius: 4px;
+	color: var(--color-whisper);
+	padding: .25em;
+}
