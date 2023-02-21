@@ -1,6 +1,6 @@
 <?php
 
-// WIP
+// WIP -- update tax counts
 // add_action('save_post', 'dfdl_update_custom_taxonomy_counts', 10, 3);
 function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before) {
     $countries = dfdl_get_countries();
@@ -125,6 +125,19 @@ function dfdl_insights_callout( array $args ): void {
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
      );
+
+    
+    $sections = dfdl_get_section();
+    if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
+        $query_args['tax_query'] = array(
+            array(
+                'taxonomy' => 'dfdl_countries',
+                'field'    => 'slug',
+                'terms'    => $sections[1],
+            )
+        );
+    }
+
     $posts = new WP_Query( $query_args );
 
     if ( ! empty( $posts->posts ) ) {
@@ -133,6 +146,12 @@ function dfdl_insights_callout( array $args ): void {
          * Term object
          */
         $term = get_term_by("slug", $args['category'], "category");
+
+        $archive_link = get_term_link($term);
+
+        if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
+            $archive_link .= $sections[1] . "/";
+        }
 
         /**
          * Queue up news cards
@@ -161,6 +180,7 @@ function dfdl_insights_callout( array $args ): void {
             get_template_part( 'includes/template-parts/content/insights', 'callout' );
         $template = ob_get_clean();
         $output   = str_replace("{posts}", $news, $template);
+        $output   = str_replace("{archive_link}", $archive_link, $output);
 
         echo $output;
 

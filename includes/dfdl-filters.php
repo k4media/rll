@@ -1,10 +1,6 @@
 <?php
 
 
-
-
-
-
 /*
 function dfdl_search_related($where, $wp_query){
     global $wpdb;
@@ -27,6 +23,10 @@ add_filter( 'the_content', 'dfdl_author_callout', 100, 2);
 function dfdl_author_callout( string $content )  {       
     
     global $post;
+
+    if ( ! isset($post) ) {
+        return $content;
+    }
 
     /**
      * Only add author box to legal-and-tax posts

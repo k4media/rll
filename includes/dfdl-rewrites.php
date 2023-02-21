@@ -67,7 +67,7 @@ function dfdl_add_rewrite_rules() {
      /* insights/[country]/ */
 	add_rewrite_rule(
         'insights/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
-        'index.php?pagename=dfdl_insights&dfdl_country=$matches[1]',
+        'index.php?pagename=dfdl_insights_country&dfdl_country=$matches[1]',
         'top'
     );
 
@@ -147,6 +147,18 @@ function dfdl_member_template_include($template) {
 		exit;
     }
     
+    /**
+     * Insights 
+     * /insights/[country]/
+     */
+	if ( "dfdl_insights_country" == $query_vars['pagename'] ) {
+        $page_template = get_stylesheet_directory() . '/page-insights.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+
     /**
      * Insights 
      * /insights/[country]/
