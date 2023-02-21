@@ -3,17 +3,64 @@
 add_action('init', 'dfdl_migrate');
 function dfdl_migrate() {
     if ( isset($_GET['migration']) && "run" === $_GET['migration'] ) {
-        dfdl_migration_update_countries();
-        dfdl_migration_update_categories();
-        dfdl_migration_update_keywords();
+
+        echo "All functions commented out. Check the code, bro.";
+
+        //dfdl_migration_update_countries();
+        //dfdl_migration_update_categories();
+        //dfdl_migration_update_keywords();
+        // dfdl_migration_category_to_solution();
+
+        exit;
     }
     if ( isset($_GET['migration']) && "reset" === $_GET['migration'] ) {
+       
+        echo "Are you sure? Remove exit statement in dfdl_migration.php";
+
+        exit;
         dfdl_migration_reset_all();
+        exit;
     }
-    exit;
 }
 
+/**
+ * WIP -- update solutions cpt based on old post category
+ */
+function dfdl_migration_category_to_solution() { 
 
+    $categories = array(
+        'Cambodia, Legal and Tax Updates' => ''
+    );
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => array('publish', 'pending', 'draft', 'future', 'private'),
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
+
+    // $posts = new WP_Query( $query_args );
+
+    if ( $posts->post_count > 0 ) {
+
+        foreach ( $posts->posts as $post ) {}
+
+    } else {
+        echo "<p>no posts found</p>";
+    }
+
+    echo "<p>done!</p>";
+
+}
+
+/**
+ * Add dfdl_solutions, dfdl_countries tax based on keywords
+ */
 function dfdl_migration_update_keywords() {  
 
     $counter = 0;
@@ -61,7 +108,9 @@ function dfdl_migration_update_keywords() {
                 "dhaka"
             );
             $countries['cambodia'] = array(
-                "phnom penh"
+                "phnom penh",
+                "kampong cham",
+                "kratie"
             );
             $countries['indonesia'] = array(
                 "jakarta"
@@ -103,16 +152,21 @@ function dfdl_migration_update_keywords() {
             $solutions['compliance-investigations'] = array();
             $solutions['corporate-and-ma'] = array();
             $solutions['dispute-resolution'] = array();
-            $solutions['employment'] = array();
-            $solutions['energy-natural-resources-infrastructure'] = array();
+            $solutions['employment'] = array(
+                "employee",
+                "career"
+            );
+            $solutions['energy-natural-resources-infrastructure'] = array(
+                "solar"
+            );
             $solutions['healthcare-life-science'] = array();
             $solutions['investment-funds'] = array();
-            $solutions['real-estate-hospitality'] = array();
+            $solutions['real-estate-hospitality'] = array(
+                "RE"
+            );
             $solutions['restructuring'] = array();
             $solutions['tax-transfer-pricing'] = array();
             $solutions['technology-media-telecoms'] = array();
-
-
 
             /**
              * Set dfdl_countries tax
@@ -133,19 +187,27 @@ function dfdl_migration_update_keywords() {
 
 }
 
-
+/**
+ * Update dfdl_solutions based on seach of solution keywords
+ */
 function dfdl_migration_update_categories() {  
 
     $counter = 0;
-    $limit   = 10000;
 
     $solutions = dfdl_get_solutions_tax();
 
     foreach ( $solutions as $solution ) {
 
+        /**
+         * Define the search term
+         */
         $search_term = str_replace("and", "", $solution->name);
+
+        // remove &
         $search_term = str_replace('&#038;', "", $search_term);
-        $search_term = preg_replace('/[[:punct:]]/', '', $search_term);
+
+        // remove punctuation
+        $search_term = preg_replace('/[[:punct:]]/', '', $search_term); 
 
         $query_args = array(
             'post_type'      => 'post',
@@ -174,15 +236,6 @@ function dfdl_migration_update_categories() {
                  * Set dfdl_countries tax
                  */
                 wp_set_post_terms($post->ID, $solution->term_id, 'dfdl_solutions');
-                    
-                /**
-                 * Check for script limit
-                 */
-                $counter++;
-                if ( $counter >= $limit ) {
-                    echo "<p>stopping at " . $limit . " posts</p>";
-                    exit;
-                }
     
             }
     
@@ -196,7 +249,9 @@ function dfdl_migration_update_categories() {
 
 }
 
-
+/**
+ * Set dfdl_countries based on post title
+ */
 function dfdl_migration_update_countries() {  
     
     $counter = 0;
@@ -291,14 +346,23 @@ function dfdl_migration_update_countries() {
  
 }
 
+/**
+ * Remove all dfdl_countries, dfdl_solutions terms
+ */
 function dfdl_migration_reset_all() {  
 
+    /**
+     * Array of dfdl_solutions term_id
+     */
     $solutions_terms = dfdl_get_solutions_tax();
     $dfdl_solutions = array();
     foreach( $solutions_terms as $st ) {
         $dfdl_solutions[] = $st->term_id;
     }
 
+    /**
+     * Array of dfdl_country term_id
+     */
     $country_terms = dfdl_get_countries_tax();
     $dfdl_countries = array();
     foreach( $country_terms as $ct ) {
