@@ -332,7 +332,7 @@ function dfdl_get_solutions_tax(): array {
 }
 
 /*
-* DFDL Countries.
+* DFDL Desks.
 *
 * @return array of IDs
 */
@@ -394,6 +394,22 @@ function dfdl_get_countries( array $args = array() ): array {
     
     return array();
     
+}
+
+/*
+* DFDL Countries Tax.
+*
+* Return dfdl_scountries taxonomy
+* 
+* @return array of IDs
+*/
+function dfdl_get_countries_tax(): array {
+    return get_terms(array(
+        'taxonomy' => 'dfdl_countries',
+        'hide_empty' => false,
+        'orderby'  => 'title',
+        'order'    => 'ASC'
+    ));
 }
 
 /**

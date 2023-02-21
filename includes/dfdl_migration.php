@@ -5,9 +5,134 @@ function dfdl_migrate() {
     if ( isset($_GET['migration']) && "run" === $_GET['migration'] ) {
         dfdl_migration_update_countries();
         dfdl_migration_update_categories();
-        exit;
+        dfdl_migration_update_keywords();
     }
+    if ( isset($_GET['migration']) && "reset" === $_GET['migration'] ) {
+        dfdl_migration_reset_all();
+    }
+    exit;
 }
+
+
+function dfdl_migration_update_keywords() {  
+
+    $counter = 0;
+
+    $country_terms = dfdl_get_countries_tax();
+    $dfdl_countries = array();
+    foreach( $country_terms as $ct ) {
+        $dfdl_countries[strtolower($ct->name)] = $ct->term_id;
+    }
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => array('publish', 'pending', 'draft', 'future', 'private'),
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
+    
+    $posts = new WP_Query( $query_args );
+
+    echo "<h3>Processing posts</h3>";
+
+    if ( $posts->post_count > 0 ) {
+
+        foreach ( $posts->posts as $post ) {
+
+            echo "<p>" . $counter . " | <a href='" . get_permalink($post->ID) . "'>" . $post->post_title . "</a> (" . $post->ID . ")</p>";
+
+            $post_title     = preg_replace('/[[:punct:]]/', '', $post->post_title);
+            $post_title     = convert_smart_quotes($post_title);
+            $post_title     = str_replace("'", " ", $post_title);
+            $post_title     = strtolower($post_title);
+            $post_title     = str_replace("laos pdr", "laos-pdr", $post_title);
+            $post_title     = str_replace("lao pdr", "laos-pdr", $post_title);
+            $words          = explode(" ", strtolower($post_title));
+        
+            /**
+             * Countries
+             */
+            $countries['bangladesh'] = array(
+                "dhaka"
+            );
+            $countries['cambodia'] = array(
+                "phnom penh"
+            );
+            $countries['indonesia'] = array(
+                "jakarta"
+            );
+            $countries['lao-pdr'] = array(
+                "vientiane"
+            );
+            $countries['myanmar'] = array(
+                "yangoon"
+            );
+            $countries['philippines'] = array(
+                "manilla"
+            );
+            $countries['thailand'] = array(
+                "bangkok",
+                "samui",
+                "thai"
+            );
+            $countries['vietnam'] = array(
+                "hanoi",
+                "ho chi minh"
+            );
+
+            foreach ( $countries as $key => $value ) {
+                if ( array_intersect( $value, $words ) ) {
+                    echo $key . " " . $dfdl_countries[$key] . "<br>";
+                    wp_set_post_terms($post->ID, $dfdl_countries[$key], 'dfdl_countries', true);
+                }
+            }
+
+            /**
+             * Solutions
+             */
+            $solutions = array();
+
+            $solutions['anti-trust-competition'] = array();
+            $solutions['aviation-logistics'] = array();
+            $solutions['banking-finance'] = array();
+            $solutions['compliance-investigations'] = array();
+            $solutions['corporate-and-ma'] = array();
+            $solutions['dispute-resolution'] = array();
+            $solutions['employment'] = array();
+            $solutions['energy-natural-resources-infrastructure'] = array();
+            $solutions['healthcare-life-science'] = array();
+            $solutions['investment-funds'] = array();
+            $solutions['real-estate-hospitality'] = array();
+            $solutions['restructuring'] = array();
+            $solutions['tax-transfer-pricing'] = array();
+            $solutions['technology-media-telecoms'] = array();
+
+
+
+            /**
+             * Set dfdl_countries tax
+             */
+            //wp_set_post_terms($post->ID, $solution->term_id, 'dfdl_solutions');
+                
+            $counter++;
+
+        }
+
+    } else {
+        echo "<p>no posts found</p>";
+    }
+
+    
+    
+    echo "<p>done!</p>";
+
+}
+
 
 function dfdl_migration_update_categories() {  
 
@@ -115,7 +240,7 @@ function dfdl_migration_update_countries() {
             $post_countries = array_intersect( $words, $dfdl_countries );
 
             if ( count($post_countries) > 0 ) {
-                //echo "Title Countries: " . implode(",", $post_countries)  . "</br>";
+                echo "Title Countries: " . implode(",", $post_countries)  . "</br>";
             }
 
             /**
@@ -143,7 +268,7 @@ function dfdl_migration_update_countries() {
                 echo "Countries: " . implode(",", $post_countries) . "</br>";
                 foreach( $post_countries as $pc ) {
                     $term = get_term_by('slug', $pc, 'dfdl_countries');
-                    wp_set_post_terms($post->ID, $term->term_id, 'dfdl_countries');
+                    wp_set_post_terms($post->ID, $term->term_id, 'dfdl_countries', 'true');
                 }
             }
 
@@ -164,6 +289,55 @@ function dfdl_migration_update_countries() {
     
     echo "<p>done!</p>";
  
+}
+
+function dfdl_migration_reset_all() {  
+
+    $solutions_terms = dfdl_get_solutions_tax();
+    $dfdl_solutions = array();
+    foreach( $solutions_terms as $st ) {
+        $dfdl_solutions[] = $st->term_id;
+    }
+
+    $country_terms = dfdl_get_countries_tax();
+    $dfdl_countries = array();
+    foreach( $country_terms as $ct ) {
+        $dfdl_countries[] = $ct->term_id;
+    }
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => array('publish', 'pending', 'draft', 'future', 'private'),
+        'posts_per_page' => -1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+        );
+    
+    $posts = new WP_Query( $query_args );
+
+    echo "<h3>Processing posts</h3>";
+
+    $counter = 0; 
+
+    if ( $posts->post_count > 0 ) {
+
+        foreach ( $posts->posts as $post ) {
+            echo "<p>" . $counter . " | " . $post->post_title . " (" . $post->ID . ")</p>";
+            wp_remove_object_terms($post->ID, $dfdl_solutions, 'dfdl_solutions');    
+            wp_remove_object_terms($post->ID, $dfdl_countries, 'dfdl_countries');
+            $counter++;
+        }
+
+    } else {
+        echo "<p>no posts found</p>";
+    }
+
+    echo "<p>done!</p>";
+
 }
 
 // helper function for migration script
