@@ -6,14 +6,9 @@
  *
  */
 
-/**
- * Handle country endpoints
- */
-//var_dump($query_vars['dfdl_category']);
-//var_dump($query_vars['dfdl_country']);
-
 get_header();
 
+$term = get_category( get_query_var( 'cat' ) );
 
 ?>
 

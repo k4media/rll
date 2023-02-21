@@ -1,11 +1,11 @@
 <div class="card news">
     <div class="meta">
-        <div class="tax">
+        <div class="taxonomy">
             <?php if ( isset($term) ) : ?>
-                <span class="section"><?php echo $term->name ?></span>
+                <span class="category"><?php echo $term->name ?></span>
             <?php endif; ?>
             <?php if ( isset($category) ) : ?>
-                <span class="category"><?php echo $category ?></span>
+                <span class="subcategory"><?php echo $category ?></span>
             <?php endif; ?>
         </div>
         <div class="date">

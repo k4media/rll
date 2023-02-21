@@ -1026,11 +1026,11 @@ article + #insights {
 .posts .card .meta {
 	display: flex;
 	font-size: var(--font-size-small);
-	font-weight: 400;
 	justify-content: space-between;
 	margin-bottom: 1em;
 }
-.posts .card .section {
+.posts .card .category,
+.posts .card .subcategory {
 	color: var(--color-green);
 	text-transform: capitalize;
 }
@@ -1060,10 +1060,13 @@ article + #insights {
 	color: var(--color-gray);
 	margin: 1em 0 1em 0;
 }
-.single .category {
+.single .category,
+.single .separator,
+.single .subcategory {
 	color: var(--color-green);
 	font-size: var(--font-size-large);
 }
+
 .single .entry-content {
 	font-size: var(--font-size-large);
 }

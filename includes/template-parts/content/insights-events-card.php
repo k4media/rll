@@ -1,17 +1,25 @@
 <?php
 
-
+    /**
+	 * Set subcategory
+	 */
+    $post_terms = wp_get_post_terms($story->ID, 'category');
+    foreach( $post_terms as $t ) {
+        if ( $term->term_id === $t->parent ) {
+            $subcategory = $t->name;
+        }
+    }
 
 ?>
-
 <div class="card news">
     <div class="meta">
-        <div class="tax">
+        <div class="taxonomy">
             <?php if ( isset($term) ) : ?>
-                <span class="section"><?php echo $term->name ?></span>
-            <?php endif; ?>
-            <?php if ( isset($category) ) : ?>
-                <span class="category"><?php echo $category ?></span>
+                <span class="category"><?php echo $term->name ?></span>
+                <?php if ( isset($subcategory) ) : ?>
+					<span class="separator">|</span>
+					<span class="subcategory"><?php echo $subcategory ?></span>
+				<?php endif; ?>
             <?php endif; ?>
         </div>
         <div class="date">
