@@ -9,20 +9,11 @@
 /**
  * Handle country endpoints
  */
-
-global $wp;
-
-$url    = home_url( $wp->request );
-$pieces = parse_url($url); 
-
-var_dump($pieces);
+//var_dump($query_vars['dfdl_category']);
+//var_dump($query_vars['dfdl_country']);
 
 get_header();
 
-
-
-// global $post;
-// $term = get_category( get_query_var( 'cat' ) );
 
 ?>
 

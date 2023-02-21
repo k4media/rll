@@ -1,5 +1,46 @@
 <?php
 
+// WIP
+// add_action('save_post', 'dfdl_update_custom_taxonomy_counts', 10, 3);
+function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before) {
+    $countries = dfdl_get_countries();
+    // var_dump($countries);
+    $count = wp_update_term_count( $countries, 'dfdl_countries' );
+    // var_dump($count);
+}
+
+/**
+ * Filter archive query for country endpoints
+ * NOT WORKING -- THIS IS NEXT adter import script
+ */
+add_action( 'pre_get_posts', 'dfdl_insights_archive' );
+function dfdl_insights_archive($query) {
+
+    global $wp_query;  
+
+	if ( ! is_admin() && $query->is_main_query() ) {
+
+        //var_dump($query);
+        //var_dump($wp_query->query['dfdl_country']);
+        //var_dump($wp_query->query['dfdl_category']);
+
+        if ( isset($query_vars['dfdl_country']) ) {
+            $tax_query = array(
+                array(
+                    'taxonomy' => 'dfdl_countries',
+                    'field'    => 'slug',
+                    'terms'    => sanitize_text_field($wp_query->query['dfdl_country']),
+                )
+            );
+            $query->set( 'tax_query', $tax_query );
+        }
+		if( isset($query_vars['dfdl_category']) ) {
+            $query->set( 'category_name', sanitize_text_field($wp_query->query['dfdl_category']) );
+        }
+	}
+
+}
+
 /**
  * DFDL Related Posts
  */

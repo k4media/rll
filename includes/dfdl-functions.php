@@ -355,13 +355,13 @@ function dfdl_get_desks(): array {
 }
 
 /*
-* DFDL Desks.
+* DFDL Countries.
 *
-* @return array of IDs
+* @return array of country IDs
 */
-function dfdl_get_countries(): array {
+function dfdl_get_countries( array $args = array() ): array {
     $locations = get_page_by_path("locations");
-    $args = array(
+    $query_args = array(
         'post_type'      => 'page',
         'posts_per_page' => 24,
         'post_parent'    => $locations->ID,
@@ -371,10 +371,29 @@ function dfdl_get_countries(): array {
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
-        'fields'                 => 'ids'
+        //'fields'                 => 'ids'
      );
-    $pages = new WP_Query( $args );
-    return $pages->posts;
+
+    if ( empty($args) ) {
+
+        $args['fields'] = 'ids';
+        $pages = new WP_Query( $query_args );
+        return $pages->posts;
+
+    } elseif ( isset($args) && "slug" === $args['return'] ) {
+
+        $pages = new WP_Query( $query_args );
+        $slugs = array();
+        foreach( $pages->posts as $post ) {
+            $slugs[] = $post->post_name;
+        }
+
+        return $slugs;
+
+    }
+    
+    return array();
+    
 }
 
 /**

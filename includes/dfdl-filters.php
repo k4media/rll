@@ -1,5 +1,10 @@
 <?php
 
+
+
+
+
+
 /*
 function dfdl_search_related($where, $wp_query){
     global $wpdb;
@@ -14,7 +19,6 @@ function dfdl_search_related($where, $wp_query){
     return $where;
 }
 */
-
 
 /**
  * Insert author box into content
@@ -114,8 +118,6 @@ function dfdl_remove_category( $string, $type )  {
     }
     return $string;
 }
-
-
 
 /**
  * Remove "Category:" from Archive pages

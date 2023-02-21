@@ -30,7 +30,7 @@ define('DFDL_SECTONS', array( "awards", "desks", "insights", "locations", "solut
 /**
  * DFDL COUNTRIES
  * 
- * Array of valid countries, used mostly for validation.
+ * Array of valid country slugs, used mostly for validation.
  * Ex: locations, solutions, teams, insights, etc.
  */
 define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr", "myanmar", "philippines", "singapore", "thailand", "vietnam") );
