@@ -100,9 +100,6 @@ function dfdl_related_stories(): void {
 
 }
 
-
-
-
 /**
  * DFDL News
  */
@@ -512,6 +509,9 @@ function dfdl_solutions_country_nav() {
     $sections   = array("teams", "awards", "contact-us", "insights");
     $section    = array_values(array_intersect( $pieces, $sections ));
 
+   var_dump( dfdl_get_section() );
+
+
     if ( isset($section[0]) ) {
         $section = $section[0];
     } else {
@@ -567,10 +567,21 @@ function dfdl_solutions_country_nav() {
              */
             if ( "insights" === $section ) {
 
-                // if no category, ie /insights/
-                if ( 1 === count($pieces) ) {
+                /**
+                 * url: /insights/news/cambodia/
+                 */
+                if ( count($pieces) < 3 ) {
+
+                    /**
+                    * url: /insights/[country]/
+                    */
                     $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+
                 } else {
+
+                    /**
+                     * Use both "insights" and [category]
+                     */
                     if ( in_array(strtolower($page->post_name), $pieces)  ) {
                         $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     } else {
