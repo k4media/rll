@@ -509,9 +509,6 @@ function dfdl_solutions_country_nav() {
     $sections   = array("teams", "awards", "contact-us", "insights");
     $section    = array_values(array_intersect( $pieces, $sections ));
 
-   var_dump( dfdl_get_section() );
-
-
     if ( isset($section[0]) ) {
         $section = $section[0];
     } else {
@@ -556,6 +553,7 @@ function dfdl_solutions_country_nav() {
      * Full details in dfdl-rewrites.php
      * 
      */
+
     foreach($pages->posts as $page) {
         if ( is_admin() ) {
             $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
@@ -575,7 +573,11 @@ function dfdl_solutions_country_nav() {
                     /**
                     * url: /insights/[country]/
                     */
-                    $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    } else {
+                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    }
 
                 } else {
 
@@ -635,7 +637,6 @@ function dfdl_solutions_country_nav() {
             }
         $nav[] = ob_get_clean();
     }
-
 
     /**
      * Prepare html output
