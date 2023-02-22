@@ -16,6 +16,13 @@ function dfdl_search_related($where, $wp_query){
 }
 */
 
+function dfdl_filter_archive_insights_title() {
+    global $wp_query;
+    $category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
+    $country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
+    return $country->name . " " . $category->name . " by DFDL";
+}
+
 /**
  * Insert author box into content
  */

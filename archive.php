@@ -6,25 +6,16 @@
  *
  */
 
+global $wp;  
+
 get_header();
 
-$term = get_category( get_query_var( 'cat' ) );
-
-
-
-if ( is_wp_error($term) ) {
-
-	$sections = dfdl_get_section();
-	$term     = get_term_by("slug", end($sections), 'category');
-
-	var_dump( $term );
-
-} 
-
-	
-
-
-
+if ( ! empty(get_query_var('cat')) ) {
+	$term = get_category(get_query_var('cat'));
+} else {
+	$pieces  = explode( "/", $wp->request ) ;
+	$term    = get_term_by("slug", $pieces[1], 'category');
+}
 
 ?>
 

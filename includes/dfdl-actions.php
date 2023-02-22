@@ -3,43 +3,52 @@
 // WIP -- update tax counts
 // add_action('save_post', 'dfdl_update_custom_taxonomy_counts', 10, 3);
 function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before) {
-    $countries = dfdl_get_countries();
+    //$countries = dfdl_get_countries();
     // var_dump($countries);
-    $count = wp_update_term_count( $countries, 'dfdl_countries' );
+    //$count = wp_update_term_count( $countries, 'dfdl_countries' );
     // var_dump($count);
 }
 
 /**
  * Filter archive query for country endpoints
- * NOT WORKING -- THIS IS NEXT adter import script
+ * 
+ * Called by archive.php
  */
-add_action( 'pre_get_posts', 'dfdl_insights_archive' );
-function dfdl_insights_archive($query) {
+// add_action( 'pre_get_posts', 'dfdl_archive_query');
+/*
+function dfdl_archive_query($query) {
 
-    global $wp_query;  
+    global $wp;  
 
-	if ( ! is_admin() && $query->is_main_query() ) {
+    // var_dump($query->pagename);
 
-        //var_dump($query);
-        //var_dump($wp_query->query['dfdl_country']);
-        //var_dump($wp_query->query['dfdl_category']);
+	if ( ! is_admin() && $query->is_main_query() && "dfdl_insights" === $query->query['pagename'] ) {
 
-        if ( isset($query_vars['dfdl_country']) ) {
+        var_dump($query->query['pagename']);
+        var_dump($query->query['dfdl_country']);
+        var_dump($query->query['dfdl_category']);
+
+        $query->set( 'tax_query', $tax_query );
+
+        if ( isset($query->query['dfdl_country']) ) {
             $tax_query = array(
                 array(
                     'taxonomy' => 'dfdl_countries',
                     'field'    => 'slug',
-                    'terms'    => sanitize_text_field($wp_query->query['dfdl_country']),
+                    'terms'    => sanitize_text_field($query->query['dfdl_country']),
                 )
             );
             $query->set( 'tax_query', $tax_query );
         }
-		if( isset($query_vars['dfdl_category']) ) {
-            $query->set( 'category_name', sanitize_text_field($wp_query->query['dfdl_category']) );
+		if( isset($query->query['dfdl_category']) ) {
+            $query->set( 'cat', sanitize_text_field($query->query['dfdl_category']) );
         }
+
+
 	}
 
 }
+*/
 
 /**
  * DFDL Related Posts
@@ -441,7 +450,6 @@ function dfdl_ajax_teams_filter(): array {
      
  }
 
-
 /**
  * DFDL Award Filter
  * 
@@ -554,53 +562,105 @@ function dfdl_solutions_country_nav() {
      * 
      */
 
+    // var_dump($pieces);
+
     foreach($pages->posts as $page) {
+
         if ( is_admin() ) {
+
             $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
+
         } else {
 
             /** 
              * insights urls are a different format
-             * /insights/[category]/[country]
+             * ex: /insights/[category]/[country]/
              */
             if ( "insights" === $section ) {
 
                 /**
-                 * url: /insights/news/cambodia/
+                 * 3 pieces means we have a category and country
+                 * build the link url accordingly
+                 * 
+                 * url: /insights/[category]/[country]/
+                 * ex: /insights/news/cambodia/
                  */
-                if ( count($pieces) < 3 ) {
+                if ( count($pieces) >= 3 ) {
 
                     /**
-                    * url: /insights/[country]/
+                    * url: /insights/[category]/[country]/
                     */
-                    if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
-                    } else {
-                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
-                    }
-
-                } else {
-
-                    /**
-                     * Use both "insights" and [category]
-                     */
                     if ( in_array(strtolower($page->post_name), $pieces)  ) {
                         $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     } else {
                         $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     }
+
+                } elseif ( count($pieces) === 2 ) {
+
+                    /**
+                     * 2 pieces means $pieces[1] is a [category] OR [country]
+                     * 
+                     * ex: /insights/cambodia/
+                     * ex: /insights/news/
+                     * 
+                     */
+
+                    if ( in_array($pieces[1], constant('DFDL_COUNTRIES')) ) {
+
+                        /**
+                         * if $pieces[1] is a country, leave it out of the new url
+                         * we don't want two countries in the 
+                         * 
+                         * new url: /insights/[country]/
+                         */
+                        if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        } else {
+                            $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        }
+
+                    } else {
+
+                        /**
+                         * if $pieces[1] is a category, include country
+                         * 
+                         * new url: /insights/[category]/[country]/
+                         */
+                        if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        } else {
+                            $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        }
+
+                    }
+
+                } else {
+
+                    /**
+                     * url: /insights/
+                     */
+                    if ( in_array(strtolower($page->post_name), $pieces)  ) {
+                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    } else {
+                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                    }
                 }
                 
             } else {
-                /** 
+
+                /**
+                 * Standard link building
+                 * 
                  * /locations/[country]/(.*)
-                 * ie /locations/cambodia/[teams|awards|etc]
+                 * ex /locations/cambodia/[teams|awards|etc]
                  */
                 if ( in_array(strtolower($page->post_name), $pieces)  ) {
                     $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
                 } else {
                     $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
                 }
+
             }
             
         }
@@ -610,7 +670,7 @@ function dfdl_solutions_country_nav() {
      * Section Filters & Sorts
      */
 
-    // enqueue filter scripts
+    // Enqueue filter scripts
     if ( "teams" === $section || "awards" === $section || "insights" === $section ) {
         wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
 		wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
@@ -663,9 +723,9 @@ function dfdl_solutions_country_nav() {
             }
         } elseif ( "insights" === $section ) {
 
-            if ( count($pieces) > 1 ) {
-                $output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
-            }
+            //if ( count($pieces) > 1 ) {
+                //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
+            //}
 
         } else {
 
