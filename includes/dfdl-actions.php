@@ -51,66 +51,73 @@ function dfdl_archive_query($query) {
 */
 
 /**
- * DFDL Related Posts
+ * Insights Swiper
  */
-add_action('dfdl_related_stories', 'dfdl_related_stories');
-function dfdl_related_stories(): void {
+add_action('dfdl_insights_swiper', 'dfdl_insights_swiper');
+function dfdl_insights_swiper( array $args ): void {
 
-    global $post;
-
-    $title = "Related (placeholders -- not working)";
-
-    /*
-    $terms = wp_get_post_terms($post->ID, 'category');
-    foreach( $terms as $t ){
-        var_dump($t->name);
+    if ( ! isset($args) ) {
+        return;
     }
-    */
-    //var_dump($post->post_name);
-    //var_dump(wp_get_post_categories(get_the_ID()));
 
+    if ( "insights" === $args['category']) {
+        /**
+         * Insight categories
+         * News = 89
+         * Legal and Tax Updates (old) = 109
+         * Legal and Tax (new) = 91
+         * Events = 96; but do not include!
+         * 
+         */
+        $categories = array(89);
+    }
     $query_args = array(
         'post_type'      => 'post',
-        'category__in' => wp_get_post_categories(get_the_ID()),
-        'post__not_in'   => array(get_the_ID()),
-        'posts_per_page' => 4,
+        'post_status'    => 'publish',
+        'cat'            => $categories,
+        'posts_per_page' => 6,
         'orderby'        => 'date',
         'order'          => 'DESC',
         'no_found_rows'          => true,
-        'ignore_sticky_posts'    => true,
+        'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
      );
-    //add_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
     $posts = new WP_Query( $query_args );
-    //remove_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
+    
+    if ( ! empty( $posts->posts ) ) {
 
-    /**
-     * Load related posts template part
-     */
-    ob_start();
+        /**
+         * Load related posts template part
+         */
+        ob_start();
         foreach( $posts->posts as $p ) {
+            $categories = dfdl_post_terms($p->ID);
+            set_query_var("categories", $categories);
             set_query_var("story", $p);
-            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            get_template_part( 'includes/template-parts/content/swiper', 'slide' );
         }
-    $cards = ob_get_clean();
+        $slides = ob_get_clean();
 
-    /**
-     * Load related posts template part
-     */
-     ob_start();
-        set_query_var("title", $title);
-        get_template_part( 'includes/template-parts/content/single', 'related-content' );
-    $template = ob_get_clean();
+        /**
+         * Load swiper-callout template part
+         */
+        ob_start();
+            get_template_part( 'includes/template-parts/content/swiper', 'callout' );
+        $template = ob_get_clean();
 
-    $template = str_replace("{posts}", $cards, $template);
+        $template = str_replace("{posts}", $slides, $template);
 
-    echo $template;
+        echo $template;
+
+    }
 
 }
 
 /**
- * DFDL News
+ * DFDL Insights Callouts
+ * 
+ * News, Legal and Tax Updates, Events, Content Hub 
  */
 add_action('dfdl_insights_callout', 'dfdl_insights_callout');
 function dfdl_insights_callout( array $args ): void {
@@ -118,6 +125,18 @@ function dfdl_insights_callout( array $args ): void {
     if ( ! isset($args['category']) ) {
         echo "<p>A category slug is required.</p>";
         return;
+    }
+
+    if ("content-hub" === $args['category'] ) {
+        /**
+         * Pass cat IDs for Content Hub
+         * 
+         * Podcasts     = 575
+         * Publications = 
+         * Videos       = 99
+         */
+        $hub_cats = array();
+
     }
 
     $query_args = array(
@@ -132,7 +151,6 @@ function dfdl_insights_callout( array $args ): void {
 	    'update_post_term_cache' => false,
      );
 
-    
     $sections = dfdl_get_section();
     if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
         $query_args['tax_query'] = array(
@@ -742,6 +760,66 @@ function dfdl_solutions_country_nav() {
     echo implode("", $output);
 
 }
+
+/**
+ * DFDL Related Posts
+ */
+add_action('dfdl_related_stories', 'dfdl_related_stories');
+function dfdl_related_stories(): void {
+
+    global $post;
+
+    $title = "Related (placeholders -- not working)";
+
+    /*
+    $terms = wp_get_post_terms($post->ID, 'category');
+    foreach( $terms as $t ){
+        var_dump($t->name);
+    }
+    */
+    //var_dump($post->post_name);
+    //var_dump(wp_get_post_categories(get_the_ID()));
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'category__in' => wp_get_post_categories(get_the_ID()),
+        'post__not_in'   => array(get_the_ID()),
+        'posts_per_page' => 4,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
+     );
+    //add_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
+    $posts = new WP_Query( $query_args );
+    //remove_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
+
+    /**
+     * Load related posts template part
+     */
+    ob_start();
+        foreach( $posts->posts as $p ) {
+            set_query_var("story", $p);
+            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+        }
+    $cards = ob_get_clean();
+
+    /**
+     * Load related posts template part
+     */
+     ob_start();
+        set_query_var("title", $title);
+        get_template_part( 'includes/template-parts/content/single', 'related-content' );
+    $template = ob_get_clean();
+
+    $template = str_replace("{posts}", $cards, $template);
+
+    echo $template;
+
+}
+
 
 /**
  * Get resuable block by ID

@@ -1066,7 +1066,10 @@ article + #insights {
 	color: var(--color-green);
 	font-size: var(--font-size-large);
 }
-
+.taxonomy .separator {
+	display: inline-block;
+	margin: 0 .25em 0 .25em ;
+}
 .single .entry-content {
 	font-size: var(--font-size-large);
 }
@@ -1110,9 +1113,45 @@ article + #insights {
 	width: 16px;
 	
 }
-
 .related-posts {
 	margin: 4em 0 4em 0;
+}
+
+.swiper-card {
+	margin: auto;
+	max-width: 600px;
+	text-align: center;
+}
+#insights .callout .swiper-card h2 {
+	line-height: 1.4em;
+	text-align: center;
+}
+.swiper-card .excerpt {
+	color: var(--color-gray);
+	line-height: 1.4em;
+}
+.callout .swiper-card .button {
+	margin-top: 2em;
+}
+.swiper-card .taxonomy {
+	color: var(--color-green);
+	margin-bottom: 1em;
+}
+.swiper-next {
+	right: 0;
+}
+.swiper-next, .swiper-prev {
+	cursor: pointer;
+	padding: 12px;
+	position: absolute;
+	top: 45%;
+	z-index:10;
+}
+.swiper-next img, .swiper-prev img {
+	transform: scale(1.3)
+}
+.swiper-next img {
+	transform: rotate(180deg) scale(1.3);
 }
 
 @media print {

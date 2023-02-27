@@ -399,7 +399,7 @@ function dfdl_get_countries( array $args = array() ): array {
 /*
 * DFDL Countries Tax.
 *
-* Return dfdl_scountries taxonomy
+* Return dfdl_countries taxonomy
 * 
 * @return array of IDs
 */
@@ -447,6 +447,52 @@ function dfdl_get_section(): array {
 
     return $return;
 
+}
+
+/**
+ * DFDL Post Terms.
+ * 
+ * Return html for post category and sub-category
+ */
+function dfdl_post_terms( int $post_id ): string {
+
+    $return = "";
+
+    /**
+     * Define some "main" categories, since there are
+     * many 'old' categories still lingering from
+     * the old site taxonomy.
+     */
+    $main_categories = array("news", "events", "legal-and-tax-updates", "legal-and-tax", "articles");
+    $post_terms = wp_get_post_terms($post_id, 'category');
+
+    $parent_cats = array();
+    $sub_cats = array();
+    foreach( $post_terms as $t ) {
+        if ( 0 === $t->parent ) {
+            $parent_cats[] = $t->slug;
+        } else {
+            $sub_cats[] = $t->slug;
+        }
+    }
+
+    $parent_category_slug = array_intersect($parent_cats, $main_categories);
+
+    if ( ! empty($parent_category_slug) ) {
+        $parent_category = get_term_by('slug', $parent_category_slug[0], 'category');
+        $return .= '<span class="category">' . $parent_category->name . '</span>';
+        if( count($sub_cats) > 0 ) {
+            foreach( $sub_cats as $s ) {
+                $sub_term = get_term_by('slug', $s, 'category');
+                if ( $parent_category->term_id === $sub_term->parent ) {
+                    $return .= '<span class="separator">|</span><span class="subcategory">' . $sub_term->name . '</span>';
+                }
+            }
+        }
+    }
+    
+    return $return;
+    
 }
 
 /**

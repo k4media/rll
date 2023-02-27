@@ -10,17 +10,12 @@
         }
     }
 
+
 ?>
 <div class="card news">
     <div class="meta">
         <div class="taxonomy">
-            <?php if ( isset($term) ) : ?>
-                <span class="category"><?php echo $term->name ?></span>
-                <?php if ( isset($subcategory) ) : ?>
-					<span class="separator">|</span>
-					<span class="subcategory"><?php echo $subcategory ?></span>
-				<?php endif; ?>
-            <?php endif; ?>
+            <?php echo dfdl_post_terms($story->ID); ?>
         </div>
         <div class="date">
             <?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?>

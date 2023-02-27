@@ -4,6 +4,11 @@
  *
  */
 get_header();
+
+// Swiper.js
+wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
+
 ?>
 
 <?php if ( have_posts() ) : ?>
@@ -22,17 +27,11 @@ get_header();
         do_action('dfdl_solutions_country_nav');
     ?>
     <div id="results_stage"><div>
-        
-        <p style='text-align: center; margin: 120px 0 120px 0'>featured post slider</p>
-
+        <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
-
         <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
-
         <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
-
         <?php do_action("dfdl_insights_callout", array('category' => 'content-hub') ); ?>
-
     </div></div>
 </section>
 

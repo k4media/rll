@@ -24,7 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
         award_toggle.classList.toggle("is-active");
         awards_filters.classList.toggle("is-active");
     });
-    
+
+    var swiper = new Swiper('.swiper', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-next',
+            prevEl: '.swiper-prev',
+        }
+    });
+
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {
