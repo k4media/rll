@@ -31,9 +31,19 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
         <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'content-hub') ); ?>
+        <?php do_action("dfdl_content_hub_callout"); ?>
     </div></div>
 </section>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var swiper = new Swiper('.swiper', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-next',
+            prevEl: '.swiper-prev',
+        }
+    });
+});
+</script>
 
 <?php get_footer();

@@ -1,20 +1,15 @@
 <?php
 
-
-/*
-function dfdl_search_related($where, $wp_query){
-    global $wpdb;
-
-    if( $search_term = $wp_query->get( 's' )){
-        // using the esc_like() instead of other esc_sql()
-        $search_term = $wpdb->esc_like($search_term);
-        $search_term = ' \'%' . $search_term . '%\'';
-        $where .= ' AND ' . $wpdb->posts . '.post_title LIKE '.$search_term;
+/**
+ * YouTube iframe wrapper div
+ */
+add_filter('embed_oembed_html', 'dfdl_youtube_wrapper', 10, 4);
+function dfdl_youtube_wrapper($html, $url, $attr, $post_id) {
+    if (strpos($html, 'youtube') !== false) {
+        return '<div class="video-container">' . $html . '</div>';
     }
-
-    return $where;
+    return $html;
 }
-*/
 
 function dfdl_filter_archive_insights_title() {
     global $wp_query;
@@ -147,3 +142,21 @@ function dfdl_add_menu_link_class( $atts, $item, $args ) {
     }
     return $atts;
 }
+
+
+
+
+/*
+function dfdl_search_related($where, $wp_query){
+    global $wpdb;
+
+    if( $search_term = $wp_query->get( 's' )){
+        // using the esc_like() instead of other esc_sql()
+        $search_term = $wpdb->esc_like($search_term);
+        $search_term = ' \'%' . $search_term . '%\'';
+        $where .= ' AND ' . $wpdb->posts . '.post_title LIKE '.$search_term;
+    }
+
+    return $where;
+}
+*/

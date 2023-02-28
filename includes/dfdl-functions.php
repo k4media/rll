@@ -450,6 +450,34 @@ function dfdl_get_section(): array {
 }
 
 /**
+ * Content Hub Subcategory.
+ * 
+ * Return post cat name
+ */
+function dfdl_content_hub_category( int $post_id ): string {
+
+    $post_terms = wp_get_post_terms($post_id, 'category');
+
+    if ( count($post_terms ) === 1 ) {
+        return $post_terms[0]->name;
+    } else {
+
+        $videos = array("videos", "video-resources");
+
+        foreach( $post_terms as $p ) {
+            // videos
+            if ( in_array($p->slug, $videos) ) {
+                return "Video";
+            }
+        }
+       
+    }
+
+    return "";
+
+}
+
+/**
  * DFDL Post Terms.
  * 
  * Return html for post category and sub-category

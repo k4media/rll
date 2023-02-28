@@ -56,11 +56,12 @@ foreach( $terms as $term ) {
 ?>
 
 <div id="insights" class="<?php echo implode(" ", $classes) ?> silo">
-	<nav class="country-subnav-stage">
+	<!--
+		<nav class="country-subnav-stage">
 		<ul class="country-nav">
 			<li class="back"><a href="javascript:history.back()">Back</a></li>
 		</ul>
-	</nav>
+	</nav-->
 	<div class="single narrow">
 		<?php if ( isset($single_category) ) : ?>
 			<div class="taxonomy">
