@@ -1,4 +1,4 @@
-<div class="card news">
+<div class="card news <?php if (isset($class)) { echo $class; } ?>">
     <div class="meta">
         <div class="taxonomy">
             <?php if ( isset($term) ) : ?>

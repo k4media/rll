@@ -4,12 +4,15 @@
 	 * Set subcategory
 	 */
     $post_terms = wp_get_post_terms($story->ID, 'category');
+
+    //var_dump($term);
+    /*
     foreach( $post_terms as $t ) {
         if ( $term->term_id === $t->parent ) {
             $subcategory = $t->name;
         }
     }
-
+    */
 
 ?>
 <div class="card news">

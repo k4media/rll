@@ -276,20 +276,18 @@ function dfdl_insights_callout( array $args ): void {
         ob_start();
         foreach ( $posts->posts as $post ) {
             
-            $sponsor = get_post_meta( $post->ID, 'sponsor', true);
-            $dateline = get_post_meta( $post->ID, 'dateline', true);
-            $timeline = get_post_meta( $post->ID, 'timeline', true);
+            //$sponsor = get_post_meta( $post->ID, 'sponsor', true);
+            //$dateline = get_post_meta( $post->ID, 'dateline', true);
+            //$timeline = get_post_meta( $post->ID, 'timeline', true);
             $startdate = get_post_meta( $post->ID, 'startdate', true);
             if ( isset($startdate) ) {
                 $show_date = mysql2date( get_option( 'date_format' ), $startdate );
             }
-
-            set_query_var("sponsor", $sponsor);
-            set_query_var("dateline", $dateline);
-            set_query_var("timeline", $timeline);
+            set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+            set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+            set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
             set_query_var("show_date", $show_date);
  
-
             set_query_var("story", $post);
             set_query_var("term", $term);
             $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
@@ -874,6 +872,12 @@ function dfdl_related_stories(): void {
 
     $title = "Related Articles";
 
+    $sections = dfdl_get_section();
+    $section  = end($sections);
+    if ( in_array("events", $sections) ) {
+        $section = "events";
+    }
+
     $categories = wp_get_post_categories(get_the_ID());
 
     $query_args = array(
@@ -887,21 +891,46 @@ function dfdl_related_stories(): void {
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
-     );
+    );
+
+    if ( "events" === $section) {
+        $query_args['meta_key'] = 'startdate';
+        $query_args['meta_type'] = 'date';
+        $query_args['orderby'] = 'meta_value_num';
+        $query_args['order'] = 'DESC';
+     }
     $posts = new WP_Query( $query_args );
 
-    $sections = dfdl_get_section();
-    $section  = end($sections);
-    
+
+
     /**
      * Load related posts template part
      */
     ob_start();
         foreach( $posts->posts as $p ) {
+
+            /**
+             * Events fields
+             */
+            $startdate = get_post_meta( $p->ID, 'startdate', true);
+            if ( isset($startdate) ) {
+                $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+            }
+            set_query_var("sponsor", get_post_meta( $p->ID, 'sponsor', true));
+            set_query_var("dateline", get_post_meta( $p->ID, 'dateline', true));
+            set_query_var("timeline", get_post_meta( $p->ID, 'timeline', true));
+            set_query_var("show_date", $show_date);
+
             set_query_var("story", $p);
             set_query_var("term", dfdl_post_terms($p->ID));
             set_query_var("category", $section);
-            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            set_query_var("class", "related");
+            if ( "events" === $section ) {
+                get_template_part( 'includes/template-parts/content/insights', 'events-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+            
         }
     $cards = ob_get_clean();
 
