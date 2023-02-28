@@ -418,7 +418,7 @@ function dfdl_get_countries_tax(): array {
  * Return an array with section info
  * 
  * 1. solutions
- * 2. locations/country
+ * 2. locations/country/category
  */
 function dfdl_get_section(): array {
     
@@ -443,6 +443,9 @@ function dfdl_get_section(): array {
         if ( isset($pieces[1]) ) {
             $return[1] = $pieces[1];
         }
+        if ( isset($pieces[2]) ) {
+            $return[2] = $pieces[2];
+        }
     }
 
     return $return;
@@ -462,12 +465,12 @@ function dfdl_content_hub_category( int $post_id ): string {
         return $post_terms[0]->name;
     } else {
 
-        $videos = array("videos", "video-resources");
+        $videos = array("videos", "videos-resources");
 
         foreach( $post_terms as $p ) {
             // videos
             if ( in_array($p->slug, $videos) ) {
-                return "Video";
+                return "Videos";
             }
         }
        

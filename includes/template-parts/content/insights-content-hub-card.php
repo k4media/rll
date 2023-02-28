@@ -1,7 +1,7 @@
-<div class="card news">
+<div class="card news content-hub-card">
     <div class="meta">
         <div class="taxonomy">
-            <?php if ( isset($term) ) : ?>
+            <?php if ( isset($slug) ) : ?>
                 <span class="category"><?php echo $slug ?></span>
             <?php endif; ?>
         </div>

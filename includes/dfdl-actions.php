@@ -70,6 +70,8 @@ function dfdl_insights_swiper( array $args ): void {
          * 
          */
         $categories = array(89);
+    } else {
+        $categories = array($args['category']);
     }
     $query_args = array(
         'post_type'      => 'post',
@@ -139,7 +141,7 @@ function dfdl_content_hub_callout() {
      * Videos          = 99
      * Video Resources = 609
      */
-    $query_args['cat'] = array(99);
+    $query_args['cat'] = array(575,99,609);
 
     /**
      * Set query country
@@ -177,10 +179,11 @@ function dfdl_content_hub_callout() {
              * will need terms in future
              */
              $slug = dfdl_content_hub_category($post->ID);
+
             set_query_var("story", $post);
             set_query_var("term", $term);
             set_query_var("slug", $slug);
-            get_template_part( 'includes/template-parts/content/insights', 'content-card' );
+            get_template_part( 'includes/template-parts/content/insights', 'content-hub-card' );
 
         }
         $cards = ob_get_clean();
@@ -253,7 +256,16 @@ function dfdl_insights_callout( array $args ): void {
             $link_cat = $args['category'];
         }
         $term = get_term_by("slug", $link_cat, "category");
+
         $archive_link = get_term_link($term);
+        
+        /**
+         * Strip 'content-hub' from url
+         * This keeps url structure consistent
+         * insights/[category]/[country]
+         * */ 
+        $archive_link = str_replace("content-hub/", "", $archive_link);
+        
         if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
              $archive_link .= $sections[1] . "/";
         }
@@ -263,9 +275,21 @@ function dfdl_insights_callout( array $args ): void {
          */
         ob_start();
         foreach ( $posts->posts as $post ) {
-            /**
-             * will need terms in future
-             */
+            
+            $sponsor = get_post_meta( $post->ID, 'sponsor', true);
+            $dateline = get_post_meta( $post->ID, 'dateline', true);
+            $timeline = get_post_meta( $post->ID, 'timeline', true);
+            $startdate = get_post_meta( $post->ID, 'startdate', true);
+            if ( isset($startdate) ) {
+                $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+            }
+
+            set_query_var("sponsor", $sponsor);
+            set_query_var("dateline", $dateline);
+            set_query_var("timeline", $timeline);
+            set_query_var("show_date", $show_date);
+ 
+
             set_query_var("story", $post);
             set_query_var("term", $term);
             $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
@@ -848,22 +872,13 @@ function dfdl_solutions_country_nav() {
 add_action('dfdl_related_stories', 'dfdl_related_stories');
 function dfdl_related_stories(): void {
 
-    global $post;
+    $title = "Related Articles";
 
-    $title = "Related (placeholders -- not working)";
-
-    /*
-    $terms = wp_get_post_terms($post->ID, 'category');
-    foreach( $terms as $t ){
-        var_dump($t->name);
-    }
-    */
-    //var_dump($post->post_name);
-    //var_dump(wp_get_post_categories(get_the_ID()));
+    $categories = wp_get_post_categories(get_the_ID());
 
     $query_args = array(
         'post_type'      => 'post',
-        'category__in' => wp_get_post_categories(get_the_ID()),
+        'category__in'   => $categories,
         'post__not_in'   => array(get_the_ID()),
         'posts_per_page' => 4,
         'orderby'        => 'date',
@@ -873,16 +888,19 @@ function dfdl_related_stories(): void {
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
      );
-    //add_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
     $posts = new WP_Query( $query_args );
-    //remove_filter( 'posts_where', 'dfdl_search_related', 10, 2 );
 
+    $sections = dfdl_get_section();
+    $section  = end($sections);
+    
     /**
      * Load related posts template part
      */
     ob_start();
         foreach( $posts->posts as $p ) {
             set_query_var("story", $p);
+            set_query_var("term", dfdl_post_terms($p->ID));
+            set_query_var("category", $section);
             get_template_part( 'includes/template-parts/content/insights', 'news-card' );
         }
     $cards = ob_get_clean();

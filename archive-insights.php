@@ -6,9 +6,7 @@
  *
  */
 
-
 global $wp, $wp_query;  
-
 
 //var_dump($wp_query->query['dfdl_category']);
 //var_dump($wp_query->query['dfdl_country']);
@@ -81,6 +79,7 @@ get_header();
                     // pass data to template
 					set_query_var("story", $post );
 					set_query_var("term", $category);
+                    set_query_var("slug", dfdl_content_hub_category($post->ID));
 
                     // define template
 					$file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $category->slug . '-card.php';

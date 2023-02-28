@@ -1029,6 +1029,9 @@ article + #insights {
 	justify-content: space-between;
 	margin-bottom: 1em;
 }
+.posts .card .dateline {
+	margin-bottom: 1em;
+}
 .posts .card .category,
 .posts .card .subcategory {
 	color: var(--color-green);
@@ -1173,6 +1176,13 @@ article + #insights {
 	left: 0;
 	width: 100%;
 	height: 100%;
+}
+.event-details {
+	border-bottom: solid 1px var(--color-black);
+	border-top: solid 1px var(--color-black);
+	line-height: 1.4em;
+	margin: 1em 0 1em 0;
+	padding: 1em 0 1em 0;
 }
 
 @media print {

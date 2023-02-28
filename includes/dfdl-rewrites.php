@@ -64,6 +64,21 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
+
+
+    /** content hub */
+    add_rewrite_rule(
+        'insights/content-hub/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'index.php?pagename=dfdl_contenthub&dfdl_category=content-hub&dfdl_country=$matches[1]',
+        'top'
+    );
+    add_rewrite_rule(
+        'insights/content-hub/?$',
+        'index.php?pagename=dfdl_contenthub&dfdl_category=content-hub',
+        'top'
+    );
+
+
      /* insights/[country]/ */
 	add_rewrite_rule(
         'insights/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
@@ -90,19 +105,9 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
-}
 
-/**
- * Paginations rules for insights
- */
-//add_action( 'generate_rewrite_rules', 'dfdl_pagination_rules' );
-/*
-function dfdl_pagination_rules( $wp_rewrite ) {
-    $wp_rewrite->rules = array(
-        'insights/([^/]+)/page/?([0-9]{1,})/?$' => $wp_rewrite->index . '?pagename=dfdl_insights&paged=' . $wp_rewrite->preg_index( 2 ),
-        'insights/([^/]+)/?$' => $wp_rewrite->index . '?pagename=dfdl_insights'
-    ) + $wp_rewrite->rules;
-} */
+
+}
 
 /**
  * Template redirects
@@ -191,6 +196,19 @@ function dfdl_member_template_include($template) {
      */
 	if ( "dfdl_insights" == $query_vars['pagename'] ) {
         $page_template = get_stylesheet_directory() . '/archive-insights.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+
+    /**
+     * Content Hub 
+     * /insights/content-hub/
+     * /insights/content-hub/[country]/
+     */
+	if ( "dfdl_contenthub" == $query_vars['pagename'] ) {
+        $page_template = get_stylesheet_directory() . '/archive-content-hub.php' ;				
 		$wp_query->is_404 = false;
 		status_header('200');
 		require_once($page_template);
