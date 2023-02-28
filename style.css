@@ -1118,6 +1118,13 @@ article + #insights {
 	margin: 4em 0 4em 0;
 }
 
+/*
+.swiper.loading {
+	background: transparent url(assets/media/spinner.gif) no-repeat 50% 50%;
+}
+.swiper.loading .swiper-card {
+	display: none;
+} */
 .swiper-card {
 	margin: auto;
 	max-width: 600px;
@@ -1161,7 +1168,6 @@ article + #insights {
 	height: 0;
 }
 .video-container > iframe {
-
 	position: absolute;
 	top: 0;
 	left: 0;

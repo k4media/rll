@@ -176,7 +176,6 @@ function dfdl_content_hub_callout() {
             /**
              * will need terms in future
              */
-
              $slug = dfdl_content_hub_category($post->ID);
             set_query_var("story", $post);
             set_query_var("term", $term);

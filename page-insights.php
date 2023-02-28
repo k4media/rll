@@ -36,8 +36,11 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var swiper = new Swiper('.swiper', {
+    var myswiper = new Swiper('.swiper', {
         loop: true,
+        preloadImages: false,
+        lazy: true,
+        watchSlidesVisibility: true,
         navigation: {
             nextEl: '.swiper-next',
             prevEl: '.swiper-prev',
