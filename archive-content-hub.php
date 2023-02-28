@@ -32,7 +32,7 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
         <?php do_action("dfdl_insights_swiper", array('category' => 'articles') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'podcasts') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'web-classes') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'publications') ); ?>
+        <?php do_action("dfdl_insights_callout", array('category' => 'publications-resources') ); ?>
     </div></div>
 </section>
 <script>

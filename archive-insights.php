@@ -53,6 +53,7 @@ get_header();
 
 ?>
 
+! archive insights !
 <section id="insights" class="<?php echo esc_attr($category->slug) ?> archive callout silo">
 
 	<?php
@@ -80,6 +81,15 @@ get_header();
 					set_query_var("story", $post );
 					set_query_var("term", $category);
                     set_query_var("slug", dfdl_content_hub_category($post->ID));
+
+                    $startdate = get_post_meta( $post->ID, 'startdate', true);
+                    if ( isset($startdate) ) {
+                        $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                    }
+                    set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                    set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                    set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+                    set_query_var("show_date", $show_date);
 
                     // define template
 					$file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $category->slug . '-card.php';
