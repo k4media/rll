@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Author URL
+ */
+add_filter( 'author_link', 'dfdl_author_link', 10, 2 );
+function dfdl_author_link( $link, $user_id ) {  
+    $first = strtolower(get_user_meta($user_id, 'first_name', true));
+    $last  = strtolower(get_user_meta($user_id, 'last_name', true));
+    $link  = get_home_url('', 'teams/members/' . esc_attr($first) . '-' . esc_attr($last) . '/' . $user_id . '/');
+    return $link;              
+}
+
+/**
  * YouTube iframe wrapper div
  */
 add_filter('embed_oembed_html', 'dfdl_youtube_wrapper', 10, 4);
@@ -11,6 +22,9 @@ function dfdl_youtube_wrapper($html, $url, $attr, $post_id) {
     return $html;
 }
 
+/**
+ * Insights Archive Title
+ */
 function dfdl_filter_archive_insights_title() {
     global $wp_query;
     $category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
@@ -122,7 +136,7 @@ function dfdl_remove_category( $string, $type )  {
 }
 
 /**
- * Remove "Category:" from Archive pages
+ * Remove "Category:" from Archive page titles
  */
 add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
 
@@ -142,21 +156,3 @@ function dfdl_add_menu_link_class( $atts, $item, $args ) {
     }
     return $atts;
 }
-
-
-
-
-/*
-function dfdl_search_related($where, $wp_query){
-    global $wpdb;
-
-    if( $search_term = $wp_query->get( 's' )){
-        // using the esc_like() instead of other esc_sql()
-        $search_term = $wpdb->esc_like($search_term);
-        $search_term = ' \'%' . $search_term . '%\'';
-        $where .= ' AND ' . $wpdb->posts . '.post_title LIKE '.$search_term;
-    }
-
-    return $where;
-}
-*/
