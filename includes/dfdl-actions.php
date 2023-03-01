@@ -167,9 +167,11 @@ function dfdl_content_hub_callout() {
         $term = get_term_by("slug", "content-hub", "category");
         $archive_link = get_term_link($term);
 
-        var_dump($archive_link);
+        //var_dump($archive_link);
 
-        if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
+        if ( is_wp_error($archive_link) ) {
+            $archive_link = "#";
+        } elseif ( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
              $archive_link .= $sections[1] . "/";
         }
 
