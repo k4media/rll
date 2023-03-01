@@ -52,8 +52,6 @@ $the_query = new WP_Query( $query_args );
 get_header();
 
 ?>
-
-! archive insights !
 <section id="insights" class="<?php echo esc_attr($category->slug) ?> archive callout silo">
 
 	<?php
