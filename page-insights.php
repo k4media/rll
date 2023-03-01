@@ -3,6 +3,9 @@
  * Template for Insights landing page
  *
  */
+
+ // -- with new changes;
+
 get_header();
 
 // Swiper.js
