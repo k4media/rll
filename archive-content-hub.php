@@ -10,9 +10,6 @@ wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/
 wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
 ?>
-
-! archive content hub !
-
 <?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>

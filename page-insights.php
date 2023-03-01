@@ -31,7 +31,7 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
         <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
-        <?php do_action("dfdl_content_hub_callout"); ?>
+        <?php // do_action("dfdl_content_hub_callout"); ?>
     </div></div>
 </section>
 <script>
