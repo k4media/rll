@@ -901,12 +901,13 @@ function dfdl_related_stories(): void {
      }
     $posts = new WP_Query( $query_args );
 
-
-
     /**
      * Load related posts template part
      */
-    ob_start();
+
+     if ( $posts->post_count > 0 ) {
+
+        ob_start();
         foreach( $posts->posts as $p ) {
 
             /**
@@ -932,19 +933,23 @@ function dfdl_related_stories(): void {
             }
             
         }
-    $cards = ob_get_clean();
 
-    /**
-     * Load related posts template part
-     */
-     ob_start();
-        set_query_var("title", $title);
-        get_template_part( 'includes/template-parts/content/single', 'related-content' );
-    $template = ob_get_clean();
+        $cards = ob_get_clean();
 
-    $template = str_replace("{posts}", $cards, $template);
+        /**
+         * Load related posts template part
+         */
+        ob_start();
+            set_query_var("title", $title);
+            get_template_part( 'includes/template-parts/content/single', 'related-content' );
+        $template = ob_get_clean();
 
-    echo $template;
+        $template = str_replace("{posts}", $cards, $template);
+
+        echo $template;
+
+     }
+    
 
 }
 
