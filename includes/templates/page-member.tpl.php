@@ -3,50 +3,55 @@
  * The template for Team Members
  */
 
- global $wp;
+global $wp;
 
- get_header();
+get_header();
 
- $position  = "";
- $locations = array();
- $expertise = array();
- $solutions = array();
+$position  = "";
+$locations = array();
+$expertise = array();
+$solutions = array();
 
- $user = get_user_by('id', $GLOBALS['wp_query']->query_vars['dfdl_member']) ;
- $meta = get_user_meta($user->data->ID);
+$user = get_user_by('id', $GLOBALS['wp_query']->query_vars['dfdl_member']) ;
+$meta = get_user_meta($user->data->ID);
 
- // position
- if ( isset($meta['position'][0]) ) {
+// position
+if ( isset($meta['position'][0]) ) {
     $position = $meta['position'][0];
- }
+}
 
- // office location
- if ( array_key_exists('_dfdl_user_country', $meta) ) {
+// language
+if ( isset($meta['languages'][0]) ) {
+    $languages = $meta['languages'][0];
+}
+
+// office location
+if ( array_key_exists('_dfdl_user_country', $meta) ) {
     foreach( $meta['_dfdl_user_country'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $locations[] = $country->name;
-     }
- }
- 
-  // country expertise
-  if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
+    }
+}
+
+// country expertise
+if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
     foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $expertise[] = $country->name;
-     }
- } else {
+    }
+} else {
     $expertise[] = "Regional Expert";
- }
+}
 
- // solutions
- if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
+// solutions
+if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
         $solutions[] = $solution->name;
-     }
- } else {
+    }
+} else {
     $solutions[] = "General Law Expert";
- }
+}
 
 ?>
 
@@ -63,6 +68,9 @@
                 <?php if( is_array($locations) && count($locations) > 0 ) : ?>
                     <div class="location"><?php echo implode(", ", $locations) ?></div>
                  <?php endif; ?>
+                 <?php if( isset($languages) ) : ?>
+                     <div class="languages"><?php echo $languages ?></div> 
+                <?php endif; ?>
                  <?php /* if( $meta['description'] ) : ?>
                     <div class="bio"><?php echo $meta['description'][0] ?></div>
                  <?php endif; */ ?>

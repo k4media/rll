@@ -425,7 +425,8 @@ header.main {
 	margin-bottom: .5em;
 }
 .dfdl-single-member .position,
-.dfdl-single-member .location {
+.dfdl-single-member .location,
+.dfdl-single-member .languages {
 	color: var(--color-green-70);
 	font-size: var(--font-size-small);
 	line-height: 1.5em;
@@ -589,6 +590,9 @@ header.main {
 	color: var(--color-white);
     flex: 1 1 50%;
     line-height: 1.75em;
+}
+.member.text-feature .columns .rcol {
+	margin-left: 1em;
 }
 .member.text-feature .columns h1,
 .member.text-feature .columns h2,
