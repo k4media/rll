@@ -7,7 +7,7 @@
       *
       * Class based on section and subsection
       */
-      $block_classes = array( $sections[0] );
+     $block_classes = array( $sections[0] );
      if ( "locations" === $sections[0] && isset($sections[1]) ) {
           $block_classes[] = "country ";
           $block_classes[] = $sections[1];
