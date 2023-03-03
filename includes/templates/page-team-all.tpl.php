@@ -37,9 +37,9 @@
 
 <?php
     /**
-     * Show reusable "contact" block, ID 700
+     * Show reusable "contact" block, ID 50588
      */
-     do_action("dfdl_reusable_block", 700);
+     do_action("dfdl_reusable_block", 50588);
 ?>
 
 <?php get_footer();

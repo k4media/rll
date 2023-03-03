@@ -960,7 +960,7 @@ function dfdl_related_stories(): void {
  * Get resuable block by ID
  */
 add_action( 'dfdl_reusable_block', 'dfdl_reusable_block', 10, 1);
-function dfdl_reusable_block( int $id ) {
+function dfdl_reusable_block( int $id ): void {
     if ( ! isset($id) ) 
         return;
     $block = get_post( $id );
