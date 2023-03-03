@@ -16,7 +16,7 @@
      <div class="country-contacts silo">
           <div class="address">
                <h3>Address</h3>
-               <?php echo $address ?>
+               <?php echo nl2br($address) ?>
           </div>
           <div class="contact">
                <h3>Contact</h3>

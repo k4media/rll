@@ -291,6 +291,7 @@ function dfdl_get_award_years( string $return="" ): array {
 * @return array of IDs
 */
 function dfdl_get_solutions( string $return="" ): array {
+
     $solutions = get_page_by_path( 'solutions' );
     $args = array(
         'post_type'      => 'page',

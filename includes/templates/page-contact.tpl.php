@@ -17,10 +17,10 @@ $key = "contact-" . $country;
 $K4 = new K4;
 $K4->fragment_cache( $key, function() { 
 
- $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
- $contacts = get_field("countries", "options");
+$country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
+$contacts = get_field("countries", "options");
 
- if ( $contacts[$country]["contact"] ) {
+if ( $contacts[$country]["contact"] ) {
     $user = get_user_by("id", $contacts[$country]["contact"]);
     $meta = get_user_meta($contacts[$country]["contact"]);
     $locations = array();

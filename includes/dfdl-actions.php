@@ -1037,7 +1037,7 @@ function footer_nav() {
 
 add_action('newsletter_signup', 'newsletter_signup');
 function newsletter_signup() {
-    get_template_part( 'includes/template-parts/footer/newsletter-signup' );
+    get_template_part( 'includes/template-parts/footer/newsletter', 'signup' );
 }
 
 add_action('copyright_notice', 'copyright_notice');

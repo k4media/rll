@@ -1,10 +1,10 @@
 <div class="contact-form">
     <form id="dfdl-contact" method="post"action="">
     <?php
-        global $post;
+  
         $sections = dfdl_get_section();
         $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
-        wp_nonce_field( 'comment-form_'.$post->ID );
+        wp_nonce_field( 'comment-form_' . $country );
     ?>
     <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
     <div class="details">
