@@ -4,14 +4,33 @@ add_action('init', 'dfdl_migrate');
 function dfdl_migrate() {
     if ( isset($_GET['migration']) && "run" === $_GET['migration'] ) {
 
-        //echo "All functions commented out. Check the code, bro.";
-        //dfdl_migration_update_countries();
+
+        //dfdl_category_replace();
+
+        /**
+         * Set dfdl_countries based on post title
+         */
+        dfdl_migration_update_countries();
+
+        /**
+         * Update dfdl_solutions based on seach of solution keywords
+         */
         //dfdl_migration_update_categories();
+        
+        /**
+         * Add dfdl_solutions, dfdl_countries tax based on keywords
+         * Ex: thai, bangkok, dhaka, etc
+         */
         //dfdl_migration_update_keywords();
-        dfdl_migration_category_to_solution();
+       
 
-        //dfdl_migration_delete_categories();
+        //dfdl_migration_category_to_solution();
 
+        /**
+         * Add dfdl_solutions, dfdl_countries tax based on keywords
+         * Ex: thai, bangkok, dhaka, etc
+         */
+        // dfdl_migration_delete_categories();
         exit;
 
     }
@@ -28,57 +47,6 @@ function dfdl_migrate() {
 }
 
 
-// do this last
-function dfdl_migration_delete_categories() {
-    
-    $good_categories = array(
-        6,    // Resources
-        1261, // Covid-19
-        1299, // Banking & Finance
-        1279, // Cambodia covid-19
-        1295, // Employment & Labour
-        1238, // Indonesia Covid
-        1285, // Laos Covid
-        1301, // Mergers & Acquisitions
-        1287, // Myanmar covid
-        1289, // Phils covid
-        1303, // Regional ??
-        1297, // Taxation
-        1291, // Thai covid
-        1261, // Covid
-        1293, // VN Covid
-        36,   // Legal and Tax Updates
-        1311, // Legal, Tax Bangladesh
-        1313, // Legal KH
-        1315, // Legal IN
-        1317, // Legal Laos
-        1319, // Legal Myanmar
-        1321, // Legal Phils
-        1323, // Legal Thai
-        1325, // Leagal VN
-        33,   // News
-        35,   // Past Events
-        1336, // Podcasts
-        47,   // Publications
-        537,  // Asean Path
-        78,   // Brochures
-        535,  // Investment Guides
-        534,  // Other Publications
-        536,  // Tax Pocket Guides
-        34,   // Upcoming Events
-        1275 // Videos
-    );
-
-    $categories = get_categories();
-
-    foreach( $categories as $c ) {
-        if ( ! in_array($c->term_id, $good_categories) ) {
-            echo $c->name . " is not a good category. delete it<br>";
-            wp_delete_category($c->term_id);
-        }
-    }
-
-}
 
 
 
@@ -256,6 +224,66 @@ function dfdl_migration_update_keywords() {
     echo "<p>done!</p>";
 
 }
+
+
+/**
+ * Update dfdl_solutions based on seach of solution keywords
+ */
+function dfdl_category_replace() {  
+
+    $counter = 0;
+
+    $keywords = array( "covid");
+
+    $categories = array(47);
+
+    foreach ( $categories as $category ) {
+
+        $query_args = array(
+            'post_type'      => 'post',
+            'post_status'    => array('publish', 'pending', 'draft', 'future', 'private'),
+            'cat'              => $category,
+            'posts_per_page' => -1,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+            'no_found_rows'          => true,
+            'ignore_sticky_posts'    => true,
+            'update_post_meta_cache' => false, 
+            'update_post_term_cache' => false,
+            );
+        
+        $posts = new WP_Query( $query_args );
+    
+        echo "<h3>Processing posts for keyword: " . $word . "</h3>";
+
+        if ( $posts->post_count > 0 ) {
+
+            foreach ( $posts->posts as $post ) {
+    
+                echo "<p>" . $counter . " | " . $post->post_title . " (" . $post->ID . ")</p>";
+    
+                /**
+                 * Set category
+                 */
+                // wp_set_post_terms($post->ID, 723, 'category');
+
+                //wp_set_post_terms($post->ID, 16, 'dfdl_solutions');
+
+                $counter++;
+    
+            }
+    
+        } else {
+            echo "<p>no posts found for " . $word . "</p>";
+        }
+
+    }
+    
+    echo "<p>done!</p>";
+
+}
+
+
 
 /**
  * Update dfdl_solutions based on seach of solution keywords
@@ -509,4 +537,62 @@ function convert_smart_quotes(string $string): string{
 
      return $str;
 
+}
+
+
+
+
+
+/** EXTRA */
+
+
+// do this last
+// tried it. it kills everything. 
+// need to go through by hand
+function dfdl_migration_delete_categories() {
+
+    $good_categories = array(
+        6,    // Resources
+        1261, // Covid-19
+        1299, // Banking & Finance
+        1279, // Cambodia covid-19
+        1295, // Employment & Labour
+        1238, // Indonesia Covid
+        1285, // Laos Covid
+        1301, // Mergers & Acquisitions
+        1287, // Myanmar covid
+        1289, // Phils covid
+        1303, // Regional ??
+        1297, // Taxation
+        1291, // Thai covid
+        1261, // Covid
+        1293, // VN Covid
+        36,   // Legal and Tax Updates
+        1311, // Legal, Tax Bangladesh
+        1313, // Legal KH
+        1315, // Legal IN
+        1317, // Legal Laos
+        1319, // Legal Myanmar
+        1321, // Legal Phils
+        1323, // Legal Thai
+        1325, // Leagal VN
+        33,   // News
+        35,   // Past Events
+        1336, // Podcasts
+        47,   // Publications
+        537,  // Asean Path
+        78,   // Brochures
+        535,  // Investment Guides
+        534,  // Other Publications
+        536,  // Tax Pocket Guides
+        34,   // Upcoming Events
+        1275 // Videos
+    );
+    $categories = get_categories();
+    foreach( $categories as $c ) {
+        if ( ! in_array($c->term_id, $good_categories) ) {
+            //echo $c->name . " is not a good category. delete it<br>";
+            // wp_delete_category($c->term_id);
+        }
+    }
 }

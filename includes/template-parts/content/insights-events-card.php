@@ -1,25 +1,8 @@
-<?php
-
-    /**
-	 * Set subcategory
-	 */
-    $post_terms = wp_get_post_terms($story->ID, 'category');
-
-    //var_dump($term);
-    /*
-    foreach( $post_terms as $t ) {
-        if ( $term->term_id === $t->parent ) {
-            $subcategory = $t->name;
-        }
-    }
-    */
-
-?>
 <div class="card news">
     <div class="meta">
-        <div class="taxonomy">
-            <?php echo dfdl_post_terms($story->ID); ?>
-        </div>
+        <?php if ( isset($term) ) : ?>
+            <span class="category"><?php echo $term->name ?></span>
+        <?php endif; ?>
         <?php if (isset($show_date)) : ?>
             <div class="date"><?php echo $show_date ; ?></div>
         <?php endif; ?>

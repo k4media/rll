@@ -486,45 +486,60 @@ function dfdl_content_hub_category( int $post_id ): string {
  * 
  * Return html for post category and sub-category
  */
-function dfdl_post_terms( int $post_id ): string {
+function dfdl_post_terms( int $post_id, array $args=array() ) {
 
-    $return = "";
+    $categories = array();
 
     /**
-     * Define some "main" categories, since there are
-     * many 'old' categories still lingering from
-     * the old site taxonomy.
+     * Should be only 1 term
      */
-    $main_categories = array("news", "events", "legal-and-tax-updates", "legal-and-tax", "articles");
-    $post_terms = wp_get_post_terms($post_id, 'category');
+    $term = wp_get_post_terms($post_id, 'category');
+    $ancestors = get_ancestors($term[0]->term_id, 'category');
+    if ( count($ancestors) > 0 ) {
+        foreach( $ancestors as $a ) { 
+            $cat = get_term_by('id', $a, 'category');
+            $categories[] = $cat->name;
+        }
+    } else {
+        $categories[] = $term[0]->name;
+    }
+    return $categories;
 
-    $parent_cats = array();
+    /*
+    $parent_cat = array();
     $sub_cats = array();
     foreach( $post_terms as $t ) {
         if ( 0 === $t->parent ) {
-            $parent_cats[] = $t->slug;
+            $parent = get_term_by('slug', $t->parent, 'category');
+            if ( "content-hub" !== $parent->slug ) {
+                $parent_cat = $t;
+            }
+            
         } else {
             $sub_cats[] = $t->slug;
         }
     }
 
-    $parent_category_slug = array_intersect($parent_cats, $main_categories);
+    if ( ! empty($parent_cat) ) {
+        $parent_category = get_term_by('slug', $parent_cat->slug, 'category');
 
-    if ( ! empty($parent_category_slug) ) {
-        $parent_category = get_term_by('slug', $parent_category_slug[0], 'category');
-        $return .= '<span class="category">' . $parent_category->name . '</span>';
+        if ( isset($args['type']) && "category" === $args['type'])
+            return $parent_category;
+
+        
+        //$return .= '<span class="category">' . $parent_category->name . '</span>';
         if( count($sub_cats) > 0 ) {
             foreach( $sub_cats as $s ) {
                 $sub_term = get_term_by('slug', $s, 'category');
                 if ( $parent_category->term_id === $sub_term->parent ) {
-                    $return .= '<span class="separator">|</span><span class="subcategory">' . $sub_term->name . '</span>';
+                    //$return .= '<span class="separator">|</span><span class="subcategory">' . $sub_term->name . '</span>';
+                    return $sub_term->name;
                 }
             }
         }
+        
     }
-    
-    return $return;
-    
+    */
 }
 
 /**

@@ -1041,6 +1041,7 @@ article + #insights {
 .posts .card .category,
 .posts .card .subcategory {
 	color: var(--color-green);
+	font-size: var(--font-size-small);
 	text-transform: capitalize;
 }
 .posts .card .date {

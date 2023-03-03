@@ -90,7 +90,7 @@ function dfdl_insights_swiper( array $args ): void {
     if ( ! empty( $posts->posts ) ) {
 
         /**
-         * Load related posts template part
+         * Load swiper template part
          */
         ob_start();
         foreach( $posts->posts as $p ) {
@@ -136,12 +136,14 @@ function dfdl_content_hub_callout() {
     );
 
     /**
-     * Podcasts        = 575
-     * Publications    = 
-     * Videos          = 99
-     * Video Resources = 609
+     * Podcasts        = 839
+     * Publications    = 744
+     * Brochures       = 761
+     * Invest Guides   = 705
+     * Tax Guides      = 686
+     * Videos          = 717
      */
-    $query_args['cat'] = array(575,99,609);
+    $query_args['cat'] = array(839,744,761,705,686,717);
 
     /**
      * Set query country
@@ -177,14 +179,14 @@ function dfdl_content_hub_callout() {
          */
         ob_start();
         foreach ( $posts->posts as $post ) {
+
             /**
              * will need terms in future
              */
-             $slug = dfdl_content_hub_category($post->ID);
+             // $slug = dfdl_content_hub_category($post->ID);
 
             set_query_var("story", $post);
-            set_query_var("term", $term);
-            set_query_var("slug", $slug);
+            set_query_var("categories", dfdl_post_terms($post->ID));
             get_template_part( 'includes/template-parts/content/insights', 'content-hub-card' );
 
         }
@@ -194,6 +196,7 @@ function dfdl_content_hub_callout() {
          * Insert cards into template
          */
         ob_start();
+            set_query_var("term", $term);
             get_template_part( 'includes/template-parts/content/insights', 'callout' );
         $template = ob_get_clean();
         $output   = str_replace("{posts}", $cards, $template);
@@ -277,19 +280,17 @@ function dfdl_insights_callout( array $args ): void {
          */
         ob_start();
         foreach ( $posts->posts as $post ) {
-            
-            //$sponsor = get_post_meta( $post->ID, 'sponsor', true);
-            //$dateline = get_post_meta( $post->ID, 'dateline', true);
-            //$timeline = get_post_meta( $post->ID, 'timeline', true);
-            $startdate = get_post_meta( $post->ID, 'startdate', true);
-            if ( isset($startdate) ) {
-                $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+
+            if ( "events" === $term->slug ) {
+                $startdate = get_post_meta( $post->ID, 'startdate', true);
+                if ( isset($startdate) ) {
+                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                    set_query_var("show_date", $show_date);
+                }
+                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
             }
-            set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
-            set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
-            set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
-            set_query_var("show_date", $show_date);
- 
             set_query_var("story", $post);
             set_query_var("term", $term);
             $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
@@ -925,8 +926,8 @@ function dfdl_related_stories(): void {
             set_query_var("show_date", $show_date);
 
             set_query_var("story", $p);
-            set_query_var("term", dfdl_post_terms($p->ID));
-            set_query_var("category", $section);
+            set_query_var("term", dfdl_post_terms($p->ID, array('type'=>'category')));
+            set_query_var("category", dfdl_post_terms($p->ID, array('type'=>'subcategory')));
             set_query_var("class", "related");
             if ( "events" === $section ) {
                 get_template_part( 'includes/template-parts/content/insights', 'events-card' );

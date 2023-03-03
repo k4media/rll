@@ -5,7 +5,7 @@
                 <span class="category"><?php echo $term->name ?></span>
             <?php endif; ?>
             <?php if ( isset($category) ) : ?>
-                <span class="subcategory"><?php echo $category ?></span>
+                <span class="subcategory"><?php // echo $category ?></span>
             <?php endif; ?>
         </div>
         <div class="date">
