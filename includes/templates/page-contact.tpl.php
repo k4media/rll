@@ -60,11 +60,13 @@ if ( $contacts[$country]["contact"] ) {
         <div class="team-lead-stage callout">
             <div class="team-lead narrow">
                 <div class="lead-team-member dfdl-single-member">
-                    <div class="avatar"><img src="<?php echo get_avatar_url($contacts[$country]["contact"], array('size' => 320)) ?>"></div>
+                    <div class="avatar">
+                        <a href="<?php echo get_author_posts_url($contacts[$country]["contact"]) ?>"><img src="<?php echo get_avatar_url($contacts[$country]["contact"], array('size' => 320)) ?>"></a>
+                    </div>
                     <div class="details-stage">
                         <div class="member">
                                 <div class="slug">Regional Key Contact</div>
-                                <div class="name"><?php echo $user->display_name ?></div>
+                                <div class="name"><a href="<?php echo get_author_posts_url($contacts[$country]["contact"]) ?>"><?php echo $user->display_name ?></a></div>
                                 <?php if( isset($meta['position'][0]) ) : ?>
                                     <div class="position"><?php echo $meta['position'][0] ?></div> 
                                 <?php endif; ?>

@@ -29,7 +29,7 @@
           <h2><?php echo $title ?></h2>
           <h3><?php echo $subtitle ?></h3>
           <div class="lead-team-member dfdl-single-member">
-               <div class="avatar"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></div>
+               <div class="avatar"><a href="<?php echo get_the_author_link($user->ID) ?>"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></a></div>
                <div class="details-stage">
                     <div class="member">
                          <div class="slug">Regional Key Contact</div>
