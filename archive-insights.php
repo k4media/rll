@@ -1,9 +1,6 @@
 <?php
 /**
- * The template for displaying archive pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
+ * The template for displaying Insight Archive pages
  */
 
 global $wp, $wp_query;  
@@ -13,11 +10,11 @@ global $wp, $wp_query;
 //var_dump($wp_query->query['page'] );
 
 /**
- * Get category and country from URL
+ * Get country, category
  */
-$page_title = "";
 $country    = "";
 $category   = "";
+$page_title = "";
 
 if ( isset($wp_query->query['dfdl_country']) ) {
     $country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
@@ -28,11 +25,13 @@ if ( isset($wp_query->query['dfdl_category']) ) {
     $page_title .= " " . $category->name;
 }
 
-// filter page title
+/**
+ * Filter html title
+ */ 
 add_filter( 'pre_get_document_title', 'dfdl_filter_archive_insights_title' );
 
 /**
- * Set up custom query args
+ * Custom query args
  */
 $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
 $query_args = array(
@@ -44,19 +43,35 @@ $query_args = array(
     'order'          => 'DESC'
 );
 if ( isset($wp_query->query['dfdl_category']) ) {
-    $query_args['category_name'] = sanitize_text_field($wp_query->query['dfdl_category']);
+    $query_args['category_name'] = $wp_query->query['dfdl_category'];
 }
 if ( isset($wp_query->query['dfdl_country']) ) {
     $query_args['tax_query'] = array(
         array(
             'taxonomy' => 'dfdl_countries',
             'field'    => 'slug',
-            'terms'    => sanitize_text_field($wp_query->query['dfdl_country']),
+            'terms'    => $wp_query->query['dfdl_country'],
         )
     );
 }
 
+/**
+ * Date query: limit results to last 2 years
+ */
+$limit = array(
+    'year'  => date("Y") - 2,
+    'month' => date("m"),
+    'day'   => date("d")
+);
+$query_args['date_query'] = array(
+    array(
+        'after' => $limit
+    )
+);
+
 $the_query = new WP_Query( $query_args );
+
+$post_class = ( $the_query->have_posts() ) ? "" : "no-results" ;
 
 get_header();
 
@@ -74,7 +89,7 @@ get_header();
 		<h2 class="page-title"><?php echo $page_title ?></h2>
 	</header><!-- .page-header -->
 
-	<div class="posts">
+	<div class="posts <?php echo $post_class ?>" >
 		<?php if ( $the_query->have_posts() ) : ?>
 			<?php while ( $the_query->have_posts() ) : ?>
 				<?php

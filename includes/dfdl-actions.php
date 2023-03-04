@@ -51,6 +51,32 @@ function dfdl_archive_query($query) {
 */
 
 /**
+ * Archive date query filter
+ */
+add_action( 'pre_get_posts', 'exclude_single_posts_home' );
+function exclude_single_posts_home($query) {
+
+	if ( ! is_admin() && is_archive() && $query->is_main_query() ) {
+
+        /**
+         * Date query: limit results to last 2 years
+         */
+        $limit = array(
+            'year'  => date("Y") - 2,
+            'month' => date("m"),
+            'day'   => date("d")
+        );
+        $query->set( 'date_query', array(
+            array(
+                'after' => $limit
+            )
+        ));
+
+	}
+}
+
+
+/**
  * Insights Swiper
  */
 add_action('dfdl_insights_swiper', 'dfdl_insights_swiper');
@@ -84,7 +110,22 @@ function dfdl_insights_swiper( array $args ): void {
         'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
-     );
+    );
+
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
+
     $posts = new WP_Query( $query_args );
     
     if ( ! empty( $posts->posts ) ) {
@@ -158,6 +199,20 @@ function dfdl_content_hub_callout() {
             )
         );
     }
+
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
 
     $posts = new WP_Query( $query_args );
 
@@ -245,14 +300,28 @@ function dfdl_insights_callout( array $args ): void {
     );
 
     if ( isset($wp_query->query['dfdl_country']) ) {
-        $query_args['tax_query'] = array(
-            array(
+        $query_args['tax_query'][] = array(
+            
                 'taxonomy' => 'dfdl_countries',
                 'field'    => 'slug',
                 'terms'    => sanitize_text_field($wp_query->query['dfdl_country'])
-            )
+            
         );
     }
+
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
 
     $posts = new WP_Query( $query_args );
 
@@ -275,7 +344,7 @@ function dfdl_insights_callout( array $args ): void {
          * Strip 'content-hub' from url
          * This keeps url structure consistent
          * insights/[category]/[country]
-         * */ 
+         */ 
         $archive_link = str_replace("content-hub/", "", $archive_link);
 
         /**
@@ -858,17 +927,14 @@ function dfdl_solutions_country_nav() {
             }
         } elseif ( "insights" === $section ) {
 
-            //var_dump(count($pieces));
-
             if ( count($pieces) > 1 ) {
                 $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
 
             }
-                //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
+            //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
             //} else {
                 // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
             //}
-            
             //$output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
 
         } else {
@@ -896,13 +962,18 @@ function dfdl_related_stories(): void {
     $title = "Related Articles";
 
     $sections = dfdl_get_section();
-    $section  = end($sections);
     if ( in_array("events", $sections) ) {
         $section = "events";
+    } else if( 3 === count($sections) ) {
+        $section = $sections[1];
+        if ( "content-hub" === $section ) {
+            $section = $sections[2];
+        }
     }
 
-    $categories = wp_get_post_categories(get_the_ID());
+    $term = get_term_by("slug", $section, "category");
 
+    $categories = wp_get_post_categories(get_the_ID());
     $query_args = array(
         'post_type'      => 'post',
         'category__in'   => $categories,
@@ -917,17 +988,43 @@ function dfdl_related_stories(): void {
     );
 
     if ( "events" === $section) {
-        $query_args['meta_key'] = 'startdate';
+        $query_args['meta_key']  = 'startdate';
         $query_args['meta_type'] = 'date';
-        $query_args['orderby'] = 'meta_value_num';
-        $query_args['order'] = 'DESC';
-     }
+        $query_args['orderby']   = 'meta_value_num';
+        $query_args['order']     = 'DESC';
+    }
+
+    $dfdl_country = get_the_terms(get_the_ID(), "dfdl_countries");
+
+    if (isset($dfdl_country) && false !== $dfdl_country ) {
+        $query_args['tax_query'] = array(
+            array(
+                'taxonomy' => 'dfdl_countries',
+                'field'    => 'slug',
+                'terms'    => $dfdl_country[0]->slug
+            )
+        );
+    }
+    
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
+
     $posts = new WP_Query( $query_args );
 
     /**
      * Load related posts template part
      */
-
      if ( $posts->post_count > 0 ) {
 
         ob_start();
@@ -946,9 +1043,11 @@ function dfdl_related_stories(): void {
             set_query_var("show_date", $show_date);
 
             set_query_var("story", $p);
-            set_query_var("term", dfdl_post_terms($p->ID, array('type'=>'category')));
+            set_query_var("term", $term);
             set_query_var("category", dfdl_post_terms($p->ID, array('type'=>'subcategory')));
             set_query_var("class", "related");
+
+
             if ( "events" === $section ) {
                 get_template_part( 'includes/template-parts/content/insights', 'events-card' );
             } else {

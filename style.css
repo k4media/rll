@@ -127,9 +127,11 @@ nav ul li {
 	cursor: pointer;
 	width: 18px;
 }
-.button {
+.button,
+.entry-content input[type="submit"] {
 	border: solid 1px;
 	border-radius: var(--setting-border-radius);
+	cursor: pointer;
 	display: inline-block;
 	font-size: 1em;
 	font-weight: 700;
@@ -140,7 +142,8 @@ nav ul li {
 	border: solid 1px var(--color-green);
 	color: var(--color-green);
 }
-.button.green.solid {
+.button.green.solid,
+.entry-content input[type="submit"] {
 	background-color: var(--color-green);
 	color: var(--color-white);
 }
@@ -643,7 +646,8 @@ header.main {
 	opacity: 1;
 	transition: all .5s;
 }
-#results_stage.no-results > div {
+#results_stage.no-results > div,
+#insights .posts.no-results {
 	columns: 1;
 	display: block;
 	text-align: center;
@@ -885,9 +889,8 @@ input[type=checkbox] {
 	font-family: var(--setting-body-font);
 	margin: 2em 0 .5em 1em;
 }
-
-
 .contact-form input[type=text],
+.entry-content input[name="s"],
 .contact-form input[type=email] {
 	display: block;
 	border: solid 1px var(--color-whisper);
@@ -897,8 +900,12 @@ input[type=checkbox] {
 	position: relative;
 	width: 100%;
 }
-
-
+.entry-content input[name="s"] {
+	display: inline;
+	font-size: var(--font-size-large);
+	margin: auto;
+	max-width: 24em;
+}
 input {
 	font-family: var(--setting-body-font);
 }
@@ -1214,6 +1221,9 @@ article + #insights {
 	line-height: 1.4em;
 	margin: 1em 0 1em 0;
 	padding: 1em 0 1em 0;
+}
+.entry-content input[name="s"]{
+
 }
 
 @media print {

@@ -226,40 +226,44 @@ function dfdl_get_insights_years() {
         $loop = get_posts( 'numberposts=1&category=' . $category . '&order=ASC' );
     }
     
-    $oldest_post_date = $loop[0]->post_date; 
+    if ( isset($loop[0]->ID) ) {
 
-    if ( isset($oldest_post_date) ) {
+        $oldest_post_date = $loop[0]->post_date;
 
-        $current_year = intval(date("Y"));
-        $pieces       = explode("-", $oldest_post_date);
-        $oldest_year  = intval($pieces[0]);
-        
-        if ( $current_year - 3 > $oldest_year ) {
-            $oldest_year = $current_year - 3;
-            $truncate = true;
+        if ( isset($oldest_post_date) ) {
+    
+            $current_year = intval(date("Y"));
+            $pieces       = explode("-", $oldest_post_date);
+            $oldest_year  = intval($pieces[0]);
+            
+            if ( $current_year - 3 > $oldest_year ) {
+                $oldest_year = $current_year - 3;
+                $truncate = true;
+            }
+    
+            $options = array();
+    
+            for ( $i = $current_year ; $i >= $oldest_year ; $i-- ) {
+                $obj = (object)[];
+                $obj->term_id = $i;
+                $obj->name = $i;
+                $obj->slug = $i;
+                $options[] = $obj;
+            }
+    
+            if ( true === $truncate ) {
+                $obj = (object)[];
+                $obj->term_id = 0;
+                $obj->name = 'Older';
+                $obj->slug = 'older';
+                $options[] = $obj;
+            }
+    
+            return $options;
+    
         }
-
-        $options = array();
-
-        for ( $i = $current_year ; $i >= $oldest_year ; $i-- ) {
-            $obj = (object)[];
-            $obj->term_id = $i;
-            $obj->name = $i;
-            $obj->slug = $i;
-            $options[] = $obj;
-        }
-
-        if ( true === $truncate ) {
-            $obj = (object)[];
-            $obj->term_id = 0;
-            $obj->name = 'Older';
-            $obj->slug = 'older';
-            $options[] = $obj;
-        }
-
-        return $options;
-
     }
+    
     
 }
 
@@ -492,24 +496,63 @@ function dfdl_insights_back_link(): string {
      * Try DFDL Category first
      */
     if ( isset($wp_query->query['dfdl_category']) ) {
-        return get_term_link($wp_query->query['dfdl_category'], "category");
+        $link = get_term_link($wp_query->query['dfdl_category'], "category");
+        /**
+         * Keep url structure consistent
+         * insights/[category]/[country]
+         */ 
+        $link = str_replace("content-hub/", "", $link);
+        //if ( isset($wp_query->query['dfdl_country']) ) {
+            //$link .= esc_attr($wp_query->query['dfdl_country']) . "/";
+        //}
+        return $link;
     }
     
     /**
      * Grab cat from sections
      */
-
     $sections = dfdl_get_section();
+
     if ( 2 === count($sections) ) {
         $link = get_home_url(null, "/insights/");
     } elseif ( 3 === count($sections) ) {
-        $link = get_term_link($sections[2], "category");
+        $link = get_term_link($sections[1], "category");
     } else {
         $link = "#";
     }
 
+   
+    if ( is_wp_error($link ) ) {
+        $link = get_home_url(null, "/insights/");
+    } else {
+        /**
+         * Keep url structure consistent
+         * insights/[category]/[country]
+        */ 
+        $link = str_replace("content-hub/", "", $link);
+    }
+
+    //if ( isset($wp_query->query['dfdl_country']) ) {
+        //$link .= esc_attr($wp_query->query['dfdl_country']) . "/";
+    //}
+
     return $link;
 
+}
+
+/**
+ * DFDL Permalink
+ * 
+ * Strip "content-hub" from link urls
+ */
+function dfdl_get_permalink( int $post_id ): string {
+    $link = get_permalink($post_id);
+    /**
+     * Keep url structure consistent
+     * insights/[category]/[country]
+     */ 
+    $link = str_replace("content-hub/", "", $link);
+    return $link;
 }
 
 /**
@@ -575,9 +618,7 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
 
 /**
  * Get Block Data
- * 
  * Get block data from page
- * 
  */
 function get_block_data($post, $block_name = 'core/heading', $field_name = "" ): string{
 	$content = "";

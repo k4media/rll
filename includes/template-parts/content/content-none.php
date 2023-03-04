@@ -4,22 +4,21 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package WordPress
- * @subpackage Twenty_Twenty_One
- * @since Twenty Twenty-One 1.0
  */
 
 ?>
 
+
 <section class="no-results not-found">
-	<header class="page-header alignwide">
+
+	<header class="page-header">
 		<?php if ( is_search() ) : ?>
 
 			<h1 class="page-title">
 				<?php
 				printf(
 					/* translators: %s: Search term. */
-					esc_html__( 'Results for "%s"', 'twentytwentyone' ),
+					esc_html__( 'Results for "%s"', 'dfdl' ),
 					'<span class="page-description search-term">' . esc_html( get_search_query() ) . '</span>'
 				);
 				?>
@@ -27,13 +26,12 @@
 
 		<?php else : ?>
 
-			<h1 class="page-title"><?php esc_html_e( 'Nothing here', 'twentytwentyone' ); ?></h1>
+			<h1 class="page-title"><?php esc_html_e( 'Nothing here', 'dfdl' ); ?></h1>
 
 		<?php endif; ?>
 	</header><!-- .page-header -->
 
-	<div class="page-content default-max-width">
-
+	<div class="entry-content">
 		<?php if ( is_home() && current_user_can( 'publish_posts' ) ) : ?>
 
 			<?php
@@ -62,5 +60,7 @@
 			<?php get_search_form(); ?>
 
 		<?php endif; ?>
-	</div><!-- .page-content -->
+	</div><!-- .entry-content -->
+
 </section><!-- .no-results -->
+
