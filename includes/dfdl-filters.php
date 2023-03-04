@@ -131,6 +131,15 @@ function dfdl_author_callout( string $content )  {
 }   
 
 /**
+ * Disable Gutenberg for dfdl_contact_forms CPT
+ */
+add_filter('use_block_editor_for_post_type', 'dfdl_disable_gutenberg_for_contact_forms', 10, 2);
+function dfdl_disable_gutenberg_for_contact_forms($current_status, $post_type) {
+    if ($post_type === 'dfdl_contact_forms') return false;
+    return $current_status;
+}
+
+/**
  * Remove "category" from Archive urls
  */
 add_filter( 'user_trailingslashit', 'dfdl_remove_category', 100, 2);

@@ -4,6 +4,10 @@
  * Process Contact Form
  */
 
+/**
+ * Page Section & Country
+ * Used to create and validate nonce
+ */
 $sections = dfdl_get_section();
 $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
 
@@ -24,11 +28,14 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     $elements['company']   = $_POST['company'];
     $elements['position']  = $_POST['position'];
     $elements['message']   = $_POST['message'];
-
-    /** sanitize input */
+    
+    /** Sanitize input */
     $clean_elements = array_map('sanitize_text_field', $elements);
 
-    /** validate input */
+    /** Sanitize Solutions */
+    $clean_solutions = array_map('intval', $_POST['solutions']);
+
+    /** Validate input */
     $error_messages = array();
     foreach( $clean_elements as $key => $value ) {
         if ( "" === $value ) {
@@ -36,14 +43,36 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         }
     }
 
-    /** sanitize email */
+    /** Sanitize email */
     if (! filter_var($clean_elements['email'], FILTER_VALIDATE_EMAIL)) {
         $error_messages['email'] = true;
     }
 
     if ( count($error_messages) === 0 ) {
 
-        // insert into cpt
+        $nice_date = wp_date("M d, Y, H:i:s");
+
+        $args = array(
+            'post_title'  => $clean_elements['firstname'] . " " . $clean_elements['lastname'] . " | " . $nice_date,
+            'post_type'   => 'dfdl_contact_forms',
+            'post_status' => 'private'
+        );
+
+        $new_post = wp_insert_post($args);
+
+        update_field( "field_64035670e27ac", sanitize_text_field($_POST['form_country']), $new_post );
+        update_field( "field_6403527fff8d6", $clean_elements['firstname'] , $new_post );
+        update_field( "field_64035293ff8d7", $clean_elements['lastname'] , $new_post );
+        update_field( "field_6403529bff8d8", $clean_elements['email'] , $new_post );
+        update_field( "field_640352adff8d9", $clean_elements['telephone'] , $new_post );
+        update_field( "field_640352baff8da", $clean_elements['company'] , $new_post );
+        update_field( "field_640352c6ff8db", $clean_elements['position'] , $new_post );
+        update_field( "field_640352cbff8dc", $clean_elements['message'] , $new_post );
+
+        /** set solutions cpt */
+        $result = wp_set_object_terms($new_post, $clean_solutions, 'dfdl_solutions');
+
+        /** insert flag */
         $submitted = true;
 
     }
@@ -69,10 +98,11 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
 
     <?php endif; ?>
 
-        <form id="dfdl-contact" method="post"action="">
+        <form id="dfdl-contact" method="post">
+            
         <?php
-            $sections = dfdl_get_section();
-            $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
+            //$sections = dfdl_get_section();
+            //$country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
             wp_nonce_field( 'comment-form_' . $country );
         ?>
         <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
