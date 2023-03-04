@@ -45,6 +45,8 @@ DFDL Theme, (C) 2022 DFDL
 	--color-red: #66000;
 	--color-yellow: #FFBD5C;
 	--color-white: #fff;
+	--color-error-dark: #ED4337;
+	--color-error-light: #FDECEB;
 	--font-size-smaller: 12px;
 	--font-size-small: 14px;
 	--font-size-body: 16px;
@@ -180,6 +182,7 @@ nav ul li {
 	background: var(--color-gray-disabled);
 	border: solid 1px var(--color-gray-disabled);
 	color: var(--color-white);
+	opacity: .3;
 	pointer-events: none;
 }
 /* lighten header */
@@ -866,28 +869,28 @@ input[type=checkbox] {
 }
 .contact-stage .copy-stage {
 	display: flex;
-	margin-top: 64px;
+	margin: 64px 0 4em 0;
 }
 .contact-stage .copy-stage .copy {
 	flex: 1 1 30%;
 }
 .contact-stage .copy-stage .form {
 	flex: 1 1 70%;
-	margin-left: 4em;
+	margin: 0 0 4em 4em;
 }
-
 .contact-form .details label,
 .contact-form h4 {
 	color: var(--color-gray);
     font-variant: small-caps;
 	font-weight: 400;
+	margin-bottom: 1.5em;
 }
 .contact-form .solutions label {
 	cursor: pointer;
 }
 .contact-form h4 {
 	font-family: var(--setting-body-font);
-	margin: 2em 0 .5em 1em;
+	margin: 2em 0 .5em 0
 }
 .contact-form input[type=text],
 .entry-content input[name="s"],
@@ -896,9 +899,9 @@ input[type=checkbox] {
 	border: solid 1px var(--color-whisper);
 	border-radius: 8px;
 	font-size: 1em;
-	padding: .7em;
+	padding: .7em 0 .7em .7em;
 	position: relative;
-	width: 100%;
+	width: calc(100% - 0.7em);
 }
 .entry-content input[name="s"] {
 	display: inline;
@@ -944,38 +947,24 @@ input[type=checkbox] {
 	/* Windows High Contrast Mode */
 	background-color: CanvasText;
   }
-  input[type=checkbox]:checked {
+input[type=checkbox]:checked {
 	border: solid 2px var(--color-green);
-  }
-  input[type=checkbox]:checked::before {
-	transform: scale(1);
-  }
-  
-
-
-/*
-.contact-form input[type=text]:focus,
-.contact-form input[type=email]:focus {
-	border: solid 1px var(--color-green-70);
-	outline: 0;
 }
-*/
-
-
-
-
-
-
+input[type=checkbox]:checked::before {
+	transform: scale(1);
+}
+input[type=checkbox]:hover {
+	border: solid 2px var(--color-bright-green);
+}
 .contact-form .details,
 .contact-form .solutions {
+	column-gap: 1.5em;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
+	row-gap: 1.5em;
 }
-.contact-form .details div {
-	padding: 1em;
-}
-.contact-form .solutions label {
-	padding: .75em 1em .75em 1em;
+.contact-form .solutions {
+	padding-top: 1.5em;
 }
 #contact-dfdl .team-lead-stage {
 	margin-top: 128px;
@@ -986,12 +975,27 @@ input[type=checkbox] {
 	border-radius: 8px;
 	font-family: var(--setting-body-font);
 	font-size: 16px;
-	margin-left: 1em;
-	padding: .7em;
-	width: 100%;
+	padding: .7em 0 .7em .7em;
+	width: calc(100% - .7em);
 }
 .contact-form .button.submit {
-	margin: 2.5em 0 0 1em;
+	margin-top: 2.5em;
+}
+#contact-dfdl .error-message,
+#contact-dfdl .error-banner {
+	background: var(--color-error-light) url(assets/media/icon-exclamation-error.svg) no-repeat 9px 50% ;
+	background-size: 18px;
+	border-radius: var(--setting-border-radius);
+	color: var(--color-gray);
+	display: none;
+	font-variant: initial;
+	margin: 5px 0 1.5em 0;
+	padding: .7em;
+	text-indent: 22px;
+}
+#contact-dfdl .dirty.invalid .error-message,
+#contact-dfdl .error-banner {
+	display: block;
 }
 
 
@@ -1222,9 +1226,46 @@ article + #insights {
 	margin: 1em 0 1em 0;
 	padding: 1em 0 1em 0;
 }
-.entry-content input[name="s"]{
 
+
+#contact-dfdl input[type=text],
+#contact-dfdl input[type=email],
+#contact-dfdl textarea {
+	border: solid 1px var(--color-whisper);
+	outline: none;
 }
+#contact-dfdl input[type=text]:hover,
+#contact-dfdl input[type=email]:hover,
+#contact-dfdl textarea:hover {
+	border: solid 1px var(--color-bright-green);
+}
+#contact-dfdl input[type=text]:focus,
+#contact-dfdl input[type=email]:focus,
+#contact-dfdl textarea:focus,
+#contact-dfdl .dirty.invalid input[type=text]:focus,
+#contact-dfdl .dirty.invalid input[type=email]:focus,
+#contact-dfdl .dirty.invalid textarea:focus {
+	border: solid 1px var(--color-bright-green);
+}
+#contact-dfdl .dirty.valid,
+#contact-dfdl .dirty.valid h4,
+#contact-dfdl .dirty.valid textarea {
+	color: var(--color-green)
+}
+#contact-dfdl .dirty.valid input,
+#contact-dfdl .dirty.valid textarea {
+	border: solid 1px var(--color-green);
+}
+
+#contact-dfdl .dirty.invalid,
+#contact-dfdl .dirty.invalid h4 {
+	color: var(--color-error-dark)
+}
+#contact-dfdl .dirty.invalid input,
+#contact-dfdl .dirty.invalid textarea {
+	border: solid 1px var(--color-error-dark);
+}
+
 
 @media print {
 	.header-stage .left,

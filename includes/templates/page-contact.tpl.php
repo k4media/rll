@@ -3,14 +3,14 @@
  * Contact Us page(s) template
  */
 
- // Validator.js
- wp_enqueue_script('parsely', get_stylesheet_directory_uri() . '/assets/js/parsely.min.js', null, null, true );
+// validation
+wp_enqueue_script('dfdl-contact-validation', get_stylesheet_directory_uri() . '/assets/js/dfdl-contact.js', null, null, true );
  
- get_header();
+get_header();
 
- $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
+$country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
 
- /**
+/**
  * Cache results
  */
 $key = "contact-" . $country;
