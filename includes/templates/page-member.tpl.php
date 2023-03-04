@@ -47,7 +47,10 @@ if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
 if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
-        $solutions[] = $solution->name;
+        if (isset($solution)) {
+            $solutions[] = $solution->name;
+        }
+        
     }
 } else {
     $solutions[] = "General Law Expert";
@@ -119,15 +122,9 @@ if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
         </div>
     </div>
 
-    <div id="dfdl-member-published"" class="xtra silo">
-        <h2>Written by <?php echo esc_attr($user->data->display_name) ?></h2>
-        <div>coming soon</div>
-    </div>
 
-    <div id="dfdl-member-news"" class="xtra silo">
-        <h2>In the News</h2>
-        <div>coming soon</div>
-    </div>
+    <?php do_action("dfdl_written_by") ?>
+    <?php do_action("dfdl_in_the_news") ?>
 
 </div>
 

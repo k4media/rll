@@ -1018,15 +1018,21 @@ article + #insights {
 #insights .callout {
 	padding: 4em 0 4em 0;
 }
-#insights .callout header {
+#insights .callout header,
+#dfdl-written-by header,
+#dfdl-in-the-news header {
 	display: flex;
 	justify-content: space-between;
 }
-#insights .callout header a {
+#insights .callout header a,
+#dfdl-written-by header a,
+#dfdl-in-the-news header a {
 	color: var(--color-green);
 	font-weight: 700;
 }
-#insights .callout h2 {
+#insights .callout h2,
+#dfdl-written-by h2,
+#dfdl-in-the-news h2 {
 	font-size: var(--font-size-larger);
 	margin: 0 0 1em 0;
 	text-align: left;

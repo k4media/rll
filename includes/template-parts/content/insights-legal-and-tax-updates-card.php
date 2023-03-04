@@ -9,7 +9,7 @@
             <?php endif; ?>
         </div>
         <div class="date">
-            <?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?>
+            <?php echo wp_date( get_option( 'date_format' ), get_post_timestamp($story->ID) ); ?>
         </div>
     </div>
     <div class="author"><?php echo get_the_author_meta('display_name', $story->post_author); ?></div>

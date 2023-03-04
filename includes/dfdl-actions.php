@@ -53,6 +53,187 @@ function dfdl_archive_query($query) {
 /**
  * Archive date query filter
  */
+add_action( 'dfdl_in_the_news', 'dfdl_in_the_news' );
+function dfdl_in_the_news() {
+
+    global $wp;
+
+    $pieces    = explode("/", $wp->request ) ;
+    $author_id = intval(end($pieces));
+    $author    = get_user_by("id", $author_id);
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        's'              => $author->display_name,
+        'posts_per_page' => 4,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => false,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
+    );
+
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
+
+    $posts = new WP_Query( $query_args );
+
+    if ( ! empty( $posts->posts ) ) {
+
+        /**
+         * "View All" link
+         */
+        $archive_link = get_home_url(null, "/s=" . $author->display_name);
+
+        /**
+         * Queue up news cards
+         */
+        ob_start();
+        foreach ( $posts->posts as $post ) {
+
+            $term = dfdl_post_terms($post->ID);
+            $term = get_term_by("name", $term[0], "category");
+
+            if ( "events" === $term->slug ) {
+                $startdate = get_post_meta( $post->ID, 'startdate', true);
+                if ( isset($startdate) ) {
+                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                    set_query_var("show_date", $show_date);
+                }
+                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+            }
+            set_query_var("story", $post);
+            set_query_var("term", $term);
+
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+
+        }
+        $news = ob_get_clean();
+
+        
+        echo '<section id="dfdl-in-the-news" class="xtra callout silo">';
+        echo '<header><h2 class="title">In the News</h2><a href="' . $archive_link . '">View All</a></header>';
+        echo '<div class="posts">' . $news . '</div>';
+        echo '</section>';
+
+    }
+}
+
+
+/**
+ * Archive date query filter
+ */
+add_action( 'dfdl_written_by', 'dfdl_written_by' );
+function dfdl_written_by() {
+
+    global $wp;
+
+    $pieces    = explode("/", $wp->request ) ;
+    $author_id = intval(end($pieces));
+    $author    = get_user_by("id", $author_id);
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'author'         => $author_id,
+        'posts_per_page' => 4,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => false,
+        'update_post_meta_cache' => false, 
+	    'update_post_term_cache' => false,
+    );
+
+    /**
+     * Date query: limit results to last 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            // 'after' => $limit
+        )
+    );
+
+    $posts = new WP_Query( $query_args );
+
+    if ( ! empty( $posts->posts ) ) {
+
+
+        /**
+         * Strip 'content-hub' from url
+         * This keeps url structure consistent
+         * insights/[category]/[country]
+         */ 
+        $archive_link = str_replace("content-hub/", "", $archive_link);
+
+        /**
+         * Queue up news cards
+         */
+        ob_start();
+        foreach ( $posts->posts as $post ) {
+
+            $term = dfdl_post_terms($post->ID);
+            $term = get_term_by("name", $term[0], "category");
+            
+            if ( "events" === $term->slug ) {
+                $startdate = get_post_meta( $post->ID, 'startdate', true);
+                if ( isset($startdate) ) {
+                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                    set_query_var("show_date", $show_date);
+                }
+                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+            }
+            set_query_var("story", $post);
+            set_query_var("term", $term);
+
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+
+        }
+        $news = ob_get_clean();
+        
+        echo '<section id="dfdl-written-by" class="xtra callout silo">';
+        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2><a href="' . $archive_link . '">View All</a></header>';
+        echo '<div class="posts">' . $news . '</div>';
+        echo '</section>';
+
+    }
+}
+
+/**
+ * Archive date query filter
+ */
 add_action( 'pre_get_posts', 'exclude_single_posts_home' );
 function exclude_single_posts_home($query) {
 
