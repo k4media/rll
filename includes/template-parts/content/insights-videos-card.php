@@ -1,4 +1,4 @@
-<div class="card podcasts media <?php if (isset($class)) { echo $class; } ?>">
+<div class="card videos media <?php if (isset($class)) { echo $class; } ?>">
     <a href="<?php echo esc_url(get_permalink($story->ID)) ?>">
         <div class="play">
             <div class="stage">

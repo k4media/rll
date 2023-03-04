@@ -485,16 +485,31 @@ function dfdl_content_hub_category( int $post_id ): string {
  * Insights "back" link.
  */
 function dfdl_insights_back_link(): string {
-    //global $post;
-    //$terms  = dfdl_post_terms($post->ID);
-    //var_dump($terms);
-    //var_dump($sections);
+    
+    global $wp_query;
+
+    /**
+     * Try DFDL Category first
+     */
+    if ( isset($wp_query->query['dfdl_category']) ) {
+        return get_term_link($wp_query->query['dfdl_category'], "category");
+    }
+    
+    /**
+     * Grab cat from sections
+     */
 
     $sections = dfdl_get_section();
-    if (isset($_SERVER['HTTP_REFERER'])) {
-        return $_SERVER['HTTP_REFERER'];
+    if ( 2 === count($sections) ) {
+        $link = get_home_url(null, "/insights/");
+    } elseif ( 3 === count($sections) ) {
+        $link = get_term_link($sections[2], "category");
+    } else {
+        $link = "#";
     }
-    return get_category_link($sections[1]);
+
+    return $link;
+
 }
 
 /**

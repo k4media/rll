@@ -858,13 +858,18 @@ function dfdl_solutions_country_nav() {
             }
         } elseif ( "insights" === $section ) {
 
-            //if ( count($pieces) > 1 ) {
+            //var_dump(count($pieces));
+
+            if ( count($pieces) > 1 ) {
+                $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
+
+            }
                 //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
             //} else {
                 // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
             //}
             
-            $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
+            //$output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
 
         } else {
 

@@ -1030,8 +1030,11 @@ article + #insights {
 	padding: 1.5em;
 }
 
-.posts .card.podcasts {
+.posts .card.media {
 	padding: 0;
+}
+.posts .card.media > .stage {
+	padding: 1.5em;
 }
 .posts .card .play {
 	background-color: var(--color-whisper);
@@ -1048,9 +1051,6 @@ article + #insights {
 	background: transparent url('assets/media/icon-multimedia-play.svg') no-repeat 50% 50%;;
 	height: 100%;
 	width: 100%;
-}
-.posts .card.podcasts > .stage {
-	padding: 1.5em;
 }
 
 .posts .card .meta {
