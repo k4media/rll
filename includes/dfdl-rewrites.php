@@ -104,7 +104,11 @@ function dfdl_add_rewrite_rules() {
         'index.php?pagename=dfdl_insights&dfdl_category=$matches[1]&dfdl_country=$matches[2]&page=$matches[3]',
         'top'
     );
-
+    add_rewrite_rule(
+        'insights/(.*)/page/?([0-9]{1,})/?$',
+        'index.php?pagename=dfdl_insights&dfdl_category=$matches[1]&page=$matches[2]',
+        'top'
+    );
 
 
 }

@@ -216,14 +216,18 @@ function dfdl_content_hub_callout() {
 add_action('dfdl_insights_callout', 'dfdl_insights_callout');
 function dfdl_insights_callout( array $args ): void {
 
+    global $wp_query;
+
     if ( ! isset($args['category']) ) {
         echo "<p>A category slug is required.</p>";
         return;
     }
 
+    /**
+     * Use tax_query to get child category posts, too
+     */
     $query_args = array(
         'post_type'      => 'post',
-        'category_name'  => $args['category'],
         'posts_per_page' => 4,
         'orderby'        => 'date',
         'order'          => 'DESC',
@@ -231,18 +235,21 @@ function dfdl_insights_callout( array $args ): void {
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => $args['category']
+            )
+         )
     );
 
-    /**
-     * Set query country
-     */
-    $sections = dfdl_get_section();
-    if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
+    if ( isset($wp_query->query['dfdl_country']) ) {
         $query_args['tax_query'] = array(
             array(
                 'taxonomy' => 'dfdl_countries',
                 'field'    => 'slug',
-                'terms'    => $sections[1],
+                'terms'    => sanitize_text_field($wp_query->query['dfdl_country'])
             )
         );
     }
@@ -260,8 +267,8 @@ function dfdl_insights_callout( array $args ): void {
         } else {
             $link_cat = $args['category'];
         }
-        $term = get_term_by("slug", $link_cat, "category");
 
+        $term = get_term_by("slug", $link_cat, "category");
         $archive_link = get_term_link($term);
         
         /**
@@ -270,9 +277,12 @@ function dfdl_insights_callout( array $args ): void {
          * insights/[category]/[country]
          * */ 
         $archive_link = str_replace("content-hub/", "", $archive_link);
-        
-        if( isset($sections[1]) && in_array( $sections[1], constant('DFDL_COUNTRIES') ) ) {
-             $archive_link .= $sections[1] . "/";
+
+        /**
+         * Add dfdl_country if needed
+         */
+        if( isset($wp_query->query['dfdl_country']) ) {
+             $archive_link .= $wp_query->query['dfdl_country'] . "/";
         }
 
         /**
@@ -293,6 +303,7 @@ function dfdl_insights_callout( array $args ): void {
             }
             set_query_var("story", $post);
             set_query_var("term", $term);
+
             $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
             if ( file_exists($file) ) {
                 get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
@@ -849,7 +860,11 @@ function dfdl_solutions_country_nav() {
 
             //if ( count($pieces) > 1 ) {
                 //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
+            //} else {
+                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
             //}
+            
+            $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
 
         } else {
 

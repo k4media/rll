@@ -27,9 +27,16 @@ function dfdl_youtube_wrapper($html, $url, $attr, $post_id) {
  */
 function dfdl_filter_archive_insights_title() {
     global $wp_query;
-    $category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
-    $country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
-    return $country->name . " " . $category->name . " by DFDL";
+    $page_title = "";
+    if ( isset($wp_query->query['dfdl_country']) ) {
+        $country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
+        $page_title .= $country->name;
+    }
+    if ( isset($wp_query->query['dfdl_category']) ) {
+        $category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
+        $page_title .= " " . $category->name;
+    }
+    return $page_title . " by DFDL";
 }
 
 /**

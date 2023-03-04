@@ -15,9 +15,18 @@ global $wp, $wp_query;
 /**
  * Get category and country from URL
  */
-$category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
-$country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
-$page_title = $country->name . " " . $category->name;
+$page_title = "";
+$country    = "";
+$category   = "";
+
+if ( isset($wp_query->query['dfdl_country']) ) {
+    $country  = get_term_by("slug", $wp_query->query['dfdl_country'], "dfdl_countries");
+    $page_title .= $country->name;
+}
+if ( isset($wp_query->query['dfdl_category']) ) {
+    $category = get_term_by("slug", $wp_query->query['dfdl_category'], 'category');
+    $page_title .= " " . $category->name;
+}
 
 // filter page title
 add_filter( 'pre_get_document_title', 'dfdl_filter_archive_insights_title' );

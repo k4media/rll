@@ -1029,6 +1029,30 @@ article + #insights {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
 	padding: 1.5em;
 }
+
+.posts .card.podcasts {
+	padding: 0;
+}
+.posts .card .play {
+	background-color: var(--color-whisper);
+	padding-top: 56.25%;
+	position: relative;
+}
+.posts .card .play .stage {
+	height: 100%;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.posts .card .action {
+	background: transparent url('assets/media/icon-multimedia-play.svg') no-repeat 50% 50%;;
+	height: 100%;
+	width: 100%;
+}
+.posts .card.podcasts > .stage {
+	padding: 1.5em;
+}
+
 .posts .card .meta {
 	display: flex;
 	font-size: var(--font-size-small);

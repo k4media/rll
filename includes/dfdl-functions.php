@@ -482,6 +482,22 @@ function dfdl_content_hub_category( int $post_id ): string {
 }
 
 /**
+ * Insights "back" link.
+ */
+function dfdl_insights_back_link(): string {
+    //global $post;
+    //$terms  = dfdl_post_terms($post->ID);
+    //var_dump($terms);
+    //var_dump($sections);
+
+    $sections = dfdl_get_section();
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        return $_SERVER['HTTP_REFERER'];
+    }
+    return get_category_link($sections[1]);
+}
+
+/**
  * DFDL Post Terms.
  * 
  * Return html for post category and sub-category
