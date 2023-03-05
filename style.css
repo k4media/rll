@@ -143,6 +143,17 @@ nav ul li {
 .button.green {
 	border: solid 1px var(--color-green);
 	color: var(--color-green);
+	transition: all .15s;
+}
+.button.green:hover {
+	border: solid 1px var(--color-bright-green);
+	color: var(--color-bright-green);
+	transition: all .15s;
+}
+.button.green:active {
+	border: solid 1px var(--color-green-70);
+	color: var(--color-green-70);
+	transition: all .15s;
 }
 .button.green.solid,
 .entry-content input[type="submit"] {
@@ -221,6 +232,15 @@ header.main {
 	border-radius: var(--setting-border-radius);
 	color: var(--color-white);
 	padding: var(--setting-button-padding);
+	transition: all .15s;
+}
+.header-stage .right .cta-button a:hover {
+	background-color: var(--color-green);
+	transition: all .15s;
+}
+.header-stage .right .cta-button a:active {
+	background-color: var(--color-green-70);
+	transition: all .15s;
 }
 .site-branding {
 	padding-top: 25px;
@@ -332,6 +352,7 @@ header.main {
 	background: transparent;
 	border: solid 1px var(--color-whisper);
 	border-radius: 8px;
+	outline: 0;
 	padding: .7em;
 	position: relative;
 	width: 24em;
@@ -479,6 +500,28 @@ header.main {
 .member-loop {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
+	position: relative;
+}
+.member-loop .rollover {
+	background-color: var(--color-white);
+	display: flex;
+	height: 100%;
+	left: -9999em;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.member-loop:hover .rollover {
+	left: 0;
+}
+.member-loop .rollover .stage {
+	color: var(--color-green);
+	padding: 2em;
+	text-align: left;
+}
+.member-loop .stage .ranking {
+	margin-bottom: 1em;
 }
 #team-all,
 #contact-dfdl,
