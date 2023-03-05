@@ -7,13 +7,13 @@
     global $wp;
             
     /**
-     * country/team
+     * Country/team
      */
     $args = array(
         'number'    => -1,
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
-        'orderby'   => 'user_nicename',
-        'order'     => 'ASC',
+        'meta_key'  => '_dfdl_member_rank',
+        'orderby'   => array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' ),
         'no_found_rows'          => true,
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
@@ -22,18 +22,26 @@
 
     if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
         $term = get_term_by('slug', $GLOBALS['wp_query']->query_vars['dfdl_country'], 'dfdl_countries');
-        $args['meta_key'] = '_dfdl_user_country';
-        $args['meta_value'] = $term->term_id;
+        $args['meta_query'] = array(
+            'relationship' => 'AND',
+            array(
+                'key'     => '_dfdl_user_country',
+                'value'   => $term->term_id,
+                'compare' => '='
+            ),
+        );
     }
 
     // The Query
     $user_query = new WP_User_Query( $args );
 
+    $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
+
 ?>
 <div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" class="teams-country-stage">
     <?php do_action("dfdl_solutions_country_nav"); ?>
     <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
-    <div id="results_stage" class="team-stage <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?> silo">
+    <div id="results_stage" class="team-stage <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] . " " . $class ?> silo">
         <div>
             <?php
                 // The Loop

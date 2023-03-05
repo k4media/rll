@@ -10,8 +10,8 @@
     $args = array(
         'number'    => -1,
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
-        'orderby'   => 'user_nicename',
-        'order'     => 'ASC'
+        'meta_key'  => '_dfdl_member_rank',
+        'orderby'   => array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' )
     );
 
     // The Query
@@ -20,18 +20,20 @@
 ?>
 <div id="team-all" >
     <?php do_action("dfdl_solutions_country_nav"); ?>
-    <div class="team-stage silo">
-        <?php
-            // The Loop
-            if ( ! empty( $user_query->get_results() ) ) {
-                foreach ( $user_query->get_results() as $user ) {
-                    set_query_var("user", $user);
-                    get_template_part( 'includes/template-parts/content/member' );
+    <div id="results_stage" class="team-stage silo">
+        <div>
+            <?php
+                // The Loop
+                if ( ! empty( $user_query->get_results() ) ) {
+                    foreach ( $user_query->get_results() as $user ) {
+                        set_query_var("user", $user);
+                        get_template_part( 'includes/template-parts/content/member' );
+                    }
+                } else {
+                    echo 'No users found.';
                 }
-            } else {
-                echo 'No users found.';
-            }
-        ?>
+            ?>
+        </div>
     </div>
 </div>
 

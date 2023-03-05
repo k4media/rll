@@ -510,10 +510,12 @@ header.main {
 	overflow: hidden;
 	position: absolute;
 	top: 0;
+	transition: all 0s ease;
 	width: 100%;
 }
 .member-loop:hover .rollover {
 	left: 0;
+	transition-delay: .15s; 
 }
 .member-loop .rollover .stage {
 	color: var(--color-green);
@@ -699,7 +701,8 @@ header.main {
 	transition: all .5s;
 }
 #results_stage.no-results > div,
-#insights .posts.no-results {
+#insights .posts.no-results,
+#results_stage.no-results.team-stage.silo {
 	columns: 1;
 	display: block;
 	text-align: center;

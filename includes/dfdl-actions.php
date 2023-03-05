@@ -587,6 +587,157 @@ function dfdl_contact_form(): void {
     get_template_part( 'includes/template-parts/forms/form', 'contact' );
 }
 
+
+/**
+ * DFDL Insights Filter Ajax
+ * 
+ * Return HTML results
+ * 
+ * ... @insights_solutions
+ * ... @insights_ytype
+ * ... @insights_ysort
+ * 
+ * @return string
+ * 
+ */
+add_action('wp_ajax_filter_insights', 'dfdl_ajax_teams_insights');
+add_action('wp_ajax_nopriv_filter_insights', 'dfdl_ajax_teams_insights');
+function dfdl_ajax_teams_insights(): array {
+
+    /**
+    * Response 
+    */
+    $response = array();
+    $response['code']    = 0;
+    $response['message'] = '';
+    $response['status']  = '';
+    $response['html']    = '';
+    $response['count']   = 0;
+
+    /**
+    * Validate nonce
+    */
+    if ( ! wp_verify_nonce( $_POST['nonce'], "dfdl_insights" )) {
+        $response["status"]	= "invalid nonce";
+        echo json_encode($response);
+        exit;
+    }
+
+    /**
+    * Valid input values
+    */
+    $valid = array();
+    $valid['solutions'] = dfdl_get_solutions('slug');
+
+    /**
+    * Buffer for clean post inputs
+    */
+    $clean = array();
+
+    /**
+    * Validate $_POST vars
+    */
+    $post_solutions  = explode(',', $_POST['iSolutions']);
+    foreach( $post_solutions as $p ) {
+        if ( in_array($p, $valid['solutions'])) {
+            $term = get_term_by("slug", $p, 'dfdl_solutions');
+            $clean['solutions'][] = $term->term_id;
+        }
+    }
+
+    $post_categories  = explode(',', $_POST['iCategories']);
+    foreach( $post_categories as $p ) {
+        if ( in_array($p, $valid['solutions'])) {
+            //$term = get_term_by("slug", $p, 'dfdl_solutions');
+            //$clean['solutions'][] = $term->term_id;
+        }
+    }
+
+    $post_years  = explode(',', $_POST['iyears']);
+    foreach( $post_years as $p ) {
+        //$term = get_term_by("slug", $p, 'dfdl_solutions');
+        //$clean['solutions'][] = $term->term_id;
+    }
+
+
+
+    // add solutions
+    if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
+        $args['meta_query'][] = array(
+            'relation' => 'OR',
+            array (
+                'key' => '_dfdl_user_solutions',
+                'value' => $clean['solutions'],
+                'compare' => 'IN'
+            ),
+        );
+    }
+
+    // add country
+    if ( "undefined" !== $clean_country ) {
+        $term = get_term_by('slug', $clean_country, 'dfdl_countries');
+        $args['meta_query'][] = array(
+            'relation' => 'AND',
+            array(
+                'key' => '_dfdl_user_country',
+                'value' => $term->term_id,
+            ),
+        );
+    }
+
+    // add years
+
+    // add categories
+
+    // limit members in admin
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+        $args['number'] = 4;
+    }
+
+    /**
+     * User query
+     */
+    $users  = new WP_User_Query($args);
+    if ( ! empty( $users->get_results() ) ) {
+        ob_start();
+        foreach ( $users->get_results() as $user ) {
+            set_query_var("user", $user);
+            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+        }
+        $output = ob_get_clean();
+    }
+    
+    /**
+    * Validate response
+    */
+    if ( isset($output) && "" !== $output ) {
+        $response['code']   = 200;
+        $response['status'] = 'success';
+        $response['html']   = $output;
+        $response['count']  = $users->results;
+    } else {
+        $response['code']   = 400;
+        $response['status'] = 'empty result set';
+    }
+
+   /**
+    * Debug info
+    */
+    $response['debug']  = $args;
+
+   /**
+    * Send response
+    */
+    echo json_encode($response);
+
+   /**
+    * Exit
+    */
+    exit;
+    
+}
+
+
 /**
  * DFDL Teams Filter Ajax
  * 
@@ -650,22 +801,23 @@ function dfdl_ajax_teams_filter(): array {
     $args                = array();
     $args['number']      = 16;
     $args['count_total'] = true;
-    $args['orderby']     = "display_name";
-    $args['order']       = ( "a-z" == $clean_sort ) ? "ASC" : "DESC" ;
-    
-    // define relation
-    if ( ! empty($clean['solutions']) && "undefined" !== $clean_country ) {
-        $args['meta_query']['relation'] = "AND";
+    $args['meta_key']    = '_dfdl_member_rank';
+
+    if ( "a-z" == $clean_sort ) {
+        $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' );
     } else {
-        $args['meta_query']['relation'] = "OR";
+        $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'DESC' );
     }
-    
+
     // add solutions
-    if ( ! empty($clean['solutions']) ) {
+    if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
         $args['meta_query'][] = array(
-            'key' => '_dfdl_user_solutions',
-            'value' => $clean['solutions'],
-            'compare' => 'IN'
+            'relation' => 'OR',
+            array (
+                'key' => '_dfdl_user_solutions',
+                'value' => $clean['solutions'],
+                'compare' => 'IN'
+            ),
         );
     }
 
@@ -673,8 +825,11 @@ function dfdl_ajax_teams_filter(): array {
     if ( "undefined" !== $clean_country ) {
         $term = get_term_by('slug', $clean_country, 'dfdl_countries');
         $args['meta_query'][] = array(
-            'key' => '_dfdl_user_country',
-            'value' => $term->term_id,
+            'relation' => 'AND',
+            array(
+                'key' => '_dfdl_user_country',
+                'value' => $term->term_id,
+            ),
         );
     }
 
@@ -703,6 +858,7 @@ function dfdl_ajax_teams_filter(): array {
         $response['code']   = 200;
         $response['status'] = 'success';
         $response['html']   = $output;
+        $response['count']  = $users->results;
     } else {
         $response['code']   = 400;
         $response['status'] = 'empty result set';

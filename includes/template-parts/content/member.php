@@ -33,6 +33,9 @@
         $expertise[] = $solution->name;
     }
 
+    $rank = get_user_meta( $user->data->ID, '_dfdl_member_rank', true);
+
+
 ?>
 <a href="<?php echo $link ?>">
     <article id="post-<?php the_ID(); ?>" <?php post_class("member-loop"); ?>>
@@ -49,6 +52,7 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <div><p><?php echo "Rank: " . $rank ?></p></div>
         </div>
         <div class="rollover">
             <div class="stage">
