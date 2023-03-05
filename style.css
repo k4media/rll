@@ -620,6 +620,9 @@ header.main {
 	line-height: 1.4em;
 	margin-top: 32px;
 }
+.team-lead-stage .member .bio  {
+	columns: 1;
+}
 .member .bio p {
 	display: inline-block;
 }

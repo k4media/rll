@@ -1228,9 +1228,18 @@ function dfdl_related_stories(): void {
             set_query_var("category", dfdl_post_terms($p->ID, array('type'=>'subcategory')));
             set_query_var("class", "related");
 
-
+            /*
             if ( "events" === $section ) {
                 get_template_part( 'includes/template-parts/content/insights', 'events-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+            */
+            
+
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
             } else {
                 get_template_part( 'includes/template-parts/content/insights', 'news-card' );
             }
