@@ -1,0 +1,49 @@
+
+body.login {
+	background-color: #004C45;
+	font-family: "Calibri", sans-serif;;
+	line-height: 1.15;
+	margin: 0;
+	padding: 0;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+body.login div#login h1 a {
+	background-image: url('assets/media/dfdl-logo-reverse.svg');
+	background-position: center top;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	color: #000;
+	font-size: 20px;
+	font-weight: normal;
+	line-height: 1.3em;
+	margin: 0 auto 25px;
+	padding: 0;
+	text-decoration: none;
+	text-indent: -9999px;
+	outline: none;
+	overflow: hidden;
+	display: block;
+	width: 160px;
+}
+
+.login #backtoblog a, .login #nav a {
+    text-decoration: none;
+    color: #131313;
+}
+.login #backtoblog a:hover, .login #nav a:hover {
+    color: #fff;
+}
+.login .message, .login .success {
+    border-left: 4px solid #004C45;
+}
+.login #login_error {
+    border-left: 4px solid #ED4337;
+}
+.wp-core-ui .button-primary {
+    background: #004C45;
+	border: 0;
+}
+.wp-core-ui .button-primary:hover {
+    background: #10B565;
+}

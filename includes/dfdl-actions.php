@@ -1559,3 +1559,8 @@ function legal_nav() {
     ) );
     echo '</div>';
 }
+
+add_action( 'login_enqueue_scripts', 'dfdl_login_style' );
+function dfdl_login_style() {
+    wp_enqueue_style( 'dfdl-login', get_stylesheet_directory_uri() . '/login.css' );
+}
