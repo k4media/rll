@@ -99,6 +99,13 @@ img { display: block; }
 a { 
 	text-decoration: none;
 }
+a:hover,
+.callout .stage a:hover,
+.posts .card h4 a:hover,
+.dfdl-single-member .name a:hover,
+.dfdl-single-member .contact-details a:hover {
+	color: var(--color-bright-green);
+}
 nav ul {
 	margin: 0;
 	padding: 0;
@@ -443,6 +450,11 @@ header.main {
 .team-member-stage .team-member {
 	flex-direction: row-reverse;
 }
+.team-member-stage .team-member .details-stage {
+	margin: 0 2em 0 0;
+	padding: 1.5em 1.5em 1.5em 0;
+}
+
 .dfdl-single-member .details-stage {
 	margin: 0 2em 0 2em;
 	width: 100%;
@@ -455,8 +467,9 @@ header.main {
 	width: 100%;
 }
 .dfdl-single-member .name {
+	color: var(--color-green);
 	font-size: var(--font-size-larger);
-	font-weight: 700;
+	font-family: 'praxis_lt_regularbold';
 	margin-bottom: .5em;
 }
 .dfdl-single-member .name a {
@@ -476,12 +489,11 @@ header.main {
 .dfdl-single-member .contact-details {
 	border-top: solid 1px var(--color-green);
 	display: flex;
+	justify-content: space-between;
 	margin-top: 1em;
 	padding-top: 1em;
 }
-.dfdl-single-member .contact-details > div {
-	width: 25%;
-}
+/* .dfdl-single-member .contact-details > div { width: 25%; } */
 .dfdl-single-member .contact-details a {
 	color: var(--color-green);
 }
@@ -613,10 +625,15 @@ header.main {
 .admin-bar #menu-side-close {
 	margin-top: 48px;
 }
+.contact-callout-stage.front-page {
+	padding: 120px 0 120px 0;
+}
+.contact-callout-stage.solutions {
+	padding: 120px 0 0 0;
+}
 .contact-callout {
     background-color: var(--color-bright-green);
     display: flex;
-	margin: 4em 0 4em 0;
     position: relative;
 }
 .contact-callout > div {
@@ -676,7 +693,8 @@ header.main {
 	line-height: 1.4em;
 	margin-top: 32px;
 }
-.team-lead-stage .member .bio  {
+.team-lead-stage .member .bio,
+.team-member .member .bio  {
 	columns: 1;
 }
 .member .bio p {

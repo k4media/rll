@@ -23,12 +23,16 @@ if ( isset($wp_query->query['dfdl_country']) ) {
 
 $insights = dfdl_insights();
 
+$jump = get_home_url('', '/insights/');
+
+/*
 if ( isset($insights->tax_query->queries[0]['terms'][0]) && ! empty($insights->tax_query->queries[0]['terms'][0]) ) {
      // var_dump($insights->tax_query->queries[0]['terms'][0]);
      $jump = get_home_url('', '/insights/' . $insights->tax_query->queries[0]['terms'][0] . '/');
 } else {
      $jump = get_home_url('', '/insights/');
 }
+*/
 
 if ( isset($insights) ) {
      $post_class = ( $insights->have_posts() ) ? "" : "no-results" ; 

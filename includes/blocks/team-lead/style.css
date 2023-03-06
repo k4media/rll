@@ -2,7 +2,7 @@
 	background-color: var(--color-green-10);
 	padding: 120px 0 120px 0 ;
 }
-.team-lead .member .slug {
+.member .slug {
 	color: var(--color-green-70);
 	font-size: var(--font-size-small);
     margin-bottom: 1em;

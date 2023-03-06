@@ -30,34 +30,78 @@
      }
 
      /**
-      * User query args
+      * Build User Query
       */
      $args                = array();
-     $args['number']      = 16;
+     $args['number']      = 8;
      $args['count_total'] = true;
-     $args['meta_key']    = '_dfdl_member_rank';
-     $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_lastname' => 'ASC' );
+     $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'meta_value' => 'ASC' );
 
+     /**
+      * Sort keys
+      */
+     $args['meta_query'] = array(
+          'relation' => 'AND',
+          array(
+               'key'   => '_dfdl_member_rank',
+               'compare' => 'EXISTS'
+          ),
+          array(
+               'key'   => 'last_name',
+               'compare' => 'EXISTS'
+          ),
+     );
+
+     /**
+      * Solutions
+      */
      if ( "solutions" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_solutions');
-          $args['meta_key'] = '_dfdl_user_solutions';
-          $args['meta_value'] = $term->term_id;
+          $args['meta_query'][] = array(
+               'key'     => '_dfdl_user_solutions',
+               'value'   => $term->term_id,
+               'compare' => '='
+          );
      }
+
+     /**
+      * Locations
+      */
      if ( "locations" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
-          $args['meta_key'] = '_dfdl_user_country';
-          $args['meta_value'] = $term->term_id;
+          //$args['meta_key'] = '_dfdl_user_country';
+          //$args['meta_value'] = $term->term_id;
+          $args['meta_query'][] = array(
+               'key'     => '_dfdl_user_country',
+               'value'   => $term->term_id,
+               'compare' => '='
+          );
      }
+
+     /**
+      * Desks
+      */
      if ( "desks" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_desks');
-          $args['meta_key'] = '_dfdl_user_desks';
-          $args['meta_value'] = $term->term_id;
+          //$args['meta_key'] = '_dfdl_user_desks';
+          //$args['meta_value'] = $term->term_id;
+          $args['meta_query'][] = array(
+               'key'     => '_dfdl_user_desks',
+               'value'   => $term->term_id,
+               'compare' => '='
+          );
      }
+
+     /**
+      * Teams
+      */
      if ( "teams" === $sections[0] ) {
           $args['fields'] = 'all_with_meta';
      }
 
-     // limit members in admin
+     /**
+      * Limit members in admin
+      */
      if ( is_admin() ) {
           $args['number'] = 4;
           $jump = "#";
@@ -67,10 +111,9 @@
       * User query
       */
      $users = get_users($args);
+     
+     $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
 
-     //echo "<pre>";
-     //var_dump($users );
-     //echo "</pre>";
 
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
@@ -78,13 +121,12 @@
           <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
                <?php do_action("dfdl_solutions_country_nav") ?>
           <?php endif; ?>  
-          <div id="results_stage" class="team-stage">
+          <div id="results_stage" class="team-stage <?php echo $post_class ?>">
                <div>
                     <?php
                          if ( count($users) > 0) {
                               foreach( $users as $user ) {
                                    set_query_var("user", $user);
-                                   //var_dump( $user);
                                    get_template_part( 'includes/template-parts/content/member' );
                               }
                          } else {

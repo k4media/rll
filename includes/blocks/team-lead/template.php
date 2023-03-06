@@ -33,7 +33,7 @@
                <div class="details-stage">
                     <div class="member">
                          <div class="slug">Regional Key Contact</div>
-                         <div class="name"><?php echo $user->display_name ?></div>
+                         <div class="name"><a href="<?php echo get_author_posts_url($user->ID) ?>"><?php echo $user->display_name ?></a></div>
                          <?php if( isset($meta['position'][0]) ) : ?>
                               <div class="position"><?php echo $meta['position'][0] ?></div> 
                          <?php endif; ?>
@@ -55,8 +55,8 @@
                                    <?php endif; ?>
                               </div>
                               <div class="email">
-                                   <?php if ( isset($meta['email']) && ! empty($meta['email'][0]) ) : ?>
-                                        <a href="mailto:<?php echo $meta['email'][0] ?>">Email</a>
+                                   <?php if ( isset($user->user_email) && ! empty($user->user_email) ) : ?>
+                                        <a href="mailto:<?php echo $user->user_email ?>">Email</a>
                                    <?php endif; ?>
                               </div>
                               <div class="linkedin">

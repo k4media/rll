@@ -5,8 +5,8 @@
      $button_text = "";
      $button_link = "";
      $image       = "";
+     $section     = "";
 
-     
      // get fields
      if ( function_exists('get_fields') ) {
           $title       = get_field('title');
@@ -15,8 +15,11 @@
           $button_link = get_field('link');
           $image       = get_field('image'); 
      }
+
+     
+
 ?>
-<div class="contact-callout-stage">
+<div class="contact-callout-stage <?php dfdl_section_class(); ?>">
      <div class="contact-callout">
           <?php if ( isset($image['url']) ) : ?>
                <div class="image"><img src="<?php echo $image['url'] ?>"></div>

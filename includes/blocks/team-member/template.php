@@ -26,7 +26,7 @@
 <div class="team-member-stage callout">
      <div class="team-member narrow">
           <div class="team-member dfdl-single-member">
-               <div class="avatar"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></div>
+               <div class="avatar"><a href="<?php echo get_author_posts_url($user->ID) ?>"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></a></div>
                <div class="details-stage">
                     <div class="member">
                          <div class="slug">
@@ -35,7 +35,7 @@
                               <?php endif; ?>
                               Key Contact
                          </div>
-                         <div class="name"><?php echo $user->display_name ?></div>
+                         <div class="name"><a href="<?php echo get_author_posts_url($user->ID) ?>"><?php echo $user->display_name ?></a></div>
                          <?php if( isset($meta['position'][0]) ) : ?>
                               <div class="position"><?php echo $meta['position'][0] ?></div> 
                          <?php endif; ?>
@@ -43,7 +43,7 @@
                               <div class="location"><?php echo implode(", ", $locations) ?></div>
                          <?php endif; ?>
                          <?php if( $user->user_description ) : ?>
-                              <div class="bio"><?php echo $user->user_description ?></div>
+                              <div class="bio"><?php echo nl2br($user->user_description) ?></div>
                          <?php endif; ?>
                          <div class="contact-details">
                               <div class="telephone">

@@ -557,6 +557,22 @@ function dfdl_get_countries_tax(): array {
     ));
 }
 
+
+/**
+ * DFDL section
+ * 
+ * Return string
+ * 
+ */
+function dfdl_section_class() {
+    $sections = dfdl_get_section();
+    if ( count($sections) > 0 ) {
+        echo $sections[0];
+    } elseif ( is_front_page() ) {
+        echo "front-page";
+    }
+}
+
 /**
  * DFDL section
  * 
