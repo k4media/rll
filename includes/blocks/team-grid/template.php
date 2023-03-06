@@ -31,11 +31,10 @@ if ( "teams" === $sections[0] ) {
 
 /**
  * Build User Query
-     */
-$args                      = array();
-$args['number']            = 8;
-$args['count_total']       = true;
-$args['_dfdl_member_rank'] = true;
+ */
+$args                = array();
+$args['number']      = 8;
+$args['count_total'] = true;
 $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' );
 
 /**
@@ -116,7 +115,6 @@ if ( is_admin() ) {
 $users = get_users($args);
 
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
-
 
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">

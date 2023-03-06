@@ -10,8 +10,22 @@
     $args = array(
         'number'    => -1,
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
-        'meta_key'  => '_dfdl_member_rank',
-        'orderby'   => array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' )
+        'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' )
+    );
+
+    /**
+     * Sort keys
+     */
+    $args['meta_query'] = array(
+        'relation' => 'AND',
+        'dfdl_rank' => array(
+            'key'   => '_dfdl_member_rank',
+            'compare' => 'EXISTS'
+        ),
+        'last_name' => array(
+            'key'   => 'last_name',
+            'compare' => 'EXISTS'
+        ),
     );
 
     // The Query
