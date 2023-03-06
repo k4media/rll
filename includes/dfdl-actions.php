@@ -236,9 +236,7 @@ function dfdl_written_by() {
  */
 add_action( 'pre_get_posts', 'exclude_single_posts_home' );
 function exclude_single_posts_home($query) {
-
 	if ( ! is_admin() && is_archive() && $query->is_main_query() ) {
- 
         /**
          * Date query: limit results to last 2 years
          */
@@ -252,10 +250,8 @@ function exclude_single_posts_home($query) {
                 'after' => $limit
             )
         ));
-
 	}
 }
-
 
 /**
  * Insights Swiper
@@ -801,13 +797,30 @@ function dfdl_ajax_teams_filter(): array {
     $args                = array();
     $args['number']      = 16;
     $args['count_total'] = true;
-    $args['meta_key']    = '_dfdl_member_rank';
+    //$args['meta_key']    = '_dfdl_member_rank';
 
     if ( "a-z" == $clean_sort ) {
-        $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' );
+        //$args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' );
+        $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' );
     } else {
-        $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'DESC' );
+        //$args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'DESC' );
+        $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'DESC' );
     }
+
+    /**
+     * Sort keys
+     */
+    $args['meta_query'] = array(
+        'relation' => 'AND',
+        'dfdl_rank' => array(
+            'key'   => '_dfdl_member_rank',
+            'compare' => 'EXISTS'
+        ),
+        'last_name' => array(
+            'key'   => 'last_name',
+            'compare' => 'EXISTS'
+        ),
+    );
 
     // add solutions
     if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
