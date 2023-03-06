@@ -19,7 +19,7 @@ lastname && lastname.addEventListener("blur", function() {
 var email = document.getElementById("email");
 email && email.addEventListener("blur", function() {
     email.parentElement.classList.add("dirty");
-    if ( ! email.value ) {
+    if ( validateEmail(email.value) == false || ! email.value ) {
         set_input_status(email, "invalid");
     } else {
         set_input_status(email, "valid");
@@ -61,7 +61,6 @@ message && message.addEventListener("blur", function() {
         set_input_status(message, "valid");
     }
 });
-
 var form_inputs = document.querySelectorAll("#dfdl-contact input[type=text], #dfdl-contact input[type=email], #dfdl-contact textarea");
 form_inputs.forEach((el) => {
     el.addEventListener('blur', () => {
@@ -69,7 +68,6 @@ form_inputs.forEach((el) => {
     });
     el.classList.add("clean");
 });
-
 function set_input_status(el, status) {
     el.classList.remove("clean");
     el.classList.remove("valid", "invalid");
@@ -77,7 +75,6 @@ function set_input_status(el, status) {
     el.classList.add(status);
     el.parentElement.classList.add(status);
 }
-
 function form_validate() {
     var invalid = 0;
     form_inputs.forEach((el) => {
@@ -90,5 +87,8 @@ function form_validate() {
     } else {
         document.getElementById("contact-submit").classList.add("disabled");
     }
-
 }
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
