@@ -273,3 +273,9 @@ html :where(.wp-block) {
 .team-member .details .location {
     color: var(--color-gray);
 }
+.callout .posts {
+    display: grid;
+    grid-column-gap: 1.5em;
+    grid-row-gap: 1.5em;
+    grid-template-columns: repeat(4, 1fr);
+}
