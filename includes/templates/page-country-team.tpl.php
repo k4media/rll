@@ -4,38 +4,52 @@
  */
  get_header();
 
-    global $wp;
+global $wp;
             
-    /**
-     * Country/team
-     */
-    $args = array(
-        'number'    => -1,
-        'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
-        'meta_key'  => '_dfdl_member_rank',
-        'orderby'   => array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' ),
-        'no_found_rows'          => true,
-        'ignore_sticky_posts'    => true,
-        'update_post_meta_cache' => false, 
-	    'update_post_term_cache' => false,
-    );
+/**
+ * Country/team
+ */
+$args = array(
+    'number'    => -1,
+    'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
+    'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
+    'no_found_rows'          => true,
+    'ignore_sticky_posts'    => true,
+    'update_post_meta_cache' => false, 
+    'update_post_term_cache' => false,
+);
 
-    if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
-        $term = get_term_by('slug', $GLOBALS['wp_query']->query_vars['dfdl_country'], 'dfdl_countries');
-        $args['meta_query'] = array(
-            'relationship' => 'AND',
-            array(
-                'key'     => '_dfdl_user_country',
-                'value'   => $term->term_id,
-                'compare' => '='
-            ),
+/**
+ * Sort keys
+ */
+$args['meta_query'] = array(
+    'relation' => 'AND',
+    'dfdl_rank' => array(
+        'key'   => '_dfdl_member_rank',
+        'compare' => 'EXISTS'
+    ),
+    'last_name' => array(
+        'key'   => 'last_name',
+        'compare' => 'EXISTS'
+    ),
+);
+
+/**
+ * Country
+ */
+if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
+    $term = get_term_by('slug', $GLOBALS['wp_query']->query_vars['dfdl_country'], 'dfdl_countries');
+    $args['meta_query'][] = array(
+            'key'     => '_dfdl_user_country',
+            'value'   => $term->term_id,
+            'compare' => '='
         );
-    }
+    
+}
 
-    // The Query
-    $user_query = new WP_User_Query( $args );
-
-    $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
+// The Query
+$user_query = new WP_User_Query( $args );
+$class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
 
 ?>
 <div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" class="teams-country-stage">

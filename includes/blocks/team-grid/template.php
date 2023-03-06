@@ -23,7 +23,7 @@ if ( "teams" === $sections[0] ) {
 /**
  * View All Link
      */
-     if ( "teams" === $sections[0] ) {
+if ( "teams" === $sections[0] ) {
      $jump = get_home_url(null, '/teams/all/');
 } else {
      $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
@@ -32,10 +32,15 @@ if ( "teams" === $sections[0] ) {
 /**
  * Build User Query
  */
-$args                = array();
-$args['number']      = 8;
-$args['count_total'] = true;
-$args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' );
+$args = array(
+     'number'    => 8,
+     'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
+     'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
+     'no_found_rows'           => true,
+     'ignore_sticky_posts'     => true,
+     'update_post_meta_cache'  => false, 
+      'update_post_term_cache' => false,
+ );
 
 /**
  * Sort keys
