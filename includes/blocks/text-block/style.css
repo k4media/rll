@@ -1,6 +1,16 @@
 .text-feature-stage {
     padding: 120px 0 120px 0;
 }
+.text-feature-stage + .text-feature-stage {
+    padding: 0;
+}
+.text-feature-stage + .awards-callout-stage {
+    padding-top: 120px;
+}
+.text-feature-stage + .awards-callout-stage #results_stage {
+    min-height: auto;
+    padding-bottom: 120px;
+}
 .text-feature .columns {
     color: var(--color-dark-gray);
     display: flex;
@@ -12,7 +22,6 @@
 .text-feature .columns.single-column > div {
     flex: 1 1 100%;
     line-height: 1.75em;
-    margin: auto;
     max-width: 860px;
 }
 .text-feature .columns.single-column .rcol {
