@@ -1033,8 +1033,11 @@ function dfdl_filter( string $filter ): void {
             $options = dfdl_get_insights_years();
             break;
         case "teams_sort":
-                $options = dfdl_get_teams_sort();
-                break;
+            $options = dfdl_get_teams_sort();
+            break;
+        case "insights_categories":
+            $options = dfdl_get_insights_categories_sort();
+            break;
         default:
             // no default
     }
@@ -1048,6 +1051,8 @@ function dfdl_filter( string $filter ): void {
     if ( isset($options) ) {
         foreach( $options as $option ) {
             if ( "teams_sort" === $filter && 1 === $option->term_id) {
+                $selected = 'selected="selected"';
+            } else if ( "insights_years" === $filter && $option->term_id !== 0 ) {
                 $selected = 'selected="selected"';
             } else {
                 $selected = "";

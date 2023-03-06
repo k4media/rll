@@ -366,66 +366,71 @@ function dfdl_get_award_bodies( string $return=""): array {
 
 /** 
  * DFDL Insights Years.
- * 
- * Oldest year by post category
- * news, legal-and-tax, events, etc
  *
  * @return array of terms
-*/
+ */
 function dfdl_get_insights_years() {
 
     global $wp;
 
-    $pieces   = explode("/", $wp->request ) ;
-    $category = end($pieces);
-    $truncate = null;
+    $current_year = intval(date("Y"));
+    $oldest_year  = $current_year - 2;
+    $options      = array();
 
-    if ( "insights" === $category ) {
-        $loop = get_posts( 'numberposts=1&order=ASC' );
-    } else {
-        $loop = get_posts( 'numberposts=1&category=' . $category . '&order=ASC' );
+    for ( $i = $current_year ; $i >= $oldest_year ; $i-- ) {
+        $obj = (object)[];
+        $obj->term_id = $i;
+        $obj->name = $i;
+        $obj->slug = $i;
+        $options[] = $obj;
     }
-    
-    if ( isset($loop[0]->ID) ) {
 
-        $oldest_post_date = $loop[0]->post_date;
+    // 'Older' posts
+    $obj = (object)[];
+    $obj->term_id = 0;
+    $obj->name = 'Older';
+    $obj->slug = 'older';
+    $options[] = $obj;
 
-        if ( isset($oldest_post_date) ) {
-    
-            $current_year = intval(date("Y"));
-            $pieces       = explode("-", $oldest_post_date);
-            $oldest_year  = intval($pieces[0]);
-            
-            if ( $current_year - 3 > $oldest_year ) {
-                $oldest_year = $current_year - 3;
-                $truncate = true;
-            }
-    
-            $options = array();
-    
-            for ( $i = $current_year ; $i >= $oldest_year ; $i-- ) {
-                $obj = (object)[];
-                $obj->term_id = $i;
-                $obj->name = $i;
-                $obj->slug = $i;
-                $options[] = $obj;
-            }
-    
-            if ( true === $truncate ) {
-                $obj = (object)[];
-                $obj->term_id = 0;
-                $obj->name = 'Older';
-                $obj->slug = 'older';
-                $options[] = $obj;
-            }
-    
-            return $options;
-    
+    return $options;
+
+}
+
+/** 
+ * DFDL News Types.
+ * 
+ * Sub-categories from News and Content Hub 
+ * 
+ * @return array of terms
+ */
+function dfdl_get_insights_categories_sort(): array {
+
+    $return  = array();
+    $term_id = array( 842, 667);
+
+    foreach ( $term_id as $id ) {
+        $terms = get_terms(array(
+            'taxonomy'   => 'category',
+            'child_of'    => $id,
+            'hide_empty' => false,
+            'orderby'    => 'name',
+            'order'      => 'ASC'
+        ));
+        foreach ( $terms as $t ) {
+            $return[] = $t;
         }
     }
-    
-    
+
+    usort($return,function($first,$second){
+        return strtolower($first->name) <=> strtolower($second->name);
+    });
+
+    return $return;
+
 }
+
+
+
 
 /** 
  * DFDL Award Years.
