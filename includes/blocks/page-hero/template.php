@@ -27,6 +27,11 @@ $K4->fragment_cache( $key, function() {
      if ( isset($size) ) {
           $class .= ( "landing page" === strtolower($size) ) ? " landing " : "" ;
      }
+
+     $sections = dfdl_get_section() ;
+     if ( isset($sections[0]) && "solutions" === $sections[0]) {
+          $class .= " solutions ";
+     }
      
      // validate fields
      if ( "Page Hero Title" === $title ) {
@@ -38,6 +43,14 @@ $K4->fragment_cache( $key, function() {
      <?php if( isset($overlay) ) : ?>
           <div class="overlay" style="background-color:<?php echo $overlay ?>"></div>
      <?php endif; ?>
-     <div class="fp-hero-title"><h2><?php echo $title ?></h2></div>
+     <div class="stage silo">
+          <nav class="subnav-stage">
+               <ul>
+                    <li class="back"><a href="<?php echo get_home_url(null, '/solutions/') ?>">Back</a></li>
+               </ul>
+          </nav>
+          <h2><?php echo $title ?></h2>
+     </div>
+     
 </div>
 <?php }); // close K4 fragment ?>

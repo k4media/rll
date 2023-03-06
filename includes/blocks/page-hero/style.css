@@ -14,22 +14,37 @@
 .hero.page.landing {
     height: 616px;
 }
-
-.hero .overlay {
+.hero .stage {
+    align-items: flex-end;
+    display: flex;
     height: 100%;
+    position: relative;
+    width: 100%;
+}
+.hero .overlay {
     position: absolute;
     width: 100%;
     z-index: 1;
 }
-.fp-hero-title {
+#page-hero h2 {
     color: var(--color-white);
     font-size: var(--font-size-super-jumbo);
-    margin-left: 64px;
-    padding-bottom:1em;
+    padding-bottom: 1em;
     position: relative;
     z-index: 1;
 }
-.fp-hero-title h2 {
-    font-size: var(--font-size-super-jumbo);
-    font-weight: 700;
+.hero .stage .subnav-stage {
+    position: absolute;
+    top: 120px;
+}
+#page-hero .subnav-stage .back a {
+    background: transparent url(../../../assets/media/icon-back-arrow-white.svg) center left no-repeat;
+    background-size: 8px;
+	color: var(--color-white);
+    display: none;
+    font-weight: 900;
+	padding-left: 1.5em;
+}
+#page-hero.solutions .subnav-stage .back a {
+    display: block;
 }
