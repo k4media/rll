@@ -1,8 +1,8 @@
 <div class="card news content-hub-card">
     <div class="meta">
         <div class="taxonomy">
-            <?php if ( isset($categories) ) : ?>
-                <span class="category"><?php echo $categories[0] ?></span>
+            <?php if ( isset($term) ) : ?>
+                <span class="category"><?php echo $term->name ?></span>
             <?php endif; ?>
         </div>
         <div class="date">

@@ -1313,8 +1313,6 @@ article + #insights {
 	margin: 1em 0 1em 0;
 	padding: 1em 0 1em 0;
 }
-
-
 #contact-dfdl input[type=text],
 #contact-dfdl input[type=email],
 #contact-dfdl textarea {
@@ -1343,7 +1341,6 @@ article + #insights {
 #contact-dfdl .dirty.valid textarea {
 	border: solid 1px var(--color-green);
 }
-
 #contact-dfdl .dirty.invalid,
 #contact-dfdl .dirty.invalid h4 {
 	color: var(--color-error-dark)
@@ -1352,7 +1349,12 @@ article + #insights {
 #contact-dfdl .dirty.invalid textarea {
 	border: solid 1px var(--color-error-dark);
 }
+.page-wrapper {
+	margin: 120px 0 120px 0;
+}
+.page-wrapper h1 {
 
+}
 
 @media print {
 	.header-stage .left,

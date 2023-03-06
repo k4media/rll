@@ -415,10 +415,11 @@ function dfdl_content_hub_callout() {
             /**
              * will need terms in future
              */
-             // $slug = dfdl_content_hub_category($post->ID);
+             $post_term = dfdl_post_terms($post->ID, array("return"=>"term"));
 
             set_query_var("story", $post);
-            set_query_var("categories", dfdl_post_terms($post->ID));
+            set_query_var("term", $post_term);
+            //set_query_var("categories", dfdl_post_terms($post->ID));
             get_template_part( 'includes/template-parts/content/insights', 'content-hub-card' );
 
         }

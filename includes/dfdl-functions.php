@@ -19,15 +19,20 @@ function dfdl_insights() {
         'update_post_term_cache' => false,
    );
    
-   /**
-     * Add section data
-     */
-    $sections = dfdl_get_section();
+   $sections = dfdl_get_section();
 
+    /**
+     * Add solution/country query data
+     */
     if ( count($sections) > 0 ) {
+
+        $maybe_country = end($sections);
 
         if ( isset($sections) && "solutions" === $sections[0] && isset($sections[1]) ) {
 
+            /**
+             * Solutions
+             */
             $query_args['tax_query'] = array(
                 array(
                     'taxonomy' => 'dfdl_solutions',
@@ -35,7 +40,20 @@ function dfdl_insights() {
                     'terms'    => $sections[1],
                 )
             );
-        
+
+        } else if( isset($maybe_country) && in_array( $maybe_country, constant('DFDL_COUNTRIES') ) ) {
+           
+            /**
+             * Country
+             */
+            $query_args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'dfdl_countries',
+                    'field'    => 'slug',
+                    'terms'    => $maybe_country,
+                )
+            );
+
         } else {
         
             /**
@@ -78,6 +96,10 @@ function dfdl_insights() {
         )
     );
 
+    //echo "<pre>";
+    //var_dump($query_args);
+    //echo "</pre>";
+
    $insights = new WP_Query( $query_args );
 
     /**
@@ -101,8 +123,6 @@ function dfdl_insights() {
     }
 
 }
-
-
 
 function dfdl_recent_news() {
 
@@ -557,7 +577,6 @@ function dfdl_get_countries_tax(): array {
     ));
 }
 
-
 /**
  * DFDL section
  * 
@@ -620,8 +639,13 @@ function dfdl_insights_back_link(): string {
     
     global $wp_query;
 
+    // Try referer first 
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        return $_SERVER['HTTP_REFERER'];
+    }
+
     /**
-     * Try DFDL Category first
+     * Try DFDL Category
      */
     if ( isset($wp_query->query['dfdl_category']) ) {
         $link = get_term_link($wp_query->query['dfdl_category'], "category");
@@ -694,6 +718,9 @@ function dfdl_post_solution( int $post_id, array $args=array() ) {
     if ( isset($solution[0]) ) {
         return $solution[0];
     }
+
+    $term = dfdl_post_terms($post_id, array("return"=>"term"));
+
     return dfdl_post_terms($post_id, array("return"=>"term"));
 
 }
@@ -707,14 +734,19 @@ function dfdl_post_solution( int $post_id, array $args=array() ) {
  */
 function dfdl_post_terms( int $post_id, array $args=array() ) {
 
-    // $return = array();
-
     $terms     = wp_get_post_terms($post_id, 'category');
-    $ancestors = get_ancestors($terms[0]->term_id, 'category');
 
+    if ( isset($args['return']) && "term" === $args['return'] ) {
+        return $terms[0];
+    } else {
+        return $terms[0]->name;
+    }
+
+    //$ancestors = get_ancestors($terms[0]->term_id, 'category');
     /**
      * Return if only 1 term
      */
+    /*
     if ( 0 === count($ancestors) ) {
         if ( isset($args['return']) && "term" === $args['return'] ) {
             return $terms[0];
@@ -722,7 +754,7 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
             return $terms[0]->name;
         }
     }
-
+    */
     /** else ... we have a problem! deal with it later  */
     /*
     if ( count($ancestors) > 0 ) {

@@ -1,11 +1,9 @@
 <?php
 
-
 /**
  * Migration functions. 
  */
 require get_template_directory() . '/includes/dfdl_migration.php';
-
 
 // Theme Setup
 require get_template_directory() . '/includes/dfdl-theme-setup.php';

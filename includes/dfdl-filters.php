@@ -23,6 +23,26 @@ function dfdl_youtube_wrapper($html, $url, $attr, $post_id) {
 }
 
 /**
+ * Sign in/Log out urls
+ */
+add_filter( 'wp_nav_menu_objects', 'dfdl_sign_in_menu_item', 10, 1 );
+function dfdl_sign_in_menu_item($items) {
+    foreach( $items as $item ) {
+        if( $item->title === "Sign In" ) { 
+            if( is_user_logged_in() ) {
+                $item->title = "Sign Out";
+                $item->url = wp_logout_url();
+            } else {
+                $item->title = "Sign In";
+                $item->url = wp_login_url();
+            }
+        }
+    }
+    return $items;
+}
+
+
+/**
  * Insights Archive Title
  */
 function dfdl_filter_archive_insights_title() {

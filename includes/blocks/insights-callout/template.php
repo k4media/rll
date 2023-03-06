@@ -9,35 +9,25 @@
  */
 global $wp, $wp_query;  
 
-/*
-if ( isset($wp_query->query['dfdl_country']) ) {
-    $query_args['tax_query'][] = array(
-        array(
-            'taxonomy' => 'dfdl_countries',
-            'field'    => 'slug',
-            'terms'    => $wp_query->query['dfdl_country'],
-        )
-    );
-}
-*/
-
 $insights = dfdl_insights();
-
-$jump = get_home_url('', '/insights/');
-
-/*
-if ( isset($insights->tax_query->queries[0]['terms'][0]) && ! empty($insights->tax_query->queries[0]['terms'][0]) ) {
-     // var_dump($insights->tax_query->queries[0]['terms'][0]);
-     $jump = get_home_url('', '/insights/' . $insights->tax_query->queries[0]['terms'][0] . '/');
-} else {
-     $jump = get_home_url('', '/insights/');
-}
-*/
-
 if ( isset($insights) ) {
      $post_class = ( $insights->have_posts() ) ? "" : "no-results" ; 
 } else {
      return;
+}
+
+/**
+ * View More button link
+ */
+$jump = get_home_url('', '/insights/');
+
+/**
+ * check for country
+ */
+$sections = dfdl_get_section();
+$maybe_country = end($sections);
+if( isset($maybe_country) && in_array( $maybe_country, constant('DFDL_COUNTRIES') ) ) {
+     $jump .= $maybe_country . "/";
 }
 
 ?>
@@ -62,6 +52,7 @@ enim bibendum cras risus consectetur elit cras.</h3>
                          set_query_var("story", $post );
                          set_query_var("term", $term);
 
+                         
 
                          //set_query_var("term", $category);
                          //set_query_var("slug", dfdl_content_hub_category($post->ID));
