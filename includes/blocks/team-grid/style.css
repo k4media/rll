@@ -1,4 +1,5 @@
-.team-grid-stage.locations {
+.team-grid-stage.locations,
+.team-grid-stage.solutions {
     background-color: var(--color-green-10);
 }
 .team-grid {

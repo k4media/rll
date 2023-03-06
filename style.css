@@ -236,6 +236,7 @@ header.main {
 }
 .header-stage .right .cta-button a:hover {
 	background-color: var(--color-green);
+	color: var(--color-white);
 	transition: all .15s;
 }
 .header-stage .right .cta-button a:active {
@@ -262,6 +263,10 @@ header.main {
 }
 .header-stage .right a {
 	margin-left: 1.5em;
+}
+.header-stage .left a:hover,
+.header-stage .right a:hover {
+	color: var(--color-bright-green);
 }
 .header-stage .current_page_item a,
 .header-stage .current-page-parent {
@@ -295,7 +300,8 @@ header.main {
 }
 .callout h3 {
     color: var(--color-gray);
-    font-size: var(--font-size-body);
+    font-family: var(--setting-body-font);
+	font-size: var(--font-size-body);
     font-weight: 400;
     line-height: 1.4em;
     margin: 1em auto 4em auto;
@@ -434,8 +440,10 @@ header.main {
 	align-items: center;
 	display: flex;
 }
+.team-member-stage .team-member {
+	flex-direction: row-reverse;
+}
 .dfdl-single-member .details-stage {
-	
 	margin: 0 2em 0 2em;
 	width: 100%;
 }
@@ -461,7 +469,8 @@ header.main {
 	font-size: var(--font-size-small);
 	line-height: 1.5em;
 }
-.dfdl-single-member .bio {
+.dfdl-single-member .member .bio {
+	color: var(--color-green);
 	margin-top: 1em;
 }
 .dfdl-single-member .contact-details {
@@ -541,6 +550,7 @@ header.main {
 }
 .team-member .details-stage {
     align-items: center;
+	color: var(--color-green);
     display: flex;
     padding: 1.5em;
     text-align: left;
@@ -606,6 +616,7 @@ header.main {
 .contact-callout {
     background-color: var(--color-bright-green);
     display: flex;
+	margin: 4em 0 4em 0;
     position: relative;
 }
 .contact-callout > div {

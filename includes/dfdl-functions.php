@@ -1,5 +1,145 @@
 <?php
 
+/**
+ * Insights posts
+ */
+function dfdl_insights() {
+
+    $debug = false;
+
+    $query_args = array(
+        'post_type'      => array('post'),
+        'post_status'    => array("publish"),
+        'posts_per_page' => 8,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => false,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+   );
+   
+   /**
+     * Add section data
+     */
+    $sections = dfdl_get_section();
+
+    if ( count($sections) > 0 ) {
+
+        if ( isset($sections) && "solutions" === $sections[0] && isset($sections[1]) ) {
+
+            $query_args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'dfdl_solutions',
+                    'field'    => 'slug',
+                    'terms'    => $sections[1],
+                )
+            );
+        
+        } else {
+        
+            /**
+             * Default to news category -- is that right?
+             */
+            $query_args['tax_query'] = array(
+                array(
+                        'taxonomy' => 'category',
+                        'field'    => 'slug',
+                        'terms'    => 'news',
+                )
+            );
+        }
+
+    } else {
+        
+        /**
+         * Default to news category -- is that right?
+         */
+        $query_args['tax_query'] = array(
+            array(
+                    'taxonomy' => 'category',
+                    'field'    => 'slug',
+                    'terms'    => 'news',
+            )
+        );
+    }
+
+    /**
+     * Limit results to 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
+
+   $insights = new WP_Query( $query_args );
+
+    /**
+     * Debug info
+     */
+    if ( true === $debug && current_user_can('manage_options') ) {
+        echo "<h4>Query Args</h4>";
+        var_dump( $query_args );
+        echo "<h4>Results Count</h4>";
+        var_dump( $insights->found_posts );
+        var_dump( count($insights->posts) );
+    }
+
+    /**
+     * In no results from out main query fetch recent news
+     */
+    if ( $insights->have_posts() ) {
+        return $insights;
+    } else {
+        return dfdl_recent_news();
+    }
+
+}
+
+
+
+function dfdl_recent_news() {
+
+    $query_args = array(
+        'post_type'      => 'post',
+        'post_status'    => array("publish"),
+        'posts_per_page' => 8,
+        'cat'            => 667, // news category
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
+
+    /**
+     * Limit results to 2 years
+     */
+    $limit = array(
+        'year'  => date("Y") - 2,
+        'month' => date("m"),
+        'day'   => date("d")
+    );
+    $query_args['date_query'] = array(
+        array(
+            'after' => $limit
+        )
+    );
+
+    return new WP_Query( $query_args );
+
+}
+
+
+
+
 /** 
  * DFDL Get Awards.
  *
@@ -402,12 +542,12 @@ function dfdl_get_countries( array $args = array() ): array {
 }
 
 /*
-* DFDL Countries Tax.
-*
-* Return dfdl_countries taxonomy
-* 
-* @return array of IDs
-*/
+ * DFDL Countries Tax.
+ *
+ * Return dfdl_countries taxonomy
+ * 
+ * @return array of IDs
+ */
 function dfdl_get_countries_tax(): array {
     return get_terms(array(
         'taxonomy' => 'dfdl_countries',
@@ -454,34 +594,6 @@ function dfdl_get_section(): array {
     }
 
     return $return;
-
-}
-
-/**
- * Content Hub Subcategory.
- * 
- * Return post cat name
- */
-function dfdl_content_hub_category( int $post_id ): string {
-
-    $post_terms = wp_get_post_terms($post_id, 'category');
-
-    if ( count($post_terms ) === 1 ) {
-        return $post_terms[0]->name;
-    } else {
-
-        $videos = array("videos", "videos-resources");
-
-        foreach( $post_terms as $p ) {
-            // videos
-            if ( in_array($p->slug, $videos) ) {
-                return "Videos";
-            }
-        }
-       
-    }
-
-    return "";
 
 }
 
@@ -556,29 +668,55 @@ function dfdl_get_permalink( int $post_id ): string {
 }
 
 /**
+ * DFDL Post Solution.
+ * 
+ * dfdl_solution tax term for post
+ * 
+ */
+function dfdl_post_solution( int $post_id, array $args=array() ) {
+    $solution = wp_get_post_terms($post_id, 'dfdl_solutions');
+    if ( isset($solution[0]) ) {
+        return $solution[0];
+    }
+    return dfdl_post_terms($post_id, array("return"=>"term"));
+
+}
+
+/**
  * DFDL Post Terms.
  * 
- * Return html for post category and sub-category
+ * Return term data for post category and sub-category
+ * 
+ * @args term, slug
  */
 function dfdl_post_terms( int $post_id, array $args=array() ) {
 
-    $categories = array();
+    // $return = array();
+
+    $terms     = wp_get_post_terms($post_id, 'category');
+    $ancestors = get_ancestors($terms[0]->term_id, 'category');
 
     /**
-     * Should be only 1 term
+     * Return if only 1 term
      */
-    $term = wp_get_post_terms($post_id, 'category');
-    $ancestors = get_ancestors($term[0]->term_id, 'category');
-    if ( count($ancestors) > 0 ) {
-        foreach( $ancestors as $a ) { 
-            $cat = get_term_by('id', $a, 'category');
-            $categories[] = $cat->name;
+    if ( 0 === count($ancestors) ) {
+        if ( isset($args['return']) && "term" === $args['return'] ) {
+            return $terms[0];
+        } else {
+            return $terms[0]->name;
         }
-    } else {
-        $categories[] = $term[0]->name;
     }
-    return $categories;
 
+    /** else ... we have a problem! deal with it later  */
+    /*
+    if ( count($ancestors) > 0 ) {
+        foreach( $ancestors as $a ) {
+            var_dump($a);
+            $cat = get_term_by('id', $a, 'category');
+            $return[] = $cat->name;
+        }
+    } 
+    */
     /*
     $parent_cat = array();
     $sub_cats = array();
@@ -593,14 +731,12 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
             $sub_cats[] = $t->slug;
         }
     }
-
     if ( ! empty($parent_cat) ) {
         $parent_category = get_term_by('slug', $parent_cat->slug, 'category');
 
         if ( isset($args['type']) && "category" === $args['type'])
             return $parent_category;
 
-        
         //$return .= '<span class="category">' . $parent_category->name . '</span>';
         if( count($sub_cats) > 0 ) {
             foreach( $sub_cats as $s ) {
@@ -615,6 +751,32 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
     }
     */
 }
+
+/**
+ * Content Hub Subcategory.
+ * 
+ * Return post cat name
+ * @int post_id
+ * 
+ * make this obsolete -- use above dfdl_post_category
+ */
+function dfdl_content_hub_category( int $post_id ): string {
+    $post_terms = wp_get_post_terms($post_id, 'category');
+    if ( count($post_terms ) === 1 ) {
+        return $post_terms[0]->name;
+    } else {
+        $videos = array("videos", "videos-resources");
+        foreach( $post_terms as $p ) {
+            // videos
+            if ( in_array($p->slug, $videos) ) {
+                return "Videos";
+            }
+        }
+    }
+    return "";
+}
+
+
 
 /**
  * Get Block Data

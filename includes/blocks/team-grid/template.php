@@ -35,6 +35,8 @@
      $args                = array();
      $args['number']      = 16;
      $args['count_total'] = true;
+     $args['meta_key']    = '_dfdl_member_rank';
+     $args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_lastname' => 'ASC' );
 
      if ( "solutions" === $sections[0] ) {
           $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_solutions');
@@ -82,6 +84,7 @@
                          if ( count($users) > 0) {
                               foreach( $users as $user ) {
                                    set_query_var("user", $user);
+                                   //var_dump( $user);
                                    get_template_part( 'includes/template-parts/content/member' );
                               }
                          } else {

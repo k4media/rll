@@ -238,7 +238,7 @@ add_action( 'pre_get_posts', 'exclude_single_posts_home' );
 function exclude_single_posts_home($query) {
 
 	if ( ! is_admin() && is_archive() && $query->is_main_query() ) {
-
+ 
         /**
          * Date query: limit results to last 2 years
          */
