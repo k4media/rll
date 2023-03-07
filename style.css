@@ -719,7 +719,9 @@ header.main {
 #results_stage {
 	min-height: 450px;
 }
-#results_stage.no-results {
+#results_stage.no-results,
+#results_stage .filter-results,
+.content-hub .filter-results {
 	margin-top: 120px;
 }
 #results_stage header.title {
@@ -1120,6 +1122,7 @@ article + #insights {
 	text-align: left;
 	text-transform: capitalize;
 }
+#results_stage .posts,
 .callout .posts {
 	display: grid;
 	grid-column-gap: 1.5em;
@@ -1170,6 +1173,7 @@ article + #insights {
 }
 .posts .card .date {
 	color: var(--color-green-70);
+	white-space: nowrap;
 }
 .posts .card .author {
 	font-size: var(--font-size-small);

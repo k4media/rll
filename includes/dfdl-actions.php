@@ -562,6 +562,8 @@ add_action('wp_ajax_filter_insights', 'dfdl_ajax_teams_insights');
 add_action('wp_ajax_nopriv_filter_insights', 'dfdl_ajax_teams_insights');
 function dfdl_ajax_teams_insights(): array {
 
+    global $wp_query;
+
     /**
      * Response 
      */
@@ -626,6 +628,7 @@ function dfdl_ajax_teams_insights(): array {
         $term = get_term_by("slug", sanitize_text_field($_POST['iSection']), 'category');
         if ( ! is_wp_error($term) ) {
             $clean['categories'][] = $term->term_id;
+            $clean['section'] = $term->term_id;
             $filters[] = $term->name;
         }
     } 
@@ -636,21 +639,37 @@ function dfdl_ajax_teams_insights(): array {
             $filters[] = intval($p);
         }
     }
+    if ( isset($_POST['iCountry']) && "" !== $_POST['iCountry'] && "undefined" !== $_POST['iCountry'] ) {
+        $clean['country'] = sanitize_text_field($_POST['iCountry']);
+    }
 
     /**
      * Build query
      */
+    $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
+    $dfdl_country = ( isset($wp_query->query['dfdl_country']) ) ? $wp_query->query['dfdl_country'] : '';
+
     $args                = array();
     $args['post_type']   = array('post');
     $args['post_status'] = array('publish'); 
+    $args['paged']       = $paged; 
     $args['number']      = 24; 
     $args['count_total'] = true;
 
+    // country
+    if ( isset($clean['country']) && $clean['country'] !== "") {
+        $args['tax_query'][] = array(
+            array (
+                'taxonomy' => 'dfdl_countries',
+                'field'    => 'slug',
+                'terms'    => $clean['country'],
+                'compare'  => 'IN'
+            ),
+        );
+    }
+
     // add solutions
     if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
-
-        echo "!solutions!";
-
         $args['tax_query'][] = array(
             array (
                 'taxonomy' => 'dfdl_solutions',
@@ -688,6 +707,7 @@ function dfdl_ajax_teams_insights(): array {
             ),
         );
     }
+
 
     // add years
     if ( isset($clean['years']) && count($clean['years']) > 0 ) {
@@ -737,7 +757,6 @@ function dfdl_ajax_teams_insights(): array {
             $search_string .= "<span>Filters: " . $filters . "</span>";
         }
         
-        
         ob_start();
         foreach ( $insights->posts as $p ) {
 
@@ -771,15 +790,30 @@ function dfdl_ajax_teams_insights(): array {
         /**
          * Insert pagination
          */
-        $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
+
+        $solutions  = ( isset($clean['solutions']) ) ? implode(",",$clean['solutions']) : "" ;
+        $categories = ( isset($clean['categories']) ) ? implode(",",$clean['categories']) : "" ;
+        $section    = ( isset($clean['section']) ) ? implode(",",$clean['section']) : "" ;
+        $years      = ( isset($clean['years']) ) ? implode(",",$clean['years']) : "" ;
+        $country    = ( isset($clean['country']) ) ? $clean['country'] : "" ;
+
         ob_start();
             echo '<div class="pagination">';
-            echo paginate_links( array(
-                //'base'         => str_replace( 999999999, '%#%', esc_url( get_permalink(get_pagenum_link( 999999999 )) ) ),
-                'base'    => dfdl_ajax_pagination_link($paged, get_permalink(), $clean), 
+            $links = paginate_links( array(
+                'base' => '%_%',
+                'format'  => $_POST['permalink'] . '?paged=%#%',
                 'total'   => $insights->max_num_pages,
-                'current' => max( 1, $paged )
+                'current' => max( 1, get_query_var('paged') ),
+                'add_args' => array(
+                    'iSolutions'  => $solutions,
+                    'iCategories' => $categories,
+                    'iSection'    => $section,
+                    'iYears'      => $years,
+                    'iCountry'    => $country,
+                )
             ));
+
+            echo $links;
             echo '</div>';
         $pagination = ob_get_clean();
         $output .= $pagination;
@@ -1352,17 +1386,22 @@ function dfdl_solutions_country_nav() {
     // Insights filter
     if ( "insights" === $section ) {
         ob_start();
-        $filter_file = get_stylesheet_directory() . "/includes/template-parts/filters/filter-" . end($dfdl_sections) . ".php";
+        if ( count($dfdl_sections) >= 3 ) {
+            $pageslug = sanitize_text_field($dfdl_sections[1]);
+            $filter_file = get_stylesheet_directory() . "/includes/template-parts/filters/filter-" .  $pageslug . ".php";
+        } else {
+            $pageslug = sanitize_text_field(end($dfdl_sections));
+            $filter_file = get_stylesheet_directory() . "/includes/template-parts/filters/filter-" . $pageslug . ".php";
+        }
         if ( file_exists($filter_file) ) {
-            $maybe_section_term = get_term_by("slug", end($dfdl_sections), 'category');
+            $maybe_section_term = get_term_by("slug", $pageslug, 'category');
             if ( false !== $maybe_section_term && ! is_wp_error($maybe_section_term) ) {
                 $omit = array("news");
-                if ( ! in_array(end($dfdl_sections), $omit) ) {
-                    echo '<input type="hidden" name="insights_section" id="insights_section" value="' . end($dfdl_sections) . '">';
+                if ( ! in_array($pageslug, $omit) ) {
+                    echo '<input type="hidden" name="insights_section" id="insights_section" value="' . $pageslug . '">';
                 }
-                
             }
-            get_template_part("includes/template-parts/filters/filter", end($dfdl_sections) );
+            get_template_part("includes/template-parts/filters/filter", $pageslug );
         } else {
             get_template_part("includes/template-parts/filters/filter", "insights");
         }

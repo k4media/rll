@@ -29,6 +29,10 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
          * Country Navigation
          */
         do_action('dfdl_solutions_country_nav');
+
+        if ( isset($wp_query->query['dfdl_country']) ) {
+            echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
+        }
     ?>
     <div id="results_stage"><div>
         <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>

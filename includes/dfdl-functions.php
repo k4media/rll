@@ -4,10 +4,11 @@
  * Insights filter pagination links
  */
 function dfdl_ajax_pagination_link( int $pagenum, string $url, array $post ): string {
-    $solutions  = ( isset($post['solutions']) ) ? implode(",",$post['solutions']) : "" ;
-    $categories = ( isset($post['categories']) ) ? implode(",",$post['categories']) : "" ;
-    $years      = ( isset($post['years']) ) ? implode(",",$post['years']) : "" ;
-    return $url . "?solutions=" . $solutions . "&categories=" . $categories. "&years=" . $years . "&page=" . intval($pagenum);
+    $solutions  = ( isset($post['iSolutions']) ) ? implode(",",$post['solutions']) : "" ;
+    $categories = ( isset($post['iCategories']) ) ? implode(",",$post['categories']) : "" ;
+    $section    = ( isset($post['iSection']) ) ? implode(",",$post['section']) : "" ;
+    $years      = ( isset($post['iYears']) ) ? implode(",",$post['years']) : "" ;
+    return $url . "?iSolutions=" . $solutions . "&iCategories=" . $categories. "&iSection=" . $section . "iYears=" . $years . "&page=" . intval($pagenum+1);
 }
 
 /**

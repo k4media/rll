@@ -59,10 +59,12 @@ function filterInsights() {
         ajax_object.ajaxurl, {
             action: "filter_insights",
             nonce: ajax_object.insights_nonce,
+            permakink: ajax_object.permalink,
             iSolutions:jQuery('#insights_solutions').select2("val"),
             iCategories: jQuery('#insights_categories').select2("val") || jQuery('#insights_events').select2("val"),
             iYears: jQuery('#insights_years').val(),
             iSection: jQuery('#insights_section').val(),
+            iCountry: jQuery('#insights_country').val(),
         }, function(data){
             data = JSON.parse(data);
             if ( data.code === 200 ) {
