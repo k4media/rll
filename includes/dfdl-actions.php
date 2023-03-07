@@ -10,47 +10,6 @@ function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before)
 }
 
 /**
- * Filter archive query for country endpoints
- * 
- * Called by archive.php
- */
-// add_action( 'pre_get_posts', 'dfdl_archive_query');
-/*
-function dfdl_archive_query($query) {
-
-    global $wp;  
-
-    // var_dump($query->pagename);
-
-	if ( ! is_admin() && $query->is_main_query() && "dfdl_insights" === $query->query['pagename'] ) {
-
-        var_dump($query->query['pagename']);
-        var_dump($query->query['dfdl_country']);
-        var_dump($query->query['dfdl_category']);
-
-        $query->set( 'tax_query', $tax_query );
-
-        if ( isset($query->query['dfdl_country']) ) {
-            $tax_query = array(
-                array(
-                    'taxonomy' => 'dfdl_countries',
-                    'field'    => 'slug',
-                    'terms'    => sanitize_text_field($query->query['dfdl_country']),
-                )
-            );
-            $query->set( 'tax_query', $tax_query );
-        }
-		if( isset($query->query['dfdl_category']) ) {
-            $query->set( 'cat', sanitize_text_field($query->query['dfdl_category']) );
-        }
-
-
-	}
-
-}
-*/
-
-/**
  * Archive date query filter
  */
 add_action( 'dfdl_in_the_news', 'dfdl_in_the_news' );
@@ -266,20 +225,17 @@ function dfdl_insights_swiper( array $args ): void {
     if ( "insights" === $args['category']) {
         /**
          * Insight categories
-         * News = 89
-         * Legal and Tax Updates (old) = 109
-         * Legal and Tax (new) = 91
-         * Events = 96; but do not include!
+         * News = 667
+         * Content Hub = 842
          * 
          */
-        $categories = array(89);
+        $categories = array(667, 842);
     } else {
         $categories = array($args['category']);
     }
     $query_args = array(
         'post_type'      => 'post',
         'post_status'    => 'publish',
-        'cat'            => $categories,
         'posts_per_page' => 6,
         'orderby'        => 'date',
         'order'          => 'DESC',
@@ -287,7 +243,16 @@ function dfdl_insights_swiper( array $args ): void {
         'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
+        'tax_query' => array(
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'id',
+                'terms'    => $categories
+            ),
+        ),
     );
+
+
 
     /**
      * Date query: limit results to last 2 years
@@ -645,8 +610,8 @@ function dfdl_ajax_teams_insights(): array {
     $post_categories  = explode(',', $_POST['iCategories']);
     foreach( $post_categories as $p ) {
         if ( in_array($p, $valid['solutions'])) {
-            //$term = get_term_by("slug", $p, 'dfdl_solutions');
-            //$clean['solutions'][] = $term->term_id;
+            $term = get_term_by("slug", $p, 'dfdl_solutions');
+            $clean['categories'][] = $term->term_id;
         }
     }
 
@@ -1123,6 +1088,19 @@ function dfdl_solutions_country_nav() {
      */
 
     // var_dump($pieces);
+
+    if ( in_array("insights", $sections) ) {
+
+        /**
+         * All button
+         */
+        if ( "insights" === end($sections)  ) {
+            $nav[] = '<li><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+        } else {
+            $nav[] = '<li><a href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+        }
+
+    }
 
     foreach($pages->posts as $page) {
 

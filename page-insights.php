@@ -11,7 +11,11 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 
 ?>
 
-<?php if ( have_posts() ) : ?>
+<?php 
+    /**
+     * Show page header from cms
+     */
+    if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : ?>
 		<?php the_post(); ?>
         <?php get_template_part( 'includes/template-parts/content/content-page' ); ?>

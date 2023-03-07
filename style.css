@@ -59,7 +59,7 @@ DFDL Theme, (C) 2022 DFDL
 	--setting-silo-max-width: 1312px;
 	--setting-narrow-max-width: 1090px;
 	--setting-border-radius: 8px;
-	--setting-button-padding: .65em 1.2em .65em 1.2em;
+	--setting-button-padding: .5em 1.2em .6em 1.2em;
 	--setting-body-font: Calibri, sans-serif;
 }
 body {
@@ -172,7 +172,8 @@ nav ul li {
 	border: solid 1px var(--color-green-70);
 	color: var(--color-green);
 	cursor: pointer;
-	padding: .8em 1.25em .8em 3.25em ;
+	font-family: "Calibri", sans-serif;
+	padding: 0.6em 1.25em .6em 3em;
 	position: relative;
 }
 .button.filter:before {
@@ -182,9 +183,9 @@ nav ul li {
 	background-size: 16px;
 	content: " ";
 	height: 24px;
-	left: 14px;
+	left: 16px;
 	position: absolute;
-	top: 16px;
+	top: 14px;
 	width: 24px;
 }
 .button.filter:hover,
@@ -321,7 +322,9 @@ header.main {
     text-decoration: none;
 }
 .callout a.button {
-    margin: 4em auto 0 auto;
+    color: var(--color-green);
+	font-size: var(--font-size-body);
+	margin: 4em auto 0 auto;
 }
 #colophon {
 	background: var(--color-green);
@@ -1078,16 +1081,12 @@ input[type=checkbox]:hover {
 #contact-dfdl .error-banner {
 	display: block;
 }
-
-
 article + #insights {
 	margin: 60px 0 60px 0;
 }
 #insights {
 	margin: 100px auto 60px auto;
 }
-
-
 #insights > header h2 {
 	font-size: var(--font-size-huge);
 	margin: 60px 0 60px 0;
@@ -1116,7 +1115,6 @@ article + #insights {
 	text-align: left;
 	text-transform: capitalize;
 }
-
 .callout .posts {
 	display: grid;
 	grid-column-gap: 1.5em;
@@ -1164,7 +1162,7 @@ article + #insights {
 .posts .card .subcategory {
 	color: var(--color-green);
 	font-size: var(--font-size-small);
-	text-transform: capitalize;
+	font-variant: small-caps;
 }
 .posts .card .date {
 	color: var(--color-green-70);
@@ -1181,6 +1179,7 @@ article + #insights {
 }
 .posts .card .excerpt {
 	color: var(--color-gray);
+	line-height: 1.4em;
 	margin-top: 1em;
 }
 
@@ -1258,9 +1257,16 @@ article + #insights {
 	display: none;
 } */
 .swiper-card {
+	border-bottom: solid 1px var(--color-green-70);
+	border-top: solid 1px var(--color-green-70);
+	margin: auto;
+	padding: 60px 0 60px 0;
+	text-align: center;
+	width: 80%;
+}
+.swiper-card .stage {
 	margin: auto;
 	max-width: 600px;
-	text-align: center;
 }
 #insights .callout .swiper-card h2 {
 	line-height: 1.4em;
@@ -1275,7 +1281,9 @@ article + #insights {
 }
 .swiper-card .taxonomy {
 	color: var(--color-green);
-	margin-bottom: 1em;
+	font-size: var(--font-size-small);
+	margin-bottom: 2em;
+	text-transform: uppercase;
 }
 .swiper-next {
 	right: 0;
