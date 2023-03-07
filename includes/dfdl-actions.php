@@ -252,8 +252,6 @@ function dfdl_insights_swiper( array $args ): void {
         ),
     );
 
-
-
     /**
      * Date query: limit results to last 2 years
      */
@@ -444,11 +442,9 @@ function dfdl_insights_callout( array $args ): void {
 
     if ( isset($wp_query->query['dfdl_country']) ) {
         $query_args['tax_query'][] = array(
-            
-                'taxonomy' => 'dfdl_countries',
-                'field'    => 'slug',
-                'terms'    => sanitize_text_field($wp_query->query['dfdl_country'])
-            
+            'taxonomy' => 'dfdl_countries',
+            'field'    => 'slug',
+            'terms'    => sanitize_text_field($wp_query->query['dfdl_country'])
         );
     }
 
@@ -567,20 +563,21 @@ add_action('wp_ajax_nopriv_filter_insights', 'dfdl_ajax_teams_insights');
 function dfdl_ajax_teams_insights(): array {
 
     /**
-    * Response 
-    */
+     * Response 
+     */
     $response = array();
     $response['code']    = 0;
+    $response['count']   = 0;
     $response['message'] = '';
     $response['status']  = '';
     $response['html']    = '';
-    $response['count']   = 0;
+    $response['debug']   = '';
 
     /**
     * Validate nonce
     */
     if ( ! wp_verify_nonce( $_POST['nonce'], "dfdl_insights" )) {
-        $response["status"]	= "invalid nonce";
+        $response["status"]	= "Failed security check. Please reload the page and try again.";
         echo json_encode($response);
         exit;
     }
@@ -595,61 +592,132 @@ function dfdl_ajax_teams_insights(): array {
     * Buffer for clean post inputs
     */
     $clean = array();
+ 
+    /**
+    * Show text value of filters
+    */
+    $filters = array();
 
     /**
     * Validate $_POST vars
     */
-    $post_solutions  = explode(',', $_POST['iSolutions']);
-    foreach( $post_solutions as $p ) {
-        if ( in_array($p, $valid['solutions'])) {
-            $term = get_term_by("slug", $p, 'dfdl_solutions');
-            $clean['solutions'][] = $term->term_id;
+    if ( isset($_POST['iSolutions']) && "" !== $_POST['iSolutions'] && "undefined" !== $_POST['iSolutions'] ) {
+        $post_solutions  = explode(',', $_POST['iSolutions']);
+        foreach( $post_solutions as $p ) {
+            $term = get_term_by("id", $p, 'dfdl_solutions');
+            if ( ! is_wp_error($term) ) {
+                $clean['solutions'][] = $term->term_id;
+                $filters[] = $term->name;
+            }
         }
     }
-
-    $post_categories  = explode(',', $_POST['iCategories']);
-    foreach( $post_categories as $p ) {
-        if ( in_array($p, $valid['solutions'])) {
-            $term = get_term_by("slug", $p, 'dfdl_solutions');
+    if ( isset($_POST['iCategories']) && "" !== $_POST['iCategories'] && "undefined" !== $_POST['iCategories'] ) {
+        $post_categories  = explode(',', $_POST['iCategories']);
+        if ( ! empty($post_categories) ) {
+            foreach( $post_categories as $p ) {
+                $term = get_term_by("id", $p, 'category');
+                if ( ! is_wp_error($term) ) {
+                    $clean['categories'][] = $term->term_id;
+                    $filters[] = $term->name;
+                }
+            }
+        }
+    } elseif ( isset($_POST['iSection']) && "" !== $_POST['iSection'] && "undefined" !== $_POST['iSection'] ) {
+        $term = get_term_by("slug", sanitize_text_field($_POST['iSection']), 'category');
+        if ( ! is_wp_error($term) ) {
             $clean['categories'][] = $term->term_id;
+            $filters[] = $term->name;
+        }
+    } 
+    if ( isset($_POST['iYears']) && "" !== $_POST['iYears'] && "undefined" !== $_POST['iYears'] ) {
+        $post_years  = explode(',', $_POST['iYears']);
+        foreach( $post_years as $p ) {
+            $clean['years'][] = intval($p);
+            $filters[] = intval($p);
         }
     }
 
-    $post_years  = explode(',', $_POST['iyears']);
-    foreach( $post_years as $p ) {
-        //$term = get_term_by("slug", $p, 'dfdl_solutions');
-        //$clean['solutions'][] = $term->term_id;
-    }
-
-
+    /**
+     * Build query
+     */
+    $args                = array();
+    $args['post_type']   = array('post');
+    $args['post_status'] = array('publish'); 
+    $args['number']      = 24; 
+    $args['count_total'] = true;
 
     // add solutions
     if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
-        $args['meta_query'][] = array(
-            'relation' => 'OR',
+
+        echo "!solutions!";
+
+        $args['tax_query'][] = array(
             array (
-                'key' => '_dfdl_user_solutions',
-                'value' => $clean['solutions'],
+                'taxonomy' => 'dfdl_solutions',
+                'field' => 'id',
+                'terms' => $clean['solutions'],
                 'compare' => 'IN'
             ),
         );
     }
 
-    // add country
-    if ( "undefined" !== $clean_country ) {
-        $term = get_term_by('slug', $clean_country, 'dfdl_countries');
-        $args['meta_query'][] = array(
-            'relation' => 'AND',
-            array(
-                'key' => '_dfdl_user_country',
-                'value' => $term->term_id,
+    // add categories
+    if ( isset($clean['categories']) && count($clean['categories']) > 0 ) {
+
+        if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
+            $args['tax_query']['relation'] = 'AND';
+        }
+        $args['tax_query'][] = array(
+            array (
+                'taxonomy'   => 'category',
+                'field' => 'id',
+                'terms' => $clean['categories']
+            ),
+        );
+
+    } else {
+
+        if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
+            $args['tax_query']['relation'] = 'AND';
+        }
+        $args['tax_query'][] = array(
+            array (
+                'taxonomy'   => 'category',
+                'field' => 'id',
+                'terms' => dfdl_insights_categories_ids()
             ),
         );
     }
 
     // add years
+    if ( isset($clean['years']) && count($clean['years']) > 0 ) {
 
-    // add categories
+        asort($clean['years']);
+        $sort_years = array();
+        foreach ( $clean['years'] as $y ) {
+            $sort_years[] = array("year" => $y);
+        }
+        $args['date_query'] = array();
+        $args['date_query']['relation'] = 'OR';
+        $args['date_query'][] = $sort_years;
+
+    } else {
+
+        /**
+         * Date query: limit results to last 2 years
+         */
+        $limit = array(
+            'year'  => date("Y") - 2,
+            'month' => date("m"),
+            'day'   => date("d")
+        );
+        $args['date_query'] = array(
+            array(
+                'after' => $limit
+            )
+        );
+
+    }
 
     // limit members in admin
     if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
@@ -659,16 +727,65 @@ function dfdl_ajax_teams_insights(): array {
     /**
      * User query
      */
-    $users  = new WP_User_Query($args);
-    if ( ! empty( $users->get_results() ) ) {
-        ob_start();
-        foreach ( $users->get_results() as $user ) {
-            set_query_var("user", $user);
-            get_template_part( 'includes/template-parts/content/insights', 'news-card' );
-        }
-        $output = ob_get_clean();
-    }
+    $insights  = new WP_Query($args);
     
+    if ( $insights->have_posts() ) {
+
+        $search_string = "<span>Showing " . $insights->post_count . " of " . $insights->found_posts . " posts.</span> ";
+        $filters = implode(", ", $filters);
+        if ( ! empty($filters) ) {
+            $search_string .= "<span>Filters: " . $filters . "</span>";
+        }
+        
+        
+        ob_start();
+        foreach ( $insights->posts as $p ) {
+
+            // $term = dfdl_post_solution($p->ID);
+            $term = dfdl_post_solution($p->ID, array("return" => "term"));
+            $cats = dfdl_post_terms($p->ID);
+            
+            set_query_var("story", $p);
+            set_query_var("term", $term);
+            set_query_var("cats", $cats);
+            set_query_var("search_string", $search_string);
+
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+
+        }
+        $cards = ob_get_clean();
+        
+        /**
+         * Insert cards into template
+         */
+        ob_start();
+            get_template_part( 'includes/template-parts/content/insights', 'search-results' );
+        $template = ob_get_clean();
+        $output   = str_replace("{posts}", $cards, $template);
+
+        /**
+         * Insert pagination
+         */
+        $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
+        ob_start();
+            echo '<div class="pagination">';
+            echo paginate_links( array(
+                //'base'         => str_replace( 999999999, '%#%', esc_url( get_permalink(get_pagenum_link( 999999999 )) ) ),
+                'base'    => dfdl_ajax_pagination_link($paged, get_permalink(), $clean), 
+                'total'   => $insights->max_num_pages,
+                'current' => max( 1, $paged )
+            ));
+            echo '</div>';
+        $pagination = ob_get_clean();
+        $output .= $pagination;
+
+    }
+
     /**
     * Validate response
     */
@@ -676,27 +793,29 @@ function dfdl_ajax_teams_insights(): array {
         $response['code']   = 200;
         $response['status'] = 'success';
         $response['html']   = $output;
-        $response['count']  = $users->results;
+        $response['count']  = $insights->post_count;
     } else {
-        $response['code']   = 400;
-        $response['status'] = 'empty result set';
+        $response['code']    = 400;
+        $response['message'] = 'empty result set';
     }
 
-   /**
+    /**
     * Debug info
     */
     $response['debug']  = $args;
 
-   /**
+    /**
     * Send response
     */
     echo json_encode($response);
 
-   /**
+    /**
     * Exit
     */
     exit;
+
     
+
 }
 
 
@@ -1003,6 +1122,9 @@ function dfdl_filter( string $filter ): void {
         case "insights_categories":
             $options = dfdl_get_insights_categories_sort();
             break;
+        case "insights_events":
+            $options = dfdl_get_insights_events_sort();
+            break;
         default:
             // no default
     }
@@ -1017,12 +1139,15 @@ function dfdl_filter( string $filter ): void {
         foreach( $options as $option ) {
             if ( "teams_sort" === $filter && 1 === $option->term_id) {
                 $selected = 'selected="selected"';
-            } else if ( "insights_years" === $filter && $option->term_id !== 0 ) {
-                $selected = 'selected="selected"';
             } else {
                 $selected = "";
             }
-            $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
+            if( "insights_categories" === $filter || "insights_solutions" === $filter || "insights_events" === $filter ) {
+                $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->term_id . '">' .  $option->name . '</option>'; 
+            } else {
+                $select[] = '<option ' . $selected . ' data-id="' . $option->term_id . '" name="' . $option->slug. '" value="' . $option->slug . '">' .  $option->name . '</option>'; 
+            }
+            
         }
     }
     $select[] = '</select>';
@@ -1087,14 +1212,13 @@ function dfdl_solutions_country_nav() {
      * 
      */
 
-    // var_dump($pieces);
+    if ( "insights" === $section ) {
 
-    if ( in_array("insights", $sections) ) {
-
+        $dfdl_sections = dfdl_get_section();
         /**
          * All button
          */
-        if ( "insights" === end($sections)  ) {
+        if ( "insights" === end($dfdl_sections)  ) {
             $nav[] = '<li><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
         } else {
             $nav[] = '<li><a href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
@@ -1228,11 +1352,20 @@ function dfdl_solutions_country_nav() {
     // Insights filter
     if ( "insights" === $section ) {
         ob_start();
-            if ( isset($pieces[1]) ) {
-                get_template_part("includes/template-parts/filters/filter", $pieces[1]);
-            } else {
-                get_template_part("includes/template-parts/filters/filter", "insights");
+        $filter_file = get_stylesheet_directory() . "/includes/template-parts/filters/filter-" . end($dfdl_sections) . ".php";
+        if ( file_exists($filter_file) ) {
+            $maybe_section_term = get_term_by("slug", end($dfdl_sections), 'category');
+            if ( false !== $maybe_section_term && ! is_wp_error($maybe_section_term) ) {
+                $omit = array("news");
+                if ( ! in_array(end($dfdl_sections), $omit) ) {
+                    echo '<input type="hidden" name="insights_section" id="insights_section" value="' . end($dfdl_sections) . '">';
+                }
+                
             }
+            get_template_part("includes/template-parts/filters/filter", end($dfdl_sections) );
+        } else {
+            get_template_part("includes/template-parts/filters/filter", "insights");
+        }
         $nav[] = ob_get_clean();
     }
 

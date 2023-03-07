@@ -1,4 +1,4 @@
-<div class="card news">
+<div class="card events">
     <div class="meta">
         <?php if ( isset($term) ) : ?>
             <span class="category"><?php echo $term->name ?></span>

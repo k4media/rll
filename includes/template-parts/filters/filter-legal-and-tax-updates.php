@@ -1,16 +1,12 @@
-<li class="filter-button"><button id="filters-toggle" class="button filter news-filter">Filter</button></li>
-<div id="filters-stage" class="news-filters-stage filters-stage silo">
+<li class="filter-button"><button id="filters-toggle" class="button filter legal-and-tax-updates-filter">Filter</button></li>
+<div id="filters-stage" class="legal-and-tax-updates-filters-stage filters-stage silo">
     <div class="stage">
-        <div class="news-filters filters">
-            <div class="col col1 news-solutions">
+        <div class="legal-and-tax-updates-filters filters">
+            <div class="col col1 legal-and-tax-updates-solutions">
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "insights_solutions") ?>
             </div>
-            <div class="col col1 news-types">
-                <h4>News Types</h4>
-                <?php do_action("dfdl_filter", "insights_categories") ?>
-            </div>
-            <div class="col col1 news-years">
+            <div class="col col1 legal-and-tax-updates-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "insights_years") ?>
             </div>

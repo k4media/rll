@@ -711,8 +711,6 @@ header.main {
 	font-size: var(--font-size-larger);
 	font-weight: 700;
 }
-
-
 .loading {
 	align-items: center;
 	display: flex;
@@ -720,6 +718,12 @@ header.main {
 }
 #results_stage {
 	min-height: 450px;
+}
+#results_stage.no-results {
+	margin-top: 120px;
+}
+#results_stage header.title {
+	margin: 60px 0 60px;
 }
 .award-stage > div {
 	color: var(--color-gray);
@@ -739,7 +743,8 @@ header.main {
 	display: block;
 	text-align: center;
 }
-#results_stage > div > div {
+
+#results_stage.award-stage > div > div {
 	display: inline-block;
 }
 .award-stage > div h4 {
@@ -884,7 +889,7 @@ input[type=checkbox] {
 	vertical-align: middle;
 }
 .select2-results__option[aria-selected=true]:before {
-	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 50% 50%;
+	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 63% 60%;
 	background-size: 90%;
 	border: solid 2px var(--color-green);
 	content: " ";
@@ -1134,8 +1139,8 @@ article + #insights {
 }
 .posts .card .play {
 	background-color: var(--color-whisper);
-	padding-top: 56.25%;
 	position: relative;
+	height: 180px;
 }
 .posts .card .play .stage {
 	height: 100%;
@@ -1148,7 +1153,6 @@ article + #insights {
 	height: 100%;
 	width: 100%;
 }
-
 .posts .card .meta {
 	display: flex;
 	font-size: var(--font-size-small);
@@ -1208,10 +1212,10 @@ article + #insights {
 .single h1 {
 	font-size: var(--font-size-huge)
 }
-
 .pagination {
 	margin: 4em 0 4em 0;
 	text-align: center;
+	width: 100%;
 }
 .pagination a {
 	color: var(--color-gray);

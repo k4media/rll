@@ -25,6 +25,13 @@ document.addEventListener('DOMContentLoaded', function () {
         awards_filters.classList.toggle("is-active");
     });
 
+    var filters_toggle = document.getElementById("filters-toggle");
+    var filters_filters = document.getElementById("filters-stage");
+    filters_toggle && filters_toggle.addEventListener("click", function() {
+        filters_toggle.classList.toggle("is-active");
+        filters_filters.classList.toggle("is-active");
+    });
+
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {
@@ -39,7 +46,7 @@ if (jQuery().jquery) {
     jQuery("#teams_solutions, #teams_sort").on("change", debounce(function() {
         filterTeams()
     }, 700));
-    jQuery("#insights_solutions, #insights_categories, #insights_years").on("change", debounce(function() {
+    jQuery("#insights_solutions, #insights_categories, #insights_years, #insights_events").on("change", debounce(function() {
         filterInsights()
     }, 700));
 }
@@ -53,18 +60,20 @@ function filterInsights() {
             action: "filter_insights",
             nonce: ajax_object.insights_nonce,
             iSolutions:jQuery('#insights_solutions').select2("val"),
-            iCategories: jQuery('#insights_categories').select2("val"),
-            iYears: jQuery('#insights_years').val()
+            iCategories: jQuery('#insights_categories').select2("val") || jQuery('#insights_events').select2("val"),
+            iYears: jQuery('#insights_years').val(),
+            iSection: jQuery('#insights_section').val(),
         }, function(data){
             data = JSON.parse(data);
             if ( data.code === 200 ) {
                 jQuery("#results_stage").removeClass("no-results");
                 jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
             } else {
-                jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
+                jQuery("#results_stage > div ").replaceWith( '<div><p class="no-insights not-found">Nothing found. Please refine your search.</p></div>' );
                 console.log(data);
             }
             console.log("results loaded");
+            console.log(data);
         }
     )
 }

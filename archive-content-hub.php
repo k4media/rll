@@ -17,7 +17,7 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 	<?php endwhile; ?>
 <?php endif; ?>
 
-<section id="insights" class="">
+<section id="insights" class="archive content-hub">
 
     <?php
         /**

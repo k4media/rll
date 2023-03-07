@@ -110,7 +110,6 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
-
 }
 
 /**

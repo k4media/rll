@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * Insights filter pagination links
+ */
+function dfdl_ajax_pagination_link( int $pagenum, string $url, array $post ): string {
+    $solutions  = ( isset($post['solutions']) ) ? implode(",",$post['solutions']) : "" ;
+    $categories = ( isset($post['categories']) ) ? implode(",",$post['categories']) : "" ;
+    $years      = ( isset($post['years']) ) ? implode(",",$post['years']) : "" ;
+    return $url . "?solutions=" . $solutions . "&categories=" . $categories. "&years=" . $years . "&page=" . intval($pagenum);
+}
+
+/**
  * Insights posts
  */
 function dfdl_insights() {
@@ -386,11 +396,11 @@ function dfdl_get_insights_years() {
     }
 
     // 'Older' posts
-    $obj = (object)[];
-    $obj->term_id = 0;
-    $obj->name = 'Older';
-    $obj->slug = 'older';
-    $options[] = $obj;
+    // $obj = (object)[];
+    // $obj->term_id = 0;
+    // $obj->name = 'Older';
+    // $obj->slug = 'older';
+    // $options[] = $obj;
 
     return $options;
 
@@ -404,10 +414,8 @@ function dfdl_get_insights_years() {
  * @return array of terms
  */
 function dfdl_get_insights_categories_sort(): array {
-
     $return  = array();
     $term_id = array( 842, 667);
-
     foreach ( $term_id as $id ) {
         $terms = get_terms(array(
             'taxonomy'   => 'category',
@@ -420,17 +428,59 @@ function dfdl_get_insights_categories_sort(): array {
             $return[] = $t;
         }
     }
-
     usort($return,function($first,$second){
         return strtolower($first->name) <=> strtolower($second->name);
     });
-
     return $return;
+}
 
+/** 
+ * Insights Events Sort.
+ * 
+ * Event sub-categories
+ * 
+ * @return array of terms
+ */
+function dfdl_get_insights_events_sort(): array {
+    $return   = array();
+    $term     = get_term_by("slug", "events", "category");
+    $children = get_term_children($term->term_id, 'category'); 
+    foreach ( $children as $c ) {
+        $child = get_term_by("id", $c, "category");
+        $return[] = $child;
+    }
+    //usort($return,function($first,$second){
+        //return strtolower($first->name) <=> strtolower($second->name);
+    //});
+    return $return;
 }
 
 
+/**
+ * Insights Categories
+ * 
+ * array of cats & subcats included in Insights
+ */
+function dfdl_insights_categories_ids():array {
+    /**
+     * Content Hub = 843
+     * News        = 667
+     * Events      = 668
+     * Legal & Tax = 47
+     */
+    $term_ids = array( 842, 667, 668, 47 );
+    $children = array();
+    foreach ( $term_ids as $id ) {
+        $kids = get_term_children($id, 'category'); 
+        foreach( $kids as $k ) {
+            $children[] = $k;
+        }
+    }
+    $cat_ids = array_merge($term_ids, $children);
 
+    return $cat_ids;
+
+}
 
 /** 
  * DFDL Award Years.
@@ -718,16 +768,12 @@ function dfdl_get_permalink( int $post_id ): string {
  * dfdl_solution tax term for post
  * 
  */
-function dfdl_post_solution( int $post_id, array $args=array() ) {
+function dfdl_post_solution( int $post_id ) {
     $solution = wp_get_post_terms($post_id, 'dfdl_solutions');
     if ( isset($solution[0]) ) {
         return $solution[0];
     }
-
-    $term = dfdl_post_terms($post_id, array("return"=>"term"));
-
     return dfdl_post_terms($post_id, array("return"=>"term"));
-
 }
 
 /**
@@ -739,13 +785,36 @@ function dfdl_post_solution( int $post_id, array $args=array() ) {
  */
 function dfdl_post_terms( int $post_id, array $args=array() ) {
 
-    $terms     = wp_get_post_terms($post_id, 'category');
+    $hard_return = array("podcasts", "events", "videos", "news");
 
-    if ( isset($args['return']) && "term" === $args['return'] ) {
-        return $terms[0];
-    } else {
-        return $terms[0]->name;
+    $terms = wp_get_post_terms($post_id, 'category');
+
+    $categories = array();
+
+    if ( ! is_wp_error($terms) ) {
+        foreach( $terms as $term ) {
+            if (in_array($term->slug, $hard_return)) {
+                $parent = $term;
+            } else {
+                $categories[] = $term;
+            }
+        }
     }
+
+    if ( isset($parent) && isset($args['return']) && "term" === $args['return'] ) {
+        return $parent;
+    } elseif (isset($parent)) {
+        return $parent->name;
+    } elseif ( isset($categories) && isset($args['return']) && "term" === $args['return'] ) {
+        return $categories[0];
+    } elseif (isset($categories)) {
+        return $categories[0]->name;
+    } else {
+        return array();
+    }
+
+    
+
 
     //$ancestors = get_ancestors($terms[0]->term_id, 'category');
     /**
