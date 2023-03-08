@@ -58,6 +58,29 @@ function dfdl_filter_archive_insights_title() {
 }
 
 /**
+ * Style first text graph
+ */
+add_filter( 'the_content', 'dfdl_story_lead', 100, 2);
+function dfdl_story_lead( string $content )  {  
+
+    // get first graph
+    $first_graph = substr($content, 0, strpos($content, "</p>") + 4);
+
+    // sometimes first graph is an image, so strip html
+    $first_graph = strip_tags($first_graph);
+    
+    if ( "" === $first_graph ) {
+        $posx  = strposX($content, "</p>", 2);
+        $front = substr($content, 0, $posx + 4);
+        $back  = substr($content, $posx);
+        $front = str_replace("<p", "<p class='lead' ", $front);
+        return $front . $back;
+    }
+    return $content;
+
+}
+
+/**
  * Insert author box into content
  */
 add_filter( 'the_content', 'dfdl_author_callout', 100, 2);
@@ -112,7 +135,26 @@ function dfdl_author_callout( string $content )  {
     $back   = substr($content, $insert);
     
     return  $front . " " . $author_box_html . " " . $back;
-}   
+}  
+
+/**
+ * Excerp customisations
+ */
+add_filter( 'excerpt_length', 'dfdl_excerpt_filter');
+function dfdl_excerpt_filter( $length ) {
+	if ( is_admin() ) {
+		return $length;
+	}
+	return 20;
+}
+add_filter( 'excerpt_more', 'wpshout_change_and_link_excerpt');
+function wpshout_change_and_link_excerpt( $more ) {
+	if ( is_admin() ) {
+		return $more;
+	}
+	return ' &hellip;';
+ }
+
 
 /**
  * Disable Gutenberg for dfdl_contact_forms CPT

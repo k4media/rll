@@ -16,7 +16,7 @@
 
     <div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author"><?php echo get_the_author_meta('display_name'); ?></div>
+		<div class="author">Written by <?php echo get_the_author_meta('display_name'); ?></div>
 	</div>
 
 	<div class="entry-content">

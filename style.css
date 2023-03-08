@@ -863,6 +863,8 @@ header.main {
 	margin-left: 32px;
 }
 .filters-stage .filters h4 {
+	font-family: var(--setting-body-font);
+	font-size: var(--font-size-small);
 	color: var(--color-gray);
 	font-variant: small-caps;
 }
@@ -872,19 +874,16 @@ header.main {
 	color: var(--color-dark-gray);
 	font-size: var(--font-size-body);
 }
-
-
-
-
 .select2-container {
 	min-width: 300px;
 }
 .select2-results__option {
     text-indent: -30px;
-    padding-left: 35px !important;
+    padding: 12px 0 12px 35px !important;
 }
 .select2-container--default .select2-results > .select2-results__options {
-	max-height:420px !important;
+	max-height:440px !important;
+	padding: 1em 0 1em 0 !important;
 }
 .select2-container--default .select2-selection--multiple,
 .select2-container--default .select2-selection--single {
@@ -904,8 +903,11 @@ header.main {
 	line-height: 32px !important;
 }
 .select2-results__option {
-	padding-right: 20px;
+	margin: 7px 0 7px 0 !important;
 	vertical-align: middle;
+}
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+	border-color: #aaa !important;
 }
 .select2-results__option:before,
 input[type=checkbox] {
@@ -919,6 +921,7 @@ input[type=checkbox] {
 	background-color: #fff;
 	margin-right: 10px;
 	vertical-align: middle;
+	margin-left: 1.5em;
 }
 .select2-results__option[aria-selected=true]:before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 63% 60%;
@@ -929,15 +932,15 @@ input[type=checkbox] {
 	display: inline-block;
 }
 .select2-container--default .select2-results__option[aria-selected=true] {
-	background-color: #fff;
+	/* background-color: #fff; */
 }
 .select2-container--default .select2-results__option[aria-selected=true] {
 	background-color: var(--color-green-10) !important;
 	color: var(--color-black) !important;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-	background-color: var(--color-green-70) !important;
-    color: var(--color-white) !important;
+	background-color: var(--color-green-10) !important;
+	color: var(--color-black) !important;
 }
 /*
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
@@ -1126,7 +1129,7 @@ article + #insights {
 }
 #insights > header h2 {
 	font-size: var(--font-size-huge);
-	margin: 60px 0 60px 0;
+	margin: 3em 0 3em 0;
 }
 
 #insights .callout {
@@ -1158,12 +1161,12 @@ article + #insights {
 	grid-column-gap: 1.5em;
 	grid-row-gap: 1.5em;
 	grid-template-columns: repeat(4, 1fr);
+	margin-bottom: 120px;
 }
 .posts .card {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
 	padding: 1.5em;
 }
-
 .posts .card.media {
 	padding: 0;
 }
@@ -1241,6 +1244,7 @@ article + #insights {
 }
 .single .entry-meta {
 	color: var(--color-gray);
+	line-height: 1.4em;
 	margin: 1em 0 1em 0;
 }
 .single .category,
@@ -1255,12 +1259,20 @@ article + #insights {
 }
 .single .entry-content {
 	font-size: var(--font-size-large);
+	line-height: 1.4em;
 	position: relative;
 }
+.single .entry-content p:first-child,
+.single .entry-content .lead {
+	font-size: var(--font-size-big);
+	line-height: 1.4em;
+}
 .single h1 {
-	font-size: var(--font-size-huge)
+	font-size: var(--font-size-huge);
+	line-height: 1.4em;
 }
 .pagination {
+	display: none;
 	margin: 4em 0 4em 0;
 	text-align: center;
 	width: 100%;
