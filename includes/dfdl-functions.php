@@ -899,8 +899,6 @@ function dfdl_content_hub_category( int $post_id ): string {
     return "";
 }
 
-
-
 /**
  * Get Block Data
  * Get block data from page
@@ -918,4 +916,19 @@ function get_block_data($post, $block_name = 'core/heading', $field_name = "" ):
 	    }  
 	}
 	return $content;
+}
+
+function dfdl_short_bio( string $bio ): string {
+    $posx = strposX($bio, ". ", 1);
+    return substr($bio, 0, $posx+1);
+}
+/**
+ * Helper: Find nth occurrence of $needle
+ * Used to insert author bio in tax & lelag updates
+ */
+function strposX($haystack, $needle, $number = 0) {
+    return strpos($haystack, $needle,
+        $number > 1 ?
+        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
+    );
 }

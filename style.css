@@ -457,7 +457,40 @@ header.main {
 	margin: 0 2em 0 0;
 	padding: 1.5em 1.5em 1.5em 0;
 }
-
+.dfdl-single-member.author {
+	align-items: flex-start;
+	background-color: var(--color-green-10);
+	margin: 2em 0 2em 0;
+	padding: 1.5em;
+	position: relative;
+}
+.dfdl-single-member.author .name {
+	margin-bottom: 1em;
+}
+.dfdl-single-member.author .location {
+	margin-bottom: 1em;
+}
+.dfdl-single-member.author .bio {
+	color: var(--color-green);
+	columns: 1;
+	font-size: var(--font-size-body);
+	margin: 1em 0 1em 0;
+}
+.dfdl-single-member.author .location + .link {
+	margin-top: 1em;
+}
+.dfdl-single-member.author .link a {
+	color: var(--color-green);
+	font-size: var(--font-size-body);
+	font-weight: 900;	
+}
+.dfdl-single-member.author .link a:hover {
+	color: var(--color-bright-green);
+}
+.dfdl-single-member.author .jump {
+	position: relative;
+	right: 100px;
+}
 .dfdl-single-member .details-stage {
 	margin: 0 2em 0 2em;
 	width: 100%;

@@ -40,8 +40,6 @@ function dfdl_sign_in_menu_item($items) {
     }
     return $items;
 }
-
-
 /**
  * Insights Archive Title
  */
@@ -77,77 +75,43 @@ function dfdl_author_callout( string $content )  {
     $terms = wp_get_post_terms($post->ID, 'category');
     $slugs = array();
     foreach( $terms as $t ) { $slugs[] = $t->slug; }
-    if ( ! in_array( 'legal-and-tax', $slugs) ) {
+    if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
         return $content;
     }
 
     $user = get_user_by('ID', $post->post_author);
 
-    // $link        = get_home_url(null, 'teams/members/' . $member_slug . '/' . $user->data->ID . '/');
-    $position    = get_user_meta( $user->data->ID, 'position', true);
+    $author = array();
+    $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
+    $author['name']     = esc_attr($user->data->display_name);
+    $author['position'] = get_user_meta( $user->data->ID, 'position', true);
+    $author['location'] = '';
+    $author['bio']      = dfdl_short_bio(get_the_author_meta('description'), $user->data->ID);
+    $author['link']     = get_author_posts_url($user->data->ID);
+    // some links have spaces, maybe from import?
+    $author['link']     = str_replace(" ", "-", $author['link']);
+
+    /** Locations */
     $locations   = array();
     $country_ids = get_user_meta( $user->data->ID, '_dfdl_user_country');
     foreach( $country_ids as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $locations[] = $country->name;
     }
-
-    set_query_var("user", $user);
-    set_query_var("position", $position);
-    set_query_var("locations", $locations);
-
+    if ( count($locations) > 0 ) {
+        $author['location'] = implode(", ", $locations);
+    }
+    
+    set_query_var("author", $author);
     ob_start();
         get_template_part( 'includes/template-parts/content/author', 'callout' );
     $author_box_html = ob_get_clean();
 
-
-    /*
-    // clean up silly quotes
-    $content = iconv('UTF-8', 'ASCII//TRANSLIT', $content); 
-
-    $xml = new DOMDocument('1.0', 'UTF-8');
-    $xml->loadHTML($content);
-    $xpath = new DOMXPath( $xml );
-
-    $nodes  = $xpath->evaluate('//div[starts-with(@if, "rand")]');
-    $paras  = $xpath->query("//p");
-    $insert = floor( count($paras) / 5 );
-
-    $author_box = $xml->createElement("div", "author box goes here");
-
-    $html = $xml->createDocumentFragment();
-    $html->appendXML($author_box_html );
-
-    if ($x = $paras[$insert]) {
-
-        $x->parentNode->insertBefore($author_box, $x);
-        
-        $clone = $x->cloneNode();
-        $clone->appendChild($html);
-
-        $x->parentNode->replaceChild($clone, $x);
-
-        //$new->parentNode->appendChild($html);
-        //$x->parentNode->appendChild($author_box_html);
-        //$xml->documentElement->appendChild($html);
-
-        // move all the fetched nodes into the container
-        foreach($nodes as $node) {
-
-            //if ( $counter === $insert ) {
-               // $xml->appendChild($author_box_html);
-            //} else {
-                $xml->appendChild($node);
-            //}
-
-            //$counter++;
-            
-        }
-    }
-    $content = $xml->saveXML();
-    */
+    $insert = strposX($content, "</p>", 6);
+    $front  = substr($content, 0, $insert+4);
+    $back   = substr($content, $insert);
     
-    return $content;
+    return  $front . " " . $author_box_html . " " . $back;
 }   
 
 /**
