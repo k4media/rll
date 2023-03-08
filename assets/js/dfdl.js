@@ -32,6 +32,20 @@ document.addEventListener('DOMContentLoaded', function () {
         filters_filters.classList.toggle("is-active");
     });
 
+    var scroll_to_top = document.getElementById("scroll-to-top");
+    scroll_to_top && scroll_to_top.addEventListener("click", function() {
+        jQuery("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+    var scrollWatch = function() {
+        var y = window.scrollY;
+        if (y >= 680) {
+            scroll_to_top.classList.add("is_active");
+        } else {
+            scroll_to_top.classList.remove("is_active");
+        }
+    };
+    window.addEventListener("scroll", scrollWatch);
+
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {

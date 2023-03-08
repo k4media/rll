@@ -55,6 +55,8 @@ foreach( $terms as $term ) {
 
 ?>
 
+<a id="scroll-to-top" class="single jump" href="#top"></a>
+
 <div id="insights" class="<?php echo implode(" ", $classes) ?> silo">
 	<nav class="country-subnav-stage">
 		<ul class="country-nav">
@@ -71,7 +73,6 @@ foreach( $terms as $term ) {
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>
-
 		<?php
 			/* Start the Loop */
 			while ( have_posts() ) :

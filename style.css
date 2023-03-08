@@ -71,6 +71,7 @@ body {
 	max-width: 100%;
 	overflow-x: hidden;
 	padding: 0;
+	scroll-behavior: smooth;
 }
 body.noscroll {
 	overflow: hidden;
@@ -486,10 +487,6 @@ header.main {
 }
 .dfdl-single-member.author .link a:hover {
 	color: var(--color-bright-green);
-}
-.dfdl-single-member.author .jump {
-	position: relative;
-	right: 100px;
 }
 .dfdl-single-member .details-stage {
 	margin: 0 2em 0 2em;
@@ -1223,8 +1220,22 @@ article + #insights {
 	line-height: 1.4em;
 	margin-top: 1em;
 }
-
-
+.single.jump {
+	background: var(--color-green-10) url(assets/media/scroll-to-top-arrow.svg) no-repeat 50% 50%;
+	border: 0;
+	height: 44px;
+	cursor: pointer;
+	opacity: 0;
+	position: fixed;
+	right: 32px;
+	top: 47%;
+	transition: all .35s;
+	width: 44px;
+}
+.single.jump.is_active {
+	opacity: 100;
+	transition: all .35s;
+}
 .single.narrow {
 	max-width: 866px;
 }
