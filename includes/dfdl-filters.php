@@ -77,7 +77,6 @@ function dfdl_story_lead( string $content )  {
         return $front . $back;
     }
     return $content;
-
 }
 
 /**

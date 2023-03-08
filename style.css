@@ -1262,14 +1262,32 @@ article + #insights {
 	line-height: 1.4em;
 	position: relative;
 }
-.single .entry-content p:first-child,
+.single .entry-content > p:first-child,
 .single .entry-content .lead {
 	font-size: var(--font-size-big);
+	line-height: 1.5em;
+}
+.single h1, h2, h3, h4, h5 {
 	line-height: 1.4em;
+	margin: 1em 0 0 0;
+}
+.single h1 + p, h2 + p, h3 + p, h4 + p, h5 + p {
+	margin-top: .5em;
 }
 .single h1 {
 	font-size: var(--font-size-huge);
-	line-height: 1.4em;
+}
+.single h2 {
+	font-size: var(--font-size-jumbo);
+}
+.single h3 {
+	font-size: var(--font-size-huge);
+}
+.single h4 {
+	font-size: var(--font-size-larger);
+}
+.single h5, .single h6 {
+	font-size: var(--font-size-large);
 }
 .pagination {
 	display: none;
