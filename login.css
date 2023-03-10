@@ -29,7 +29,7 @@ body.login div#login h1 a {
 
 .login #backtoblog a, .login #nav a {
     text-decoration: none;
-    color: #131313;
+    color: #fff !important;
 }
 .login #backtoblog a:hover, .login #nav a:hover {
     color: #fff;

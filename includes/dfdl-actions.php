@@ -91,7 +91,7 @@ function dfdl_in_the_news() {
 
         
         echo '<section id="dfdl-in-the-news" class="xtra callout silo">';
-        echo '<header><h2 class="title">In the News</h2><a href="' . $archive_link . '">View All</a></header>';
+        echo '<header><h2 class="title">In the News</h2><!--<a href="' . $archive_link . '">View All</a>--></header>';
         echo '<div class="posts">' . $news . '</div>';
         echo '</section>';
 
@@ -183,7 +183,7 @@ function dfdl_written_by() {
         $news = ob_get_clean();
         
         echo '<section id="dfdl-written-by" class="xtra callout silo">';
-        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2><a href="' . $archive_link . '">View All</a></header>';
+        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2><!--<a href="' . $archive_link . '">View All</a>--></header>';
         echo '<div class="posts">' . $news . '</div>';
         echo '</section>';
 

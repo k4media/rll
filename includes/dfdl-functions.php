@@ -918,17 +918,27 @@ function get_block_data($post, $block_name = 'core/heading', $field_name = "" ):
 	return $content;
 }
 
+function dfdl_one_liner( string $string ): string {
+    return dfdl_short_bio($string);
+}
+
+// 。 <-- need to search for this
 function dfdl_short_bio( string $bio ): string {
     $posx = strposX($bio, ". ", 1);
-    return substr($bio, 0, $posx+1);
+    if ( isset($posx) ) {
+        return substr($bio, 0, $posx+1);
+    }
+    return "";
 }
 /**
  * Helper: Find nth occurrence of $needle
  * Used to insert author bio in tax & lelag updates
  */
 function strposX($haystack, $needle, $number = 0) {
-    return strpos($haystack, $needle,
-        $number > 1 ?
-        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
-    );
+    if ( strpos($haystack, $needle) > 0 ) {
+        return strpos($haystack, $needle,
+            $number > 1 ?
+            strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
+        );
+    }
 }

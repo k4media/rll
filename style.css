@@ -534,6 +534,7 @@ header.main {
 .dfdl-single-member .contact-details .mobile,
 .dfdl-single-member .contact-details .email,
 .dfdl-single-member .contact-details .linkedin {
+	color: var(--color-green);
 	text-indent: 1.5em;
 }
 .dfdl-single-member .telephone {
@@ -716,7 +717,7 @@ header.main {
 	color: var(--color-white);
 	font-family: Calibri, sans-serif;
 }
-.member .solutions {
+.member .solutions, .member .countries {
 	font-size: var(--font-size-small);
 }
 .member .bio {
@@ -1161,7 +1162,7 @@ article + #insights {
 	grid-column-gap: 1.5em;
 	grid-row-gap: 1.5em;
 	grid-template-columns: repeat(4, 1fr);
-	margin-bottom: 120px;
+	/* margin-bottom: 120px; */
 }
 .posts .card {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);

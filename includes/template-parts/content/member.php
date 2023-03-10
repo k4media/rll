@@ -52,13 +52,15 @@
                     <?php endif; ?>
                 </div>
             </div>
-            <div><p><?php echo "Rank: " . $rank ?></p></div>
         </div>
         <div class="rollover">
             <div class="stage">
                 <?php if ( isset($position) ) : ?>
                     <h4>Position</h4>
-                    <div class="ranking"><?php echo $position ?></div>
+                    <ul>
+                        <li><?php echo $position ?></li>
+                    </ul>
+                    <!-- <div class="ranking"><?php echo $position ?></div>-->
                 <?php endif; ?>
                 <?php if ( isset($expertise) && count($expertise) > 0 ) : ?>
                     <h4>Key Services</h4>

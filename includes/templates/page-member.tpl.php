@@ -109,7 +109,7 @@ if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
                     <?php else: ?>
                         <h3>Country of expertise</h3>
                     <?php endif; ?>
-                    <?php echo implode(", ", $expertise) ?>
+                    <div class="countries"><?php echo implode(", ", $expertise) ?></div>
                 </div>
             </div>
             <div class="bio">
