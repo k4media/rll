@@ -845,11 +845,10 @@ header.main {
 	background: var(--color-white);
 	border-top: solid 1px #ccc;
 	display: none;
-	padding: 1.5em;
+	padding: 1.5em 0 1.5em 0;
 	position: relative;
 	right: 0;
 	top: 60px;
-	width: 100%;
 }
 .filters-stage.is-active {
 	display: block;
