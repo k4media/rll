@@ -26,9 +26,8 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
         do_action('dfdl_solutions_country_nav');
     ?>
     <div id="results_stage"><div>
-        <?php // do_action("dfdl_insights_swiper", array('category' => 'articles') ); ?>
+        <?php do_action("dfdl_insights_swiper", array('category' => 'articles') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'podcasts') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'videos') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'web-classes') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'publications') ); ?>
     </div></div>
