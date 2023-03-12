@@ -3,9 +3,9 @@
         <?php if ( isset($term) ) : ?>
             <span class="category"><?php echo $term->name ?></span>
         <?php endif; ?>
-        <?php if (isset($show_date)) : ?>
-            <div class="date"><?php echo $show_date ; ?></div>
-        <?php endif; ?>
+        <div class="date">
+            <?php echo wp_date( get_option( 'date_format' ), get_post_timestamp($story->ID) ); ?>
+        </div>
     </div>
     <?php if (isset($dateline)) : ?>
         <div class="dateline"><?php echo $dateline ?></div>
