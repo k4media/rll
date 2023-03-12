@@ -1443,9 +1443,6 @@ article + #insights {
 .page-wrapper {
 	margin: 120px 0 120px 0;
 }
-.page-wrapper h1 {
-
-}
 
 @media print {
 	.header-stage .left,

@@ -37,6 +37,7 @@
 .hero .stage .subnav-stage {
     position: absolute;
     top: 120px;
+    z-index: 1;
 }
 #page-hero .subnav-stage .back a {
     background: transparent url(../../../assets/media/icon-back-arrow-white.svg) center left no-repeat;
