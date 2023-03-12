@@ -1130,7 +1130,7 @@ article + #insights {
 }
 #insights > header h2 {
 	font-size: var(--font-size-huge);
-	margin: 3em 0 3em 0;
+	margin-top: 3em;
 }
 
 #insights .callout {
@@ -1163,6 +1163,13 @@ article + #insights {
 	grid-row-gap: 1.5em;
 	grid-template-columns: repeat(4, 1fr);
 	/* margin-bottom: 120px; */
+}
+#results_stage > div > .swiper,
+.swiper + .posts {
+	margin-top: 60px;
+}
+header + #results_stage .swiper {
+	margin-top: 0px !important;
 }
 .posts .card {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);

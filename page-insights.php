@@ -1,14 +1,13 @@
 <?php
-/**
- * Template for Insights landing page
- *
- */
-get_header();
+    /**
+     * Template for Insights landing page
+     *
+     */
+    get_header();
 
-// Swiper.js
-wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
-wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
-
+    // Swiper.js
+    wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+    wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 ?>
 
 <?php 
@@ -22,17 +21,21 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 	<?php endwhile; ?>
 <?php endif; ?>
 
-<section id="insights" class="">
-
+<section id="insights" class="page-insights">
     <?php
+
         /**
          * Country Navigation
          */
         do_action('dfdl_solutions_country_nav');
 
+        /**
+         * Add hidden field for country
+         */
         if ( isset($wp_query->query['dfdl_country']) ) {
             echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
         }
+        
     ?>
     <div id="results_stage"><div>
         <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>

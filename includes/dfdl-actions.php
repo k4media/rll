@@ -218,6 +218,8 @@ function exclude_single_posts_home($query) {
 add_action('dfdl_insights_swiper', 'dfdl_insights_swiper');
 function dfdl_insights_swiper( array $args ): void {
 
+    global $wp_query;
+
     if ( ! isset($args) ) {
         return;
     }
@@ -233,6 +235,7 @@ function dfdl_insights_swiper( array $args ): void {
     } else {
         $categories = array($args['category']);
     }
+
     $query_args = array(
         'post_type'      => 'post',
         'post_status'    => 'publish',
@@ -251,6 +254,26 @@ function dfdl_insights_swiper( array $args ): void {
             ),
         ),
     );
+    
+    /**
+     * Add category
+     */
+    if ( isset($wp_query->query['dfdl_category']) ) {
+        $query_args['category_name'] = $wp_query->query['dfdl_category'];
+    }
+
+    /**
+     * Add country
+     */
+    if ( isset($wp_query->query['dfdl_country']) ) {
+        $query_args['tax_query'] = array(
+            array(
+                'taxonomy' => 'dfdl_countries',
+                'field'    => 'slug',
+                'terms'    => $wp_query->query['dfdl_country'],
+            ),
+        );
+    }
 
     /**
      * Date query: limit results to last 2 years

@@ -9,6 +9,10 @@ global $wp, $wp_query;
 //var_dump($wp_query->query['dfdl_country']);
 //var_dump($wp_query->query['page'] );
 
+// Swiper.js
+wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
+
 /**
  * Get country, category
  */
@@ -31,7 +35,7 @@ if ( isset($wp_query->query['dfdl_category']) ) {
 add_filter( 'pre_get_document_title', 'dfdl_filter_archive_insights_title' );
 
 /**
- * Custom query args
+ * Build custom query
  */
 $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
 $query_args = array(
@@ -69,24 +73,27 @@ $query_args['date_query'] = array(
     )
 );
 
-$the_query = new WP_Query( $query_args );
-
+$the_query  = new WP_Query( $query_args );
 $post_class = ( $the_query->have_posts() ) ? "" : "no-results" ;
 
 get_header();
 
 ?>
 <section id="insights" class="<?php echo esc_attr($category->slug) ?> archive-insights callout silo">
-
 	<?php
+
 		/**
 		 * Country Navigation
 		 */
 		do_action('dfdl_solutions_country_nav');
 
+        /**
+         * Add hidden field for country
+         */
         if ( isset($wp_query->query['dfdl_country']) ) {
             echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
         }
+
 	?>
 
     <header class="title">
@@ -94,6 +101,10 @@ get_header();
     </header><!-- .page-header -->
 
     <div id="results_stage"><div>
+
+        <?php
+            do_action("dfdl_insights_swiper", array('category' => 'insights') );
+        ?>
 
         <div class="posts <?php echo $post_class ?>" >
             <?php if ( $the_query->have_posts() ) : ?>
@@ -150,5 +161,18 @@ get_header();
         </div>
     </div>
 </section>
-
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var myswiper = new Swiper('.swiper', {
+        loop: true,
+        preloadImages: false,
+        lazy: true,
+        watchSlidesVisibility: true,
+        navigation: {
+            nextEl: '.swiper-next',
+            prevEl: '.swiper-prev',
+        }
+    });
+});
+</script>
 <?php get_footer();

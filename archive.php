@@ -1,22 +1,25 @@
 <?php
-/**
- * The template for displaying archive pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- */
+	/**
+	 * The template for displaying archive pages
+	 *
+	 * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+	 *
+	 */
 
-global $wp;  
+	global $wp;  
 
-get_header();
+	get_header();
 
-if ( ! empty(get_query_var('cat')) ) {
-	$term = get_category(get_query_var('cat'));
-} else {
-	$pieces  = explode( "/", $wp->request ) ;
-	$term    = get_term_by("slug", $pieces[1], 'category');
-}
+	// Swiper.js
+	wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+	wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
+	if ( ! empty(get_query_var('cat')) ) {
+		$term = get_category(get_query_var('cat'));
+	} else {
+		$pieces  = explode( "/", $wp->request ) ;
+		$term    = get_term_by("slug", $pieces[1], 'category');
+	}
 ?>
 <section id="insights" class="<?php echo esc_attr($term->slug) ?> archive callout silo">
 	<?php
@@ -24,6 +27,12 @@ if ( ! empty(get_query_var('cat')) ) {
 		 * Country Navigation
 		 */
 		do_action('dfdl_solutions_country_nav');
+		/**
+         * Add hidden field for country
+         */
+        if ( isset($wp_query->query['dfdl_country']) ) {
+            echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
+        }
 	?>
 
 	<header class="title">
@@ -31,10 +40,14 @@ if ( ! empty(get_query_var('cat')) ) {
 	</header><!-- .page-header -->
 
 	<div id="results_stage"><div>
+		<?php
+			/**
+			 * Swiper Slider
+			 */
+            do_action("dfdl_insights_swiper", array('category' => $term->term_id) );
+        ?>
 		<div class="posts">
-
 			<?php if ( have_posts() ) : ?>
-
 				<?php while ( have_posts() ) : ?>
 					<?php the_post(); ?>
 					<?php
@@ -65,8 +78,22 @@ if ( ! empty(get_query_var('cat')) ) {
 			<?php endif; ?>
 		</div>
 
-		<div class="pagination"><?php echo paginate_links(); ?>	</div>
+		<!--<div class="pagination"><?php echo paginate_links(); ?>	</div>-->
 	</div>
 </section>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var myswiper = new Swiper('.swiper', {
+        loop: true,
+        preloadImages: false,
+        lazy: true,
+        watchSlidesVisibility: true,
+        navigation: {
+            nextEl: '.swiper-next',
+            prevEl: '.swiper-prev',
+        }
+    });
+});
+</script>
 
 <?php get_footer();
