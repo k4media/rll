@@ -134,7 +134,7 @@ function dfdl_written_by() {
     );
     $query_args['date_query'] = array(
         array(
-            // 'after' => $limit
+            'after' => $limit
         )
     );
 
@@ -142,13 +142,12 @@ function dfdl_written_by() {
 
     if ( ! empty( $posts->posts ) ) {
 
-
         /**
          * Strip 'content-hub' from url
          * This keeps url structure consistent
          * insights/[category]/[country]
          */ 
-        $archive_link = str_replace("content-hub/", "", $archive_link);
+        //$archive_link = str_replace("content-hub/", "", $archive_link);
 
         /**
          * Queue up news cards
@@ -157,24 +156,32 @@ function dfdl_written_by() {
         foreach ( $posts->posts as $post ) {
 
             $term = dfdl_post_terms($post->ID);
-            $term = get_term_by("name", $term[0], "category");
-            
-            if ( "events" === $term->slug ) {
-                $startdate = get_post_meta( $post->ID, 'startdate', true);
-                if ( isset($startdate) ) {
-                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
-                    set_query_var("show_date", $show_date);
-                }
-                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
-                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
-                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
-            }
-            set_query_var("story", $post);
-            set_query_var("term", $term);
+            $term = get_term_by("slug", $term, "category");
 
-            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
-            if ( file_exists($file) ) {
-                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            set_query_var("story", $post);
+
+            if ( isset($term) && false !== $term && ! is_wp_error($term) ) {
+
+                if ("events" === $term->slug ) {
+                    $startdate = get_post_meta( $post->ID, 'startdate', true);
+                    if ( isset($startdate) ) {
+                        $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                        set_query_var("show_date", $show_date);
+                    }
+                    set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                    set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                    set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+                }
+
+                set_query_var("term", $term);
+
+                $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+                if ( file_exists($file) ) {
+                    get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+                } else {
+                    get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+                }
+
             } else {
                 get_template_part( 'includes/template-parts/content/insights', 'news-card' );
             }
@@ -183,7 +190,7 @@ function dfdl_written_by() {
         $news = ob_get_clean();
         
         echo '<section id="dfdl-written-by" class="xtra callout silo">';
-        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2><!--<a href="' . $archive_link . '">View All</a>--></header>';
+        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2></header>';
         echo '<div class="posts">' . $news . '</div>';
         echo '</section>';
 
@@ -254,7 +261,7 @@ function dfdl_insights_swiper( array $args ): void {
             ),
         ),
     );
-    
+
     /**
      * Add category
      */
