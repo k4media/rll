@@ -1295,9 +1295,6 @@ header + #results_stage .swiper {
 	line-height: 1.4em;
 	margin: 2rem 0 0 0;
 }
-.single h1 + p, h2 + p, h3 + p, h4 + p, h5 + p {
-	margin-top: .5em;
-}
 .single h1 {
 	font-size: var(--font-size-huge);
 }
