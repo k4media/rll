@@ -795,9 +795,11 @@ header.main {
 	display: block;
 	text-align: center;
 }
-
 #results_stage.award-stage > div > div {
 	display: inline-block;
+}
+.award-grid.silo .country-subnav-stage {
+	margin: 4em 0 4em 0
 }
 .award-stage > div h4 {
 	color: var(--color-green);
@@ -827,8 +829,12 @@ header.main {
 }
 .award-entry {
 	border-left: solid 1px var(--color-green);
+	margin-bottom: 3em;
 	margin-left: 1em;
 	padding-left: 1em;
+}
+.award-entry h4 {
+	margin-top: 0;
 }
 .award-entry li div {
 	margin: 0.5em 0 0.5em 0;
