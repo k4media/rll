@@ -33,8 +33,6 @@ $K4->fragment_cache( $key, function() {
           $awards = dfdl_get_awards($args);
      }
      
-
-
      if ( "" !== $awards ) :
 ?>
 <div class="awards-callout-stage callout">

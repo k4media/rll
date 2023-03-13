@@ -176,7 +176,8 @@ nav ul li {
 	color: var(--color-green);
 	cursor: pointer;
 	font-family: "Calibri", sans-serif;
-	padding: 0.6em 1.25em .6em 3em;
+	height: 40px;
+	padding: 0 1.25em .6em 3em;
 	position: relative;
 }
 .button.filter:before {
@@ -452,6 +453,9 @@ header.main {
 	background-color: var(--color-bright-green);
 	border-radius: var(--setting-border-radius);
 	color: var(--color-white);
+	display: inline-block;
+	height: 40px;
+	line-height: 2.375em;
 	padding: var(--setting-button-padding);
 }
 .dfdl-single-member {
@@ -848,7 +852,6 @@ header.main {
 .filter-button {
 	position: absolute;
 	right: 0;
-	top: -.75em;
 }
 .filters-stage {
 	background: var(--color-white);
