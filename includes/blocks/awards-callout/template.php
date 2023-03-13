@@ -5,7 +5,7 @@
  *
  */
 
- global $post;
+global $post;
 $key = "dfdl-awards-callout-" . $post->post_name ;
 $K4 = new K4;
 $K4->fragment_cache( $key, function() { 
@@ -29,7 +29,12 @@ $K4->fragment_cache( $key, function() {
           }
      }
 
-     $awards = dfdl_get_awards($args);
+     if ( is_array($args) ) {
+          $awards = dfdl_get_awards($args);
+     }
+     
+
+
      if ( "" !== $awards ) :
 ?>
 <div class="awards-callout-stage callout">
