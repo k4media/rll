@@ -59,7 +59,7 @@ DFDL Theme, (C) 2022 DFDL
 	--setting-silo-max-width: 1312px;
 	--setting-narrow-max-width: 1090px;
 	--setting-border-radius: 8px;
-	--setting-button-padding: .5em 1.2em .6em 1.2em;
+	--setting-button-padding: 0 1.2em 0 1.2em;
 	--setting-body-font: Calibri, sans-serif;
 }
 body {
@@ -145,6 +145,8 @@ nav ul li {
 	display: inline-block;
 	font-size: 1em;
 	font-weight: 700;
+	height: 38px;
+	line-height: 2.375em;
 	padding: var(--setting-button-padding);
 	text-decoration: none;
 }
@@ -240,7 +242,10 @@ header.main {
 	background-color: var(--color-bright-green);
 	border-radius: var(--setting-border-radius);
 	color: var(--color-white);
-	padding: var(--setting-button-padding);
+	display: inline-block;
+	height: 40px;
+	line-height: 2.375em;
+	padding: 0 1.2em 0 1.2em;
 	transition: all .15s;
 }
 .header-stage .right .cta-button a:hover {
@@ -295,6 +300,7 @@ header.main {
 	height: 18px;
 	position: absolute;
 	width: 18px;
+	top: 0;
 }
 .header-stage .search a {
 	margin-left: 0;

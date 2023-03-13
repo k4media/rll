@@ -6,6 +6,7 @@
 .our-desks-callout .our-desks {
     display: flex;
     justify-content: space-around;
+    width: 80%;
 }
 .our-desks img {
     display: block;
