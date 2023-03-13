@@ -10,11 +10,11 @@
     margin: 4em auto 0 auto;
 }
 .team-stage > div {
-    column-gap: 16px;
+    column-gap: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;
     margin-top: 60px;
-    row-gap: 16px;
+    row-gap: 24px;
 }
 .team-stage > .loading {
     display: block;

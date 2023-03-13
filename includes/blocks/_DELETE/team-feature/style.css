@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;
     margin-top: 60px;
-    row-gap: 16px;
+    row-gap: 24px;
 }
 .team-member {
     background-color: var(--color-white);
