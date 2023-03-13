@@ -37,17 +37,16 @@ document.addEventListener('DOMContentLoaded', function () {
         jQuery("html, body").animate({ scrollTop: 0 }, "slow");
     });
     if (scroll_to_top) {
-        window.addEventListener("scroll", scrollWatch);
+        window.addEventListener("scroll", function() {
+            var y = window.scrollY;
+            if (y >= 680) {
+                scroll_to_top.classList.add("is_active");
+            } else {
+                scroll_to_top.classList.remove("is_active");
+            } 
+        });
     }
-    var scrollWatch = function() {
-        var y = window.scrollY;
-        if (y >= 680) {
-            scroll_to_top.classList.add("is_active");
-        } else {
-            scroll_to_top.classList.remove("is_active");
-        }
-    };
-    
+
     var swiper = document.getElementsByClassName("swiper");
     if (swiper) {
         Array.prototype.forEach.call(swiper, function(element) {
@@ -55,9 +54,19 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
     }
-    
-    
 
+    var team_grid = document.getElementById("team-grid");
+    var country_subnav = document.getElementById("country-subnav");
+    if (country_subnav) {
+        window.addEventListener("scroll", function(){
+            rect = team_grid.getBoundingClientRect();
+            if ( rect.top <= 56 ) {
+                country_subnav.classList.add("fixed");
+            } else {
+                country_subnav.classList.remove("fixed");
+            }
+        });
+    }
 
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};

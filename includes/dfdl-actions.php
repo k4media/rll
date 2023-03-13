@@ -1444,7 +1444,7 @@ function dfdl_solutions_country_nav() {
     $class  = is_admin() ? "admin" : "" ;
     $output = array();
 
-    $output[] = '<nav class="country-subnav-stage silo"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
+    $output[] = '<nav id="country-subnav" class="country-subnav-stage silo"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
     if ( ( "all" === end($pieces) || "teams" === end($pieces) ) && count($pieces) < 3) {
         $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
     } else {
