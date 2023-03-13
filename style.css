@@ -608,6 +608,7 @@ header.main {
 #award-grid-stage,
 .country-subnav-stage.desks-subnav {
 	margin-top: 100px;
+	text-align: center;
 }
 .team-member a {
     color: var(--color-gray);

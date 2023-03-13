@@ -23,8 +23,16 @@
           
      }
 
+     $section = dfdl_get_section();
+     $style   = "";
+     if ( isset($section) ) {
+          $style = $section[0];
+     }
+
+     
+
 ?>
-<div class="team-lead-stage callout">
+<div class="team-lead-stage callout <?php echo $style; ?>">
      <div class="team-lead narrow">
           <h2><?php echo $title ?></h2>
           <h3><?php echo $subtitle ?></h3>
