@@ -49,11 +49,6 @@
                                         <?php echo $meta['tel'][0] ?>
                                    <?php endif; ?>
                               </div>
-                              <div class="mobile">
-                                   <?php if ( isset($meta['mob']) && ! empty($meta['mob'][0]) ) : ?>
-                                        <?php echo $meta['mob'][0] ?>
-                                   <?php endif; ?>
-                              </div>
                               <div class="email">
                                    <?php if ( isset($user->user_email) && ! empty($user->user_email) ) : ?>
                                         <a href="mailto:<?php echo $user->user_email ?>">Email</a>
