@@ -18,7 +18,7 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class("member-loop"); ?>>
     <div class="founder member">';
-        <img src="<?php get_avatar_url($f['founder']['ID'], array('size' => 320)) ?>">
+        <img src="<?php get_avatar_url($f['founder']['ID'], array('size' => 330)) ?>">
         <div class="details-stage">
             <div class="details">
                 <div class="name"><?php $f['founder']['display_name'] ?></div>';

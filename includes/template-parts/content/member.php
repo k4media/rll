@@ -40,7 +40,7 @@
 <a href="<?php echo $link ?>">
     <article id="post-<?php the_ID(); ?>" <?php post_class("member-loop"); ?>>
         <div class="team-member">
-            <img src="<?php echo get_avatar_url($user->data->ID, array('size' => 320)) ?>">
+            <img src="<?php echo get_avatar_url($user->data->ID, array('size' => 330)) ?>">
             <div class="details-stage">
                 <div class="details">
                     <div class="name"><?php echo $user->data->display_name ?></div>

@@ -630,7 +630,9 @@ header.main {
 .team-member .details .location {
     color: var(--color-gray);
 }
-
+.member-loop .rollover .stage h4:first-child {
+	margin-top: 0;
+}
 #menu-side {
 	background: var(--color-green);
 	bottom: 0;
