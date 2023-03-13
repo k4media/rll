@@ -686,6 +686,8 @@ header.main {
 }
 .contact-callout {
     background-color: var(--color-bright-green);
+	background: var(--color-bright-green) url(assets/media/logo-art-reverse.svg) no-repeat bottom right;
+    background-size: 15%;
     display: flex;
     position: relative;
 }
@@ -700,17 +702,18 @@ header.main {
     display: flex;
     color: var(--color-white);
 }
+/*
 .contact-callout::after {
     background: url(assets/media/logo-art-reverse.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 120%;
     bottom: 0;
     content: ' ';
     height: 125px;
     position: absolute;
     right: 0;
     width: 150px;
-}
+} */
 .contact-callout .copy-stage .copy {
     max-width: 32em;
     width: 100%;
