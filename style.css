@@ -200,6 +200,10 @@ nav ul li {
 .button.filter.is-active:before {
 	background-image: url(assets/media/icon-filter-active.svg);
 }
+.button.green.solid:hover {
+	border: solid 1px var(--color-green);
+	color: var(--color-bright-green);
+}
 .button.disabled {
 	background: var(--color-gray-disabled);
 	border: solid 1px var(--color-gray-disabled);
