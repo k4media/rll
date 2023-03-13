@@ -26,7 +26,7 @@ if ( isset($meta['languages'][0]) ) {
 }
 
 // office location
-if ( array_key_exists('_dfdl_user_country', $meta) ) {
+if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country', $meta) ) {
     foreach( $meta['_dfdl_user_country'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $locations[] = $country->name;
@@ -34,7 +34,7 @@ if ( array_key_exists('_dfdl_user_country', $meta) ) {
 }
 
 // country expertise
-if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
+if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country_expertise', $meta) ) {
     foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
         $expertise[] = $country->name;
@@ -44,7 +44,7 @@ if ( array_key_exists('_dfdl_user_country_expertise', $meta) ) {
 }
 
 // solutions
-if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
+if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions', $meta) ) {
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
         if (isset($solution)) {
@@ -58,6 +58,11 @@ if ( array_key_exists('_dfdl_user_solutions', $meta) ) {
 
 ?>
 
+<nav class="subnav-stage silo">
+    <ul>
+        <li class="back"><a href="<?php echo dfdl_solutions_back_link() ?>">Back</a></li>
+    </ul>
+</nav>
 <div id="dfdl-member-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_member'] ?>" class="dfdl-single-member-stage">
     <div class="dfdl-single-member <?php echo sanitize_title($user->data->display_name) ?> narrow">
         <div class="avatar"><img src="<?php echo get_avatar_url($user->data->ID, array('size' => 320)) ?>"></div>

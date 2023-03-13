@@ -689,6 +689,17 @@ function dfdl_get_section(): array {
 }
 
 /**
+ * Solutions "back" link.
+ */
+function dfdl_solutions_back_link(): string {
+    // Try referer first 
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        return $_SERVER['HTTP_REFERER'];
+    }
+    return get_home_url("", "/teams/all/");
+}
+
+/**
  * Insights "back" link.
  */
 function dfdl_insights_back_link(): string {

@@ -425,6 +425,15 @@ header.main {
 	height: auto;
 	max-width: 100%;
 }
+
+
+
+.subnav-stage.silo {
+	position: relative;
+	margin-top: 100px
+}
+
+
 .country-subnav-stage li {
 	display: inline;
 	list-style-type: none;
@@ -434,8 +443,10 @@ header.main {
 	left: 0;
 	position: absolute;
 }
+.subnav-stage.silo a,
 .country-subnav-stage .back a {
 	background: transparent url(assets/media/icon-back-arrow.svg) center left no-repeat;
+	color: var(--color-black);
 	font-weight: 900;
 	padding-left: 1.5em;
 }

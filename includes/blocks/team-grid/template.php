@@ -122,12 +122,14 @@ $users = get_users($args);
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
 
 ?>
-<?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
-     <div id="beacon"></div>
-     <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
-<?php endif; ?>  
 
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
+
+     <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
+          <div id="beacon"></div>
+          <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
+     <?php endif; ?>  
+
      <div id="team-grid" class="team-grid silo">
           
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">

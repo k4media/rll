@@ -1,3 +1,6 @@
+#country-subnav {
+	text-align: center;
+}
 #subnav-stage {
     background-color: var(--color-white);
     padding: 16px 0 16px 0;
@@ -18,8 +21,11 @@
 .team-grid-stage.solutions {
     background-color: var(--color-green-10);
 }
+.team-grid-stage.teams {
+    padding-top: 120px;
+}
 .team-grid {
-    padding: 60px 0 120px 0;
+    padding: 0 0 120px 0;
     text-align: center;
 }
 .team-grid .button.see-all {
@@ -36,8 +42,8 @@
     display: block;
 }
 .team-stage.silo {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
+    /* display: grid;
+    grid-template-columns: repeat(4,1fr);*/
     margin: 64px auto 120px auto;
 }
 .team-stage article {
