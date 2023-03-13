@@ -55,16 +55,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     }
 
-    var team_grid = document.getElementById("team-grid");
-    var country_subnav = document.getElementById("country-subnav");
-    if (country_subnav) {
+    var beacon = document.getElementById("beacon");
+    var stage = document.getElementById("subnav-stage");
+    var subnav = document.getElementById("subnav-stage");
+    if (beacon && subnav) {
         window.addEventListener("scroll", function(){
-            rect = team_grid.getBoundingClientRect();
-            if ( rect.top <= 56 ) {
-                country_subnav.classList.add("fixed");
-            } else {
-                country_subnav.classList.remove("fixed");
-            }
+            rect = beacon.getBoundingClientRect();
+            console.log(rect.top);
+            if ( rect.top <= 0 ) {
+                subnav.classList.add("fixed");
+                beacon.classList.add("stage");
+            } 
+            if ( rect.top > 0 ) {
+                subnav.classList.remove("fixed");
+                beacon.classList.remove("stage");
+            } 
         });
     }
 
