@@ -2,7 +2,7 @@
     display: grid;
     column-gap: 20px;
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 64px;
+    margin-top: 120px;
 }
 .solutions-grid .solution {
     box-shadow: 0 0 6px rgb(200 200 200 / 50%);
