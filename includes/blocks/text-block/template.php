@@ -17,7 +17,7 @@
 ?>
 <div class="text-feature-stage">
      <div class="text-feature narrow">
-          <?php if ( isset($title) ) : ?>
+          <?php if ( ! empty($title) ) : ?>
                <h3 class="title"><?php echo $title ?></h3>
           <?php endif; ?>
           

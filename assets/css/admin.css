@@ -45,11 +45,17 @@ html :where(.wp-block) {
     display: flex;
     height: 200px;
 }
+#page-hero h2 {
+	font-size: 2em;
+}
 .hero .overlay {
     height: 100%;
     position: absolute;
     width: 100%;
     z-index: 1;
+}
+.hero .stage .subnav-stage {
+	display: none;
 }
 .fp-hero-title {
     color: var(--color-white);
