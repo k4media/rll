@@ -39,7 +39,7 @@
 
     relevanssi_do_query( $query );
 
-    var_Dump($query->have_posts());
+    // var_Dump($query->have_posts());
 
 
 ?>
