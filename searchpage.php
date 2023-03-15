@@ -3,8 +3,10 @@
     /*
     Template Name: Search Page
     */
+
     get_header();
 
+    /*
     $query_args = array(
         'post_type'      => array('dfdl_countries',),
         'post_status'    => 'publish',
@@ -19,10 +21,6 @@
         'update_post_term_cache' => false,
     );
 
-    /**
-     * Date query: limit results to last 2 years
-     */
-    
     $limit = array(
         'year'  => date("Y") - 2,
         'month' => date("m"),
@@ -36,11 +34,9 @@
 
     $query = new WP_Query();
     $query->parse_query( $query_args );
-
     relevanssi_do_query( $query );
 
-    // var_Dump($query->have_posts());
-
+    */
 
 ?>
 
@@ -50,18 +46,7 @@
         <?php get_search_form(); ?>
     </div>
 
-    <?php if ( $query->have_posts() ) : ?>
-        <?php while ( $query->have_posts() ) : ?>
-            <?php $query->the_post(); ?>
-            <?php
-            
-                $post_type = get_post_type();
-
-                var_Dump($post_type);
-                //get_template_part( 'includes/template-parts/content/insights', 'news-card' );
-            ?>
-        <?php endwhile; ?>
-    <?php endif; ?>
+    <?php do_action("dfdl_search_solutions") ?>
 
 </div>
 
