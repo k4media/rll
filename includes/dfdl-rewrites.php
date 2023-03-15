@@ -64,8 +64,6 @@ function dfdl_add_rewrite_rules() {
         'top'
     );
 
-
-
     /** content hub */
     add_rewrite_rule(
         'insights/content-hub/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
@@ -218,6 +216,14 @@ function dfdl_member_template_include($template) {
 		exit;
     }
 
+	if ( isset($query_vars['s']) && ! empty($query_vars['s'])  ) {
+        $page_template = get_stylesheet_directory() . '/searchpage.php' ;				
+		$wp_query->is_404 = false;
+		status_header('200');
+		require_once($page_template);
+		exit;
+    }
+    
     return $template;
     
 }

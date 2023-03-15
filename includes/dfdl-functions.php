@@ -935,7 +935,10 @@ function dfdl_one_liner( string $string ): string {
 
 // 。 <-- need to search for this
 function dfdl_short_bio( string $bio, int $length = 4 ): string {
-    $posx = strposX($bio, ". ", $length);
+    $posx = strposX($bio, PHP_EOL, $length);
+
+    //var_dump($posx );
+
     if ( isset($posx) ) {
         return substr($bio, 0, $posx+1);
     }

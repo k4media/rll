@@ -309,9 +309,10 @@ header.main {
 }
 .header-stage .search a {
 	margin-left: 0;
+	position: absolute;
 	text-indent: -9999em;
-	width: 2em;
-    position: absolute;
+	top: 0px;
+	width: 17px;
 }
 .callout h2 {
     font-size: var(--font-size-huge);
@@ -1477,9 +1478,56 @@ header + #results_stage .swiper {
 	border: solid 1px var(--color-error-dark);
 }
 .page-wrapper {
-	margin: 120px 0 120px 0;
+	margin: 120px auto 120px auto;
 }
 
+.searchpage-searchform {
+	margin: auto;
+	width: 42em;
+}
+input[type='search'] {
+	border: solid 1px var(--color-gray);
+	border-radius: 8px;
+	font-size: var(--font-size-large);
+	height: 40px;
+	padding: 7px;
+	width: 100%;
+}
+.search-submit {
+	position: absolute;
+	height: 18px;
+	right: 12px;
+	top: 10px;
+}
+.button-stage {
+	pointer-events: none;
+	height: 40px;
+	position: relative;
+}
+.not-found .button-stage {
+	width: 27em;
+}
+.button-stage input {
+	position: absolute;
+	top: -28px;
+}
+.relevanssi-live-search-result-status {
+	display: none;
+}
+.relevanssi-live-search-result p, .relevanssi-live-search-result-status p {
+    border-bottom: 0 !important;
+	padding: .5em 1em .5em 1em !important;
+}
+.relevanssi-live-search-result p a {
+	color: var(--color-black);
+}
+.rlv-has-spinner {
+	border-color: var(--color-green-70);
+	border-right-color: transparent;
+}
+.rlv-has-spinner::after {
+	background-color: var(--color-green-70);
+}
 @media print {
 	.header-stage .left,
 	.header-stage .right,

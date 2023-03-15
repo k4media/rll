@@ -1679,6 +1679,12 @@ function footer_logo() {
     echo '<div class="site-name"><img src="' . $mods['dfdl_logo_reversed'] . '"></div>';
 }
 
+
+add_action( 'wp_enqueueu_scripts', function() {
+    wp_dequeue_style( 'relevanssi-live-search' );
+},99 );
+
+
 add_action('footer_text', 'footer_text');
 function footer_text() {
     if( function_exists('get_field') ) {
