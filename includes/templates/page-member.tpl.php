@@ -56,7 +56,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
     $solutions[] = "General Law Expert";
 }
 ?>
-
 <nav class="subnav-stage silo">
     <ul>
         <li class="back"><a href="<?php echo dfdl_solutions_back_link() ?>">Back</a></li>
@@ -97,7 +96,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
              </div>
         </div>
     </div>
-
     <div id="dfdl-member-xtra"" class="text-feature-stage">
         <div class="text-feature member narrow">
             <div class="columns">
@@ -123,11 +121,8 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
             </div>
         </div>
     </div>
-
-
     <?php do_action("dfdl_written_by") ?>
     <?php do_action("dfdl_in_the_news") ?>
-
 </div>
 
 <?php
