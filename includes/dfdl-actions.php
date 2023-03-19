@@ -57,7 +57,7 @@ function dfdl_search_insights() {
         'orderby'        => 'date',
         'order'          => 'DESC',
         'no_found_rows'          => true,
-        'ignore_sticky_posts'    => false,
+        'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
     );
