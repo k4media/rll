@@ -121,7 +121,7 @@ function dfdl_search_insights() {
         $news = ob_get_clean();
 
         ob_start();
-            echo  '<section id="dfdl-in-the-news" class="xtra callout silo">';
+            echo  '<section id="dfdl-in-the-news" class="xtra callout">';
             echo '<header><h2 class="title">Insights</h2></header>';
             echo '<div class="posts">' . $news . '</div>';
             echo '</section>';
@@ -147,7 +147,7 @@ function dfdl_search_teams() {
     $query_args = array(
         'number'                 => 8,
         'role__in '              => array( 'contributor', 'dfdl_member' ),
-        'orderby'                => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
+        'orderby'                => array( 'dfdl_rank' => 'DESC', 'last_name' => 'ASC' ),
         'search_columns'         => array( 'user_email', 'user_url', 'user_nicename', 'display_name' ),
         'no_found_rows'          => true,
         'ignore_sticky_posts'    => true,
@@ -179,28 +179,6 @@ function dfdl_search_teams() {
             ),
         ); 
     }
-    /*
-    array(
-            'key' => '_dfdl_user_country',
-                'value' => $search_term ,
-                'compare' => 'LIKE'
-            ),
-            array(
-                'key' => '_dfdl_user_desks',
-                'value' => $search_term ,
-                'compare' => 'LIKE'
-            ),
-            array(
-                'key' => '_dfdl_user_country_expertise',
-                'value' => $search_term ,
-                'compare' => 'LIKE'
-            ),
-            array(
-                'key' => '_dfdl_user_solutions',
-                'value' => $search_term ,
-                'compare' => 'LIKE'
-            )  
-    */
 
     $query = new WP_User_Query($query_args);
 
@@ -212,7 +190,9 @@ function dfdl_search_teams() {
         }
         $users = ob_get_clean();
 
-        $return[] = '<div id="team-grid"><div id="results_stage" class="team-stage silo"><div>';
+        $return[] = '<div id="team-grid" class="search-teams">';
+        $return[] = '<header><h2 class="title">Team</h2></header>';
+        $return[] = '<div class="team-stage"><div>';
         $return[] = $users;
         $return[] = '</div></div></div>';
         return implode($return);
@@ -273,7 +253,7 @@ function dfdl_search_solutions() {
             $solutions[] = $solution;
         }
 
-        $return[] = '<section id="search-solutions" class="solutions-grid silo">';
+        $return[] = '<section id="search-solutions" class="solutions-grid">';
         $return[] = '<header><h2 class="title">Solutions</h2></header>';
         $return[] = '<div class="solutions stage">';
         $return[] = implode($solutions);

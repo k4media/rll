@@ -1185,7 +1185,8 @@ article + #insights {
 #insights .callout h2,
 #dfdl-written-by h2,
 #dfdl-in-the-news h2,
-#search-solutions h2 {
+#search-solutions h2,
+.search-teams h2 {
 	font-size: var(--font-size-larger);
 	margin: 0 0 1em 0;
 	text-align: left;
@@ -1370,7 +1371,9 @@ header + #results_stage .swiper {
 .related-posts {
 	margin: 4em 0 4em 0;
 }
-
+.search-teams .team-stage > div {
+	margin-top: 0;
+}
 /*
 .swiper.loading {
 	background: transparent url(assets/media/spinner.gif) no-repeat 50% 50%;
