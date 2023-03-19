@@ -15,23 +15,29 @@ function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before)
 add_action( 'dfdl_search', 'dfdl_search' );
 function dfdl_search() {
 
-    //$solutions = dfdl_search_solutions();
+    $solutions = dfdl_search_solutions();
     $teams     = dfdl_search_teams();
-    //$insights  = dfdl_search_insights() ;
+    $insights  = dfdl_search_insights() ;
 
-    //$results = $solutions . $teams . $insights;
+    $results = $solutions . $teams . $insights;
 
-    //if ( ! empty($results) ) {
+    if ( ! empty($results) ) {
 
-        //echo $solutions;
-        echo $teams;
-        //echo $insights;
+        if ( ! empty($solutions) ) {
+            echo $solutions;
+        }
+        if ( ! empty($teams) ) {
+            echo $teams;
+        }
+        if ( ! empty($insights) ) {
+            echo $insights;
+        }     
 
-    //} else {
+    } else {
 
-        //echo "<p>Nada.</p>";
+        echo "<p>Nada.</p>";
 
-    //}
+    }
 
 }
 
@@ -89,9 +95,9 @@ function dfdl_search_insights() {
         foreach ( $query->posts as $post ) {
 
             $term = dfdl_post_terms($post->ID);
-            $term = get_term_by("name", $term[0], "category");
+            $term = get_term_by("name", $term, "category");
 
-            if ( "events" === $term->slug ) {
+            if ( isset($term) && false !==  $term && "events" === $term->slug ) {
                 $startdate = get_post_meta( $post->ID, 'startdate', true);
                 if ( isset($startdate) ) {
                     $show_date = mysql2date( get_option( 'date_format' ), $startdate );
@@ -132,11 +138,8 @@ function dfdl_search_insights() {
 add_action( 'dfdl_search_teams', 'dfdl_search_teams' );
 function dfdl_search_teams() {
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
-
-    $return = array();
+    $return      = array();
+    $search_term = esc_attr($_REQUEST['q']);
 
     /**
      * Build User Query
@@ -149,16 +152,9 @@ function dfdl_search_teams() {
         'no_found_rows'          => true,
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
-        'update_post_term_cache' => false,
-        'search' =>  esc_attr($_REQUEST['q'])
+        'update_post_term_cache' => false
     );
-
- /*
-    $search_term = esc_attr($_REQUEST['q']) ;
-
     if ( isset($search_term) && ! empty($search_term) ) {
-        $query_args['search'] =  $search_term ;
-       
         $query_args['meta_query'] = array(
             'relation' => 'OR',
             array(
@@ -181,12 +177,11 @@ function dfdl_search_teams() {
                 'value'   => $search_term,
                 'compare' => 'LIKE'
             ),
-            
         ); 
-    }*/
+    }
     /*
     array(
-                'key' => '_dfdl_user_country',
+            'key' => '_dfdl_user_country',
                 'value' => $search_term ,
                 'compare' => 'LIKE'
             ),
@@ -207,15 +202,7 @@ function dfdl_search_teams() {
             )  
     */
 
-    if ( function_exists('relevanssi_do_query') ) {
-        $query = new WP_User_Query();
-        $query->parse_query( $query_args );
-        relevanssi_do_query( $query );
-    } else {
-        $query = new WP_User_Query($query_args);
-    }
-    
-    var_dump($query);
+    $query = new WP_User_Query($query_args);
 
     if ( ! empty( $query->get_results() ) ) {
         ob_start();
@@ -223,10 +210,11 @@ function dfdl_search_teams() {
              set_query_var("user", $user);
              get_template_part( 'includes/template-parts/content/member' );
         }
-        $return = ob_get_clean();
-        $return = '<div id="team-grid"><div id="results_stage" class="team-stage silo"><div>';
-        $return = $users;
-        $return = '</div></div></div>';
+        $users = ob_get_clean();
+
+        $return[] = '<div id="team-grid"><div id="results_stage" class="team-stage silo"><div>';
+        $return[] = $users;
+        $return[] = '</div></div></div>';
         return implode($return);
     }
 

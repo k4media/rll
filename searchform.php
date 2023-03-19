@@ -18,7 +18,7 @@ $dfdl_unique_id = wp_unique_id( 'search-form-' );
 $dfdl_aria_label = ! empty( $args['aria_label'] ) ? 'aria-label="' . esc_attr( $args['aria_label'] ) . '"' : '';
 ?>
 <form role="search" <?php echo $dfdl_aria_label; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Escaped above. ?> method="get" class="search-form" action="<?php echo esc_url( home_url( '/search/' ) ); ?>">
-	<input type="search" id="<?php echo esc_attr( $dfdl_unique_id ); ?>" class="search-field" value="<?php echo esc_attr($_REQUEST['q']) ; ?>" name="q" placeholder="Search..." data-rlvlive="true" data-rlvparentel="#rlvlive" data-rlvconfig="default"/>
+	<input type="search" id="<?php echo esc_attr( $dfdl_unique_id ); ?>" class="search-field" value="<?php if (isset($_REQUEST['q'])) { echo esc_attr($_REQUEST['q']); } ?>" name="q" placeholder="Search..." data-rlvlive="true" data-rlvparentel="#rlvlive" data-rlvconfig="default"/>
 </form>
 <div class="button-stage"><input type="image" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-search.svg" class="search-submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'dfdl' ); ?>" method="get" action="<?php echo get_home_url('', '/search/') ?>" /></div>
 
