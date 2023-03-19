@@ -146,7 +146,8 @@ function dfdl_search_teams() {
      */
     $query_args = array(
         'number'                 => 8,
-        'role__in '              => array( 'dfdl_member' ),
+        'role__in '              => array('dfdl_member'),
+        'role__not_in'           => array('Administrator'),
         'orderby'                => array( 'dfdl_rank' => 'DESC', 'last_name' => 'ASC' ),
         'search_columns'         => array( 'user_email', 'user_url', 'user_nicename', 'display_name' ),
         'no_found_rows'          => true,
