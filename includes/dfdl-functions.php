@@ -946,8 +946,10 @@ function dfdl_short_bio( string $bio, int $length = 3 ): string {
  * Used to insert author bio in tax & lelag updates
  */
 function strposX($haystack, $needle, $number = 0) {
-    return strpos($haystack, $needle,
-        $number > 1 ?
-        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
-    );
+    if ( strpos($haystack, $needle) ) {
+        return strpos($haystack, $needle,
+            $number > 1 ?
+            strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
+        );
+    }
 }
