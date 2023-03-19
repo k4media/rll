@@ -81,6 +81,12 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                     <div class="bio"><?php //echo dfdl_short_bio($meta['description'][0]) ?></div>
                 <?php endif; */?>
 
+<?php
+    var_dump($meta['tel']);
+    var_dump($meta);
+?>
+
+
                  <div class="contact-details">
                     <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>
                         <div class="telephone"><?php echo $meta['tel'][0] ?></div>
