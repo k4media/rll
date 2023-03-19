@@ -5,48 +5,37 @@
     */
 
     get_header();
-
-    /*
-    $query_args = array(
-        'post_type'      => array('dfdl_countries',),
-        'post_status'    => 'publish',
-        's'              => $_REQUEST['s'],
-        'posts_per_page' => 24,
-        'paged'          => 1,
-        'orderby'        => 'date',
-        'order'          => 'DESC',
-        'no_found_rows'          => false,
-        'ignore_sticky_posts'    => true,
-        'update_post_meta_cache' => false, 
-        'update_post_term_cache' => false,
-    );
-
-    $limit = array(
-        'year'  => date("Y") - 2,
-        'month' => date("m"),
-        'day'   => date("d")
-    );
-    $query_args['date_query'] = array(
-        array(
-            'after' => $limit
-        )
-    );
-
-    $query = new WP_Query();
-    $query->parse_query( $query_args );
-    relevanssi_do_query( $query );
-
-    */
-
 ?>
 
-<div id="searchpage" class="page page-wrapper silo">
+<div id="searchpage" class="searchpage page page-wrapper silo">
 
     <div class="searchpage-searchform">
         <?php get_search_form(); ?>
     </div>
 
-    <?php do_action("dfdl_search_solutions") ?>
+    <?php if ( isset($_REQUEST['q']) && ! empty($_REQUEST['q']) ) : ?>
+
+        <header class="page-header alignwide">
+            <h1 class="page-title">
+                <?php
+                printf(
+                    /* translators: %s: Search term. */
+                    esc_html__( 'Results for "%s"', 'dfdl' ),
+                    '<span class="page-description search-term">' . esc_html( $_REQUEST['q'] ) . '</span>'
+                );
+                ?>
+            </h1>
+        </header><!-- .page-header -->
+
+        <?php do_action("dfdl_search") ?>
+
+    <?php else : ?>
+
+        <div class="empty-search" style="text-align: center">
+            What can we help you find?
+        </div>
+
+    <?php endif; ?>
 
 </div>
 

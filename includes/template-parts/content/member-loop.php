@@ -3,7 +3,6 @@
  * Template part for Member
  */
 
- 
  $member_slug = sanitize_title($user->data->display_name);
  $link        = get_home_url(null, 'teams/members/' . $member_slug . '/' . $user->data->ID . '/');
  $position    = get_user_meta( $user->data->ID, 'position', true);

@@ -63,19 +63,25 @@ function dfdl_filter_archive_insights_title() {
 add_filter( 'the_content', 'dfdl_story_lead', 100, 2);
 function dfdl_story_lead( string $content )  {  
 
-    // get first graph
-    $first_graph = substr($content, 0, strpos($content, "</p>") + 4);
+    if ( ! empty($content) ) {
+        // get first graph
+        $first_graph = substr($content, 0, strpos($content, "</p>") + 4);
 
-    // sometimes first graph is an image, so strip html
-    $first_graph = strip_tags($first_graph);
-    
-    if ( "" === $first_graph ) {
-        $posx  = strposX($content, "</p>", 2);
-        $front = substr($content, 0, $posx + 4);
-        $back  = substr($content, $posx);
-        $front = str_replace("<p", "<p class='lead' ", $front);
-        return $front . $back;
+        // sometimes first graph is an image, so strip html
+        $first_graph = strip_tags($first_graph);
+
+        if ( "" === $first_graph ) {
+            $posx  = strposX($content, "</p>", 2);
+            if ( isset($posx) ) {
+                $front = substr($content, 0, $posx + 4);
+                $back  = substr($content, $posx);
+                $front = str_replace("<p", "<p class='lead' ", $front);
+                return $front . $back;
+            }
+            
+        }
     }
+    
     return $content;
 }
 

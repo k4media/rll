@@ -8,7 +8,9 @@
 
 get_header();
 ?>
-<div id="searchpage" class="page page-wrapper silo">
+
+SEARCH.PHP
+<div id="searchpage" class="search page page-wrapper silo">
 
 	<div class="searchpage-searchform"><?php get_search_form(); ?></div>
 

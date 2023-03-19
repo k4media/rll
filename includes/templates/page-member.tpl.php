@@ -68,7 +68,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
         <div class="avatar"><img src="<?php echo get_avatar_url($user->data->ID, array('size' => 320)) ?>"></div>
         <div class="details-stage">
             <div class="member">
-
                 <div class="name"><?php echo esc_attr($user->data->display_name) ?></div>
                 <?php if( isset($position) ) : ?>
                      <div class="position"><?php echo $position ?></div> 
@@ -79,9 +78,9 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                  <?php if( isset($languages) ) : ?>
                      <div class="languages"><?php echo $languages ?></div> 
                 <?php endif; ?>
-                <?php if( isset($meta['description']) && ! empty($meta['description']) ) : ?>
-                    <div class="bio"><?php echo dfdl_short_bio(nl2br($meta['description'][0])) ?></div>
-                <?php endif; ?>
+                <?php /* if( isset($meta['description']) && ! empty($meta['description']) ) : ?>
+                    <div class="bio"><?php //echo dfdl_short_bio($meta['description'][0]) ?></div>
+                <?php endif; */?>
 
                  <div class="contact-details">
                     <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>

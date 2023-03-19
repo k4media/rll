@@ -10,24 +10,56 @@ function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before)
 }
 
 /**
- * Search solutions
+ * Search Insights
  */
-add_action( 'dfdl_search_solutions', 'dfdl_search_solutions' );
-function dfdl_search_solutions() {
+add_action( 'dfdl_search', 'dfdl_search' );
+function dfdl_search() {
+
+    //$solutions = dfdl_search_solutions();
+    $teams     = dfdl_search_teams();
+    //$insights  = dfdl_search_insights() ;
+
+    //$results = $solutions . $teams . $insights;
+
+    //if ( ! empty($results) ) {
+
+        //echo $solutions;
+        echo $teams;
+        //echo $insights;
+
+    //} else {
+
+        //echo "<p>Nada.</p>";
+
+    //}
+
+}
+
+/**
+ * Search Insights
+ */
+add_action( 'dfdl_search_insights', 'dfdl_search_insights' );
+function dfdl_search_insights() {
+
+    $search_term = esc_attr($_REQUEST['q']) ;
+
     $query_args = array(
-        'post_type'      => array('posts'),
+        'post_type'      => array('post'),
         'post_status'    => 'publish',
-        's'              => $_REQUEST['s'],
-        'posts_per_page' => 24,
-        'paged'          => 1,
+        's'              =>  $search_term,
+        'posts_per_page' => 16,
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'no_found_rows'          => false,
-        'ignore_sticky_posts'    => true,
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
-        'update_post_term_cache' => false,
+	    'update_post_term_cache' => false,
     );
 
+    /**
+     * Date query: limit results to last 2 years
+     */
+    /*
     $limit = array(
         'year'  => date("Y") - 2,
         'month' => date("m"),
@@ -38,13 +70,233 @@ function dfdl_search_solutions() {
             'after' => $limit
         )
     );
+    */
 
-    $query = new WP_Query();
-    $query->parse_query( $query_args );
-    relevanssi_do_query( $query );
+    if ( function_exists('relevanssi_do_query') ) {
+        $query = new WP_Query();
+        $query->parse_query( $query_args );
+        relevanssi_do_query( $query );
+    } else {
+        $query = new WP_User_Query($query_args);
+    }
+
+    if ( ! empty( $query->posts ) ) {
+
+        /**
+         * Queue up news cards
+         */
+        ob_start();
+        foreach ( $query->posts as $post ) {
+
+            $term = dfdl_post_terms($post->ID);
+            $term = get_term_by("name", $term[0], "category");
+
+            if ( "events" === $term->slug ) {
+                $startdate = get_post_meta( $post->ID, 'startdate', true);
+                if ( isset($startdate) ) {
+                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                    set_query_var("show_date", $show_date);
+                }
+                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+            }
+            set_query_var("story", $post);
+            set_query_var("term", $term);
+
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+            if ( file_exists($file) ) {
+                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+            }
+
+        }
+        $news = ob_get_clean();
+
+        ob_start();
+            echo  '<section id="dfdl-in-the-news" class="xtra callout silo">';
+            echo '<header><h2 class="title">Insights</h2></header>';
+            echo '<div class="posts">' . $news . '</div>';
+            echo '</section>';
+        $return = ob_get_clean();
+
+        return $return ;
+
+    }
 }
 
+/**
+ * Search Teams
+ */
+add_action( 'dfdl_search_teams', 'dfdl_search_teams' );
+function dfdl_search_teams() {
 
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+    $return = array();
+
+    /**
+     * Build User Query
+     */
+    $query_args = array(
+        'number'                 => 8,
+        'role__in '              => array( 'contributor', 'dfdl_member' ),
+        'orderby'                => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
+        'search_columns'         => array( 'user_email', 'user_url', 'user_nicename', 'display_name' ),
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+        'search' =>  esc_attr($_REQUEST['q'])
+    );
+
+ /*
+    $search_term = esc_attr($_REQUEST['q']) ;
+
+    if ( isset($search_term) && ! empty($search_term) ) {
+        $query_args['search'] =  $search_term ;
+       
+        $query_args['meta_query'] = array(
+            'relation' => 'OR',
+            array(
+                'key'     => 'first_name',
+                'value'   => $search_term,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key'     => 'last_name',
+                'value'   => $search_term,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key' => 'description',
+                'value' => $search_term ,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key'     => '_dfdl_user_solutions_search_terms',
+                'value'   => $search_term,
+                'compare' => 'LIKE'
+            ),
+            
+        ); 
+    }*/
+    /*
+    array(
+                'key' => '_dfdl_user_country',
+                'value' => $search_term ,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key' => '_dfdl_user_desks',
+                'value' => $search_term ,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key' => '_dfdl_user_country_expertise',
+                'value' => $search_term ,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key' => '_dfdl_user_solutions',
+                'value' => $search_term ,
+                'compare' => 'LIKE'
+            )  
+    */
+
+    if ( function_exists('relevanssi_do_query') ) {
+        $query = new WP_User_Query();
+        $query->parse_query( $query_args );
+        relevanssi_do_query( $query );
+    } else {
+        $query = new WP_User_Query($query_args);
+    }
+    
+    var_dump($query);
+
+    if ( ! empty( $query->get_results() ) ) {
+        ob_start();
+        foreach( $query->get_results() as $user ) {
+             set_query_var("user", $user);
+             get_template_part( 'includes/template-parts/content/member' );
+        }
+        $return = ob_get_clean();
+        $return = '<div id="team-grid"><div id="results_stage" class="team-stage silo"><div>';
+        $return = $users;
+        $return = '</div></div></div>';
+        return implode($return);
+    }
+
+}
+
+/**
+ * Search solutions
+ */
+add_action( 'dfdl_search_solutions', 'dfdl_search_solutions' );
+function dfdl_search_solutions() {
+
+    $return = array();
+
+    global $post;
+
+    $solutions  = dfdl_get_solutions();
+    $query_args = array(
+        'post_type'      => array('page'),
+        'post_status'    => 'publish',
+        'posts_per_page' => 16,
+        'post__in'       => $solutions,
+        's'              => esc_attr($_REQUEST['q']),
+        'orderby'        => 'title',
+        'order'          => 'ASC',
+        'no_found_rows'          => false,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
+
+    /**
+     * Don't user relevannsi. Results are too broad
+     */ 
+    remove_filter( 'posts_request', 'relevanssi_prevent_default_request' );
+    remove_filter( 'the_posts', 'relevanssi_query', 99 );
+    $query = new WP_Query($query_args);
+
+    // output buffer
+    $solutions = array();
+
+    if ( $query->have_posts() ) { 
+        while ( $query->have_posts() ) { 
+            $query->the_post();
+            $image   = get_block_data($post, 'acf/dfdl-page-hero', 'image');
+            $image   = wp_get_attachment_image_url($image, 'medium');
+            $overlay = get_block_data($post, 'acf/dfdl-page-hero', 'overlay');
+            $solution = '<a href="' . get_permalink($post->ID) . '">'  ;
+            $solution .= '<div class="solution ' . sanitize_title($post->post_title). ' ">';
+                    // image thumbnail
+                    $solution .= '<div class="thumbnail" style="background-image:url(' . $image . ')">';
+                    $solution .= '<div class="overlay" style="background-color:' . $overlay . '"></div>';
+                    $solution .= '</div>';
+            $solution .= "<h3>" . esc_attr($post->post_title) . "</h3>";
+            $solution .= '</div>';
+            $solution .= '</a>';
+            $solutions[] = $solution;
+        }
+
+        $return[] = '<section id="search-solutions" class="solutions-grid silo">';
+        $return[] = '<header><h2 class="title">Solutions</h2></header>';
+        $return[] = '<div class="solutions stage">';
+        $return[] = implode($solutions);
+        $return[] = '</div>';
+        $return[] = '</section>';
+
+        return implode($return);
+
+    }
+
+}
 
 /**
  * Archive date query filter

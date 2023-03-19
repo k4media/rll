@@ -1,6 +1,6 @@
 <?php
 
-function desks_navigation() {
+//function desks_navigation() {
 
      global $wp;
 
@@ -36,9 +36,9 @@ function desks_navigation() {
      echo implode($nav);
      echo '</ul></nav>';
 
-}
+//}
 
-desks_navigation();
+//desks_navigation();
 
 ?>
 
