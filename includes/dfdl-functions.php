@@ -597,7 +597,7 @@ function dfdl_get_countries( array $args = array() ): array {
 
     if ( empty($args) ) {
 
-        $args['fields'] = 'ids';
+        $query_args['fields'] = 'ids';
         $pages = new WP_Query( $query_args );
         return $pages->posts;
 
@@ -934,11 +934,8 @@ function dfdl_one_liner( string $string ): string {
 }
 
 // 。 <-- need to search for this
-function dfdl_short_bio( string $bio, int $length = 4 ): string {
-    $posx = strposX($bio, PHP_EOL, $length);
-
-    //var_dump($posx );
-
+function dfdl_short_bio( string $bio, int $length = 3 ): string {
+    $posx = strposX($bio, ".", $length);
     if ( isset($posx) ) {
         return substr($bio, 0, $posx+1);
     }
@@ -949,10 +946,8 @@ function dfdl_short_bio( string $bio, int $length = 4 ): string {
  * Used to insert author bio in tax & lelag updates
  */
 function strposX($haystack, $needle, $number = 0) {
-    if ( strpos($haystack, $needle) > 0 ) {
-        return strpos($haystack, $needle,
-            $number > 1 ?
-            strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
-        );
-    }
+    return strpos($haystack, $needle,
+        $number > 1 ?
+        strposX($haystack, $needle, $number - 1) + strlen($needle) : 0
+    );
 }
