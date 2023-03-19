@@ -55,10 +55,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
 } else {
     $solutions[] = "General Law Expert";
 }
-
-
-var_dump($meta);
-
 ?>
 
 <nav class="subnav-stage silo">
