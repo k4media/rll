@@ -4,6 +4,8 @@ $K4  = new K4;
 $key = $K4->cache_key("block-page-lead");
 $K4->fragment_cache( $key, function() {
 
+     global $post;
+     
      $lead = null;
      $text = null;
 
@@ -13,7 +15,7 @@ $K4->fragment_cache( $key, function() {
           $text   = get_field('text');
      }
 ?>
-<div id="page-lead">
+<div id="page-lead" class="<?php echo $post->post_name ?>">
      <div class="narrow">
           <?php if( isset($lead) ) : ?>
                <div class="lead"><?php echo apply_filters( 'the_content', wp_kses_post( $lead ) ); ?></div>

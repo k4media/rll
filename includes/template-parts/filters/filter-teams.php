@@ -6,7 +6,7 @@
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "teams_solutions") ?>
             </div>
-            <div class="col col1 teams-sort">
+            <div class="col col3 teams-sort">
                 <h4>Sort By</h4>
                 <?php do_action("dfdl_filter", "teams_sort") ?>
             </div>

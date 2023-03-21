@@ -7,6 +7,7 @@
      // get fields
      if ( function_exists('get_fields') ) {
           $title    = get_field('title');
+
           $subtitle = get_field('subtitle');
           $user     = ( get_field('user') ) ? get_field('user') : 1 ;
 

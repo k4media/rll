@@ -20,14 +20,13 @@
 <?php wp_body_open(); ?>
 
 <?php
-
 $K4 = new K4;
 $K4->fragment_cache( "page-header", function() { ?>
 <header class="main">
 	<div class="header-stage silo">
 		<div class="left">
 			<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>
-			<nav id="site-navigation" class="main-navigation">
+			<nav id="site-navigation-left" class="main-navigation">
 				<?php
 					wp_nav_menu(
 						array(
@@ -44,7 +43,7 @@ $K4->fragment_cache( "page-header", function() { ?>
 			<?php do_action("dfdl_logo") ?>
 		</div><!-- .site-branding -->
 		<div class="right">
-			<nav id="site-navigation" class="secondary-navigation">
+			<nav id="site-navigation-right" class="secondary-navigation">
 				<?php
 					wp_nav_menu(
 						array(

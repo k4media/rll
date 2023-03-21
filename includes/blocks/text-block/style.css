@@ -24,6 +24,12 @@
     line-height: 1.75em;
     max-width: 860px;
 }
+.text-feature .lcol {
+    margin-right: 12px;
+}
+.text-feature .rcol {
+    margin-left: 12px;
+}
 .text-feature .columns.single-column .rcol {
     display: none;
 }
@@ -47,7 +53,6 @@
 .text-feature .columns h3 {
     font-size: var(--font-size-large);
 }
-.text-feature .columns h4 {
-
+.text-feature-stage + .awards-callout-stage {
+    padding-top: 0;
 }
-

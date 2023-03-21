@@ -12,17 +12,20 @@
 $K4 = new K4;
 $K4->fragment_cache( "page-footer", function() { ?>
     <div id="colophon" class="site-footer">
-        <div class="site-info silo">
+        <div class="site-info">
             <div class="about-dfld">
                 <?php do_action('footer_logo') ?>
                 <?php do_action('footer_text') ?>
-                <?php do_action('footer_nav') ?>
             </div>
             <div class="newsletter-signup">
                 <?php do_action('newsletter_signup') ?>
             </div>
         </div>
-        <div class="fineprint silo">
+
+        <?php do_action('footer_nav') ?>
+
+        
+        <div class="fineprint">
             <?php do_action('copyright_notice') ?>
             <?php do_action('social_links') ?>
             <?php do_action('legal_nav') ?>

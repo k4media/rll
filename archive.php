@@ -21,7 +21,7 @@
 		$term    = get_term_by("slug", $pieces[1], 'category');
 	}
 ?>
-<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive callout silo">
+<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive">
 	<?php
 		/**
 		 * Country Navigation
@@ -39,7 +39,7 @@
 		<?php the_archive_title( '<h2 class="page-title">', '</h2>' ); ?>
 	</header><!-- .page-header -->
 
-	<div id="results_stage"><div>
+	<div id="results_stage" class="silo"><div>
 		<?php
 			/**
 			 * Swiper Slider
@@ -86,14 +86,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var myswiper = new Swiper('.swiper', {
         loop: true,
         preloadImages: false,
-        lazy: true,
-        watchSlidesVisibility: true,
+        slidesPerView: 1.1,
         navigation: {
             nextEl: '.swiper-next',
             prevEl: '.swiper-prev',
+        },
+        breakpoints: {
+            599: {
+                slidesPerView: 1,
+            },
+            0: {
+                slidesPerView: 1.1
+            }
         }
-    });
-});
+    })
+})
 </script>
-
 <?php get_footer();

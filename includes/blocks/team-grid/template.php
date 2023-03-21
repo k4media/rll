@@ -1,5 +1,9 @@
 <?php
 
+// Swiper.js
+wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
+
 $sections = dfdl_get_section();
 
 /**
@@ -121,25 +125,38 @@ $users = get_users($args);
 
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
 
+if ( count($users) > 0) :
+
 ?>
 
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
 
-     <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] ) : ?>
+     <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
           <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
      <?php endif; ?>  
 
      <div id="team-grid" class="team-grid silo">
-          
-          <div id="results_stage" class="team-stage <?php echo $post_class ?>">
-               <div>
+          <div class="team-stage <?php echo $post_class ?>">
+               <div id="team-grid-swiper">
                     <?php
                          if ( count($users) > 0) {
+
+                              ob_start();
                               foreach( $users as $user ) {
                                    set_query_var("user", $user);
                                    get_template_part( 'includes/template-parts/content/member' );
                               }
+                              $slides = ob_get_clean();
+
+                              ob_start();
+                                   get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+                              $template = ob_get_clean();
+                  
+                              $template = str_replace("{posts}", $slides, $template);
+                  
+                              echo $template;
+
                          } else {
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
@@ -156,3 +173,40 @@ $post_class = ( count($users) > 0  ) ? "" : "no-results" ;
           <?php endif; ?>
      </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+      /*
+      
+      var swiperStage = document.getElementByClassName
+     teamSwiper = new Swiper(".team-swiper", {
+          loop: false,
+          preloadImages: true,
+          lazy: true,
+          slidesPerView: 4,
+          spaceBetween: 24,
+     });
+     var init = false;
+     function swiperCard() {
+          if (window.innerWidth <= 700) {
+               if (!init) {
+                    init = true;
+                    teamSwiper = new Swiper(".team-swiper", {
+                         loop: false,
+                         preloadImages: true,
+                         lazy: true,
+                         slidesPerView: 2,
+                         spaceBetween: 24,
+                    });
+               }
+          } else if (init) {
+               teamSwiper.destroy();
+               init = false;
+          }
+     }
+     swiperCard();
+     window.addEventListener("resize", swiperCard);
+
+     */arguments
+});
+</script>
+<?php endif; ?>

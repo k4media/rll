@@ -1,4 +1,4 @@
-<li class="filter-button"><button id="filters-toggle" class="button filter legal-and-tax-updates-filter">Filter</button></li>
+<!--<li class="filter-button"><button id="filters-toggle" class="button filter legal-and-tax-updates-filter">Filter</button></li>-->
 <div id="filters-stage" class="legal-and-tax-updates-filters-stage filters-stage silo">
     <div class="stage">
         <div class="legal-and-tax-updates-filters filters">
@@ -6,7 +6,7 @@
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "insights_solutions") ?>
             </div>
-            <div class="col col1 legal-and-tax-updates-years">
+            <div class="col col2 legal-and-tax-updates-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "insights_years") ?>
             </div>

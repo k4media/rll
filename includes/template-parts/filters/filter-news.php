@@ -1,4 +1,4 @@
-<li class="filter-button"><button id="filters-toggle" class="button filter news-filter">Filter</button></li>
+<!--<li class="filter-button"><button id="filters-toggle" class="button filter news-filter">Filter</button></li>-->
 <div id="filters-stage" class="news-filters-stage filters-stage silo">
     <div class="stage">
         <div class="news-filters filters">
@@ -6,11 +6,11 @@
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "insights_solutions") ?>
             </div>
-            <div class="col col1 news-types">
+            <div class="col col2 news-types">
                 <h4>News Types</h4>
                 <?php do_action("dfdl_filter", "insights_categories") ?>
             </div>
-            <div class="col col1 news-years">
+            <div class="col col3 news-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "insights_years") ?>
             </div>

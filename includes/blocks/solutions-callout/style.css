@@ -1,19 +1,21 @@
+.solutions-callout-stage .solutions.stage {
+    display: grid;
+    column-gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    margin-top: 120px;
+    row-gap: 24px;
+    text-align: left;
+}
 .solutions-callout-stage {
     background-color: #F4F7F7;
     padding: 120px 0 120px 0;
     text-align: center;
 }
-.solutions-callout .solutions {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    text-align: left;
-}
-.solution {
+.solutions-callout-stage .solution {
     align-items: flex-start;
     display: flex;
     height: 48px;
-    margin-bottom: 1em;
 }
 .solution span {
     font-size: var(--font-size-large);

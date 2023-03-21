@@ -6,11 +6,11 @@
                 <h4>Award Types</h4>
                 <?php do_action("dfdl_filter", "award_bodies") ?>
             </div>
-            <div class="col col1 award-solutions">
+            <div class="col col2 award-solutions">
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "award_solutions") ?>
             </div>
-            <div class="col col1 award-years">
+            <div class="col col3 award-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "award_years") ?>
             </div>

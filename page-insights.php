@@ -22,6 +22,15 @@
 <?php endif; ?>
 
 <section id="insights" class="page-insights">
+
+    <!--
+    <nav class="subnav-stage silo">
+        <ul>
+            <li class="back"><a href="<?php echo get_home_url(null, '/solutions/') ?>">Back</a></li>
+        </ul>
+    </nav>
+    -->
+
     <?php
 
         /**
@@ -50,14 +59,20 @@ document.addEventListener('DOMContentLoaded', function () {
     var myswiper = new Swiper('.swiper', {
         loop: true,
         preloadImages: false,
-        lazy: true,
-        watchSlidesVisibility: true,
+        slidesPerView: 1.1,
         navigation: {
             nextEl: '.swiper-next',
             prevEl: '.swiper-prev',
+        },
+        breakpoints: {
+            599: {
+                slidesPerView: 1,
+            },
+            0: {
+                slidesPerView: 1.1
+            }
         }
-    });
-});
+    })
+})
 </script>
-
 <?php get_footer();

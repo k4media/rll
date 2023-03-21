@@ -30,6 +30,7 @@
 #page-hero h2 {
     color: var(--color-white);
     font-size: var(--font-size-super-jumbo);
+    font-size: clamp(2.25rem, -0.5625rem + 9vw, 4.5rem);
     padding-bottom: 1em;
     position: relative;
     z-index: 1;

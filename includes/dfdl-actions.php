@@ -254,7 +254,7 @@ function dfdl_search_solutions() {
             $solutions[] = $solution;
         }
 
-        $return[] = '<section id="search-solutions" class="solutions-grid">';
+        $return[] = '<section id="search-solutions" class="solutions-grid solutions-grid-stage">';
         $return[] = '<header><h2 class="title">Solutions</h2></header>';
         $return[] = '<div class="solutions stage">';
         $return[] = implode($solutions);
@@ -1453,9 +1453,9 @@ function dfdl_filter( string $filter ): void {
 
     $select   = array();
     if ( "teams_sort" === $filter ) {
-        $select[] = '<select id="' . $filter . '" name="' . $filter . '">';
+        $select[] = '<select style="width: 100%" id="' . $filter . '" name="' . $filter . '">';
     } else {
-        $select[] = '<select multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
+        $select[] = '<select style="width: 100%" multiple="multiple" id="' . $filter . '" name="' . $filter . '">';
     }
     if ( isset($options) ) {
         foreach( $options as $option ) {
@@ -1536,14 +1536,23 @@ function dfdl_solutions_country_nav() {
 
     if ( "insights" === $section ) {
 
+        // mobile filter button
+        $nav[] = '<li class="swiper-slide mobile-filter-button"><button id="mobile-filters-toggle" class="button mobile-filter insights-filter"></button></li>';
+
         $dfdl_sections = dfdl_get_section();
         /**
          * All button
          */
         if ( "insights" === end($dfdl_sections)  ) {
-            $nav[] = '<li><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
         } else {
-            $nav[] = '<li><a href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+
+            //if ( "news" === end($dfdl_sections) ) {
+                //$nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+            //} else {
+                $nav[] = '<li class="swiper-slide"><a  href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+            //}
+            
         }
 
     }
@@ -1575,9 +1584,9 @@ function dfdl_solutions_country_nav() {
                     * url: /insights/[category]/[country]/
                     */
                     if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     } else {
-                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        $nav[] = '<li class="swiper-slide"><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     }
 
                 } elseif ( count($pieces) === 2 ) {
@@ -1599,9 +1608,9 @@ function dfdl_solutions_country_nav() {
                          * new url: /insights/[country]/
                          */
                         if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                         } else {
-                            $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                            $nav[] = '<li class="swiper-slide"><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                         }
 
                     } else {
@@ -1612,9 +1621,9 @@ function dfdl_solutions_country_nav() {
                          * new url: /insights/[category]/[country]/
                          */
                         if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                            $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                         } else {
-                            $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                            $nav[] = '<li class="swiper-slide"><a href="' . $home_url . '/' . $pieces[0] . '/' . $pieces[1] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                         }
 
                     }
@@ -1625,12 +1634,12 @@ function dfdl_solutions_country_nav() {
                      * url: /insights/
                      */
                     if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                        $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     } else {
-                        $nav[] = '<li><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
+                        $nav[] = '<li class="swiper-slide"><a href="' . $home_url . '/' . $pieces[0] . '/' . $page->post_name . '/">' . $page->post_title . '</a></li>' ;
                     }
                 }
-                
+             
             } else {
 
                 /**
@@ -1651,8 +1660,60 @@ function dfdl_solutions_country_nav() {
     }
 
     /**
+     * Prepare html output
+     */
+    $class  = is_admin() ? "admin" : "" ;
+    $output = array();
+
+    $output[] = '<nav id="country-subnav" class="country-subnav-stage narrow"><div class="subnav-swiper"><ul class="' . $class . ' ' . $section . '-country-nav country-nav swiper-wrapper">';
+    if ( ( "all" === end($pieces) || "teams" === end($pieces) ) && count($pieces) < 3) {
+        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+    } else {
+
+        if( "awards" === $section ) {
+            if ( count($pieces) == 1 ) {
+                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
+            } else {
+                $output[] = '<li><a href="' . $home_url . '/' . $section . '/">All</a></li>';
+            }
+        } elseif ( "contact-us" === end($pieces) ) {
+            if ( count($pieces) == 1 ) {
+                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/contact-us/">Regional</a></li>';
+            } else {
+                $output[] = '<li><a href="' . $home_url . '/contact-us/">Regional</a></li>';
+            }
+        } elseif ( "insights" === $section ) {
+
+            //if ( count($pieces) > 1 ) {
+                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
+            //}
+            //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
+            //} else {
+                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
+            //}
+            //$output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
+
+            $nav[] = '<li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter insights-filter">Filter</button></li>';
+            
+        } else {
+
+            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+ 
+        }
+    }
+
+    $output[] = implode("", $nav);
+    $output[] = '</ul></div><!-- /swiper wrapper --></nav>';
+
+    /**
      * Section Filters & Sorts
      */
+
+    $filters = array();
+
+    // Swiper.js
+    wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
+    wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
     // Enqueue filter scripts
     if ( "teams" === $section || "awards" === $section || "insights" === $section ) {
@@ -1663,13 +1724,13 @@ function dfdl_solutions_country_nav() {
     if ( "teams" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "teams");
-        $nav[] = ob_get_clean();
+        $filters[] = ob_get_clean();
     }
     // Awards filter
     if ( "awards" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "awards");
-        $nav[] = ob_get_clean();
+        $filters[] = ob_get_clean();
     }
     // Insights filter
     if ( "insights" === $section ) {
@@ -1693,54 +1754,10 @@ function dfdl_solutions_country_nav() {
         } else {
             get_template_part("includes/template-parts/filters/filter", "insights");
         }
-        $nav[] = ob_get_clean();
+        $filters[] = ob_get_clean();
     }
 
-    /**
-     * Prepare html output
-     */
-    $class  = is_admin() ? "admin" : "" ;
-    $output = array();
-
-    $output[] = '<nav id="country-subnav" class="country-subnav-stage silo"><ul class="' . $class . ' ' . $section . '-country-nav country-nav">';
-    if ( ( "all" === end($pieces) || "teams" === end($pieces) ) && count($pieces) < 3) {
-        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
-    } else {
-
-        if( "awards" === $section ) {
-            if ( count($pieces) == 1 ) {
-                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
-            } else {
-                $output[] = '<li><a href="' . $home_url . '/' . $section . '/">All</a></li>';
-            }
-        } elseif ( "contact-us" === end($pieces) ) {
-            if ( count($pieces) == 1 ) {
-                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/contact-us/">Regional</a></li>';
-            } else {
-                $output[] = '<li><a href="' . $home_url . '/contact-us/">Regional</a></li>';
-            }
-        } elseif ( "insights" === $section ) {
-
-            if ( count($pieces) > 1 ) {
-                $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-
-            }
-            //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
-            //} else {
-                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-            //}
-            //$output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-
-        } else {
-
-             $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
-            
-        }
-    }
-
-    $output[] = implode("", $nav);
-    $output[] = '</ul>';
-    $output[] = '</nav>';
+    $output[] = implode($filters);
 
     // output
     echo implode("", $output);
