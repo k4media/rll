@@ -1235,8 +1235,10 @@ article + #insights {
 }
 
 #insights .callout {
-	/* padding: 4em 16px 4em 16px; */
-	padding: 4em 0 4em 0;
+
+	padding: 4em 16px 4em 16px;
+	/* padding: 4em 0 4em 0; */
+
 }
 #insights .callout header,
 #dfdl-written-by header,
