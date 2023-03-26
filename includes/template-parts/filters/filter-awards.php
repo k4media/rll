@@ -1,5 +1,4 @@
-<li class="filter-button"><button id="awards-filters-toggle" class="button filter awards-filter">Filter</button></li>
-<div id="awards-filters-stage" class="awards-filters-stage filters-stage silo">
+<div id="filters-stage" class="awards-filters-stage filters-stage silo">
     <div class="stage">
         <div class="awards-filters filters">
             <div class="col col1 award-types">

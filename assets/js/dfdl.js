@@ -11,33 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
         document.body.classList.toggle("noscroll");
     });
 
-    var teams_toggle = document.getElementById("teams-filters-toggle");
-    var teams_filters = document.getElementById("teams-filters-stage");
-    teams_toggle && teams_toggle.addEventListener("click", function() {
-        teams_toggle.classList.toggle("is-active");
-        teams_filters.classList.toggle("is-active");
-    });
-
-    var award_toggle = document.getElementById("awards-filters-toggle");
-    var awards_filters = document.getElementById("awards-filters-stage");
-    award_toggle && award_toggle.addEventListener("click", function() {
-        award_toggle.classList.toggle("is-active");
-        awards_filters.classList.toggle("is-active");
-    });
-
+    var filters_stage = document.getElementById("filters-stage");
     var filters_toggle = document.getElementById("filters-toggle");
-    var filters_filters = document.getElementById("filters-stage");
+    var mobile_filters_toggle = document.getElementById("mobile-filters-toggle");
     filters_toggle && filters_toggle.addEventListener("click", function() {
         filters_toggle.classList.toggle("is-active");
         mobile_filters_toggle.classList.toggle("is-active");
-        filters_filters.classList.toggle("is-active");
+        filters_stage.classList.toggle("is-active");
     });
-
-    var mobile_filters_toggle = document.getElementById("mobile-filters-toggle");
     mobile_filters_toggle && mobile_filters_toggle.addEventListener("click", function() {
         filters_toggle.classList.toggle("is-active");
         mobile_filters_toggle.classList.toggle("is-active");
-        filters_filters.classList.toggle("is-active");
+        filters_stage.classList.toggle("is-active");
     });
 
     var scroll_to_top = document.getElementById("scroll-to-top");
@@ -63,12 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     var beacon = document.getElementById("beacon");
-    // var stage = document.getElementById("subnav-stage");
     var subnav = document.getElementById("subnav-stage");
     if (beacon && subnav) {
         window.addEventListener("scroll", function(){
             rect = beacon.getBoundingClientRect();
-            // console.log(rect.top);
             if ( rect.top <= 0 ) {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
@@ -80,28 +63,28 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var subnavSwiper = new Swiper(".subnav-swiper", {
-        // slidesPerView: 10,
-        // spaceBetween: 16,
-        // freeMode: true,
-        breakpoints: {
-        950: {
-            slidesPerView: 11,
-        },
-        599: {
-            slidesPerView: 7,
-        },
-        499: {
-            slidesPerView: 6,
-        },
-        399: {
-            slidesPerView: 4,
-        },
-        0: {
-            slidesPerView: 3,
-          },
-      }
-    });
+    var slider = document.querySelector(".subnav-swiper");
+    if (slider) {
+        var subnavSwiper = new Swiper(".subnav-swiper", {
+            breakpoints: {
+            950: {
+                slidesPerView: 11,
+            },
+            599: {
+                slidesPerView: 7,
+            },
+            499: {
+                slidesPerView: 6,
+            },
+            399: {
+                slidesPerView: 4,
+            },
+            0: {
+                slidesPerView: 3,
+              },
+          }
+        });
+    }
 
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
@@ -130,12 +113,13 @@ function filterInsights() {
         ajax_object.ajaxurl, {
             action: "filter_insights",
             nonce: ajax_object.insights_nonce,
-            permakink: ajax_object.permalink,
+            permalink: ajax_object.permalink,
             iSolutions:jQuery('#insights_solutions').select2("val"),
             iCategories: jQuery('#insights_categories').select2("val") || jQuery('#insights_events').select2("val"),
             iYears: jQuery('#insights_years').val(),
             iSection: jQuery('#insights_section').val(),
             iCountry: jQuery('#insights_country').val(),
+            iContentHub: jQuery('#content_hub').val()
         }, function(data){
             data = JSON.parse(data);
             if ( data.code === 200 ) {
@@ -150,7 +134,6 @@ function filterInsights() {
         }
     )
 }
-
 function filterTeams() {
     console.log("loading results");
     jQuery("#results_stage").addClass("no-results");
@@ -166,7 +149,9 @@ function filterTeams() {
             data = JSON.parse(data);
             if ( data.code === 200 ) {
                 jQuery("#results_stage").removeClass("no-results");
-                jQuery("#results_stage > div ").replaceWith( "<div>" + data.html + "</div>" );
+                jQuery("#results_stage > div ").replaceWith(  data.html );
+                swiperInit = false;
+                window.dispatchEvent(new Event('resize'));
             } else {
                 jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
                 console.log(data);
@@ -175,7 +160,6 @@ function filterTeams() {
         }
     )
 }
-
 function updateAwards() {
     console.log("loading results");
     jQuery("#results_stage").addClass("no-results");

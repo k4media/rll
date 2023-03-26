@@ -37,10 +37,10 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country', $
 if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country_expertise', $meta) ) {
     foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
-        $expertise[] = $country->name;
+        $expertise[] = '<li>' . $country->name. '</li>';
     }
 } else {
-    $expertise[] = "Regional Expert";
+    $expertise[] = "<li>Regional Expert</li>";
 }
 
 // solutions
@@ -48,12 +48,12 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
         if (isset($solution)) {
-            $solutions[] = $solution->name;
+            $solutions[] = '<li>' . $solution->name . '</li>';
         }
         
     }
 } else {
-    $solutions[] = "General Law Expert";
+    $solutions[] = "<li>General Law Expert</li>";
 }
 ?>
 <nav class="subnav-stage silo">
@@ -101,7 +101,7 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
             <div class="columns">
                 <div class="lcol">
                     <h3>Solutions</h3>
-                    <div class="solutions"><?php echo implode(", ", $solutions) ?></div>
+                    <div class="solutions"><ul><?php echo implode($solutions) ?></ul></div>
                 </div>
                 <div class="rcol">
                     <?php if ( count($expertise) > 1 ) : ?>
@@ -109,7 +109,7 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                     <?php else: ?>
                         <h3>Country of expertise</h3>
                     <?php endif; ?>
-                    <div class="countries"><?php echo implode(", ", $expertise) ?></div>
+                    <div class="countries"><ul><?php echo implode($expertise) ?></ul></div>
                 </div>
             </div>
             <div class="bio">

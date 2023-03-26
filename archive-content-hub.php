@@ -17,8 +17,8 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 	<?php endwhile; ?>
 <?php endif; ?>
 
-<section id="insights" class="archive content-hub">
-
+<section id="insights" class="archive content-hub silo">
+    <input type="hidden" name="content_hub" id="content_hub" value="content_hub">
     <?php
         /**
          * Country Navigation
@@ -34,16 +34,23 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myswiper = new Swiper('.swiper', {
-        loop: true,
+    var swiper = new Swiper('.swiper', {
+        loop: false,
         preloadImages: false,
-        lazy: true,
-        watchSlidesVisibility: true,
+        slidesPerView: 1.1,
         navigation: {
             nextEl: '.swiper-next',
             prevEl: '.swiper-prev',
+        },
+        breakpoints: {
+            599: {
+                slidesPerView: 1,
+            },
+            0: {
+                slidesPerView: 1.1
+            }
         }
-    });
+    })
 });
 </script>
 

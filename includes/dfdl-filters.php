@@ -78,7 +78,6 @@ function dfdl_story_lead( string $content )  {
                 $front = str_replace("<p", "<p class='lead' ", $front);
                 return $front . $back;
             }
-            
         }
     }
     
@@ -152,14 +151,13 @@ function dfdl_excerpt_filter( $length ) {
 	}
 	return 20;
 }
-add_filter( 'excerpt_more', 'wpshout_change_and_link_excerpt');
-function wpshout_change_and_link_excerpt( $more ) {
+add_filter( 'excerpt_more', 'dfdl_link_excerpt_jump');
+function dfdl_link_excerpt_jump( $more ) {
 	if ( is_admin() ) {
 		return $more;
 	}
 	return ' &hellip;';
  }
-
 
 /**
  * Disable Gutenberg for dfdl_contact_forms CPT

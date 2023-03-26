@@ -163,8 +163,8 @@ get_header();
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myswiper = new Swiper('.swiper', {
-        loop: true,
+    var swiper = new Swiper('.swiper', {
+        loop: false,
         preloadImages: false,
         slidesPerView: 1.1,
         navigation: {

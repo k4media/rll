@@ -2,11 +2,12 @@
     background-color: #F4F7F7;
     padding: 120px 0 120px 0;
 }
-.our-founders h2 {
+.our-founders {
     text-align: center;
 }
 .founders-stage {
-    display: grid;
+    column-gap: 24px;
+    display: inline-grid;
     grid-template-columns: repeat(3, 1fr) ;
     margin-top: 60px;
 }

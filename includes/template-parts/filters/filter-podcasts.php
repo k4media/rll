@@ -1,15 +1,11 @@
-<div id="filters-stage" class="insights-filters-stage filters-stage silo">
+<div id="filters-stage" class="podcasts-filters-stage filters-stage silo">
     <div class="stage">
-        <div class="insights-filters filters">
-            <div class="col col1 insights-solutions">
+        <div class="podcasts-filters filters">
+            <div class="col col1 podcasts-solutions">
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "insights_solutions") ?>
             </div>
-            <div class="col col2 insights-types">
-                <h4>News Types</h4>
-                <?php do_action("dfdl_filter", "insights_categories") ?>
-            </div>
-            <div class="col col3 insights-years">
+            <div class="col col3 podcasts-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "insights_years") ?>
             </div>
@@ -20,7 +16,7 @@
 img = new Image();
 img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-filter-active.svg';
 jQuery( document ).ready(function() {
-    jQuery("#insights_solutions, #insights_categories, #insights_years").select2({
+    jQuery("#insights_solutions,  #insights_years").select2({
         closeOnSelect : false,
         allowHtml: true,
         allowClear: false,

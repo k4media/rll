@@ -21,7 +21,7 @@
 		$term    = get_term_by("slug", $pieces[1], 'category');
 	}
 ?>
-<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive">
+<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive silo">
 	<?php
 		/**
 		 * Country Navigation
@@ -39,7 +39,7 @@
 		<?php the_archive_title( '<h2 class="page-title">', '</h2>' ); ?>
 	</header><!-- .page-header -->
 
-	<div id="results_stage" class="silo"><div>
+	<div id="results_stage" class=""><div>
 		<?php
 			/**
 			 * Swiper Slider
@@ -83,8 +83,8 @@
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myswiper = new Swiper('.swiper', {
-        loop: true,
+    var swiper = new Swiper('.swiper', {
+        loop: FontFaceSetLoadEvent,
         preloadImages: false,
         slidesPerView: 1.1,
         navigation: {

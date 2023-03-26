@@ -30,8 +30,6 @@
           $style = $section[0];
      }
 
-     
-
 ?>
 <div class="team-lead-stage callout <?php echo $style; ?>">
      <div class="team-lead narrow">
@@ -51,9 +49,7 @@
                          <?php endif; ?>
                          <?php if( $user->user_description ) : ?>
                               <div class="bio short-bio">
-                              <?php
-                                   echo dfdl_short_bio($user->user_description);
-                              ?>
+                              <?php echo dfdl_short_bio($user->user_description); ?>
                               </div>
                          <?php endif; ?>
                          <div class="contact-details">

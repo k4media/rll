@@ -34,8 +34,8 @@ if ( $contacts[$country]["contact"] ) {
 
 ?>
 <div id="contact-dfdl">
+    <?php do_action("dfdl_solutions_country_nav"); ?>
     <div class="contact-stage narrow">
-        <?php do_action("dfdl_solutions_country_nav"); ?>
         <div class="copy-stage">
             <div class="copy">
                 <h2>Contact Us</h2>
@@ -74,7 +74,7 @@ if ( $contacts[$country]["contact"] ) {
                                     <div class="location"><?php echo implode(", ", $locations) ?></div>
                                 <?php endif; ?>
                                 <?php if( $user->user_description ) : ?>
-                                    <div class="bio"><?php echo $user->user_description ?></div>
+                                    <div class="bio"><?php echo dfdl_short_bio($user->user_description); ?></div>
                                 <?php endif; ?>
                                 <div class="contact-details">
                                     <div class="telephone">

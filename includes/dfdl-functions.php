@@ -288,6 +288,37 @@ function dfdl_get_awards( array $args=array() ): string {
                         $title = '<div class="entry">';
                                                 
                         if ( count($pieces) > 1 ) {
+                            
+                            
+                            if ( isset($pieces[1]) ) {
+                                $title .= '<span class="solution">' . $pieces[1] . '</span>';
+                            }
+                            if ( isset($pieces[2]) ) {
+                                $title .= '<span class="country">' . $pieces[2] . '</span>';
+                            }
+                            if ( isset($pieces[0]) ) {
+                                $title .= '<span class="rank">' . $pieces[0] . '</span>';
+                            }
+                            
+    
+                        } else {
+                            $title .= '<span class="award-title">' . array_shift($pieces) . '</span>';
+                        }
+                        $output[] = $title;
+                        $output[] = "</div></li>";
+
+
+                        /*
+                        // previous formatting
+                        if ( "award" === $type ) {
+                            $output[] = '<li class="award">';
+                        } else {
+                            $output[] = "<li>";
+                        }
+                        $pieces = explode("–", $p->post_title);
+                        $title = '<div class="entry">';
+                                                
+                        if ( count($pieces) > 1 ) {
                             $title .= '<span>' . array_shift($pieces) . ' –</span>';
                             $title .= '<span>' . implode("– ", $pieces) . '</span>';
                         } else {
@@ -295,6 +326,7 @@ function dfdl_get_awards( array $args=array() ): string {
                         }
                         $output[] = $title;
                         $output[] = "</div></li>";
+                        */
                         
                     }
                 }
@@ -464,7 +496,7 @@ function dfdl_get_insights_events_sort(): array {
  */
 function dfdl_insights_categories_ids():array {
     /**
-     * Content Hub = 843
+     * Content Hub = 842
      * News        = 667
      * Events      = 668
      * Legal & Tax = 47
@@ -481,6 +513,27 @@ function dfdl_insights_categories_ids():array {
 
     return $cat_ids;
 
+}
+
+/**
+ * Content Hub Categories
+ * 
+ * array of cats & subcats included under Content Hub
+ */
+function dfdl_insights_content_hub_ids():array {
+    /**
+     * Content Hub = 842
+     */
+    $term_ids = array(842);
+    $children = array();
+    foreach ( $term_ids as $id ) {
+        $kids = get_term_children($id, 'category'); 
+        foreach( $kids as $k ) {
+            $children[] = $k;
+        }
+    }
+    $cat_ids = array_merge($term_ids, $children);
+    return $cat_ids;
 }
 
 /** 
@@ -772,6 +825,20 @@ function dfdl_get_permalink( int $post_id ): string {
      */ 
     $link = str_replace("content-hub/", "", $link);
     return $link;
+}
+
+/**
+ * DFDL Content Hub Category.
+ * 
+ * dfdl_solution tax term for post
+ * 
+ */
+function get_content_hub_cat( int $post_id ) {
+    $solution = wp_get_post_terms($post_id, 'dfdl_solutions');
+    if ( isset($solution[0]) ) {
+        return $solution[0];
+    }
+    return dfdl_post_terms($post_id, array("return"=>"term"));
 }
 
 /**

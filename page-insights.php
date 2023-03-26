@@ -21,7 +21,7 @@
 	<?php endwhile; ?>
 <?php endif; ?>
 
-<section id="insights" class="page-insights">
+<section id="insights" class="page-insights silo">
 
     <!--
     <nav class="subnav-stage silo">
@@ -46,6 +46,7 @@
         }
         
     ?>
+ 
     <div id="results_stage"><div>
         <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
@@ -56,8 +57,8 @@
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myswiper = new Swiper('.swiper', {
-        loop: true,
+    var swiper = new Swiper('.swiper', {
+        loop: false,
         preloadImages: false,
         slidesPerView: 1.1,
         navigation: {

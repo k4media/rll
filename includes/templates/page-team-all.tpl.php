@@ -8,7 +8,7 @@
      * All Members
      */
     $args = array(
-        'number'    => -1,
+        'number'    => get_option('posts_per_page'),
         'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
         'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' )
     );
@@ -32,12 +32,15 @@
     $user_query = new WP_User_Query($args);
 
 ?>
-<div id="team-all" >
+<div id="team-all" class="silo">
     <?php do_action("dfdl_solutions_country_nav"); ?>
-    <div id="results_stage" class="team-stage silo">
-        <div>
+    <div id="results_stage" class="team-stage all">
+        <div id="team-grid-swiper">
+
+      
             <?php
                 // The Loop
+                /*
                 if ( ! empty( $user_query->get_results() ) ) {
                     foreach ( $user_query->get_results() as $user ) {
                         set_query_var("user", $user);
@@ -46,7 +49,31 @@
                 } else {
                     echo 'No users found.';
                 }
+                */
+
+                if ( ! empty( $user_query->get_results() ) ) {
+
+                    ob_start();
+                    foreach( $user_query->get_results() as $user ) {
+                         set_query_var("user", $user);
+                         get_template_part( 'includes/template-parts/content/member' );
+                    }
+                    $slides = ob_get_clean();
+    
+                    ob_start();
+                         get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+                    $template = ob_get_clean();
+                    $template = str_replace("{posts}", $slides, $template);
+    
+                    echo $template;
+    
+               } else {
+                    echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
+               }
+
             ?>
+
+
         </div>
     </div>
 </div>

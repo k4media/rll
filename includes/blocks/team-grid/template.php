@@ -137,9 +137,10 @@ if ( count($users) > 0) :
      <?php endif; ?>  
 
      <div id="team-grid" class="team-grid silo">
-          <div class="team-stage <?php echo $post_class ?>">
+          <div id="results_stage" class="team-stage <?php echo $post_class ?>">
                <div id="team-grid-swiper">
                     <?php
+
                          if ( count($users) > 0) {
 
                               ob_start();
@@ -152,9 +153,7 @@ if ( count($users) > 0) :
                               ob_start();
                                    get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
                               $template = ob_get_clean();
-                  
                               $template = str_replace("{posts}", $slides, $template);
-                  
                               echo $template;
 
                          } else {
@@ -175,38 +174,34 @@ if ( count($users) > 0) :
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-      /*
-      
-      var swiperStage = document.getElementByClassName
-     teamSwiper = new Swiper(".team-swiper", {
-          loop: false,
-          preloadImages: true,
-          lazy: true,
-          slidesPerView: 4,
-          spaceBetween: 24,
-     });
-     var init = false;
+     swiperInit = false;
      function swiperCard() {
           if (window.innerWidth <= 700) {
-               if (!init) {
-                    init = true;
+               if (!swiperInit) {
+                    swiperInit = true;
                     teamSwiper = new Swiper(".team-swiper", {
                          loop: false,
                          preloadImages: true,
                          lazy: true,
-                         slidesPerView: 2,
-                         spaceBetween: 24,
+                         breakpoints: {
+                              400: {
+                                   slidesPerView: 2,
+                                   spaceBetween: 24,
+                              },
+                              0: {
+                                   slidesPerView: 1.1,
+                                   spaceBetween: 24,
+                              },
+                         }
                     });
                }
-          } else if (init) {
+          } else if (swiperInit) {
                teamSwiper.destroy();
-               init = false;
+               swiperInit = false;
           }
      }
      swiperCard();
      window.addEventListener("resize", swiperCard);
-
-     */arguments
 });
 </script>
 <?php endif; ?>

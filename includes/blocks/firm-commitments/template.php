@@ -24,7 +24,7 @@
      <div class="narrow">
           <h2><?php echo $title ?></h2>
           <h3><?php echo $subtitle ?></h3>
-          <div class="commitments-stage" data-masonry='{ "itemSelector": ".commitment", "columnWidth": ".commitment", "fitWidth": true, "gutter": 20, "horizontalOrder": true, "stagger": 30}'>
+          <div class="commitments-stage">
                <?php echo implode ($output); ?>
           </div>
      </div>

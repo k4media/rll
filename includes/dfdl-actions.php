@@ -83,7 +83,7 @@ function dfdl_search_insights() {
         $query->parse_query( $query_args );
         relevanssi_do_query( $query );
     } else {
-        $query = new WP_User_Query($query_args);
+        $query = new WP_Query($query_args);
     }
 
     if ( ! empty( $query->posts ) ) {
@@ -283,10 +283,11 @@ function dfdl_in_the_news() {
         'post_type'      => 'post',
         'post_status'    => 'publish',
         's'              => $author->display_name,
-        'posts_per_page' => 4,
+        'author__not_in' => $author_id,
+        'posts_per_page' => 8,
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'no_found_rows'          => true,
+        'no_found_rows'          => false,
         'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
 	    'update_post_term_cache' => false,
@@ -306,9 +307,15 @@ function dfdl_in_the_news() {
         )
     );
 
-    $posts = new WP_Query( $query_args );
+    if ( function_exists('relevanssi_do_query') ) {
+        $query = new WP_Query();
+        $query->parse_query( $query_args );
+        relevanssi_do_query( $query );
+    } else {
+        $query = new WP_Query( $query_args );
+    }
 
-    if ( ! empty( $posts->posts ) ) {
+    if ( ! empty( $query->posts ) ) {
 
         /**
          * "View All" link
@@ -319,35 +326,44 @@ function dfdl_in_the_news() {
          * Queue up news cards
          */
         ob_start();
-        foreach ( $posts->posts as $post ) {
+
+        foreach ( $query->posts as $post ) {
 
             $term = dfdl_post_terms($post->ID);
-            $term = get_term_by("name", $term[0], "category");
+            $term = get_term_by("name", $term, "category");
 
-            if ( "events" === $term->slug ) {
-                $startdate = get_post_meta( $post->ID, 'startdate', true);
-                if ( isset($startdate) ) {
-                    $show_date = mysql2date( get_option( 'date_format' ), $startdate );
-                    set_query_var("show_date", $show_date);
-                }
-                set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
-                set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
-                set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
-            }
             set_query_var("story", $post);
-            set_query_var("term", $term);
 
-            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
-            if ( file_exists($file) ) {
-                get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+            if ( isset($term) && false !== $term && ! is_wp_error($term) ) {
+
+                if ( "events" === $term->slug ) {
+                    $startdate = get_post_meta( $post->ID, 'startdate', true);
+                    if ( isset($startdate) ) {
+                        $show_date = mysql2date( get_option( 'date_format' ), $startdate );
+                        set_query_var("show_date", $show_date);
+                    }
+                    set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
+                    set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                    set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
+                }
+                
+                set_query_var("term", $term);
+    
+                $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $term->slug . '-card.php';
+                if ( file_exists($file) ) {
+                    get_template_part( 'includes/template-parts/content/insights', $term->slug . '-card' );
+                } else {
+                    get_template_part( 'includes/template-parts/content/insights', 'news-card' );
+                }
+
             } else {
                 get_template_part( 'includes/template-parts/content/insights', 'news-card' );
             }
+            
 
         }
         $news = ob_get_clean();
 
-        
         echo '<section id="dfdl-in-the-news" class="xtra callout silo">';
         echo '<header><h2 class="title">In the News</h2><!--<a href="' . $archive_link . '">View All</a>--></header>';
         echo '<div class="posts">' . $news . '</div>';
@@ -396,9 +412,9 @@ function dfdl_written_by() {
         )
     );
 
-    $posts = new WP_Query( $query_args );
+    $query = new WP_Query( $query_args );
 
-    if ( ! empty( $posts->posts ) ) {
+    if ( ! empty( $query->posts ) ) {
 
         /**
          * Strip 'content-hub' from url
@@ -411,7 +427,7 @@ function dfdl_written_by() {
          * Queue up news cards
          */
         ob_start();
-        foreach ( $posts->posts as $post ) {
+        foreach ( $query->posts as $post ) {
 
             $term = dfdl_post_terms($post->ID);
             $term = get_term_by("slug", $term, "category");
@@ -935,7 +951,7 @@ function dfdl_ajax_teams_insights(): array {
      * Build query
      */
     $paged = ( isset($wp_query->query['page']) ) ? $wp_query->query['page'] : 1;
-    $dfdl_country = ( isset($wp_query->query['dfdl_country']) ) ? $wp_query->query['dfdl_country'] : '';
+    //$dfdl_country = ( isset($wp_query->query['dfdl_country']) ) ? $wp_query->query['dfdl_country'] : '';
 
     $args                = array();
     $args['post_type']   = array('post');
@@ -982,6 +998,16 @@ function dfdl_ajax_teams_insights(): array {
             ),
         );
 
+    } elseif ( isset($_POST['iContentHub']) && "content_hub" === $_POST['iContentHub'] ) {
+        // check for content hub
+        $args['tax_query'][] = array(
+            array (
+                'taxonomy'   => 'category',
+                'field' => 'id',
+                'terms' => dfdl_insights_content_hub_ids()
+            ),
+        );
+
     } else {
 
         if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
@@ -995,7 +1021,6 @@ function dfdl_ajax_teams_insights(): array {
             ),
         );
     }
-
 
     // add years
     if ( isset($clean['years']) && count($clean['years']) > 0 ) {
@@ -1048,9 +1073,10 @@ function dfdl_ajax_teams_insights(): array {
         ob_start();
         foreach ( $insights->posts as $p ) {
 
-            // $term = dfdl_post_solution($p->ID);
             $term = dfdl_post_solution($p->ID, array("return" => "term"));
             $cats = dfdl_post_terms($p->ID);
+
+            $content_hub_cat = get_content_hub_cat($p->ID);
             
             set_query_var("story", $p);
             set_query_var("term", $term);
@@ -1078,7 +1104,7 @@ function dfdl_ajax_teams_insights(): array {
         /**
          * Insert pagination
          */
-
+        /*
         $solutions  = ( isset($clean['solutions']) ) ? implode(",",$clean['solutions']) : "" ;
         $categories = ( isset($clean['categories']) ) ? implode(",",$clean['categories']) : "" ;
         $section    = ( isset($clean['section']) ) ? implode(",",$clean['section']) : "" ;
@@ -1104,6 +1130,8 @@ function dfdl_ajax_teams_insights(): array {
             echo $links;
             echo '</div>';
         $pagination = ob_get_clean();
+        */
+        
         $output .= $pagination;
 
     }
@@ -1262,13 +1290,22 @@ function dfdl_ajax_teams_filter(): array {
      * User query
      */
     $users  = new WP_User_Query($args);
+
+
     if ( ! empty( $users->get_results() ) ) {
         ob_start();
         foreach ( $users->get_results() as $user ) {
             set_query_var("user", $user);
             get_template_part( 'includes/template-parts/content/member' );
         }
-        $output = ob_get_clean();
+        $slides = ob_get_clean();
+
+        ob_start();
+            get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+        $template = ob_get_clean();
+        $output = str_replace("{posts}", $slides, $template);
+        $output = '<div id="team-grid-swiper">' . $output . '</div>';
+
     }
     
     /**
@@ -1430,12 +1467,14 @@ function dfdl_filter( string $filter ): void {
         case "award_solutions":
         case "teams_solutions":
         case "insights_solutions":
+        case "podcasts_solutions":
             $options = dfdl_get_solutions_tax();
             break;
         case "award_years":
             $options = dfdl_get_award_years();
             break;
         case "insights_years":
+        case "podcasts_years":
             $options = dfdl_get_insights_years();
             break;
         case "teams_sort":
@@ -1536,25 +1575,20 @@ function dfdl_solutions_country_nav() {
 
     if ( "insights" === $section ) {
 
-        // mobile filter button
-        $nav[] = '<li class="swiper-slide mobile-filter-button"><button id="mobile-filters-toggle" class="button mobile-filter insights-filter"></button></li>';
-
         $dfdl_sections = dfdl_get_section();
+
         /**
          * All button
          */
-        if ( "insights" === end($dfdl_sections)  ) {
-            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
+        if ( "insights" === end($dfdl_sections) ) {
+            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All</a></li>' ;
+        } elseif ( "news" === end($dfdl_sections) ) {
+            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/news/'). '">All</a></li>' ;
+        } elseif ( "content-hub" === end($dfdl_sections) ) {
+            $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/content-hub/'). '">All</a></li>' ;
         } else {
-
-            //if ( "news" === end($dfdl_sections) ) {
-                //$nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
-            //} else {
-                $nav[] = '<li class="swiper-slide"><a  href="' . get_home_url('', 'insights/'). '">All </a></li>' ;
-            //}
-            
+            $nav[] = '<li class="swiper-slide"><a  href="' . get_home_url('', 'insights/'). '">All</a></li>' ;
         }
-
     }
 
     foreach($pages->posts as $page) {
@@ -1649,9 +1683,9 @@ function dfdl_solutions_country_nav() {
                  * ex /locations/cambodia/[teams|awards|etc]
                  */
                 if ( in_array(strtolower($page->post_name), $pieces)  ) {
-                    $nav[] = '<li><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                    $nav[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
                 } else {
-                    $nav[] = '<li><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
+                    $nav[] = '<li class="swiper-slide"><a href="' . $home_url . '/locations/' . $page->post_name . '/' . $section . '/">' . $page->post_title . '</a></li>' ;
                 }
 
             }
@@ -1660,45 +1694,47 @@ function dfdl_solutions_country_nav() {
     }
 
     /**
+     * Add filter button
+     */
+    if ( "contact-us" !== $section ) {
+        $nav[] = '<li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter ' . $section . '">Filter</button></li>';
+    }
+
+    /**
      * Prepare html output
      */
     $class  = is_admin() ? "admin" : "" ;
     $output = array();
 
-    $output[] = '<nav id="country-subnav" class="country-subnav-stage narrow"><div class="subnav-swiper"><ul class="' . $class . ' ' . $section . '-country-nav country-nav swiper-wrapper">';
+    $output[] = '<nav id="country-subnav" class="country-subnav-stage"><div class="subnav-swiper"><ul class="' . $class . ' ' . $section . '-country-nav country-nav swiper-wrapper">';
+    
+    // mobile filter button
+    $output[] = '<li class="swiper-slide mobile-filter-button" data-id="' . $section . '"><button id="mobile-filters-toggle" class="button mobile-filter insights-filter"></button></li>';
+
     if ( ( "all" === end($pieces) || "teams" === end($pieces) ) && count($pieces) < 3) {
-        $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+
+        $output[] = '<li class="swiper-slide a"><a class="current-menu-item" href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+
     } else {
 
         if( "awards" === $section ) {
             if ( count($pieces) == 1 ) {
-                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
+                $output[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/' . $section . '/">All</a></li>';
             } else {
-                $output[] = '<li><a href="' . $home_url . '/' . $section . '/">All</a></li>';
+                $output[] = '<li class="swiper-slide"><a href="' . $home_url . '/' . $section . '/">All</a></li>';
             }
         } elseif ( "contact-us" === end($pieces) ) {
             if ( count($pieces) == 1 ) {
-                $output[] = '<li><a class="current-menu-item" href="' . $home_url . '/contact-us/">Regional</a></li>';
+                $output[] = '<li class="swiper-slide"><a class="current-menu-item" href="' . $home_url . '/contact-us/">Regional</a></li>';
             } else {
-                $output[] = '<li><a href="' . $home_url . '/contact-us/">Regional</a></li>';
+                $output[] = '<li class="swiper-slide"><a href="' . $home_url . '/contact-us/">Regional</a></li>';
             }
-        } elseif ( "insights" === $section ) {
-
-            //if ( count($pieces) > 1 ) {
-                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-            //}
-            //$output[] = '<li class="back"><a href="' . $home_url . '/insights/">Back</a></li>';
-            //} else {
-                // $output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-            //}
-            //$output[] = '<li class="back"><a href="' . dfdl_insights_back_link() . '">Back</a></li>';
-
-            $nav[] = '<li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter insights-filter">Filter</button></li>';
-            
         } else {
 
-            $output[] = '<li><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
- 
+            if ( "insights" !== $section ) {
+                $output[] = '<li  class="swiper-slide"><a href="' . $home_url . '/' . $section . '/all/">All</a></li>';
+            }
+            
         }
     }
 
@@ -1747,7 +1783,7 @@ function dfdl_solutions_country_nav() {
             if ( false !== $maybe_section_term && ! is_wp_error($maybe_section_term) ) {
                 $omit = array("news");
                 if ( ! in_array($pageslug, $omit) ) {
-                    echo '<input type="hidden" name="insights_section" id="insights_section" value="' . $pageslug . '">';
+                    echo '<input type="hidden" name="insights_section[]" id="insights_section" value="' . $pageslug . '">';
                 }
             }
             get_template_part("includes/template-parts/filters/filter", $pageslug );
@@ -1756,6 +1792,8 @@ function dfdl_solutions_country_nav() {
         }
         $filters[] = ob_get_clean();
     }
+
+
 
     $output[] = implode($filters);
 
@@ -1895,7 +1933,6 @@ function dfdl_related_stories(): void {
 
 }
 
-
 /**
  * Get resuable block by ID
  */
@@ -1927,6 +1964,17 @@ function wd_acf_color_palette() { ?>
 })(jQuery);
 </script>
 <?php }
+
+/**
+ * Mobile body class
+ */
+add_filter( 'body_class', 'dfdl_mobile_body_class' );
+function dfdl_mobile_body_class( $classes ) {
+    if ( wp_is_mobile() ) {
+        $classes[] = 'is-mobile';
+    }
+    return $classes;
+}
 
 /**
  * DFDL Logo
