@@ -108,7 +108,8 @@ a:hover,
 .dfdl-single-member .contact-details a:hover,
 #colophon nav a:hover,
 .country-nav a:not(.current-menu-item):hover,
-.responsive-table a:hover {
+.responsive-table a:hover,
+#insights .callout header a:hover {
 	color: var(--color-bright-green);
 }
 nav ul {
@@ -1004,6 +1005,7 @@ header.main {
 .filters-stage .filters h4 {
 	font-family: var(--setting-body-font);
 	font-size: var(--font-size-small);
+	font-weight: 400;
 	color: var(--color-gray);
 	font-variant: small-caps;
 }
