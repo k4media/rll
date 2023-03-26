@@ -125,8 +125,12 @@ get_header();
                         if ( isset($startdate) ) {
                             $show_date = mysql2date( get_option( 'date_format' ), $startdate );
                         }
+                        $dateline = get_post_meta( $post->ID, 'dateline', true);
+                        if ( empty($dateline) ) {
+                            $dateline = "Upcoming" ;
+                        }
                         set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
-                        set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+                        set_query_var("dateline", $dateline);
                         set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
                         set_query_var("show_date", $show_date);
 
