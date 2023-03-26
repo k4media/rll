@@ -22,10 +22,17 @@
 <?php
 $K4 = new K4;
 $K4->fragment_cache( "page-header", function() { ?>
+<?php get_template_part("includes/template-parts/menus/menu", "side"); ?>
 <header class="main">
 	<div class="header-stage silo">
 		<div class="left">
-			<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>
+			<div id="hamburger">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+			<!--<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>-->
 			<nav id="site-navigation-left" class="main-navigation">
 				<?php
 					wp_nav_menu(

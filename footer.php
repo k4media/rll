@@ -31,7 +31,7 @@ $K4->fragment_cache( "page-footer", function() { ?>
             <?php do_action('legal_nav') ?>
         </div>
     </div>
-    <?php get_template_part("includes/template-parts/menus/menu", "side"); ?>
+    
 <?php }); // close K4 fragment ?>
 </div><!-- /page -->
 <?php wp_footer(); ?>

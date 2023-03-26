@@ -2,14 +2,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var hamburger = document.getElementById("hamburger");
     var side_menu = document.getElementById("menu-side");
     var close     = document.getElementById("menu-side-close");
-    hamburger.addEventListener("click", function() {
+    hamburger && hamburger.addEventListener("click", function() {
+        hamburger.classList.toggle("open");
         side_menu.classList.toggle("is-active");
-        document.body.classList.toggle("noscroll");
+        //document.body.classList.toggle("noscroll");
     });
-    close.addEventListener("click", function() {
-        side_menu.classList.toggle("is-active");
-        document.body.classList.toggle("noscroll");
-    });
+    //close.addEventListener("click", function() {
+        //side_menu.classList.toggle("is-active");
+        //document.body.classList.toggle("noscroll");
+    //});
 
     var filters_stage = document.getElementById("filters-stage");
     var filters_toggle = document.getElementById("filters-toggle");

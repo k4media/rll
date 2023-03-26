@@ -2,12 +2,12 @@
 
 // WIP -- update tax counts
 // add_action('save_post', 'dfdl_update_custom_taxonomy_counts', 10, 3);
-function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before) {
+//function dfdl_update_custom_taxonomy_counts($post_id, $post_after, $post_before) {
     //$countries = dfdl_get_countries();
     // var_dump($countries);
     //$count = wp_update_term_count( $countries, 'dfdl_countries' );
     // var_dump($count);
-}
+//}
 
 /**
  * Search Insights
@@ -190,15 +190,19 @@ function dfdl_search_teams() {
              get_template_part( 'includes/template-parts/content/member' );
         }
         $users = ob_get_clean();
+        ob_start();
+            get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+        $template = ob_get_clean();
+        $template = str_replace("{posts}", $users, $template);
 
-        $return[] = '<div id="team-grid" class="search-teams">';
-        $return[] = '<header><h2 class="title">Team</h2></header>';
-        $return[] = '<div class="team-stage"><div>';
-        $return[] = $users;
+        $return[] = '<div id="team-grid" class="team-grid silo">';
+        $return[] = '<div id="results_stage" class="team-stage <?php echo $post_class ?>">';
+        $return[] = '<div id="team-grid-swiper">';
+        $return[] = $template;
         $return[] = '</div></div></div>';
+
         return implode($return);
     }
-
 }
 
 /**
