@@ -101,15 +101,16 @@ img { display: block; }
 a { 
 	text-decoration: none;
 }
-a:hover,
-.callout .stage a:hover,
+#colophon nav a:hover,
+#insights .callout header a:hover,
+#side-navigation .menu li a:hover,
+a:hover, .callout .stage a:hover,
 .posts .card h4 a:hover,
 .dfdl-single-member .name a:hover,
 .dfdl-single-member .contact-details a:hover,
-#colophon nav a:hover,
 .country-nav a:not(.current-menu-item):hover,
 .responsive-table a:hover,
-#insights .callout header a:hover {
+#colophon nav a:hover, .legal-nav a:hover {
 	color: var(--color-bright-green);
 }
 nav ul {
