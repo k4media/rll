@@ -20,6 +20,9 @@
     flex: 1 1 50%;
     line-height: 1.75em;
 }
+.text-feature .columns.single-column {
+    justify-content: left;
+}
 .text-feature .columns.single-column > div {
     flex: 1 1 100%;
     line-height: 1.75em;
