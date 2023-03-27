@@ -1747,6 +1747,9 @@ input[type='search'] {
 	cursor: pointer;
 	z-index: 999;
 }
+#hamburger:hover span {
+	background: var(--color-bright-green);
+}
 #hamburger span {
 	display: block;
 	position: absolute;

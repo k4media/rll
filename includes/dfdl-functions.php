@@ -892,65 +892,6 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
         return array();
     }
 
-    
-
-
-    //$ancestors = get_ancestors($terms[0]->term_id, 'category');
-    /**
-     * Return if only 1 term
-     */
-    /*
-    if ( 0 === count($ancestors) ) {
-        if ( isset($args['return']) && "term" === $args['return'] ) {
-            return $terms[0];
-        } else {
-            return $terms[0]->name;
-        }
-    }
-    */
-    /** else ... we have a problem! deal with it later  */
-    /*
-    if ( count($ancestors) > 0 ) {
-        foreach( $ancestors as $a ) {
-            var_dump($a);
-            $cat = get_term_by('id', $a, 'category');
-            $return[] = $cat->name;
-        }
-    } 
-    */
-    /*
-    $parent_cat = array();
-    $sub_cats = array();
-    foreach( $post_terms as $t ) {
-        if ( 0 === $t->parent ) {
-            $parent = get_term_by('slug', $t->parent, 'category');
-            if ( "content-hub" !== $parent->slug ) {
-                $parent_cat = $t;
-            }
-            
-        } else {
-            $sub_cats[] = $t->slug;
-        }
-    }
-    if ( ! empty($parent_cat) ) {
-        $parent_category = get_term_by('slug', $parent_cat->slug, 'category');
-
-        if ( isset($args['type']) && "category" === $args['type'])
-            return $parent_category;
-
-        //$return .= '<span class="category">' . $parent_category->name . '</span>';
-        if( count($sub_cats) > 0 ) {
-            foreach( $sub_cats as $s ) {
-                $sub_term = get_term_by('slug', $s, 'category');
-                if ( $parent_category->term_id === $sub_term->parent ) {
-                    //$return .= '<span class="separator">|</span><span class="subcategory">' . $sub_term->name . '</span>';
-                    return $sub_term->name;
-                }
-            }
-        }
-        
-    }
-    */
 }
 
 /**
@@ -976,6 +917,34 @@ function dfdl_content_hub_category( int $post_id ): string {
     }
     return "";
 }
+
+/**
+ * Event Category.
+ * 
+ * Return events category name
+ * @int post_id
+ * 
+ */
+function dfdl_event_category($post_id): string {
+
+    // events posts category id = 668
+    $event_terms = get_term_children(668);
+    $event_names = array();
+    foreach( $event_terms as $et ) {
+        $event_names[] = $et->name;
+    }
+
+    $post_terms = wp_get_post_terms($post_id, 'category', array( 'fields' => 'names'));
+    foreach( $post_terms as $pt ) {
+        if ( in_array($pt, $event_names) ) {
+            return $pt;
+        }
+    }
+
+    return "Events";
+
+}
+
 
 /**
  * Get Block Data

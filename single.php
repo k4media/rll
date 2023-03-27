@@ -26,10 +26,10 @@ $terms = wp_get_post_terms($post->ID, 'category');
 
 $classes = array();
 $primary_categories = array(
-	"News",
 	"Events",
 	"Legal and Tax",
 	"Legal and Tax Updates",
+	"News"
 );
 
 foreach( $terms as $term ) {
@@ -39,13 +39,15 @@ foreach( $terms as $term ) {
 	 */
 	if ( in_array($term->name, $primary_categories ) ) {
 		$single_category = $term->name;
-		$template_slug = str_replace(" ", "-", strtolower($single_category));
 	}
 
 	/**
-	 * Set subcategory
+	 * If parent, set parent/child as category/subcategory
 	 */
 	if ($term->parent) {
+		$parent = get_term_by( "id", $term->parent, 'category');
+		$classes[] = esc_attr($parent->slug);
+		$single_category = $parent->name;
 		$single_subcategory = $term->name;
 	}
 
