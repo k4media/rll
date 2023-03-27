@@ -56,9 +56,7 @@ foreach( $terms as $term ) {
 }
 
 ?>
-
 <a id="scroll-to-top" class="single jump" href="#top"></a>
-
 <div id="insights" class="<?php echo implode(" ", $classes) ?> silo">
 	<nav class="country-subnav-stage">
 		<ul class="country-nav">
@@ -76,6 +74,7 @@ foreach( $terms as $term ) {
 			</div>
 		<?php endif; ?>
 		<?php
+
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
@@ -85,11 +84,23 @@ foreach( $terms as $term ) {
 				} else {
 					get_template_part( 'includes/template-parts/content/content-single' );
 				}
-				
-
 			endwhile; // End of the loop.
+
 		?>
-		<?php get_template_part( 'includes/template-parts/content/single-social-share' ); ?>
+		<div class="article-meta">
+			<?php
+				get_template_part( 'includes/template-parts/content/single-social-share' );
+
+				if ( function_exists('get_field')) {
+					//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
+					$direct_download = get_field('direct_download', $post->ID);
+					$direct_link = get_field('download_link', $post->ID);
+				}
+				if ( isset($direct_link) ) {
+					echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+				}
+			?>
+		</div>
 	</div>
 	<?php do_action("dfdl_related_stories"); ?>
 </div>

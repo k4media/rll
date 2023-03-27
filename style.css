@@ -188,7 +188,8 @@ nav ul li {
 	position: relative;
 }
 .button.mobile-filter:before,
-.button.filter:before {
+.button.filter:before,
+.button.download:before {
 	background-image: url(assets/media/icon-filter.svg);
 	background-position: 0 0;
 	background-repeat: no-repeat;
@@ -227,6 +228,23 @@ nav ul li {
 	opacity: .3;
 	pointer-events: none;
 }
+.button.download {
+	background: var(--color-bright-green);
+	color: var(--color-white);
+	padding-left: 60px;
+	padding-right: 40px;
+	position: relative;
+}
+.button.download:hover {
+	background: var(--color-green);
+}
+.button.download:before {
+	background-image: url(assets/media/icon-download.svg);
+	left: 32px;
+	top: 10px;
+}
+
+
 /* lighten header */
 header.main {
 	background-color: rgba(255,255,255,.9);
@@ -1498,10 +1516,14 @@ header + #results_stage .swiper {
 	padding: .25em;
 }
 
+.article-meta {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 4em;
+}
 .social-share {
 	align-items: center;
 	display: flex;
-	margin-top: 4em;
 }
 .social-share label {
 	color: var(--color-gray);

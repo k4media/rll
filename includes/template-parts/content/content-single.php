@@ -66,12 +66,12 @@
 									<span>Size: (<?php echo $file_size; ?>)</span>
 									<?php endif; ?>
 								</p>
-								<?php if(!empty($download_ids) && !$direct_download): ?>
+								<?php /* if(!empty($download_ids) && !$direct_download): ?>
 									<a class="download" href="?form=1">Next step</a>
 								<?php endif; ?>
 								<?php if($direct_download): ?>
 									<a class="button green download" href="<?php echo $direct_link ?>">Download</a>
-								<?php endif; ?>
+								<?php endif; */ ?>
 							</div>
 						</div>
 
