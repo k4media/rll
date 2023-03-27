@@ -105,13 +105,15 @@ a {
 #insights .callout header a:hover,
 #side-navigation .menu li a:hover,
 a:hover, .callout .stage a:hover,
-.posts .card h4 a:hover,
 .dfdl-single-member .name a:hover,
 .dfdl-single-member .contact-details a:hover,
 .country-nav a:not(.current-menu-item):hover,
 .responsive-table a:hover,
 #colophon nav a:hover, .legal-nav a:hover {
 	color: var(--color-bright-green);
+}
+.posts .card h4 a:hover {
+	color: var(--color-green);
 }
 nav ul {
 	margin: 0;
@@ -1378,6 +1380,7 @@ header + #results_stage .swiper {
 .posts .card {
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
 	padding: 1.5em;
+	width: 100%;
 }
 .posts .card.media {
 	padding: 0;
@@ -1412,17 +1415,37 @@ header + #results_stage .swiper {
 }
 .posts .card .category,
 .posts .card .subcategory {
-	color: var(--color-green);
+	color: var(--color-gray);
 	font-size: var(--font-size-small);
 	font-variant: small-caps;
 }
 .posts .card .date {
-	color: var(--color-green-70);
+	color: var(--color-gray);
 	white-space: nowrap;
 }
 .posts .card .author {
 	font-size: var(--font-size-small);
 	margin: 1em 0 1em 0;
+}
+
+.card-hover {
+	display: flex;
+}
+.card-hover .author,
+.card-hover .dateline,
+.card-hover h4 {
+	color: var(--color-black);
+}
+.card-hover:hover .taxonomy,
+.card-hover:hover .date,
+.card-hover:hover .category,
+.card-hover:hover .subcategory,
+.card-hover:hover h4 {
+	color: var(--color-green);
+}
+.card-hover:hover .author,
+.card-hover:hover .dateline {
+	color: var(--color-gray);
 }
 .posts .card h4 a {
 	color: var(--color-dark-gray);
