@@ -510,7 +510,9 @@ header.main {
 
 
 
-.dfdl-single-member {
+.dfdl-single-member,
+#results_stage.team-stage.all,
+#results_stage.team-stage.country {
 	margin: 120px auto 120px auto;
 }
 .lead-team-member.dfdl-single-member {
@@ -847,6 +849,16 @@ header.main {
 .team-lead-stage + .team-grid-stage {
 	margin-top: 0;
 	padding-top: 0;
+}
+.see-more {
+	text-align: center;
+}
+.button.see-more, .button.see-all {
+	background: transparent;
+    margin: 4em auto auto auto;
+}
+.button.see-more.disabled {
+	color: var(--color-green);
 }
 .member .bio p {
 	display: inline-block;
@@ -1303,19 +1315,7 @@ article + #insights {
 #page.site {
 	position: relative;
 }
-
-/*
-#page.site .country-subnav-stage {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: -11px;
-	z-index: 10;
-}
-*/
-
 #insights .callout {
-	/* padding: 4em 16px 4em 16px; */
 	padding: 60px 0 60px 0;
 }
 #dfdl-written-by header {
@@ -1359,8 +1359,6 @@ article + #insights {
 }
 #page-lead + .award-grid-stage,
 #results_stage > div > .swiper,
-#results_stage.team-stage.country,
-#results_stage.team-stage.all,
 .swiper + .posts
 /* , #results_stage .posts */ {
 	margin-top: 60px;
@@ -2169,10 +2167,6 @@ input[type='search'] {
 	.country-contacts {
 		flex-direction: column;
 	}
-	/*
-	.lead-team-member.dfdl-single-member {
-		margin-bottom: 0;
-	} */
 }
 
 @media screen and ( max-width: 700px ) {
@@ -2320,7 +2314,6 @@ input[type='search'] {
 	#firm-commitments .commitments-stage {
 		columns: 1;
 	}
-
 }
 
 @media screen and ( max-width: 600px ) {
@@ -2442,6 +2435,9 @@ input[type='search'] {
 	.team-lead-stage.locations,
 	.team-grid-stage.locations {
 		background: var(--color-white);
+	}
+	.button.see-more {
+		margin-top: 32px;
 	}
 }
 

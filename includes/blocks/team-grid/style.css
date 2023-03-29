@@ -32,13 +32,10 @@
     text-align: center;
 }
 .team-grid-stage {
-    margin: 120px 0 120px 0;
+    margin: 120px 0 0 0;
 }
 #subnav-stage + .team-grid {
     padding-top: 60px;
-}
-.team-grid .button.see-all {
-    margin: 4em auto 0 auto;
 }
 #our-founders + .team-grid-stage,
 .team-lead-stage + .team-grid-stage > .team-grid {
@@ -53,36 +50,10 @@
     grid-template-columns: repeat(4, 1fr) ;
     row-gap: 24px;
 }
-
 .team-swiper .swiper-prev,
 .team-swiper .swiper-next {
     display: none;
 }
-/*
-.team-stage > div {
-    column-gap: 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) ;
-    margin-top: 60px;
-    row-gap: 24px;
-}
-*/
-/*
-.team-swiper {
-    position: relative;
-}
-.team-swiper .swiper-prev {
-    left: 0;
-}
-
-.team-stage > div {
-    column-gap: 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) ;
-    margin-top: 60px;
-    row-gap: 24px;
-} */
-
 .team-stage > .loading {
     display: block;
 }

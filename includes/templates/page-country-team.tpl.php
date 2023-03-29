@@ -11,7 +11,7 @@ global $wp;
  */
 $args = array(
     'number'    => get_option('posts_per_page'),
-    'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
+    'role__in' => array('dfdl_member'),
     'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
     'no_found_rows'          => true,
     'ignore_sticky_posts'    => true,
@@ -54,21 +54,16 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
 ?>
 <div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" class="teams-country-stage silo">
     <?php do_action("dfdl_solutions_country_nav"); ?>
-    <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
+    <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
+    <?php if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country'])) : ?>
+          <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
+     <?php else: ?>
+          <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="" />
+     <?php endif; ?>
     <div id="results_stage" class="team-stage country <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] . " " . $class ?>">
         <div id="team-grid-swiper">
         <?php
             // The Loop
-            /*
-            if ( ! empty( $user_query->get_results() ) ) {
-                foreach ( $user_query->get_results() as $user ) {
-                    set_query_var("user", $user);
-                    get_template_part( 'includes/template-parts/content/member' );
-                }
-            } else {
-                echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
-            } */
-
             if ( ! empty( $user_query->get_results() ) ) {
 
                 ob_start();
@@ -91,6 +86,9 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
 
 
         ?>
+        </div>
+        <div class="see-more">
+            <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
         </div>
     </div>
 </div>

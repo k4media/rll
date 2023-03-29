@@ -196,6 +196,7 @@ function dfdl_scripts() {
 		'ajaxurl' 		 => admin_url( 'admin-ajax.php' ),
 		'awards_nonce' 	 => wp_create_nonce('dfdl_awards'),
 		'teams_nonce' 	 => wp_create_nonce('dfdl_teams'),
+		'teams_see_more' => wp_create_nonce('dfdl_teams_see_more'),
 		'insights_nonce' => wp_create_nonce('dfdl_insights'),
 		'permalink'      => get_permalink()
 	);

@@ -259,7 +259,10 @@ html :where(.wp-block) {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
 }
-.team-member a {
+.member-loop .rollover {
+    display: none;
+}
+.member-loop a, .team-member a {
     color: var(--color-gray);
     text-decoration: none;
 }

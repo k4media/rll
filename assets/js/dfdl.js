@@ -5,12 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     hamburger && hamburger.addEventListener("click", function() {
         hamburger.classList.toggle("open");
         side_menu.classList.toggle("is-active");
-        //document.body.classList.toggle("noscroll");
     });
-    //close.addEventListener("click", function() {
-        //side_menu.classList.toggle("is-active");
-        //document.body.classList.toggle("noscroll");
-    //});
 
     var filters_stage = document.getElementById("filters-stage");
     var filters_toggle = document.getElementById("filters-toggle");
@@ -86,6 +81,24 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
     }
+    /*
+    var teams_more = document.getElementById("teams-all-see-more");
+    teams_more && teams_more.addEventListener("click", function() {
+        teams_all_page = document.getElementById("teams_all_page").value;
+        document.getElementById("teams_all_page").value = parseInt(teams_all_page) + 1;
+        teamsAllSeeMore();
+        return false;
+    });
+    */
+    document.addEventListener("click", function(e){
+        const teams_more = e.target.closest("#teams-all-see-more"); 
+        if(teams_more){
+            teams_all_page = document.getElementById("teams_all_page").value;
+            document.getElementById("teams_all_page").value = parseInt(teams_all_page) + 1;
+            teamsAllSeeMore();
+            return false;
+        }
+      });
 
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
@@ -104,6 +117,46 @@ if (jQuery().jquery) {
     jQuery("#insights_solutions, #insights_categories, #insights_years, #insights_events").on("change", debounce(function() {
         filterInsights()
     }, 700));
+}
+
+function teamsAllSeeMore() {
+    var wrap = document.getElementById("swiper-wrapper");
+    var teams_more = document.getElementById("teams-all-see-more");
+    teams_more.classList.add("disabled");
+    postAjax(
+        ajax_object.ajaxurl, {
+            action: "teams_all_more",
+            nonce: ajax_object.teams_see_more,
+            permalink: ajax_object.permalink,
+            solutions:jQuery('#teams_solutions').select2("val"),
+            sort: jQuery('#teams_sort').select2("val"),
+            country: document.getElementById("dfdl_teams_country").value,
+            page: document.getElementById("teams_all_page").value
+        }, function(data){
+            data = JSON.parse(data);
+            console.log(data.code);
+            console.log(data);
+            if ( data.code === 200 ) {
+                var counter = 0;
+                data.html.forEach((el) => {
+                    counter++;
+                    var new_span = document.createElement("span");
+                    var spanclass = "member" ;
+				    new_span.classList.add(spanclass);
+                    new_span.innerHTML = el;
+                    wrap.appendChild(new_span);
+                })
+                if ( counter > 0) {
+                    teams_more.style.display = 'block';
+                    teams_more.classList.remove("disabled");
+                }
+            } else {
+                teams_more.style.display = 'none';
+            }
+            console.log("results loaded");
+            console.log(data);
+        }
+    )
 }
 
 function filterInsights() {
@@ -138,7 +191,8 @@ function filterInsights() {
 function filterTeams() {
     console.log("loading results");
     jQuery("#results_stage").addClass("no-results");
-    jQuery("#results_stage > div ").replaceWith( "<div class='loading'>loading ...</div>" );
+    jQuery("#results_stage > #team-grid-swiper").replaceWith( "<div class='loading'>loading ...</div>" );
+    document.getElementById("teams_all_page").value = 1;
     postAjax(
         ajax_object.ajaxurl, {
             action: "filter_teams",
@@ -150,7 +204,7 @@ function filterTeams() {
             data = JSON.parse(data);
             if ( data.code === 200 ) {
                 jQuery("#results_stage").removeClass("no-results");
-                jQuery("#results_stage > div ").replaceWith(  data.html );
+                jQuery("#results_stage > div ").replaceWith( data.html );
                 swiperInit = false;
                 window.dispatchEvent(new Event('resize'));
             } else {
@@ -158,6 +212,7 @@ function filterTeams() {
                 console.log(data);
             }
             console.log("results loaded");
+            console.log(data);
         }
     )
 }

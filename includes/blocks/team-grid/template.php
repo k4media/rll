@@ -37,12 +37,12 @@ if ( "teams" === $sections[0] ) {
  * Build User Query
  */
 $args = array(
-     'number'    => 8,
-     'role__in ' => array('contributor', 'author', 'editor', 'admin', 'dfdl_member'),
+     'number'    =>  get_option('posts_per_page'),
+     'role__in' => array('dfdl_member'),
      'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
-     'no_found_rows'           => true,
-     'ignore_sticky_posts'     => true,
-     'update_post_meta_cache'  => false, 
+     'no_found_rows'          => false,
+     'ignore_sticky_posts'    => true,
+     'update_post_meta_cache' => false, 
      'update_post_term_cache' => false,
  );
 
@@ -78,8 +78,6 @@ if ( "solutions" === $sections[0] ) {
  */
 if ( "locations" === $sections[0] ) {
      $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_countries');
-     //$args['meta_key'] = '_dfdl_user_country';
-     //$args['meta_value'] = $term->term_id;
      $args['meta_query'][] = array(
           'key'     => '_dfdl_user_country',
           'value'   => $term->term_id,
@@ -92,23 +90,12 @@ if ( "locations" === $sections[0] ) {
  */
 if ( "desks" === $sections[0] ) {
      $term = get_term_by('slug', sanitize_title($sections[1]), 'dfdl_desks');
-     //$args['meta_key'] = '_dfdl_user_desks';
-     //$args['meta_value'] = $term->term_id;
      $args['meta_query'][] = array(
           'key'     => '_dfdl_user_desks',
           'value'   => $term->term_id,
           'compare' => '='
      );
 }
-
-/**
- * Teams -- doesn't seem to do anything?
-*/
-/*
-if ( "teams" === $sections[0] ) {
-     $args['fields'] = 'all_with_meta';
-}
-*/
 
 /**
  * Limit members in admin
@@ -120,7 +107,7 @@ if ( is_admin() ) {
 
 /**
  * User query
-     */
+ */
 $users = get_users($args);
 
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
@@ -130,6 +117,14 @@ if ( count($users) > 0) :
 ?>
 
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
+
+     <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
+     <?php if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country'])) : ?>
+          <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
+     <?php else: ?>
+          <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="" />
+     <?php endif; ?>
+     
 
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
@@ -160,16 +155,18 @@ if ( count($users) > 0) :
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
                     ?>
+                    <div class="see-more">
+                         <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
+                    </div>
                </div>
           </div>
+          
           <?php
                if ( is_admin() ) {
                     echo "<h4>Showing 4 of possibly many users</h4>";
                }
           ?>
-          <?php if ( count($users) > $args['number'] ) : ?>
-               <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
-          <?php endif; ?>
+          
      </div>
 </div>
 <script>

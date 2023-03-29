@@ -857,7 +857,6 @@ function dfdl_contact_form(): void {
     get_template_part( 'includes/template-parts/forms/form', 'contact' );
 }
 
-
 /**
  * DFDL Insights Filter Ajax
  * 
@@ -1176,7 +1175,6 @@ function dfdl_ajax_teams_insights(): array {
 
 }
 
-
 /**
  * DFDL Teams Filter Ajax
  * 
@@ -1237,16 +1235,19 @@ function dfdl_ajax_teams_filter(): array {
     /**
      * Team Members query args
     */
-    $args                = array();
-    $args['number']      = 16;
-    $args['count_total'] = true;
-    //$args['meta_key']    = '_dfdl_member_rank';
+    $posts_per_page = get_option('posts_per_page');
+    $args = array(
+        'number'   =>  $posts_per_page ,
+        'role__in' => array('dfdl_member'),
+        'count_total'            => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
 
     if ( "a-z" == $clean_sort ) {
-        //$args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'ASC' );
         $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' );
     } else {
-        //$args['orderby']     = array( '_dfdl_member_rank' => 'ASC', 'user_nicename' => 'DESC' );
         $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'DESC' );
     }
 
@@ -1278,7 +1279,7 @@ function dfdl_ajax_teams_filter(): array {
     }
 
     // add country
-    if ( "undefined" !== $clean_country ) {
+    if ( "undefined" !== $clean_country && "" !== $clean_country) {
         $term = get_term_by('slug', $clean_country, 'dfdl_countries');
         $args['meta_query'][] = array(
             'relation' => 'AND',
@@ -1297,8 +1298,8 @@ function dfdl_ajax_teams_filter(): array {
     /**
      * User query
      */
-    $users  = new WP_User_Query($args);
-
+    $users = new WP_User_Query($args);
+    $found = $users->get_total();
 
     if ( ! empty( $users->get_results() ) ) {
         ob_start();
@@ -1307,15 +1308,20 @@ function dfdl_ajax_teams_filter(): array {
             get_template_part( 'includes/template-parts/content/member' );
         }
         $slides = ob_get_clean();
+    }
 
-        ob_start();
-            get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
-        $template = ob_get_clean();
-        $output = str_replace("{posts}", $slides, $template);
-        $output = '<div id="team-grid-swiper">' . $output . '</div>';
+    ob_start();
+        get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+    $template = ob_get_clean();
+    $temp = str_replace("{posts}", $slides, $template);
+    $output = '<div id="team-grid-swiper">' . $temp ; 
 
+    if ( $found  > $posts_per_page ) {
+        $output .= '<button id="teams-all-see-more" class="button green ghost see-more">See More</button>';
     }
     
+    $output .= '</div>';
+
     /**
     * Validate response
     */
@@ -1324,6 +1330,7 @@ function dfdl_ajax_teams_filter(): array {
         $response['status'] = 'success';
         $response['html']   = $output;
         $response['count']  = $users->results;
+        $response['found']  = $found ;
     } else {
         $response['code']   = 400;
         $response['status'] = 'empty result set';
@@ -1345,6 +1352,177 @@ function dfdl_ajax_teams_filter(): array {
     exit;
     
 }
+
+/**
+ * Teams more ajax
+ */
+add_action('wp_ajax_teams_all_more', 'dfdl_ajax_teams_all_more');
+add_action('wp_ajax_nopriv_teams_all_more', 'dfdl_ajax_teams_all_more');
+function dfdl_ajax_teams_all_more(): void {
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+    /**
+    * Response 
+    */
+    $response = array();
+    $response['code']    = 0;
+    $response['message'] = '';
+    $response['status']  = '';
+    $response['html']    = '';
+
+    /**
+    * Validate nonce
+    */
+    if ( ! wp_verify_nonce( $_POST['nonce'], "dfdl_teams_see_more" )) {
+        $response["status"]	= "Failed security check. Please reload the page and try again.";
+        echo json_encode($response);
+        exit;
+    }
+
+    $clean = array();
+
+    /**
+    * Valid input values
+    */
+    $valid = array();
+    $valid['solutions'] = dfdl_get_solutions('slug');
+
+    /**
+    * Validate $_POST vars
+    */
+    $post_solutions  = explode(',', $_POST['solutions']);
+    foreach( $post_solutions as $p ) {
+        if ( in_array($p, $valid['solutions'])) {
+            $term = get_term_by("slug", $p, 'dfdl_solutions');
+            $clean['solutions'][] = $term->term_id;
+        }
+    }
+    if ( isset($_POST['page']) && "" !== $_POST['page'] && "undefined" !== $_POST['page'] ) {
+        $clean['page'] = intval($_POST['page']);
+    } else {
+        $clean['page'] = 1;
+    }  
+    $posts_per_page = get_option('posts_per_page');
+    $offset = $posts_per_page * ($clean['page'] - 1) ;
+
+    /**
+     * Team Members query args
+     */
+    $args = array(
+        'number'      => get_option('posts_per_page'),
+        'offset'      => $offset,
+        'paged'       => $clean['page'],
+        'count_total' => true,
+        'role'        => array('dfdl_member'),
+        'no_found_rows'          => true,
+        'ignore_sticky_posts'    => true,
+        'update_post_meta_cache' => false, 
+        'update_post_term_cache' => false,
+    );
+   
+    /**
+     * Sort keys
+     */
+    $clean['sort']   = sanitize_text_field($_POST['sort']);
+    if ( "a-z" == $clean['sort'] ) {
+        $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' );
+    } else {
+        $args['orderby']     = array( 'dfdl_rank' => 'ASC', 'last_name' => 'DESC' );
+    }
+    $args['meta_query'] = array(
+        'relation' => 'AND',
+        'dfdl_rank' => array(
+            'key'   => '_dfdl_member_rank',
+            'compare' => 'EXISTS'
+        ),
+        'last_name' => array(
+            'key'   => 'last_name',
+            'compare' => 'EXISTS'
+        ),
+    );
+    
+    // add solutions
+    if ( isset($clean['solutions']) && count($clean['solutions']) > 0 ) {
+        $args['meta_query'][] = array(
+            'relation' => 'OR',
+            array (
+                'key' => '_dfdl_user_solutions',
+                'value' => $clean['solutions'],
+                'compare' => 'IN'
+            ),
+        );
+    }
+    
+    // add country
+    $clean['country'] = sanitize_text_field($_POST['country']);
+    if ( "undefined" !== $clean['country'] && "" !== $clean['country'] ) {
+        $term = get_term_by('slug', $clean['country'], 'dfdl_countries');
+        $args['meta_query'][] = array(
+            'relation' => 'AND',
+            array(
+                'key' => '_dfdl_user_country',
+                'value' => $term->term_id,
+            ),
+        );
+    }
+    
+    // limit members in admin
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+        $args['number'] = 4;
+    }
+
+    /**
+     * User query
+     */
+    $users = get_users($args);
+    $found = $users->get_total();
+
+    // return an array of user html
+    $output = array();
+
+    if ( count($users) > 0) {
+        foreach( $users as $user ) {
+            ob_start();
+                set_query_var("user", $user);
+                get_template_part( 'includes/template-parts/content/member' );
+            $output[] = ob_get_clean();
+        }
+   }
+
+    /**
+    * Validate response
+    */
+    if ( count($output) > 0 ) {
+        $response['code']   = 200;
+        $response['status'] = 'success';
+        $response['html']   = $output;
+        $response['count']  = count($users);
+        $response['count']  = $found ;
+        $response['debug']  = count($args);
+    } else {
+        $response['code']   = 400;
+        $response['status'] = 'empty result set';
+    }
+
+    /**
+    * Debug info
+    */
+    $response['debug']  = $args;
+
+    /**
+    * Send response
+    */
+    echo json_encode($response);
+
+    /**
+    * Exit
+    */
+    exit;
+
+ }
 
 /**
  * DFDL Award Filter Ajax
