@@ -1317,7 +1317,7 @@ function dfdl_ajax_teams_filter(): array {
     $output = '<div id="team-grid-swiper">' . $temp ; 
 
     if ( $found  > $posts_per_page ) {
-        $output .= '<button id="teams-all-see-more" class="button green ghost see-more">See More</button>';
+        $output .= '<div class="see-more"><button id="teams-all-see-more" class="button green ghost see-more">See More</button></div>';
     }
     
     $output .= '</div>';
@@ -1478,12 +1478,12 @@ error_reporting(E_ALL);
      * User query
      */
     $users = get_users($args);
-    $found = $users->get_total();
 
     // return an array of user html
     $output = array();
 
     if ( count($users) > 0) {
+        //$found = $users->get_total();
         foreach( $users as $user ) {
             ob_start();
                 set_query_var("user", $user);
@@ -1500,7 +1500,6 @@ error_reporting(E_ALL);
         $response['status'] = 'success';
         $response['html']   = $output;
         $response['count']  = count($users);
-        $response['count']  = $found ;
         $response['debug']  = count($args);
     } else {
         $response['code']   = 400;

@@ -63,12 +63,15 @@ $user_query = new WP_User_Query($args);
                } else {
                     echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                }
-
+               
             ?>
+            <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
+                <div class="see-more">
+                    <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
+                </div>
+            <?php endif; ?>
         </div>
-        <div class="see-more">
-            <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
-        </div>
+        
     </div>
     
 </div>

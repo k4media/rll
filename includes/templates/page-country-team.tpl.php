@@ -62,33 +62,34 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
      <?php endif; ?>
     <div id="results_stage" class="team-stage country <?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] . " " . $class ?>">
         <div id="team-grid-swiper">
-        <?php
-            // The Loop
-            if ( ! empty( $user_query->get_results() ) ) {
+            <?php
+                // The Loop
+                if ( ! empty( $user_query->get_results() ) ) {
 
-                ob_start();
-                foreach( $user_query->get_results() as $user ) {
-                     set_query_var("user", $user);
-                     get_template_part( 'includes/template-parts/content/member' );
-                }
-                $slides = ob_get_clean();
+                    ob_start();
+                    foreach( $user_query->get_results() as $user ) {
+                        set_query_var("user", $user);
+                        get_template_part( 'includes/template-parts/content/member' );
+                    }
+                    $slides = ob_get_clean();
 
-                ob_start();
-                     get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
-                $template = ob_get_clean();
-                $template = str_replace("{posts}", $slides, $template);
+                    ob_start();
+                        get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
+                    $template = ob_get_clean();
+                    $template = str_replace("{posts}", $slides, $template);
 
-                echo $template;
+                    echo $template;
 
-           } else {
-                echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
-           }
+            } else {
+                    echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
+            }
 
-
-        ?>
-        </div>
-        <div class="see-more">
-            <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
+            ?>
+            <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
+                <div class="see-more">
+                    <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
@@ -99,5 +100,4 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
      */
      do_action("dfdl_reusable_block", 50588);
 ?>
-
 <?php get_footer();

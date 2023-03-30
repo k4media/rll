@@ -203,13 +203,16 @@ function filterTeams() {
         }, function(data){
             data = JSON.parse(data);
             if ( data.code === 200 ) {
-                jQuery("#results_stage").removeClass("no-results");
-                jQuery("#results_stage > div ").replaceWith( data.html );
-                swiperInit = false;
-                window.dispatchEvent(new Event('resize'));
+                if ( data.count.length > 0 ) {
+                    jQuery("#results_stage").removeClass("no-results");
+                    jQuery("#results_stage > div ").replaceWith( data.html );
+                    swiperInit = false;
+                    window.dispatchEvent(new Event('resize'));
+                } else {
+                    jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
+                }
             } else {
                 jQuery("#results_stage > div ").replaceWith( '<div><p class="no-team-members not-found">No Team Members found</p></div>' );
-                console.log(data);
             }
             console.log("results loaded");
             console.log(data);
