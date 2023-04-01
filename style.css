@@ -1377,6 +1377,7 @@ header + #results_stage .swiper {
 	padding-right: 0;
 }
 .posts .card {
+	border-top: solid 2px var(--color-green);
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
 	padding: 1.5em;
 	width: 100%;
@@ -1435,16 +1436,20 @@ header + #results_stage .swiper {
 .card-hover h4 {
 	color: var(--color-black);
 }
+.card-hover:hover .card {
+	background-color: var(--color-green);
+}
 .card-hover:hover .taxonomy,
 .card-hover:hover .date,
 .card-hover:hover .category,
 .card-hover:hover .subcategory,
+.card-hover:hover .excerpt,
 .card-hover:hover h4 {
-	color: var(--color-green);
+	color: var(--color-white);
 }
 .card-hover:hover .author,
 .card-hover:hover .dateline {
-	color: var(--color-gray);
+	color: var(--color-white);
 }
 .posts .card h4 a {
 	color: var(--color-dark-gray);
@@ -1452,7 +1457,7 @@ header + #results_stage .swiper {
 	font-weight: 700;
 	line-height: 1.4em;
 }
-.posts .card .excerpt {
+.card-hover .excerpt {
 	color: var(--color-gray);
 	line-height: 1.4em;
 	margin-top: 1em;
