@@ -420,6 +420,7 @@ header.main {
 	background: transparent;
 	border: solid 1px var(--color-whisper);
 	border-radius: 8px;
+	color: var(--color-white);
 	height: 38px;
 	outline: 0;
 	padding: 0 .7em 0 .7em;
@@ -1425,9 +1426,9 @@ header + #results_stage .swiper {
 	font-size: var(--font-size-small);
 	margin: 1em 0 1em 0;
 }
-
 .card-hover {
 	display: flex;
+	height: 100%;
 }
 .card-hover .author,
 .card-hover .dateline,

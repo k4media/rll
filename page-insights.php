@@ -22,7 +22,6 @@
 <?php endif; ?>
 
 <section id="insights" class="page-insights silo">
-
     <!--
     <nav class="subnav-stage silo">
         <ul>
@@ -30,30 +29,30 @@
         </ul>
     </nav>
     -->
-
     <?php
-
         /**
          * Country Navigation
          */
-        do_action('dfdl_solutions_country_nav');
-
-        /**
-         * Add hidden field for country
-         */
-        if ( isset($wp_query->query['dfdl_country']) ) {
-            echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
-        }
-        
+        do_action('dfdl_solutions_country_nav');   
     ?>
+    <input type="hidden" id="insights_item_count" name="insights_item_count" value="<?php echo get_option('posts_per_page') ?>">
+	<input type="hidden" id="insights_term" name="insights_term" value="667">
+	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">
+    <?php if ( isset($wp_query->query['dfdl_country'])) : ?>
+        <input type="hidden" id="insights_country" name="insights_country" value="<?php echo $wp_query->query['dfdl_country'] ?>" />
+     <?php else: ?>
+        <input type="hidden" id="insights_country" name="insights_country" value="" />
+     <?php endif; ?>
  
-    <div id="results_stage"><div>
-        <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
-        <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
-        <?php do_action("dfdl_content_hub_callout"); ?>
-    </div></div>
+    <div id="results_stage">
+        <div>
+            <?php do_action("dfdl_insights_swiper", array('category' => 'insights') ); ?>
+            <?php do_action("dfdl_insights_callout", array('category' => 'news') ); ?>
+            <?php do_action("dfdl_insights_callout", array('category' => 'legal-and-tax-updates') ); ?>
+            <?php do_action("dfdl_insights_callout", array('category' => 'events') ); ?>
+            <?php do_action("dfdl_content_hub_callout"); ?>
+        </div>
+    </div>
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {

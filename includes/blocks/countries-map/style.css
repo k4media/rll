@@ -21,40 +21,34 @@
     list-style-type: none;
     text-align: right;
 }
-
 .other {
-    fill:none;
-    stroke:#10B565;
-    stroke-width:0.5;
+    fill:#66948F;
     stroke-linecap:round;
     stroke-linejoin:round;
     transition: all .25s;
 }
 .other.disabled {
-    stroke:#cccccc;
+    fill:#ececec;
     transition: all .25s;
 }
 .country {
-    fill:#EFFEF7;
-    stroke:#10B565;
-    stroke-width:0.5;
+    fill:#004C45;
     stroke-linecap:round;
     stroke-linejoin:round;
     transition: all .25s;
 }
 .country.disabled {
     fill:#ececec;
-    stroke:#cccccc;
     transition: all .25s;
 }
 .st3 {
-    fill:#004C45;
+    fill: #77DD77;
 }
 .map-pin {
     cursor: pointer;
 }
 .map-pin.disabled path {
-    fill:#666666;
+    fill:#cccccc;
 }
 .callout .stage .countries ul .hilite a {
     color: var(--color-dark-gray);

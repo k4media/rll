@@ -540,11 +540,7 @@ function convert_smart_quotes(string $string): string{
 }
 
 
-
-
-
 /** EXTRA */
-
 
 // do this last
 // tried it. it kills everything. 

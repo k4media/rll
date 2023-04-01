@@ -945,7 +945,6 @@ function dfdl_event_category($post_id): string {
 
 }
 
-
 /**
  * Get Block Data
  * Get block data from page

@@ -40,6 +40,7 @@ function dfdl_sign_in_menu_item($items) {
     }
     return $items;
 }
+
 /**
  * Insights Archive Title
  */
@@ -146,14 +147,14 @@ function dfdl_author_callout( string $content )  {
  */
 add_filter( 'excerpt_length', 'dfdl_excerpt_filter');
 function dfdl_excerpt_filter( $length ) {
-	if ( is_admin() ) {
+	if ( is_admin() && ! defined('DOING_AJAX') ) {
 		return $length;
 	}
 	return 20;
 }
 add_filter( 'excerpt_more', 'dfdl_link_excerpt_jump');
 function dfdl_link_excerpt_jump( $more ) {
-	if ( is_admin() ) {
+	if ( is_admin() && ! defined('DOING_AJAX') ) {
 		return $more;
 	}
 	return ' &hellip;';

@@ -15,7 +15,7 @@
 <script>
 img = new Image();
 img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-filter-active.svg';
-jQuery( document ).ready(function() {
+jQuery(document).ready(function() {
     jQuery("#insights_solutions,  #insights_years").select2({
         closeOnSelect : false,
         allowHtml: true,
@@ -23,5 +23,8 @@ jQuery( document ).ready(function() {
         placeholder: "All",
         tags: true
     });
+});
+jQuery(window).unload(function(){
+    jQuery("#insights_solutions,  #insights_years").val(null).trigger('change');
 });
 </script>

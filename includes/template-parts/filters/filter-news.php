@@ -20,6 +20,7 @@
 img = new Image();
 img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-filter-active.svg';
 jQuery( document ).ready(function() {
+    jQuery("#insights_solutions, #insights_categories, #insights_years").select2('data', null);
     jQuery("#insights_solutions, #insights_categories, #insights_years").select2({
         closeOnSelect : false,
         allowHtml: true,
