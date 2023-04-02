@@ -903,22 +903,28 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
  * Return post cat name
  * @int post_id
  * 
- * make this obsolete -- use above dfdl_post_category
  */
-function dfdl_content_hub_category( int $post_id ): string {
+function dfdl_content_hub_category( int $post_id ) {
     $post_terms = wp_get_post_terms($post_id, 'category');
-    if ( count($post_terms ) === 1 ) {
-        return $post_terms[0]->name;
+    $content = array("articles", "podcasts", "publications", "web-classes");
+    if ( count($post_terms) === 1 ) {
+        if (isset($post_terms[0]->parent) && $post_terms[0]->parent !== 0 ) {
+            if ( in_array($post_terms[0]->slug, $content) ) {
+                return $post_terms[0];
+            }
+            return get_term_by("ID", $post_terms[0]->parent , 'category');
+        }
+        return $post_terms[0];
     } else {
-        $videos = array("videos", "videos-resources");
         foreach( $post_terms as $p ) {
-            // videos
-            if ( in_array($p->slug, $videos) ) {
-                return "Videos";
+            if ( in_array($p->slug, $content) ) {
+                return $p;
+            }
+            if ( $p->parent ) {
+                return get_term_by("ID", $p->parent , 'category');
             }
         }
     }
-    return "";
 }
 
 /**

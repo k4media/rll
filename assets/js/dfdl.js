@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (beacon && subnav) {
         window.addEventListener("scroll", function(){
             rect = beacon.getBoundingClientRect();
-            if ( rect.top <= 0 ) {
+            if ( rect.top <= 80 ) {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
             } 
-            if ( rect.top > 0 ) {
+            if ( rect.top > 80 ) {
                 subnav.classList.remove("fixed");
                 beacon.classList.remove("stage");
             } 

@@ -633,8 +633,14 @@ function dfdl_content_hub_callout() {
      * Invest Guides   = 705
      * Tax Guides      = 686
      * Videos          = 717
+     * 
+     * Article          670
+     * DFDL Energy      not yet
+     * Podcast          839
+     * Publication      744
+     * Web Class        717
      */
-    $query_args['cat'] = array(839,744,761,705,686,717);
+    $query_args['cat'] = array(670,839,744,717);
 
     /**
      * Set query country
@@ -684,17 +690,20 @@ function dfdl_content_hub_callout() {
          */
         ob_start();
         foreach ( $posts->posts as $post ) {
-
             /**
              * will need terms in future
              */
-             $post_term = dfdl_post_terms($post->ID, array("return"=>"term"));
-
+            $post_term = dfdl_post_terms($post->ID, array("return"=>"term"));
+            $hub_cat = dfdl_content_hub_category($post->ID);
             set_query_var("story", $post);
-            set_query_var("term", $post_term);
+            set_query_var("term", $hub_cat);
             //set_query_var("categories", dfdl_post_terms($post->ID));
-            get_template_part( 'includes/template-parts/content/insights', 'content-hub-card' );
-
+            $file = get_stylesheet_directory() . '/includes/template-parts/content/insights-' . $post_term->slug . '-card.php';
+            if ( file_exists($file ) ) {
+                get_template_part( 'includes/template-parts/content/insights', $post_term->slug . "-card" );
+            } else {
+                get_template_part( 'includes/template-parts/content/insights', 'content-hub-card' );
+            }
         }
         $cards = ob_get_clean();
 
