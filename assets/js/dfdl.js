@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if(teams_more){
             teams_all_page = document.getElementById("teams_all_page").value;
             document.getElementById("teams_all_page").value = parseInt(teams_all_page) + 1;
-            teamsAllSeeMore();
+            teamsSeeMore();
             return false;
         }
       });
@@ -111,15 +111,16 @@ if (jQuery().jquery) {
         filterInsights()
     }, 700));
 }
-if (document.getElementById("insights_item_count")) {
-    var counter = document.getElementById("insights_item_count").value;
+if (document.getElementById("ajax_count")) {
+    var counter = document.getElementById("ajax_count").value;
+    console.log("ajax_count = " + counter );
 }
 
 function insightsSeeMore() {
     var wrap = document.getElementById("insights-posts");
     var insights_more = document.getElementById("insights-all-see-more");
     var search_count = document.getElementById("search-count");
-    insights_more.classList.add("disabled");
+    insights_more.classList.add("disabled", "loading");
     postAjax(
         ajax_object.ajaxurl, {
             action: "insights_more",
@@ -137,6 +138,8 @@ function insightsSeeMore() {
             iTerm: document.getElementById("insights_term").value
         }, function(data){
             data = JSON.parse(data);
+            console.log("results loaded");
+            console.log(data);
             if ( data.code === 200 ) {
                 data.html.forEach((el) => {
                     counter++;
@@ -154,8 +157,7 @@ function insightsSeeMore() {
             } else {
                 insights_more.classList.add("disabled");
             }
-            console.log("results loaded");
-            console.log(data);
+            insights_more.classList.remove("loading");
         }
     )
 }
@@ -192,14 +194,13 @@ function filterInsights() {
     )
 }
 
-
-function teamsAllSeeMore() {
+function teamsSeeMore() {
     var wrap = document.getElementById("swiper-wrapper");
     var teams_more = document.getElementById("teams-all-see-more");
-    teams_more.classList.add("disabled");
+    teams_more.classList.add("disabled", "loading");
     postAjax(
         ajax_object.ajaxurl, {
-            action: "teams_all_more",
+            action: "teams_more",
             nonce: ajax_object.teams_see_more,
             permalink: ajax_object.permalink,
             solutions:jQuery('#teams_solutions').select2("val"),
@@ -208,10 +209,9 @@ function teamsAllSeeMore() {
             page: document.getElementById("teams_all_page").value
         }, function(data){
             data = JSON.parse(data);
-            console.log(data.code);
+            console.log("results loaded");
             console.log(data);
             if ( data.code === 200 ) {
-                var counter = 0;
                 data.html.forEach((el) => {
                     counter++;
                     var new_span = document.createElement("span");
@@ -220,15 +220,14 @@ function teamsAllSeeMore() {
                     new_span.innerHTML = el;
                     wrap.appendChild(new_span);
                 })
-                if ( counter > 0) {
-                    teams_more.style.display = 'block';
+                if ( parseInt(counter) < parseInt(data.found) ) {
                     teams_more.classList.remove("disabled");
+                    console.log("showing " + counter + " of " + data.found + " team members")
                 }
             } else {
-                teams_more.style.display = 'none';
+                teams_more.classList.remove("disabled");
             }
-            console.log("results loaded");
-            console.log(data);
+            teams_more.classList.remove("loading");
         }
     )
 }

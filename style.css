@@ -150,6 +150,7 @@ nav ul li {
 	height: 38px;
 	line-height: 2.375em;
 	padding: var(--setting-button-padding);
+	position: relative;
 	text-decoration: none;
 }
 .button.green {
@@ -227,8 +228,8 @@ nav ul li {
 .button.disabled {
 	background: var(--color-gray-disabled);
 	border: solid 1px var(--color-gray-disabled);
-	color: var(--color-white);
-	opacity: .3;
+	color: var(--color-gray-disabled);
+	display: block;
 	pointer-events: none;
 }
 .button.download {
@@ -246,8 +247,17 @@ nav ul li {
 	left: 32px;
 	top: 10px;
 }
-
-
+.button.loading span:after {
+	background-image: url(assets/media/spinner.gif);
+	background-size: contain;
+	content: ' ';
+	display: block;
+	height: 40px;
+	position: absolute;
+	right: -43px;
+	top: -3px;
+	width: 40px;
+}
 /* lighten header */
 header.main {
 	background-color: rgba(255,255,255,.9);
@@ -864,9 +874,6 @@ header.main {
 	background: transparent;
     margin: 4em auto auto auto;
 }
-.button.see-more.disabled {
-	color: var(--color-green);
-}
 .member .bio p {
 	display: inline-block;
 }
@@ -972,9 +979,7 @@ header.main {
 .award-entry .country {
 	font-style: italic;
 }
-
-
-#results_stage .loading,
+/* #results_stage .loading, */
 #results_stage .no-awards {
 	color: var(--color-black);
 	display: block;
@@ -1444,6 +1449,9 @@ header + #results_stage .swiper {
 }
 .card-hover:hover .card {
 	background-color: var(--color-green);
+}
+.card:hover .play {
+	background-color: var(--color-green-70);
 }
 .card-hover:hover .taxonomy,
 .card-hover:hover .date,

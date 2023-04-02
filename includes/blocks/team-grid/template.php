@@ -117,20 +117,17 @@ if ( count($users) > 0) :
 ?>
 
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
-
+     <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
      <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
      <?php if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country'])) : ?>
           <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
      <?php else: ?>
           <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="" />
      <?php endif; ?>
-     
-
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
           <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
      <?php endif; ?>  
-
      <div id="team-grid" class="team-grid silo">
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">
                <div id="team-grid-swiper">

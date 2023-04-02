@@ -103,7 +103,7 @@ get_header();
         //}
 
 	?>
-    <input type="hidden" id="insights_item_count" name="insights_item_count" value="<?php echo get_option('posts_per_page') ?>">
+    <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
     <input type="hidden" id="insights_term" name="insights_term" value="<?php echo esc_attr($category->term_id) ?>">
 	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">
     <?php if ( isset($wp_query->query['dfdl_country'])) : ?>
@@ -169,7 +169,7 @@ get_header();
         </div>
 		<?php if ( $the_query->found_posts > $the_query->post_count ) : ?>
 			<div class="see-more">
-				<button id="insights-all-see-more" class="button green ghost see-more">See More</button>
+				<button id="insights-all-see-more" class="button green ghost see-more">See More<span></span></button>
 			</div>
 		<?php endif; ?>
     </div>

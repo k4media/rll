@@ -1145,12 +1145,12 @@ function dfdl_ajax_insights_more(): void {
         $response['code']   = 200;
         $response['status'] = 'success';
         $response['html']   = $output;
-        $response['debug']  = $args;
         $response['count']  = $insights->post_count;
         $response['found']  = $insights->found_posts;
-        $response['vars']   = $insights->query_vars;
-        $response['query']   = $insights->query;
-        $response['request']  = $insights->request;
+        //$response['debug']  = $args;
+        //$response['vars']   = $insights->query_vars;
+        //$response['query']   = $insights->query;
+        //$response['request']  = $insights->request;
         
     } else {
         $response['code']    = 400;
@@ -1454,7 +1454,7 @@ function dfdl_ajax_teams_insights(): array {
         $output .= '</section>';
 
         if ( $insights->found_posts  > $insights->post_count ) {
-            $output .= '<div class="see-more"><button id="insights-all-see-more" data-source="filter" class="button green ghost see-more">See More</button></div>';
+            $output .= '<div class="see-more"><button id="insights-all-see-more" data-source="filter" class="button green ghost see-more">See More<span></span></button></div>';
         }
 
     }
@@ -1468,11 +1468,10 @@ function dfdl_ajax_teams_insights(): array {
         $response['html']   = $output;
         $response['found']  = $insights->found_posts;
         $response['count']  = $insights->post_count;
-        $response['vars']   = $insights->query_vars;
-        $response['query']  = $insights->query;
-        $response['request']  = $insights->request;
-        $response['debug']  = $args;
-        $response['term']   = "robert";
+        //$response['vars']   = $insights->query_vars;
+        //$response['query']  = $insights->query;
+        //$response['request']  = $insights->request;
+        //$response['debug']  = $args;
     } else {
         $response['code']    = 400;
         $response['message'] = 'empty result set';
@@ -1514,10 +1513,6 @@ function dfdl_ajax_teams_filter(): array {
     * Response 
     */
     $response = array();
-    $response['code']    = 0;
-    $response['message'] = '';
-    $response['status']  = '';
-    $response['html']    = '';
 
     /**
     * Validate nonce
@@ -1637,7 +1632,7 @@ function dfdl_ajax_teams_filter(): array {
     $output = '<div id="team-grid-swiper">' . $temp ; 
 
     if ( $found  > $posts_per_page ) {
-        $output .= '<div class="see-more"><button id="teams-all-see-more" class="button green ghost see-more">See More</button></div>';
+        $output .= '<div class="see-more"><button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button></div>';
     }
     
     $output .= '</div>';
@@ -1676,9 +1671,9 @@ function dfdl_ajax_teams_filter(): array {
 /**
  * Teams more ajax
  */
-add_action('wp_ajax_teams_all_more', 'dfdl_ajax_teams_all_more');
-add_action('wp_ajax_nopriv_teams_all_more', 'dfdl_ajax_teams_all_more');
-function dfdl_ajax_teams_all_more(): void {
+add_action('wp_ajax_teams_more', 'dfdl_ajax_teams_more');
+add_action('wp_ajax_nopriv_teams_more', 'dfdl_ajax_teams_more');
+function dfdl_ajax_teams_more(): void {
 
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -1688,10 +1683,6 @@ function dfdl_ajax_teams_all_more(): void {
     * Response 
     */
     $response = array();
-    $response['code']    = 0;
-    $response['message'] = '';
-    $response['status']  = '';
-    $response['html']    = '';
 
     /**
     * Validate nonce
@@ -1737,7 +1728,7 @@ function dfdl_ajax_teams_all_more(): void {
         'paged'       => $clean['page'],
         'count_total' => true,
         'role'        => array('dfdl_member'),
-        'no_found_rows'          => true,
+        'no_found_rows'          => false,
         'ignore_sticky_posts'    => true,
         'update_post_meta_cache' => false, 
         'update_post_term_cache' => false,
@@ -1797,14 +1788,23 @@ function dfdl_ajax_teams_all_more(): void {
     /**
      * User query
      */
-    $users = get_users($args);
+    $users = new WP_User_Query($args);
 
+    /*
+    if ( ! empty( $users->get_results() ) ) {
+        ob_start();
+        foreach ( $users->get_results() as $user ) {
+            set_query_var("user", $user);
+            get_template_part( 'includes/template-parts/content/member' );
+        }
+        $slides = ob_get_clean();
+    } */
+    
     // return an array of user html
     $output = array();
-
-    if ( count($users) > 0) {
-        //$found = $users->get_total();
-        foreach( $users as $user ) {
+    if ( ! empty( $users->get_results() )) {
+        $found = $users->get_total();
+        foreach( $users->get_results() as $user ) {
             ob_start();
                 set_query_var("user", $user);
                 get_template_part( 'includes/template-parts/content/member' );
@@ -1819,8 +1819,9 @@ function dfdl_ajax_teams_all_more(): void {
         $response['code']   = 200;
         $response['status'] = 'success';
         $response['html']   = $output;
-        $response['count']  = count($users);
-        $response['debug']  = count($args);
+        $response['count']  = count($output);
+        $response['found']  = $found;
+        //$response['debug']  = count($args);
     } else {
         $response['code']   = 400;
         $response['status'] = 'empty result set';

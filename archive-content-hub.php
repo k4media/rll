@@ -19,7 +19,7 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 
 <section id="insights" class="archive content-hub silo">
     <input type="hidden" name="content_hub" id="content_hub" value="content_hub">
-	<input type="hidden" id="insights_item_count" name="insights_item_count" value="<?php echo get_option('posts_per_page') ?>">
+	<input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
 	<input type="hidden" id="insights_term" name="insights_term" value="">
 	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">
     <?php if ( isset($wp_query->query['dfdl_country'])) : ?>

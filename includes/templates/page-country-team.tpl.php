@@ -54,6 +54,7 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
 ?>
 <div id="team-<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" class="teams-country-stage silo">
     <?php do_action("dfdl_solutions_country_nav"); ?>
+    <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
     <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
     <?php if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country'])) : ?>
           <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="<?php echo $GLOBALS['wp_query']->query_vars['dfdl_country'] ?>" />
@@ -87,7 +88,7 @@ $class = ( 0 === count($user_query->results)) ? "no-results" : "" ;
             ?>
             <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
                 <div class="see-more">
-                    <button id="teams-all-see-more" class="button green ghost see-more">See More</button>
+                    <button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button>
                 </div>
             <?php endif; ?>
         </div>
