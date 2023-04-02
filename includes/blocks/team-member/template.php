@@ -43,7 +43,7 @@
                               <div class="location"><?php echo implode(", ", $locations) ?></div>
                          <?php endif; ?>
                          <?php if( $user->user_description ) : ?>
-                              <div class="bio"><?php echo dfdl_one_liner(nl2br($user->user_description)) ?></div>
+                              <div class="bio"><?php echo dfdl_one_liner($user->user_description) ?></div>
                          <?php endif; ?>
                          <div class="contact-details">
                               <div class="telephone">
