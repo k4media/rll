@@ -9,16 +9,6 @@
 get_header();
 
 /**
- * Back URL
- */
-//$sections = dfdl_get_section();
-//$category = end($sections);
-//$term = get_category_by_slug($category);
-//$url  = get_category_link($term);
-
-
-
-/**
  * post classes
  */
 global $post;
@@ -50,7 +40,6 @@ foreach( $terms as $term ) {
 		$single_category = $parent->name;
 		$single_subcategory = $term->name;
 	}
-
 	$classes[] = esc_attr($term->slug);
 
 }
@@ -78,25 +67,23 @@ foreach( $terms as $term ) {
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
-
-				if ( isset($template_slug) ) {
-					get_template_part( 'includes/template-parts/content/content', $template_slug );
-				} else {
+				//if ( isset($template_slug) ) {
+					//get_template_part( 'includes/template-parts/content/content', $template_slug );
+				//} else {
 					get_template_part( 'includes/template-parts/content/content-single' );
-				}
+				//}
 			endwhile; // End of the loop.
 
 		?>
 		<div class="article-meta">
 			<?php
 				get_template_part( 'includes/template-parts/content/single-social-share' );
-
 				if ( function_exists('get_field')) {
 					//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
 					$direct_download = get_field('direct_download', $post->ID);
 					$direct_link = get_field('download_link', $post->ID);
 				}
-				if ( isset($direct_link) ) {
+				if ( isset($direct_link) && ! empty($direct_link) ) {
 					echo '<a class="button download" href="' . $direct_link . '">Download</a>';
 				}
 			?>

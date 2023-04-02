@@ -44,34 +44,19 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-							<div class="pub-download"><?php
-								$file_size = get_field('file_size');
-								$download_ids = get_field('download_ids');
-								$second_title = get_field('second_title');
-								//if(empty($second_title)){
-									//$second_title = $post->post_title;
-								//} ?>
-								<h3>
-									<?php if($direct_download): ?>
-										<a href="<?php echo $direct_link ?>">
-									<?php endif; ?>
-									<?php echo $second_title; ?>
-									<?php if($direct_download): ?>
-										</a>
-									<?php endif; ?>
-								</h3>
-								<p>
-									<span>Date: <?php the_time('d/m/Y'); ?></span><br/>
-									<?php if(!empty($file_size)): ?>
-									<span>Size: (<?php echo $file_size; ?>)</span>
-									<?php endif; ?>
-								</p>
-								<?php /* if(!empty($download_ids) && !$direct_download): ?>
-									<a class="download" href="?form=1">Next step</a>
-								<?php endif; ?>
+							<div class="pub-download">
+								<?php
+									$file_size = get_field('file_size');
+									$download_ids = get_field('download_ids');
+									$second_title = get_field('second_title');
+								?>
 								<?php if($direct_download): ?>
-									<a class="button green download" href="<?php echo $direct_link ?>">Download</a>
-								<?php endif; */ ?>
+									<h3><a href="<?php echo $direct_link ?>">
+								<?php endif; ?>
+								<?php echo $second_title; ?>
+								<?php if($direct_download): ?>
+									</a></h3>
+								<?php endif; ?>
 							</div>
 						</div>
 

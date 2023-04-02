@@ -968,7 +968,7 @@ function dfdl_one_liner( string $string ): string {
     return dfdl_short_bio($string);
 }
 
-// 。 <-- need to search for this
+// 。 <-- need to search for this, too?
 function dfdl_short_bio( string $bio, int $length = 3 ): string {
     $posx = strposX($bio, ".", $length);
     if ( isset($posx) ) {

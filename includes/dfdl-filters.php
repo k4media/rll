@@ -99,22 +99,32 @@ function dfdl_author_callout( string $content )  {
 
     /**
      * Only add author box to legal-and-tax posts
+     * of if Key Contact is set
      */
-    $terms = wp_get_post_terms($post->ID, 'category');
-    $slugs = array();
-    foreach( $terms as $t ) { $slugs[] = $t->slug; }
-    if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
-        return $content;
+
+    // check for key contact 
+    if ( function_exists('get_field')) {
+        $user = get_field('contact');
+        $user = get_user_by('ID', $user['ID']);
     }
 
-    $user = get_user_by('ID', $post->post_author);
-
+    //  check if legal & tax article
+    if ( empty($user) ) {
+        $terms = wp_get_post_terms($post->ID, 'category');
+        $slugs = array();
+        foreach( $terms as $t ) { $slugs[] = $t->slug; }
+        if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
+            return $content;
+        }
+        $user = get_user_by('ID', $post->post_author);
+    }
+    
     $author = array();
     $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
     $author['name']     = esc_attr($user->data->display_name);
     $author['position'] = get_user_meta( $user->data->ID, 'position', true);
     $author['location'] = '';
-    $author['bio']      = dfdl_short_bio(get_the_author_meta('description'), $user->data->ID);
+    $author['bio']      = dfdl_short_bio( get_the_author_meta('description'), 1 );
     $author['link']     = get_author_posts_url($user->data->ID);
     // some links have spaces, maybe from import?
     $author['link']     = str_replace(" ", "-", $author['link']);
