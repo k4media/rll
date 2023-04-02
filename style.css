@@ -1424,6 +1424,9 @@ header + #results_stage .swiper {
 	padding: 1.5em;
 	width: 100%;
 }
+.posts  .card h4 {
+	font-size: var(--font-size-large);
+}
 .posts .card.media {
 	padding: 0;
 }
