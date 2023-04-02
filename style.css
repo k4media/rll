@@ -1024,6 +1024,15 @@ header.main {
 	text-align: center;
 	width: 18px;
 }
+#searchpage .not-found::before {
+	background: var(--color-white) url(assets/media/icon-exclamation.svg) no-repeat 50% 50%;
+	content: " ";
+	display: inline-block;
+	height: 18px;
+	margin-right: 8px;
+	vertical-align: middle;
+	width: 18px;
+}
 .country-nav {
 	position: relative;
 }
@@ -1746,6 +1755,12 @@ header + #results_stage .swiper {
 .searchpage-searchform {
 	margin: auto;
 	width: 42em;
+}
+#searchpage > header {
+	margin-top: 60px;
+}
+#searchpage > section > header {
+	margin-top: 32px;
 }
 .search-form {
 	border: solid 1px var(--color-gray);

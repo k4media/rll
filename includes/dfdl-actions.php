@@ -35,7 +35,7 @@ function dfdl_search() {
 
     } else {
 
-        echo "<p>Nada.</p>";
+        echo '<p class="no-insights not-found">Nothing found.</p>';
 
     }
 
@@ -196,11 +196,11 @@ function dfdl_search_teams() {
         $template = ob_get_clean();
         $template = str_replace("{posts}", $users, $template);
 
-        $return[] = '<div id="team-grid-swiper" class="search-teams"><header><h2 class="title">Team Members</h2></header>';
+        $return[] = '<section id="team-grid-swiper" class="search-teams"><header><h2 class="title">Team Members</h2></header>';
         //$return[] = '<div id="results_stage">';
         //$return[] = '<div id="team-grid-swiper" class="s">';
         $return[] = $template;
-        $return[] = '</div>';
+        $return[] = '</section>';
 
         return implode($return);
 
@@ -511,16 +511,23 @@ function dfdl_insights_swiper( array $args ): void {
         return;
     }
 
-    if ( "insights" === $args['category']) {
+    if ( "insights" === $args['category'] ) {
         /**
          * Insight categories
          * News = 667
+         * Events = 668
          * Content Hub = 842
+         * Legal & Tax = 47
          * 
          */
-        $categories = array(667, 842);
+        $categories = array(667, 667, 47);
+    } elseif ( "content-hub" === $args['category'] )  {
+        $categories = array(668);
+    } elseif ( isset($args['category']) ) {
+        $categories = $args['category'];
     } else {
-        $categories = array($args['category']);
+        //default to news
+        $categories = array(667);
     }
 
     $query_args = array(
@@ -545,7 +552,7 @@ function dfdl_insights_swiper( array $args ): void {
     /**
      * Add category
      */
-    if ( isset($wp_query->query['dfdl_category']) ) {
+    if ( isset($wp_query->query['dfdl_category']) && "content-hub" !== $wp_query->query['dfdl_category'] ) {
         $query_args['category_name'] = $wp_query->query['dfdl_category'];
     }
 
@@ -577,7 +584,7 @@ function dfdl_insights_swiper( array $args ): void {
     );
 
     $posts = new WP_Query( $query_args );
-    
+
     if ( ! empty( $posts->posts ) ) {
 
         /**
