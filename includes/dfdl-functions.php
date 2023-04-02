@@ -30,6 +30,9 @@ function dfdl_insights() {
         'update_post_term_cache' => false,
    );
    
+   if ( is_admin() ) {
+        $query_args['posts_per_page'] = 4;
+    }
    $sections = dfdl_get_section();
 
     /**

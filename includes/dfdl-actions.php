@@ -2205,11 +2205,13 @@ function dfdl_solutions_country_nav() {
          * Add search icon to teams
          */
         if ( "teams" === $section ) {
-            $nav[] = '<li class="member-search swiper-slide"><a href="'. get_home_url('', '/search/'). '"><img src="'. get_stylesheet_directory_uri() . '/assets/media/icon-search.svg"></a></li>';
+            $nav[] = '<li class="member-search swiper-slide"><img id="search-toggle" src="'. get_stylesheet_directory_uri() . '/assets/media/icon-search.svg"></li>';
             // $nav[] = '<li class="swiper-slide member-search-stage"><div class="member-search">'. get_search_form( array( 'echo' => false ) ) . '</div></li><li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter ' . $section . '">Filter</button></li>';
         }
         $nav[] = '<li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter ' . $section . '">Filter</button></li>';
     }
+
+    
 
     /**
      * Prepare html output
@@ -2271,6 +2273,7 @@ function dfdl_solutions_country_nav() {
     if ( "teams" === $section ) {
         ob_start();
             get_template_part("includes/template-parts/filters/filter", "teams");
+            echo '<div id="search-stage" class="search-members filters-stage silo"><div class="stage">' . get_search_form( array( 'echo' => false ) ) . '</div></div>';
         $filters[] = ob_get_clean();
     }
     // Awards filter

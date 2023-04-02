@@ -501,6 +501,7 @@ header.main {
 	position: absolute;
 }
 .member-search img {
+	cursor: pointer;
 	display: inline-block;
 }
 .member-search input[type=search] {
@@ -545,6 +546,12 @@ header.main {
     grid-template-columns: repeat(4, 1fr) ;
     row-gap: 24px;
 }
+#team-grid-swiper .swiper-wrapper a {
+	align-items: stretch;
+    display: flex;
+}
+
+
 .dfdl-single-member,
 #results_stage.team-stage.all,
 #results_stage.team-stage.country {
@@ -1032,6 +1039,10 @@ header.main {
 	right: 0;
 	top: 60px;
 }
+#search-stage.filters-stage.is-active {
+	height: 4em;
+}
+.search-stage.is-active,
 .filters-stage.is-active {
 	display: block;
 }
@@ -1729,6 +1740,7 @@ header + #results_stage .swiper {
 .page-wrapper {
 	margin: 120px auto 120px auto;
 }
+#search-stage.filters-stage .search-form,
 .searchpage-searchform {
 	margin: auto;
 	width: 42em;
