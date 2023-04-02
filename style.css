@@ -1552,9 +1552,9 @@ header + #results_stage .swiper {
 .single .entry-content a {
 	border-bottom: solid 1px var(--color-green);
 	color: var(--color-green);
-	padding-bottom: .0125em;
 }
 .single .entry-content a:hover {
+	border-bottom: solid 1px var(--color-bright-green);
 	color: var(--color-bright-green);
 }
 .single .entry-content > p:first-child,
