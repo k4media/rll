@@ -808,22 +808,19 @@ header.main {
     display: flex;
     color: var(--color-white);
 }
-/*
-.contact-callout::after {
-    background: url(assets/media/logo-art-reverse.svg);
-    background-repeat: no-repeat;
-    background-size: 120%;
-    bottom: 0;
-    content: ' ';
-    height: 125px;
-    position: absolute;
-    right: 0;
-    width: 150px;
-} */
 .contact-callout .copy-stage .copy {
     max-width: 32em;
 	padding: 0 64px 0 64px;
     width: 100%;
+}
+.contact-callout p > a {
+	border-bottom: solid 1px var(--color-white);
+	color: var(--color-white);
+	padding-bottom: .0125em;
+}
+.contact-callout p > a:hover {
+	border-bottom: solid 1px var(--color-green);
+	color: var(--color-green);
 }
 .contact-callout .button {
 	font-size: 20px;
@@ -832,6 +829,7 @@ header.main {
     margin-top: 2em;
 }
 .contact-callout .copy-stage .copy p {
+	line-height: 1.4em;
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -1006,12 +1004,10 @@ header.main {
 .award-entry .country {
 	font-style: italic;
 }
-/* #results_stage .loading, */
 #results_stage .no-awards {
 	color: var(--color-black);
 	display: block;
 	font-size: var(--font-size-body);
-	/* margin-top: 5em; */
 	position: relative;
 	text-align: center;
 }
@@ -1036,11 +1032,6 @@ header.main {
 .country-nav {
 	position: relative;
 }
-/*
-.filter-button {
-	position: absolute;
-	right: 0;
-} */
 .filters-stage {
 	background: var(--color-white);
 	border-top: solid 1px #ccc;
