@@ -9,7 +9,7 @@
  */
 global $wp, $wp_query;  
 
-$title    = "";
+$title    = "Insights";
 $subtitle = "";
 
 // get fields
