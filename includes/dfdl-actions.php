@@ -2423,7 +2423,7 @@ function dfdl_related_stories(): void {
 
             set_query_var("story", $p);
             set_query_var("term", $term);
-            set_query_var("category", dfdl_post_terms($p->ID, array('type'=>'subcategory')));
+            //set_query_var("category", dfdl_post_terms($p->ID, array('type'=>'subcategory')));
             set_query_var("class", "related");
 
             /*

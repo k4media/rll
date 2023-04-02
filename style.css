@@ -1474,9 +1474,11 @@ header + #results_stage .swiper {
 	height: 100%;
 }
 .card-hover .author,
-.card-hover .dateline,
-.card-hover h4 {
+.card-hover .dateline {
 	color: var(--color-black);
+}
+.card-hover h4 {
+	color: var(--color-green);
 }
 .card-hover:hover .card {
 	background-color: var(--color-green);
@@ -1546,6 +1548,12 @@ header + #results_stage .swiper {
 	font-size: var(--font-size-large);
 	line-height: 1.4em;
 	position: relative;
+}
+.single .entry-content a {
+	color: var(--color-green);
+}
+.single .entry-content a {
+	color: var(--color-bright-green);
 }
 .single .entry-content > p:first-child,
 .single .entry-content .lead {
