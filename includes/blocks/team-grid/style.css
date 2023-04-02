@@ -44,12 +44,6 @@
 #team-grid-swiper {
     position: relative;
 }
-#team-grid-swiper .swiper-wrapper {
-    column-gap: 24px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr) ;
-    row-gap: 24px;
-}
 .team-swiper .swiper-prev,
 .team-swiper .swiper-next {
     display: none;

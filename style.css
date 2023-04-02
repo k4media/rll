@@ -491,6 +491,19 @@ header.main {
 	list-style-type: none;
 	margin: 0 .5em 0 .6em;
 }
+.country-subnav-stage .member-search-stage {
+	display: inline-block;
+	height: 25px;
+}
+.country-subnav-stage .member-search-inline {
+	position: absolute;
+}
+.member-search img {
+	display: inline-block;
+}
+.member-search input[type=search] {
+	display: none;
+}
 .country-subnav-stage .mobile-filter-button {
 	display: none;
 }
@@ -524,9 +537,12 @@ header.main {
 	line-height: 2.375em;
 	padding: var(--setting-button-padding);
 }
-
-
-
+#team-grid-swiper .swiper-wrapper {
+    column-gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) ;
+    row-gap: 24px;
+}
 .dfdl-single-member,
 #results_stage.team-stage.all,
 #results_stage.team-stage.country {
@@ -1715,37 +1731,34 @@ header + #results_stage .swiper {
 	margin: auto;
 	width: 42em;
 }
-input[type='search'] {
+.search-form {
 	border: solid 1px var(--color-gray);
 	border-radius: 8px;
+	display: flex;
+}
+input[type='search'] {
+	background: transparent;
+	border: 0;
 	font-size: var(--font-size-large);
 	height: 40px;
 	padding: 7px;
-	width: 100%;
+	width: calc(100% - 30px);
+}
+.empty-search {
+	margin-top: 8px;
 }
 .select2-search input[type='search'] {
 	height: auto;
 }
-.search-submit {
-	position: absolute;
-	height: 18px;
-	right: 12px;
-	top: 10px;
-}
 #search-solutions .solutions.stage {
 	margin-top: 0;
 }
-.button-stage {
-	pointer-events: none;
-	height: 40px;
+.search-submit {
+	display: inline-block;
 	position: relative;
 }
 .not-found .button-stage {
 	width: 27em;
-}
-.button-stage input {
-	position: absolute;
-	top: -28px;
 }
 .relevanssi-live-search-result-status {
 	display: none;

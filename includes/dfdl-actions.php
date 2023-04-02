@@ -190,18 +190,20 @@ function dfdl_search_teams() {
              get_template_part( 'includes/template-parts/content/member' );
         }
         $users = ob_get_clean();
+
         ob_start();
             get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
         $template = ob_get_clean();
         $template = str_replace("{posts}", $users, $template);
 
-        $return[] = '<div id="team-grid" class="team-grid silo">';
-        $return[] = '<div id="results_stage" class="team-stage <?php echo $post_class ?>">';
-        $return[] = '<div id="team-grid-swiper">';
+        $return[] = '<div id="team-grid-swiper" class="search-teams"><header><h2 class="title">Team Members</h2></header>';
+        //$return[] = '<div id="results_stage">';
+        //$return[] = '<div id="team-grid-swiper" class="s">';
         $return[] = $template;
-        $return[] = '</div></div></div>';
+        $return[] = '</div>';
 
         return implode($return);
+
     }
 }
 
@@ -2080,9 +2082,7 @@ function dfdl_solutions_country_nav() {
      */
 
     if ( "insights" === $section ) {
-
         $dfdl_sections = dfdl_get_section();
-
         /**
          * All button
          */
@@ -2100,9 +2100,7 @@ function dfdl_solutions_country_nav() {
     foreach($pages->posts as $page) {
 
         if ( is_admin() ) {
-
             $nav[] = '<li><a class="current-menu-item" href="#">' . $page->post_title . '</a></li>' ;
-
         } else {
 
             /** 
@@ -2203,6 +2201,13 @@ function dfdl_solutions_country_nav() {
      * Add filter button
      */
     if ( "contact-us" !== $section ) {
+        /**
+         * Add search icon to teams
+         */
+        if ( "teams" === $section ) {
+            $nav[] = '<li class="member-search swiper-slide"><a href="'. get_home_url('', '/search/'). '"><img src="'. get_stylesheet_directory_uri() . '/assets/media/icon-search.svg"></a></li>';
+            // $nav[] = '<li class="swiper-slide member-search-stage"><div class="member-search">'. get_search_form( array( 'echo' => false ) ) . '</div></li><li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter ' . $section . '">Filter</button></li>';
+        }
         $nav[] = '<li class="filter-button swiper-slide"><button id="filters-toggle" class="button filter ' . $section . '">Filter</button></li>';
     }
 

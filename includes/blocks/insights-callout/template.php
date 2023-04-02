@@ -9,6 +9,15 @@
  */
 global $wp, $wp_query;  
 
+$title    = "";
+$subtitle = "";
+
+// get fields
+if ( function_exists('get_fields') ) {
+     $title = get_field('title');
+     $subtitle = get_field('subtitle');
+}
+
 $insights = dfdl_insights();
 if ( isset($insights) ) {
      $post_class = ( $insights->have_posts() ) ? "" : "no-results" ; 
@@ -33,9 +42,8 @@ if( isset($maybe_country) && in_array( $maybe_country, constant('DFDL_COUNTRIES'
 ?>
 <div class="insights-callout-stage callout">
      <div class="insights-callout silo">
-          <h2>Insights</h2>
-          <h3>Vulputate mattis venenatis enim eget sit enim, nisi 
-enim bibendum cras risus consectetur elit cras.</h3>
+          <h2><?php echo $title ?></h2>
+          <h3><?php echo $subtitle ?></h3>
           <div class="posts <?php echo $post_class ?>" >
                <?php if ( $insights->have_posts() ) : ?>
                     <?php while ( $insights->have_posts() ) : ?>
