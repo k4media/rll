@@ -15,6 +15,7 @@
 <script>
 img = new Image();
 img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-filter-active.svg';
+img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-search-active.svg';
 jQuery( document ).ready(function() {
     jQuery("#teams_solutions").select2({
         closeOnSelect : false,

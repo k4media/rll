@@ -1775,6 +1775,7 @@ input[type='search'] {
 .search-submit {
 	display: inline-block;
 	position: relative;
+	width: 16px;
 }
 .not-found .button-stage {
 	width: 27em;
