@@ -434,6 +434,12 @@ header.main {
 .newsletter-signup input[type=email]::placeholder {
 	color: var(--color-whisper);
 }
+.newsletter-signup input[type=email].mce_inline_error {
+	border-color: var(--color-error-dark);
+}
+#mce-responses {
+	margin-top: .25em;
+}
 #colophon .site-name {
 	margin-bottom: 16px;
 }
@@ -2471,7 +2477,7 @@ input[type='search'] {
 	.newsletter-signup input[type=image] {
 		position: absolute;
 		right: 16px;
-		top: 38px;
+		top: 50px;
 	}
 	#page-lead.solutions .lead {
 		font-size: var(--font-size-large);

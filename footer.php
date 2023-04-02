@@ -21,17 +21,13 @@ $K4->fragment_cache( "page-footer", function() { ?>
                 <?php do_action('newsletter_signup') ?>
             </div>
         </div>
-
         <?php do_action('footer_nav') ?>
-
-        
         <div class="fineprint">
             <?php do_action('copyright_notice') ?>
             <?php do_action('social_links') ?>
             <?php do_action('legal_nav') ?>
         </div>
     </div>
-    
 <?php }); // close K4 fragment ?>
 </div><!-- /page -->
 <?php wp_footer(); ?>
