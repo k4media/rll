@@ -1552,7 +1552,7 @@ header + #results_stage .swiper {
 .single .entry-content a {
 	color: var(--color-green);
 }
-.single .entry-content a {
+.single .entry-content a:hover {
 	color: var(--color-bright-green);
 }
 .single .entry-content > p:first-child,
