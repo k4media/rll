@@ -199,7 +199,8 @@ function dfdl_scripts() {
 		'teams_see_more' 	=> wp_create_nonce('dfdl_teams_see_more'),
 		'insights_nonce' 	=> wp_create_nonce('dfdl_insights'),
 		'insights_see_more' => wp_create_nonce('dfdl_insights_see_more'),
-		'permalink'         => get_permalink()
+		'permalink'         => get_permalink(),
+		'stylesheet_uri'	=> get_stylesheet_directory_uri() . '/assets/media'
 	);
 	wp_localize_script( 'dfdl', 'ajax_object', $params);
 

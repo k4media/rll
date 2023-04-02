@@ -503,6 +503,8 @@ header.main {
 .member-search img {
 	cursor: pointer;
 	display: inline-block;
+	height: 16px;
+	width: 16px;
 }
 .member-search input[type=search] {
 	display: none;
@@ -1749,6 +1751,9 @@ header + #results_stage .swiper {
 	border: solid 1px var(--color-gray);
 	border-radius: 8px;
 	display: flex;
+}
+#search-stage .search-form {
+	border: solid 1px #aaa;
 }
 input[type='search'] {
 	background: transparent;

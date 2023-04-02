@@ -94,13 +94,18 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
     var search_stage = document.getElementById("search-stage");
-    //var search_toggle = document.getElementById("search-toggle");
     var search_toggle = document.getElementById("search-toggle");
     search_toggle && search_toggle.addEventListener("click", function() {
         search_stage.classList.toggle("is-active");
+        if (search_toggle.classList.contains("is-active")) {
+            search_toggle.classList.remove("is-active");
+            search_toggle.src = ajax_object.stylesheet_uri + "/icon-search.svg";
+        } else {
+            search_toggle.classList.add("is-active");
+            search_toggle.src = ajax_object.stylesheet_uri +  "/icon-search-active.svg";
+        }
+        
     });
-
-    
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {
