@@ -105,7 +105,10 @@ function dfdl_author_callout( string $content )  {
     // check for key contact 
     if ( function_exists('get_field')) {
         $user = get_field('contact');
-        $user = get_user_by('ID', $user['ID']);
+        if ( ! empty($user) ) {
+            $user = get_user_by('ID', $user['ID']);
+        }
+        
     }
 
     //  check if legal & tax article
