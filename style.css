@@ -1550,7 +1550,9 @@ header + #results_stage .swiper {
 	position: relative;
 }
 .single .entry-content a {
+	border-bottom: solid 1px var(--color-green);
 	color: var(--color-green);
+	padding-bottom: .0125em;
 }
 .single .entry-content a:hover {
 	color: var(--color-bright-green);
