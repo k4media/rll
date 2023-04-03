@@ -225,10 +225,11 @@ nav ul li {
 	border: solid 1px var(--color-green);
 	color: var(--color-bright-green);
 }
-.button.disabled {
-	background: var(--color-gray-disabled);
+.button.disabled,
+.button.green.solid.disabled {
+	background-color: var(--color-gray-disabled);
 	border: solid 1px var(--color-gray-disabled);
-	color: var(--color-gray-disabled);
+	color: var(--color-whisper);
 	display: block;
 	pointer-events: none;
 }
