@@ -29,24 +29,26 @@ $K4->fragment_cache( $key, function() {
                     $key = "singapore_city";
                }
                $popups[$key] = "";
-               $popups[$key] .= '<h4>' . $o['title'] . '</h4>';
-               //$popups[$key] .= '<p>' . nl2br($o['address']) . '</p>';
-               if ( array_key_exists( 'solutions', $o ) && is_array($o['solutions']) ) {
-                    $popups[$key] .= '<ul>';
-                    foreach( $o['solutions'] as $s ) {
-                         if ( isset($s['solution']->post_title) && "" !== $s['solution']->post_title ) {
-                              // $popups[$key] .= '<li><a href="'. get_permalink($s['solution']->ID) . '">' . esc_attr($s['solution']->post_title) . '</a></li>';
-                              $popups[$key] .= '<li>' . esc_attr($s['solution']->post_title) . '</li>';
+               if ( isset($o['title']) ) {
+                    $popups[$key] .= '<h4>' . $o['title'] . '</h4>';
+                    //$popups[$key] .= '<p>' . nl2br($o['address']) . '</p>';
+                    if ( array_key_exists( 'solutions', $o ) && is_array($o['solutions']) ) {
+                         $popups[$key] .= '<ul>';
+                         foreach( $o['solutions'] as $s ) {
+                              if ( isset($s['solution']->post_title) && "" !== $s['solution']->post_title ) {
+                                   // $popups[$key] .= '<li><a href="'. get_permalink($s['solution']->ID) . '">' . esc_attr($s['solution']->post_title) . '</a></li>';
+                                   $popups[$key] .= '<li>' . esc_attr($s['solution']->post_title) . '</li>';
+                              }
                          }
+                         $popups[$key] .= '</ul>';
                     }
-                    $popups[$key] .= '</ul>';
                }
+               
           }
      }
 
      // get countires
      $countries = dfdl_get_countries();
-
      foreach( $countries as $c ) {
           $post_title = get_the_title($c);
           $country = str_replace(" ", "_", strtolower($post_title));
