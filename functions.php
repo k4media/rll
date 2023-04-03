@@ -41,7 +41,7 @@ define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr
  * Array of valid desks, used mostly for validation.
  * Ex: china, france, india, usa, etc.
  */
-define('DFDL_DESKS', array( "china", "france", "india", "usa" ) );
+define('DFDL_DESKS', array( "china", "eu", "india", "usa" ) );
 
 // DFDL theme bootstrap
 require get_template_directory() . '/includes/dfdl.php';
