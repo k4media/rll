@@ -193,6 +193,9 @@ function dfdl_get_awards( array $args=array() ): string {
     $args['bodies']    = isset($args['bodies']) ? $args['bodies'] : dfdl_get_award_bodies('slug') ;
     $args['years']     = isset($args['years']) ? $args['years'] : dfdl_get_award_years('slug') ;
 
+    rsort($args['years']);
+    sort($args['bodies']);
+
     $types  = array("award", "ranking");
     $output = array() ;
 
@@ -208,8 +211,7 @@ function dfdl_get_awards( array $args=array() ): string {
                     'post_type'              => 'dfdl_awards',
                     'post_status'            => 'publish',
                     'posts_per_page'         => 99,
-                    'orderby'                => 'post_title',
-                    'order'                  => 'ASC',
+                    'orderby'                => array( 'post_title' => 'ASC' ),
                     'no_found_rows'          => true,
                     'ignore_sticky_posts'    => true,
                     'update_post_meta_cache' => false, 
@@ -291,7 +293,6 @@ function dfdl_get_awards( array $args=array() ): string {
                         $title = '<div class="entry">';
                                                 
                         if ( count($pieces) > 1 ) {
-                            
                             
                             if ( isset($pieces[1]) ) {
                                 $title .= '<span class="solution">' . $pieces[1] . '</span>';
@@ -430,13 +431,6 @@ function dfdl_get_insights_years() {
         $obj->slug = $i;
         $options[] = $obj;
     }
-
-    // 'Older' posts
-    // $obj = (object)[];
-    // $obj->term_id = 0;
-    // $obj->name = 'Older';
-    // $obj->slug = 'older';
-    // $options[] = $obj;
 
     return $options;
 
