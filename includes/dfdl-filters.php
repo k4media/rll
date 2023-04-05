@@ -127,7 +127,7 @@ function dfdl_author_callout( string $content )  {
     $author['name']     = esc_attr($user->data->display_name);
     $author['position'] = get_user_meta( $user->data->ID, 'position', true);
     $author['location'] = '';
-    $author['bio']      = dfdl_short_bio( get_the_author_meta('description'), 1 );
+    //$author['bio']      = dfdl_short_bio( get_the_author_meta('description'), 1 );
     $author['link']     = get_author_posts_url($user->data->ID);
     // some links have spaces, maybe from import?
     $author['link']     = str_replace(" ", "-", $author['link']);

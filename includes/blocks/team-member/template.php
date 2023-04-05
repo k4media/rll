@@ -42,9 +42,6 @@
                          <?php if( is_array($locations) && count($locations) > 0 ) : ?>
                               <div class="location"><?php echo implode(", ", $locations) ?></div>
                          <?php endif; ?>
-                         <?php if( $user->user_description ) : ?>
-                              <div class="bio"><?php echo dfdl_one_liner($user->user_description) ?></div>
-                         <?php endif; ?>
                          <div class="contact-details">
                               <div class="telephone">
                                    <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>

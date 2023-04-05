@@ -377,7 +377,7 @@ header.main {
     line-height: 1.4em;
     margin: 1em auto 4em auto;
 	text-align: center;
-    max-width: 24em;
+    max-width: 34em;
 }
 .callout .stage a {
     color: var(--color-dark-gray);
@@ -794,7 +794,7 @@ header.main {
 .contact-callout {
     background-color: var(--color-bright-green);
 	background: var(--color-bright-green) url(assets/media/logo-art-reverse.svg) no-repeat bottom right;
-    background-size: 15%;
+    background-size: 200px 200px;
     display: flex;
     position: relative;
 }
@@ -824,9 +824,8 @@ header.main {
 	color: var(--color-green);
 }
 .contact-callout .button {
-	font-size: 20px;
-	height: auto;
-	line-height: 2em;
+	border: solid 1px var(--color-green);
+	height: 38px;
     margin-top: 2em;
 }
 .contact-callout .copy-stage .copy p {

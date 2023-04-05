@@ -152,11 +152,13 @@ if ( count($users) > 0) :
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
                     ?>
-                    <?php if ( "desks" !== $sections[0] ) : ?>
+
+                    <?php // DO NOT NEED BUTTON HERE ?? ?>
+                    <?php /* if ( "desks" !== $sections[0] ) : ?>
                          <div class="see-more">
                               <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
                          </div>
-                    <?php endif; ?>
+                    <?php endif; */ ?>
                     </div>
                </div>
           </div>

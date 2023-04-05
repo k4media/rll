@@ -76,9 +76,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                  <?php if( isset($languages) ) : ?>
                      <div class="languages"><?php echo $languages ?></div> 
                 <?php endif; ?>
-                <?php /* if( isset($meta['description']) && ! empty($meta['description']) ) : ?>
-                    <div class="bio"><?php //echo dfdl_short_bio($meta['description'][0]) ?></div>
-                <?php endif; */?>
                  <div class="contact-details">
                     <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>
                         <div class="telephone"><?php echo $meta['tel'][0] ?></div>

@@ -973,11 +973,11 @@ function get_block_data($post, $block_name = 'core/heading', $field_name = "" ):
 	return $content;
 }
 
+/* short bio removed everywhere */
+/*
 function dfdl_one_liner( string $string ): string {
     return dfdl_short_bio($string);
 }
-
-// 。 <-- need to search for this, too?
 function dfdl_short_bio( string $bio, int $length = 3 ): string {
     $posx = strposX($bio, ".", $length);
     if ( isset($posx) ) {
@@ -985,6 +985,8 @@ function dfdl_short_bio( string $bio, int $length = 3 ): string {
     }
     return "";
 }
+*/
+
 /**
  * Helper: Find nth occurrence of $needle
  * Used to insert author bio in tax & lelag updates
