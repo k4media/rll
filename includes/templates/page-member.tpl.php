@@ -97,7 +97,7 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
         <div class="text-feature member narrow">
             <div class="columns">
                 <div class="lcol">
-                    <h3>Solutions</h3>
+                    <h3>Expertise</h3>
                     <div class="solutions"><ul><?php echo implode($solutions) ?></ul></div>
                 </div>
                 <div class="rcol">
