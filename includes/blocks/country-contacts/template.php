@@ -13,7 +13,7 @@
           $hours     = get_field('hours');
           $countries = get_field('countries', 'options');
      }
-     
+
      $section = dfdl_get_section();
      if ( is_array($section) ) {
           $map = $countries[end($section)]['map'];
@@ -26,7 +26,7 @@
                <h3>Address</h3>
                <?php echo nl2br($address) ?>
                <?php if ( isset($map) ) : ?>
-                    <br><a href='<?php echo $map ?>'>View on Google Maps</a>
+                    <br><a target="_blank" href='<?php echo $map ?>'>View on Google Maps</a>
                <?php endif; ?>
           </div>
           <div class="contact">
