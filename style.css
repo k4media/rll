@@ -2037,7 +2037,7 @@ input[type='search'] {
 	}
 	#mobile-navigation,
 	#menu-side .art-tablet,
-	.text-feature .columns {
+	.text-feature-stage.double-column .columns {
 		display: block;
 	}
 	.text-feature .rcol ul {
@@ -2084,7 +2084,7 @@ input[type='search'] {
 	.columns ul {
 		padding-left: 1em;
 	}
-	.text-feature .lcol, .text-feature .rcol {
+	.text-feature-stage.double-column .lcol, .text-feature-stage.double-column .rcol {
 		margin-right: 0;
 		margin-left: 0;
 	}

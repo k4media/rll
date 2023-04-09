@@ -13,28 +13,30 @@
 }
 .text-feature .columns {
     color: var(--color-dark-gray);
-    display: flex;
-    justify-content: center;
 }
 .text-feature .columns > div {
     flex: 1 1 50%;
     line-height: 1.75em;
 }
-.text-feature .columns.single-column {
-    justify-content: left;
+.text-feature-stage.single-column .columns {
+    display: block;
+    justify-content: center;
+}
+.text-feature-stage.double-column .columns {
+    display: flex;
 }
 .text-feature .columns.single-column > div {
     flex: 1 1 100%;
     line-height: 1.75em;
     max-width: 860px;
 }
-.text-feature .lcol {
+.text-feature-stage.double-column .lcol {
     margin-right: 12px;
 }
-.text-feature .rcol {
+.text-feature-stage.double-column .rcol {
     margin-left: 12px;
 }
-.text-feature .columns.single-column .rcol {
+.text-feature-stage.single-column .rcol {
     display: none;
 }
 .text-feature .title {
