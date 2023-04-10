@@ -2511,6 +2511,10 @@ input[type='search'] {
 	.button.see-more {
 		margin-top: 32px;
 	}
+	.wp-block-image .alignright {
+		float: none;
+		margin: 0.5em 0 0.5em 0;
+	}
 }
 
 @media screen and ( max-width: 500px ) {
