@@ -6,22 +6,28 @@
  *
  */
 
+/**
+ * Handle Co-Authors
+ * https://github.com/Automattic/Co-Authors-Plus
+ */
+$authors = get_the_author_meta('display_name');
+if (function_exists('coauthors_posts_links')) {
+	// $authors = coauthors_posts_links(", ", null, null, null, false);
+	$authors = coauthors(", ", null, null, null, false);
+}
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
-
+	</header>
 	<div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author">Written by <?php echo get_the_author_meta('display_name'); ?></div>
+		<div class="author">Written by <?php echo $authors; ?></div>
 	</div>
-	
 	<div class="entry-content">
 		<?php the_content(); ?>
-
 		<?php
 
 			if ( function_exists('get_field')) {
@@ -29,7 +35,6 @@
 				$direct_download = get_field('direct_download', $post->ID);
 				$direct_link = get_field('download_link', $post->ID);
 			}
-
 			if(! isset($form) || $direct_download) {
 				//$_SESSION['pre_url'] = $url; ?>
 					<div class="publication-download">
