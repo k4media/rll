@@ -1740,7 +1740,7 @@ header + #results_stage .swiper {
 }
 .speaker-grid {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	column-gap: 24px;
 	row-gap: 24px;
 }
@@ -1758,6 +1758,7 @@ header + #results_stage .swiper {
 a .event-speaker .name,
 a .event-speaker .position {
 	color: var(--color-black);
+	max-width: 20em;
 }
 a:hover .event-speaker .name,
 a:hover .event-speaker .position {
@@ -2046,9 +2047,6 @@ input[type='search'] {
 	.wp-block-table, .entry-content p {
 		margin-left: 16px;
 		margin-right: 16px;
-	}
-	.speaker-grid {
-		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
