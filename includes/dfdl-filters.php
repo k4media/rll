@@ -3,7 +3,7 @@
 /**
  * Author URL
  */
-add_filter( 'author_link', 'dfdl_author_link', 10, 2 );
+add_filter( 'author_link', 'dfdl_author_link', 99, 2 );
 function dfdl_author_link( $link, $user_id ) {  
     $first = strtolower(get_user_meta($user_id, 'first_name', true));
     $last  = strtolower(get_user_meta($user_id, 'last_name', true));
