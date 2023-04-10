@@ -75,20 +75,39 @@ foreach( $terms as $term ) {
 			endwhile; // End of the loop.
 
 		?>
-		<div class="article-meta">
-			<?php
-				get_template_part( 'includes/template-parts/content/single-social-share' );
-				if ( function_exists('get_field')) {
-					//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
-					$direct_download = get_field('direct_download', $post->ID);
-					$direct_link = get_field('download_link', $post->ID);
-				}
-				if ( isset($direct_link) && ! empty($direct_link) ) {
-					echo '<a class="button download" href="' . $direct_link . '">Download</a>';
-				}
-			?>
-		</div>
+		<?php if ( ! has_category(668) ) : ?>
+			<div class="article-meta">
+				<?php
+					get_template_part( 'includes/template-parts/content/single-social-share' );
+					if ( function_exists('get_field')) {
+						//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
+						$direct_download = get_field('direct_download', $post->ID);
+						$direct_link = get_field('download_link', $post->ID);
+					}
+					if ( isset($direct_link) && ! empty($direct_link) ) {
+						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+					}
+				?>
+			</div>
+		<?php endif; ?>
 	</div>
+
+	<?php if ( has_category(668) ) : ?>
+		<?php do_action("dfdl_event_speakers"); ?>
+		<div class="article-meta single narrow">
+				<?php
+					get_template_part( 'includes/template-parts/content/single-social-share' );
+					if ( function_exists('get_field')) {
+						//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
+						$direct_download = get_field('direct_download', $post->ID);
+						$direct_link = get_field('download_link', $post->ID);
+					}
+					if ( isset($direct_link) && ! empty($direct_link) ) {
+						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+					}
+				?>
+			</div>
+	<?php endif; ?>
 	<?php do_action("dfdl_related_stories"); ?>
 </div>
 <?php get_footer();

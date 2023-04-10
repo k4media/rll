@@ -10,6 +10,46 @@
 //}
 
 /**
+ * Insert event speakers
+ */
+add_filter( 'dfdl_event_speakers', 'dfdl_event_speakers');
+function dfdl_event_speakers(): void  {   
+
+    global $post;
+
+    if ( function_exists('get_field') && has_category(668) ) {
+
+        $speakers = get_field('speakers', $post->ID);
+
+        if ( null !== $speakers && count($speakers) > 0 ) {
+
+            ob_start();
+            foreach ( $speakers as $speaker ) {
+                $position = get_user_meta($speaker['speaker']['ID'], 'position', true);
+                set_query_var("avatar", $speaker['speaker']['user_avatar']);
+                set_query_var("name", $speaker['speaker']['display_name']);
+                set_query_var("position", $position);
+                set_query_var("url", get_author_posts_url($speaker['speaker']['ID']));
+                get_template_part( 'includes/template-parts/content/event', 'speaker' );
+            }
+            $speakers = ob_get_clean();
+            
+            ob_start();
+                get_template_part( 'includes/template-parts/content/event', 'speakers' );
+            $html = ob_get_clean();
+            $html = str_replace("{speakers}", $speakers, $html);
+
+        }
+
+        echo '<div id="event-speakers-stage">';
+        echo  $html;
+        echo '</div>';
+
+    }
+
+}
+
+/**
  * Search Insights
  */
 add_action( 'dfdl_search', 'dfdl_search' );

@@ -19,8 +19,6 @@ if (has_category(47)) {
 		$authors = coauthors(", ", null, null, null, false);
 	}
 }
-
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

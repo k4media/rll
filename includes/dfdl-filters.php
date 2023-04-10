@@ -86,6 +86,35 @@ function dfdl_story_lead( string $content )  {
 }
 
 /**
+ * Insert event registration link
+ */
+add_filter( 'the_content', 'dfdl_event_registration', 10, 2);
+function dfdl_event_registration( string $content )  {   
+
+    /**
+     * Only add link to Events 
+     */
+    if ( function_exists('get_field') && has_category(668) ) {
+        $link = get_field('link');
+        if ( empty($link) ) {
+            return $content;
+        }
+    } else {
+        return $content;
+    }
+    
+    $insert = strposX($content, "</p>", 1);
+    $front  = substr($content, 0, $insert+4);
+    $back   = substr($content, $insert);
+    
+    $content = $front;
+    $content .= '<div class="registration"><a class="button register" href="' . $link . '">R.S.V.P to Reserve Your Spot</a></div>';
+    $content .= $back;
+
+    return $content;
+}
+
+/**
  * Insert author box into content
  */
 add_filter( 'the_content', 'dfdl_author_callout', 100, 2);
