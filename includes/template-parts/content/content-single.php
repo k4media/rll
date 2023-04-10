@@ -9,12 +9,17 @@
 /**
  * Handle Co-Authors
  * https://github.com/Automattic/Co-Authors-Plus
+ * 
+ * Only show authors on Legal and Tax Updates (cat_id = 47)
  */
-$authors = get_the_author_meta('display_name');
-if (function_exists('coauthors_posts_links')) {
-	// $authors = coauthors_posts_links(", ", null, null, null, false);
-	$authors = coauthors(", ", null, null, null, false);
+if (has_category(47)) {
+	$authors = get_the_author_meta('display_name');
+	if (function_exists('coauthors_posts_links')) {
+		// $authors = coauthors_posts_links(", ", null, null, null, false);
+		$authors = coauthors(", ", null, null, null, false);
+	}
 }
+
 
 ?>
 
@@ -24,7 +29,9 @@ if (function_exists('coauthors_posts_links')) {
 	</header>
 	<div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author">Written by <?php echo $authors; ?></div>
+		<?php if (has_category(47)) : ?>
+			<div class="author">Written by <?php echo $authors; ?></div>
+		<?php endif; ?>
 	</div>
 	<div class="entry-content">
 		<?php the_content(); ?>

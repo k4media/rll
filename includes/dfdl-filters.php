@@ -5,8 +5,6 @@
  */
 add_filter( 'author_link', 'dfdl_author_link', 99, 2 );
 function dfdl_author_link( $link, $user_id ) {
-
-
     $first = trim(str_replace(" ", "-", strtolower(get_user_meta($user_id, 'first_name', true))));
     $last  = trim(str_replace(" ", "-", strtolower(get_user_meta($user_id, 'last_name', true))));
     $link  = get_home_url('', 'teams/members/' . esc_attr($first) . '-' . esc_attr($last) . '/' . $user_id . '/');
