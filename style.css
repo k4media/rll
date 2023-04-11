@@ -509,6 +509,7 @@ header.main {
 	margin-left: 1em;
 }
 .team-member img {
+	filter: grayscale(1);
 	height: auto;
 	width: 100%;
 }
