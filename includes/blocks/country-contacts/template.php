@@ -14,10 +14,10 @@
           $countries = get_field('countries', 'options');
      }
 
-     $section = dfdl_get_section();
-     if ( is_array($section) && array_key_exists('map', $section) ) {
-          $map = $countries[end($section)]['map'];
-     }
+     //$section = dfdl_get_section();
+     //if ( is_array($section) && array_key_exists('map', $section) ) {
+          //$map = $countries[end($section)]['map'];
+     //}
      
 ?>
 <div class="country-contacts-stage callout">
