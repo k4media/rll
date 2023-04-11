@@ -660,6 +660,7 @@ header.main {
 	width: 100%;
 }
 .dfdl-single-member .avatar img {
+	filter: grayscale(1);
 	width: 100%;
 }
 .dfdl-single-member .name {
@@ -689,6 +690,12 @@ header.main {
 	margin-top: 1em;
 	padding-top: 1em;
 }
+.dfdl-single-member .contact-details.partial {
+	justify-content: flex-start;
+}
+.dfdl-single-member .contact-details.partial > div:first-child {
+	width: 40%;
+}
 /* .dfdl-single-member .contact-details > div { width: 25%; } */
 .dfdl-single-member .contact-details a {
 	color: var(--color-green);
@@ -711,6 +718,12 @@ header.main {
 }
 .dfdl-single-member .linkedin {
 	background: url(assets/media/icon-linkedin-green.svg) no-repeat center left;
+	background-size: 16px;
+}
+.dfdl-single-member .linkedin:hover {
+	background: url(assets/media/icon-linkedin-active.svg) no-repeat center left;
+	background-size: 16px;
+	color: var(--color-bright-green);
 }
 #colophon .current-menu-item a {
 	font-weight: 700;

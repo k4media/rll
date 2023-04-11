@@ -7,11 +7,9 @@
 
      // get fields
      if ( function_exists('get_fields') ) {
-
           $user = ( get_field('user') ) ? get_field('user') : 1 ;
           $user = get_user_by("id", $user);
           $meta = get_user_meta($user->ID);
-
           $locations   = array();
           if ( isset($meta['_dfdl_user_country']) ) {
                foreach( $meta['_dfdl_user_country'] as $c ) {
@@ -19,8 +17,23 @@
                     $locations[] = $country->name;
                }
           }
-          
      }
+
+     /*
+      * Count user details.
+      * If 2, align-left. If 3, justify.
+      */
+      $counter = 0;
+      if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) {
+           $counter++; 
+      }
+      if ( isset($user->user_email) && ! empty($user->user_email) ) {
+           $counter++; 
+      }
+      if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) ) {
+           $counter++; 
+      }
+      $contact_align = ( $counter > 2 ) ? "full" : "partial" ;
 
 ?>
 <div class="team-member-stage callout">
@@ -42,23 +55,17 @@
                          <?php if( is_array($locations) && count($locations) > 0 ) : ?>
                               <div class="location"><?php echo implode(", ", $locations) ?></div>
                          <?php endif; ?>
-                         <div class="contact-details">
-                              <div class="telephone">
-                                   <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>
-                                        <?php echo $meta['tel'][0] ?>
-                                   <?php endif; ?>
-                              </div>
-                              <div class="email">
-                                   <?php 
-                                   if ( isset($user->user_email) && ! empty($user->user_email) ) : ?>
-                                        <a href="mailto:<?php echo $user->user_email ?>">Email</a>
-                                   <?php endif; ?>
-                              </div>
-                              <div class="linkedin">
-                                   <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) ) : ?>
-                                        <a href="<?php echo $meta['linkedin'][0] ?>">LinkedIn</a>
-                                   <?php endif; ?>
-                              </div>
+                         <div class="contact-details <?php echo $contact_align ?>">
+                              <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) && $meta['tel'][0] !== "") : ?>
+                                   <div class="telephone"><?php echo $meta['tel'][0] ?></div>
+                              <?php endif; ?>
+                              <?php 
+                              if ( isset($user->user_email) && ! empty($user->user_email) && $user->user_email !== "") : ?>
+                                   <div class="email"><a href="mailto:<?php echo $user->user_email ?>">Email</a></div>
+                              <?php endif; ?>
+                              <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) && $meta['linkedin'][0] !== "") : ?>
+                                   <div class="linkedin"><a href="<?php echo $meta['linkedin'][0] ?>">LinkedIn</a></div>
+                              <?php endif; ?>
                          </div>
                     </div>
                </div>
