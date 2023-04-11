@@ -2042,7 +2042,6 @@ input[type='search'] {
 @media (hover: hover) and (pointer: fine) {
 	.member-loop:hover .rollover {
 		left: 0;
-		transition-delay: .15s; 
 	}
 }
 @media screen and ( max-width: 1440px ) { 
