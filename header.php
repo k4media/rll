@@ -32,7 +32,7 @@ $K4->fragment_cache( "page-header", function() { ?>
 		<span></span>
 	</div>
 </div></div>
-<header class="main">
+<header id="header" class="main">
 	<div class="header-stage silo">
 		<div class="left">
 			<nav id="site-navigation-left" class="main-navigation">

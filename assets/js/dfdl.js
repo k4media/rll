@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             element.classList.remove("loading");
         });
     }
+    var header = document.getElementById("header"); 
     var beacon = document.getElementById("beacon");
     var subnav = document.getElementById("subnav-stage");
     if (beacon && subnav) {
@@ -46,10 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if ( rect.top <= 80 ) {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
+                header.classList.add("solid");
             } 
             if ( rect.top > 80 ) {
                 subnav.classList.remove("fixed");
                 beacon.classList.remove("stage");
+                header.classList.remove("solid");
             } 
         });
     }
