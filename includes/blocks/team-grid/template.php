@@ -1,6 +1,8 @@
 <?php
 
-// Swiper.js
+global $post;
+
+// Enqueue Swiper.js
 wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
 wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
@@ -8,9 +10,9 @@ $sections = dfdl_get_section();
 
 /**
  * Block css class
-     *
-     * Class based on section and subsection
-     */
+ *
+ * Class based on section and subsection
+ */
 $block_classes = array( $sections[0] );
 if ( "locations" === $sections[0] && isset($sections[1]) ) {
      $block_classes[] = "country ";
@@ -26,20 +28,29 @@ if ( "teams" === $sections[0] ) {
 
 /**
  * View All Link
-     */
+ */
 if ( "teams" === $sections[0] ) {
      $jump = get_home_url(null, '/teams/all/');
 } else {
      $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
 }
 
+/*
+* Exclude Team Lead & Team Member
+* from the team grid
+*/
+$exclude   = array();
+$exclude[] = get_block_data($post, 'acf/dfdl-team-lead', 'user');
+$exclude[] = get_block_data($post, 'acf/dfdl-team-member', 'user');
+
 /**
  * Build User Query
  */
 $args = array(
-     'number'    =>  get_option('posts_per_page'),
+     'number'   =>  get_option('posts_per_page'),
      'role__in' => array('dfdl_member'),
-     'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
+     'exclude'  => $exclude,
+     'orderby'  => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
      'no_found_rows'          => false,
      'ignore_sticky_posts'    => true,
      'update_post_meta_cache' => false, 
@@ -109,9 +120,7 @@ if ( is_admin() ) {
  * User query
  */
 $users = get_users($args);
-
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
-
 if ( count($users) > 0) :
 
 ?>
@@ -132,22 +141,18 @@ if ( count($users) > 0) :
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">
                <div id="team-grid-swiper">
                     <?php
-
                          if ( count($users) > 0) {
-
                               ob_start();
                               foreach( $users as $user ) {
                                    set_query_var("user", $user);
                                    get_template_part( 'includes/template-parts/content/member' );
                               }
                               $slides = ob_get_clean();
-
                               ob_start();
                                    get_template_part( 'includes/template-parts/content/swiper', 'team-callout' );
                               $template = ob_get_clean();
                               $template = str_replace("{posts}", $slides, $template);
                               echo $template;
-
                          } else {
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
@@ -162,13 +167,11 @@ if ( count($users) > 0) :
                     </div>
                </div>
           </div>
-          
           <?php
                if ( is_admin() ) {
                     echo "<h4>Showing 4 of possibly many users</h4>";
                }
           ?>
-          
      </div>
 </div>
 <script>
