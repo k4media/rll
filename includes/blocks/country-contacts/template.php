@@ -15,7 +15,7 @@
      }
 
      $section = dfdl_get_section();
-     if ( is_array($section) ) {
+     if ( is_array($section) && array_key_exists('map', $section) ) {
           $map = $countries[end($section)]['map'];
      }
      

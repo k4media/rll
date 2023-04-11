@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-country-nav",
+    "title": "Country Navigation",
+    "description": "Navigation elements for Locations/countries",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "filter",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
