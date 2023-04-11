@@ -2,7 +2,7 @@
 /**
  * DFDL Theme
  * 
- * Set some constants and call theme bootstrap under includes.
+ * Set some constants and call theme bootstrap.
  * 
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  * 

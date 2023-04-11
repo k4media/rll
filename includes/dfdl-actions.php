@@ -2617,18 +2617,25 @@ function copyright_notice() {
 add_action('social_links', 'social_links');
 function social_links() {
     $mods = get_theme_mods();
+
     echo '<div class="social-links">';
     if ( isset($mods['dfdl_linkedin']) ) {
-        echo '<a href="' . $mods['dfdl_linkedin'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-linkedin.svg"></a>';
+        //echo '<a href="' . $mods['dfdl_linkedin'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-linkedin.svg"></a>';
+        echo '<a href="' . $mods['dfdl_linkedin'] . '"><object id="social-linkedin" type="image/svg+xml" data="' . get_stylesheet_directory_uri() . '/assets/media/icon-linkedin.svg"></object></a>';
     }
     if ( isset($mods['dfdl_facebook']) ) {
-        echo '<a href="' . $mods['dfdl_facebook'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-facebook.svg"></a>';
+        //echo '<a href="' . $mods['dfdl_facebook'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-facebook.svg"></a>';
+        echo '<a href="' . $mods['dfdl_facebook'] . '"><object id="social-facebook" type="image/svg+xml" data="' . get_stylesheet_directory_uri() . '/assets/media/icon-facebook.svg"></object></a>';
     }
     if ( isset($mods['dfdl_twitter']) ) {
-        echo '<a href="' . $mods['dfdl_twitter'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-twitter.svg"></a>';
+        //echo '<a href="' . $mods['dfdl_twitter'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-twitter.svg"></a>';
+        echo '<a href="' . $mods['dfdl_twitter'] . '">';
+        echo '<object id="social-twitter" type="image/svg+xml" data="' . get_stylesheet_directory_uri() . '/assets/media/icon-twitter.svg"></object>';
+        echo '</a>';
     }  
     if ( isset($mods['dfdl_youtube']) ) {
-        echo '<a href="' . $mods['dfdl_youtube'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-youtube.svg"></a>';
+        //echo '<a href="' . $mods['dfdl_youtube'] . '"><img src="' . get_stylesheet_directory_uri() . '/assets/media/icon-youtube.svg"></a>';
+        echo '<a href="' . $mods['dfdl_youtube'] . '"><object id="social-youtube" type="image/svg+xml" data="' . get_stylesheet_directory_uri() . '/assets/media/icon-youtube.svg"></object></a>';
     }
     echo '</div>';
 }

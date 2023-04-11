@@ -273,6 +273,7 @@ nav ul li {
 /* lighten header */
 header.main {
 	background-color: rgba(255,255,255,.9);
+	backdrop-filter: blur(6px);
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -485,6 +486,18 @@ header.main {
 	display: flex;
     justify-content: space-between;
 	max-width: 120px;
+}
+.share-icon {
+	fill: var(--color-white);
+	stroke-linecap:round;
+	stroke-linejoin:round;
+	transition: all .25s;
+	width: auto;
+	height: 16px;
+}
+.share-icon:hover {
+	fill: var(--color-bright-green);
+	cursor: pointer;
 }
 .legal-nav {
 	text-align: right;
