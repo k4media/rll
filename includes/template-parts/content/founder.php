@@ -13,6 +13,22 @@
         $locations[] = $country->name;
     }
 
+    /** Country expertise */
+    $country_expertise = array();
+    $countries = get_user_meta( $user['founder']['ID'], '_dfdl_user_country_expertise');
+    foreach( $countries as $c ) {
+        $country = get_term( $c, 'dfdl_countries', true);
+        $country_expertise[] = $country->name;
+    }
+
+    /** Solution Services */
+    $expertise   = array();
+    $solution_ids = get_user_meta( $user['founder']['ID'], '_dfdl_user_solutions');
+    foreach( $solution_ids as $s ) {
+        $solution = get_term( $s, 'dfdl_solutions', true);
+        $expertise[] = $solution->name;
+    }
+
 ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class("member-loop founder"); ?>>
     <div class="team-member">
@@ -30,5 +46,40 @@
                 </div>
             </div>
         </a>
+    </div>
+    <div class="rollover">
+        <div class="stage">
+            <?php if ( isset($position) ) : ?>
+                <h4>Position</h4>
+                <ul>
+                    <li><?php echo $position ?></li>
+                </ul>
+                <!-- <div class="ranking"><?php echo $position ?></div>-->
+            <?php endif; ?>
+            <?php if ( isset($expertise) && count($expertise) > 0 ) : ?>
+                <h4>Expertise</h4>
+                <ul>
+                <?php 
+                    foreach( $expertise as $e ) {
+                        echo '<li>' . $e . '</li>';
+                    }
+                ?>
+                </ul>
+            <?php endif; ?>
+            <?php if ( isset($country_expertise) && count($country_expertise) > 0 ) : ?>
+                <?php if ( count($country_expertise) === 1 ) : ?>
+                    <h4>Country of Expertise</h4>
+                <?php else : ?>
+                    <h4>Countries of Expertise</h4>
+                <?php endif; ?>
+                <ul>
+                <?php 
+                    foreach( $country_expertise as $c ) {
+                        echo '<li>' . $c . '</li>';
+                    }
+                ?>
+                </ul>
+            <?php endif; ?>
+        </div>
     </div>
 </article><!-- #post-<?php the_ID(); ?> -->
