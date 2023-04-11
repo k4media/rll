@@ -32,3 +32,9 @@
     font-size: var(--font-size-large);
     margin: 1em;
 }
+.solutions-grid-stage a:hover h3 {
+    color: var(--color-white);
+}
+.solutions-grid-stage a:hover .solution {
+    background-color: var(--color-green);
+}

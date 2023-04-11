@@ -35,7 +35,6 @@ $K4->fragment_cache( "page-header", function() { ?>
 <header class="main">
 	<div class="header-stage silo">
 		<div class="left">
-			<!--<button id="hamburger" type="button" aria-label="Menu" aria-controls="navigation"></button>-->
 			<nav id="site-navigation-left" class="main-navigation">
 				<?php
 					wp_nav_menu(
