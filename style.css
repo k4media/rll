@@ -772,7 +772,7 @@ header.main {
 }
 #side-navigation .menu li a, #mobile-navigation .menu li a {
 	color: var(--color-white);
-	font-size: var(--font-size-large);
+	font-size: var(--font-size-larger);
 	font-weight: 700;
 	line-height: 64px;
 }
@@ -1917,7 +1917,8 @@ input[type='search'] {
 	cursor: pointer;
 	z-index: 999;
 }
-#hamburger:hover span {
+#hamburger:hover span,
+#hamburger.open:hover span {
 	background: var(--color-bright-green);
 }
 #hamburger span {
