@@ -749,6 +749,9 @@ header.main {
 	transition: all 0s ease;
 	width: 100%;
 }
+.founders-stage .member-loop .rollover {
+	padding-right: 0;
+}
 .member-loop .rollover .stage {
 	color: var(--color-white);
 	padding: 2em;
