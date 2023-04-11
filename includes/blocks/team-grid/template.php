@@ -119,7 +119,7 @@ if ( is_admin() ) {
 /**
  * User query
  */
-$users = get_users($args);
+$users = new WP_User_Query($args);
 $post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
 if ( count($users) > 0) :
 
@@ -141,9 +141,9 @@ if ( count($users) > 0) :
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">
                <div id="team-grid-swiper">
                     <?php
-                         if ( count($users) > 0) {
+                         if ( ! empty( $user_query->get_results() ) ) {
                               ob_start();
-                              foreach( $users as $user ) {
+                              foreach( $user_query->get_results() as $user ) {
                                    set_query_var("user", $user);
                                    get_template_part( 'includes/template-parts/content/member' );
                               }
@@ -157,13 +157,11 @@ if ( count($users) > 0) :
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
                     ?>
-
-                    <?php // DO NOT NEED BUTTON HERE ?? ?>
-                    <?php /* if ( "desks" !== $sections[0] ) : ?>
+                    <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
                          <div class="see-more">
-                              <a class="button green ghost see-all" href="<?php echo $jump ?>">See All</a>
+                              <button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button>
                          </div>
-                    <?php endif; */ ?>
+                    <?php endif; ?>
                     </div>
                </div>
           </div>

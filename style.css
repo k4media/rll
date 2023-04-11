@@ -737,7 +737,7 @@ header.main {
 	position: relative;
 }
 .member-loop .rollover {
-	background-color: var(--color-white);
+	background-color: var(--color-green);
 	display: flex;
 	height: 100%;
 	left: -9999em;
@@ -750,7 +750,7 @@ header.main {
 	width: 100%;
 }
 .member-loop .rollover .stage {
-	color: var(--color-green);
+	color: var(--color-white);
 	padding: 2em;
 	text-align: left;
 }
