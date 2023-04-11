@@ -508,11 +508,7 @@ header.main {
 .legal-nav a {
 	margin-left: 1em;
 }
-.team-member img {
-	filter: grayscale(1);
-	height: auto;
-	width: 100%;
-}
+
 .subnav-stage.silo {
 	position: relative;
 	margin-top: 100px
@@ -660,7 +656,13 @@ header.main {
 	max-width: 320px;
 	width: 100%;
 }
-.dfdl-single-member .avatar img {
+/*
+.team-member img {
+	filter: grayscale(1);
+	height: auto;
+	width: 100%;
+} */
+.team-member img, .dfdl-single-member .avatar img {
 	filter: grayscale(1);
 	width: 100%;
 }
