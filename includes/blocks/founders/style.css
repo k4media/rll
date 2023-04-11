@@ -11,6 +11,10 @@
     grid-template-columns: repeat(3, 1fr) ;
     margin-top: 60px;
 }
+.founders-stage a {
+    align-items: stretch;
+    display: flex;
+}
 .founders-stage > article {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgba(200,200,200, .5);
