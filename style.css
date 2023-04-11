@@ -209,7 +209,8 @@ nav ul li {
 	top: 9px;
 }
 .button.filter:hover,
-.button.filter.is-active {
+.button.filter.is-active,
+.button.subscribe:hover {
 	border: solid 1px var(--color-bright-green);
 	color: var(--color-bright-green);
 }
@@ -264,6 +265,10 @@ nav ul li {
 	right: -43px;
 	top: -3px;
 	width: 40px;
+}
+.button.subscribe {
+	border: solid 1px var(--color-white);
+	color: var(--color-white);
 }
 /* lighten header */
 header.main {
