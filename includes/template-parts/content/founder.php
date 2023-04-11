@@ -30,23 +30,22 @@
     }
 
 ?>
+
 <a href="<?php echo $link ?>" class="swiper-slide">
     <article id="post-<?php the_ID(); ?>" <?php post_class("member-loop founder"); ?>>
         <div class="team-member">
-            <a href="<?php echo $link ?>">
-                <img src="<?php echo esc_url(get_avatar_url($user['founder']['ID'], array('size' => 320))) ?>">
-                <div class="details-stage">
-                    <div class="details">
-                        <div class="name"><?php echo esc_attr($user['founder']['display_name']) ?></div>
-                        <?php if( isset($position) ) : ?>
-                            <div class="position"><?php echo esc_attr($position) ?></div> 
-                        <?php endif; ?>
-                        <?php if( is_array($locations) && count($locations) > 0 ) : ?>
-                            <div class="location"><?php echo esc_attr(implode(", ", $locations)) ?></div>
-                        <?php endif; ?>
-                    </div>
+            <img src="<?php echo esc_url(get_avatar_url($user['founder']['ID'], array('size' => 320))) ?>">
+            <div class="details-stage">
+                <div class="details">
+                    <div class="name"><?php echo esc_attr($user['founder']['display_name']) ?></div>
+                    <?php if( isset($position) ) : ?>
+                        <div class="position"><?php echo esc_attr($position) ?></div> 
+                    <?php endif; ?>
+                    <?php if( is_array($locations) && count($locations) > 0 ) : ?>
+                        <div class="location"><?php echo esc_attr(implode(", ", $locations)) ?></div>
+                    <?php endif; ?>
                 </div>
-            </a>
+            </div>
         </div>
         <div class="rollover">
             <div class="stage">
