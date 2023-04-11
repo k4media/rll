@@ -119,9 +119,9 @@ if ( is_admin() ) {
 /**
  * User query
  */
-$users = new WP_User_Query($args);
-$post_class = ( count($users) > 0  ) ? "" : "no-results" ; 
-if ( count($users) > 0) :
+$user_query = new WP_User_Query($args);
+$post_class = ( $user_query->get_results() > 0  ) ? "" : "no-results" ; 
+if ( ! empty( $user_query->get_results() ) ) :
 
 ?>
 
@@ -157,7 +157,11 @@ if ( count($users) > 0) :
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
                     ?>
-                    <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
+                    <?php if ( is_page('teams') ) : ?>
+                         <div class="see-more">
+                              <a id="teams-see-all" href="<?php echo get_home_url("", "/teams/all/") ?>" class="button green ghost see-more">See All</a>
+                         </div>
+                    <?php elseif ( $user_query->get_total() > count($user_query->results)) : ?>
                          <div class="see-more">
                               <button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button>
                          </div>
