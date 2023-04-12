@@ -29,7 +29,8 @@ jQuery( document ).ready(function() {
         allowHtml: true,
         allowClear: false,
         placeholder: "All",
-        tags: true
+        tags: true,
+        minimumResultsForSearch: -1
     });
 });
 </script>

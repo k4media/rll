@@ -44,7 +44,6 @@ if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
             'value'   => $term->term_id,
             'compare' => '='
         );
-    
 }
 
 // The Query
