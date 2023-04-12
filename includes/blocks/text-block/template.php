@@ -15,9 +15,12 @@
      }
      
      $section = dfdl_get_section();
-     if ( ! is_array($section) ) {
+     if ( empty($section) ) {
           $section = array();
+          $section[0] = "non";
      }
+
+     
      
 ?>
 <div class="text-feature-stage <?php echo $section[0] . ' ' . $style ?>">
