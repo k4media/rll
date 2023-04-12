@@ -43,7 +43,7 @@ if ( $contacts[$country]["contact"] ) {
                     <div class="text"><?php echo wpautop($contacts[$country]["text"]); ?></div>
                 <?php endif; ?>
                 <?php if ( $contacts[$country]["phone"] ) : ?>
-                    <div class=""><?php echo $contacts[$country]["phone"]; ?></div>
+                    <div class="telephone"><?php echo $contacts[$country]["phone"]; ?></div>
                 <?php endif; ?>
                 <?php if ( $contacts[$country]["email"] ) : ?>
                     <div class="email"><a href="mailto:<?php echo $contacts[$country]["email"]; ?>"><?php echo $contacts[$country]["email"]; ?></a></div>

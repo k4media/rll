@@ -1308,10 +1308,10 @@ input[type=checkbox] {
 	margin: 64px 0 4em 0;
 }
 .contact-stage .copy-stage .copy {
-	color: var(--color-gray);
 	flex: 1 1 30%;
 }
-.contact-stage .copy-stage .copy .text {
+.contact-stage .copy-stage .copy .text,
+.contact-stage .copy-stage .copy .telephone {
 	color: var(--color-gray);
 }
 .contact-stage .copy-stage .copy a {
