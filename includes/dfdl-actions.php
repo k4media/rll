@@ -330,7 +330,7 @@ function dfdl_in_the_news() {
         'post_status'    => 'publish',
         's'              => $author->display_name,
         'author__not_in' => $author_id,
-        'posts_per_page' => 8,
+        'posts_per_page' => 4,
         'orderby'        => 'date',
         'order'          => 'DESC',
         'no_found_rows'          => false,
