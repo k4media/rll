@@ -717,8 +717,8 @@ header.main {
 }
 .dfdl-single-member,
 #results_stage.team-stage.all,
-#results_stage.team-stage.country,
-#team-grid-swiper .swiper-wrapper {
+/* #results_stage.team-stage.country */
+/*, #team-grid-swiper .swiper-wrapper */{
     column-gap: 24px;
     display: grid;
     grid-template-columns: repeat(4, 1fr) ;

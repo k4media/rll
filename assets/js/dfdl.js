@@ -94,6 +94,44 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch(e) {
         
     };
+
+    document.addEventListener("click", function(e){
+        const teams_more = e.target.closest("#teams-all-see-more"); 
+        if(teams_more){
+            teams_all_page = document.getElementById("teams_all_page").value;
+            document.getElementById("teams_all_page").value = parseInt(teams_all_page) + 1;
+            teamsSeeMore();
+            return false;
+        }
+      });
+    document.addEventListener("click", function(e){
+        const insights_more = e.target.closest("#insights-all-see-more"); 
+        if(insights_more){
+            insights_all_page = document.getElementById("insights_all_page").value;
+            document.getElementById("insights_all_page").value = parseInt(insights_all_page) + 1;
+            insightsSeeMore();
+            return false;
+        }
+    });
+    var search_stage = document.getElementById("search-stage");
+    var search_toggle = document.getElementById("search-toggle");
+    search_toggle && search_toggle.addEventListener("click", function() {
+        search_stage.classList.toggle("is-active");
+        if (search_toggle.classList.contains("is-active")) {
+            search_toggle.classList.remove("is-active");
+            search_toggle.src = ajax_object.stylesheet_uri + "/icon-search.svg";
+        } else {
+            search_toggle.classList.add("is-active");
+            search_toggle.src = ajax_object.stylesheet_uri +  "/icon-search-active.svg";
+        }
+        
+    });
+
+    img = new Image();
+    img.src = ajax_object.stylesheet_uri + "/assets/media/icon-search-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/assets/media/icon-back-arrow-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/assets/media/icon-linkedin-active.svg";
+    
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {

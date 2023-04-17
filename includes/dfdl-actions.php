@@ -76,7 +76,6 @@ function dfdl_search() {
     } else {
 
         echo '<p class="no-insights not-found">Nothing found.</p>';
-        echo '<p class="no-insights not-found">Nothing found.</p>';
 
     }
 
