@@ -727,6 +727,7 @@ header.main {
 #team-grid-swiper .swiper-wrapper a {
 	align-items: stretch;
     display: flex;
+	justify-content: center;
 }
 .dfdl-single-member,
 #results_stage.team-stage.all,
@@ -3047,8 +3048,9 @@ input[type='search'] {
 	#results_stage.team-stage.country .swiper-wrapper {
 		grid-template-columns: repeat(1, 1fr);
 	}
-	#team-grid-swiper .team-swiper .swiper-wrapper > a {
+	#team-grid-swiper .team-swiper .swiper-wrapper a {
 		margin: 0 auto 0 auto;
+		max-width: 320px;
 	}
 	.contact-form .details,
 	.member.text-feature .columns {

@@ -161,6 +161,10 @@ if ( ! empty( $user_query->get_results() ) ) :
                          <div class="see-more">
                               <a id="teams-see-all" href="<?php echo get_home_url("", "/teams/all/") ?>" class="button green ghost see-more">See All</a>
                          </div>
+                    <?php elseif ( isset($sections) && "locations" === $sections[0] ) : ?>
+                         <div class="see-more">
+                              <a id="teams-see-all" href="<?php echo $jump ?>" class="button green ghost see-more">See All</a>
+                         </div>
                     <?php elseif ( $user_query->get_total() > count($user_query->results)) : ?>
                          <div class="see-more">
                               <button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button>

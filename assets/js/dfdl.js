@@ -242,8 +242,8 @@ function teamsSeeMore() {
             action: "teams_more",
             nonce: ajax_object.teams_see_more,
             permalink: ajax_object.permalink,
-            solutions:jQuery('#teams_solutions').select2("val"),
-            sort: jQuery('#teams_sort').select2("val"),
+            solutions:jQuery('#teams_solutions').select2("val") || '',
+            sort: jQuery('#teams_sort').select2("val") || '',
             country: document.getElementById("dfdl_teams_country").value,
             page: document.getElementById("teams_all_page").value
         }, function(data){
