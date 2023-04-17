@@ -18,7 +18,9 @@
                 //echo $story->post_author
                 //echo get_the_author_meta('display_name', $story->post_author);
 
+                $author = get_post_field ('post_author', $story->ID);
                 var_dump($story->post_author);
+                var_dump($author);
 
                 //if ( function_exists('coauthors') ) {
                     //coauthors();
