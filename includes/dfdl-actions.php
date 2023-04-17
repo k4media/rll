@@ -39,13 +39,11 @@ function dfdl_event_speakers(): void  {
             $html = ob_get_clean();
             $html = str_replace("{speakers}", $speakers, $html);
 
-            echo '<div id="event-speakers-stage">';
-            echo  $html;
-            echo '</div>';
-
         }
 
-        
+        echo '<div id="event-speakers-stage">';
+        echo  $html;
+        echo '</div>';
 
     }
 
@@ -77,6 +75,7 @@ function dfdl_search() {
 
     } else {
 
+        echo '<p class="no-insights not-found">Nothing found.</p>';
         echo '<p class="no-insights not-found">Nothing found.</p>';
 
     }

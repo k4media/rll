@@ -26,15 +26,19 @@
 }
 .other {
     fill:#66948F;
+    fill:#66948F;
     stroke-linecap:round;
     stroke-linejoin:round;
     transition: all .25s;
 }
 .other.disabled {
     fill:#ececec;
+    fill:#ececec;
     transition: all .25s;
 }
 .country {
+    fill:#004C45;
+    stroke: #fff;
     fill:#004C45;
     stroke: #fff;
     stroke-linecap:round;
@@ -48,17 +52,23 @@
 }
 .st3 {
     fill: #77DD77;
+    fill: #77DD77;
 }
 .map-pin {
     cursor: pointer;
 }
 .map-pin.disabled path {
     fill:#cccccc;
+    fill:#cccccc;
 }
 .callout .stage .countries ul .hilite a {
     color: var(--color-dark-gray);
 }
 .callout .stage .countries ul a {
+    color: var(--color-dark-gray);
+}
+.callout .stage .countries ul a:hover {
+    color: var(--color-green);
     color: var(--color-dark-gray);
 }
 .callout .stage .countries ul a:hover {
@@ -79,6 +89,7 @@
 }
 #popup h4 {
     font-size: var(--font-size-small);
+    margin-top: 1em;
     margin-top: 1em;
 }
 #popup li::marker,

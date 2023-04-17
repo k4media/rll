@@ -20,6 +20,7 @@ $primary_categories = array(
 	"Legal and Tax",
 	"Legal and Tax Updates",
 	"News"
+	"News"
 );
 
 foreach( $terms as $term ) {
@@ -33,8 +34,12 @@ foreach( $terms as $term ) {
 
 	/**
 	 * If parent, set parent/child as category/subcategory
+	 * If parent, set parent/child as category/subcategory
 	 */
 	if ($term->parent) {
+		$parent = get_term_by( "id", $term->parent, 'category');
+		$classes[] = esc_attr($parent->slug);
+		$single_category = $parent->name;
 		$parent = get_term_by( "id", $term->parent, 'category');
 		$classes[] = esc_attr($parent->slug);
 		$single_category = $parent->name;
@@ -64,15 +69,21 @@ foreach( $terms as $term ) {
 		<?php endif; ?>
 		<?php
 
+
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
 				//if ( isset($template_slug) ) {
 					//get_template_part( 'includes/template-parts/content/content', $template_slug );
 				//} else {
+				//if ( isset($template_slug) ) {
+					//get_template_part( 'includes/template-parts/content/content', $template_slug );
+				//} else {
 					get_template_part( 'includes/template-parts/content/content-single' );
 				//}
+				//}
 			endwhile; // End of the loop.
+
 
 		?>
 		<?php if ( ! has_category(668) ) : ?>
