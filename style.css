@@ -86,9 +86,6 @@ body.noscroll {
 .narrow,
 .wp-block-table,
 .entry-content p {
-.narrow,
-.wp-block-table,
-.entry-content p {
 	margin-left: auto;
 	margin-right: auto;
 	max-width: var(--setting-narrow-max-width);
