@@ -1114,6 +1114,9 @@ header.main {
 	background: transparent;
     margin: 4em auto auto auto;
 }
+.see-more.disabled {
+	color: var(--color-gray-disabled);
+}
 .member .bio p {
 	display: inline-block;
 }
