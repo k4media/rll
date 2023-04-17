@@ -430,9 +430,6 @@ header.main {
 .menu .current-page-ancestor,
 .menu .current-page-ancestor a {
 	color: var(--color-green);
-.menu .current-page-ancestor,
-.menu .current-page-ancestor a {
-	color: var(--color-green);
 	font-weight: 700;
 }
 .header-stage .search {
