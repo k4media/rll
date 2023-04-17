@@ -2078,6 +2078,7 @@ input[type='search'] {
 }
 #location-subnav {
 	margin-left: 18px;
+	overflow: hidden;
 }
 @media print {
 	.header-stage .left,
