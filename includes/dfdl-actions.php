@@ -21,9 +21,7 @@ function dfdl_event_speakers(): void  {
 
         $speakers = get_field('speakers', $post->ID);
 
-        var_dump($speakers);
-
-        if ( null !== $speakers && count($speakers) > 0 ) {
+        if ( null !== $speakers && false !== $speakers && count($speakers) > 0 ) {
 
             ob_start();
             foreach ( $speakers as $speaker ) {
