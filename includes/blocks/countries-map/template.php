@@ -54,7 +54,7 @@ $K4->fragment_cache( $key, function() {
           $country = str_replace(" ", "_", strtolower($post_title));
           $output[] = '<li id="link-' . $country . '">';
           $output[] = '<a data-country="' . $country . '" href="' . get_permalink($c) . '">'  ;
-          $output[] = $post_title;
+          $output[] = '<span>&#x2022;</span>' . ' ' . $post_title;
           $output[] = '</a>';
           $output[] = '</li>';
      }
@@ -66,11 +66,11 @@ $K4->fragment_cache( $key, function() {
           <div class="stage">
                <div class="map">
                     <div id="popup">
-                         <h4>Office name, Country</h4>
+                         <h4>City name</h4>
                          <ul>
                               <li>Solution 1</li>
-                              <li>Solution 1</li>
-                              <li>Solution 1</li>
+                              <li>Solution 2</li>
+                              <li>Solution 3</li>
                          </ul>
                     </div>
                     <object id="dfdl-map" type="image/svg+xml" data="<?php echo get_stylesheet_directory_uri() ?>/assets/media/dfdl-map.svg"></object>

@@ -177,11 +177,12 @@ function dfdl_author_callout( string $content )  {
         get_template_part( 'includes/template-parts/content/author', 'callout' );
     $author_box_html = ob_get_clean();
 
-    $insert = strposX($content, "</p>", 6);
-    $front  = substr($content, 0, $insert+4);
-    $back   = substr($content, $insert);
-    
-    return  $front . " " . $author_box_html . " " . $back;
+    //$insert = strposX($content, "</p>", 6);
+    //$front  = substr($content, 0, $insert+4);
+    //$back   = substr($content, $insert);
+    //return  $front . " " . $author_box_html . " " . $back;
+
+    return $content . " " . $author_box_html;
 }  
 
 /**

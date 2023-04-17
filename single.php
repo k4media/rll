@@ -85,7 +85,7 @@ foreach( $terms as $term ) {
 						$direct_link = get_field('download_link', $post->ID);
 					}
 					if ( isset($direct_link) && ! empty($direct_link) ) {
-						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+						echo '<div><a class="button download" href="' . $direct_link . '">Download</a></div>';
 					}
 				?>
 			</div>
@@ -103,7 +103,7 @@ foreach( $terms as $term ) {
 						$direct_link = get_field('download_link', $post->ID);
 					}
 					if ( isset($direct_link) && ! empty($direct_link) ) {
-						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+						echo '<div><a class="button download" href="' . $direct_link . '">Download</a></div>';
 					}
 				?>
 			</div>

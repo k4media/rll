@@ -17,7 +17,7 @@
     display: flex;
     height: 48px;
 }
-.solution span {
+.solution span, #country-list span {
     font-size: var(--font-size-large);
     padding-right: .5em;
 }

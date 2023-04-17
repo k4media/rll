@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var side_menu = document.getElementById("menu-side");
     var close     = document.getElementById("menu-side-close");
     hamburger.addEventListener("click", function() {
+        hamburger.classList.toggle("open");
         side_menu.classList.toggle("is-active");
         document.body.classList.toggle("noscroll");
     });
@@ -55,54 +56,63 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    var swiper = document.getElementsByClassName("swiper");
-    if (swiper) {
-        Array.prototype.forEach.call(swiper, function(element) {
-            element.classList.remove("loading");
-        });
-    }
-
+    var header = document.getElementById("header");
     var beacon = document.getElementById("beacon");
-    // var stage = document.getElementById("subnav-stage");
     var subnav = document.getElementById("subnav-stage");
     if (beacon && subnav) {
         window.addEventListener("scroll", function(){
             rect = beacon.getBoundingClientRect();
-            // console.log(rect.top);
-            if ( rect.top <= 0 ) {
+            console.log(rect.top);
+            if ( rect.top <= 80 ) {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
+                header.classList.add("solid");
             } 
-            if ( rect.top > 0 ) {
+            if ( rect.top > 80 ) {
                 subnav.classList.remove("fixed");
                 beacon.classList.remove("stage");
+                header.classList.remove("solid");
             } 
         });
     }
 
-    var subnavSwiper = new Swiper(".subnav-swiper", {
-        // slidesPerView: 10,
-        // spaceBetween: 16,
-        // freeMode: true,
-        breakpoints: {
-        950: {
-            slidesPerView: 11,
-        },
-        599: {
-            slidesPerView: 7,
-        },
-        499: {
-            slidesPerView: 6,
-        },
-        399: {
-            slidesPerView: 4,
-        },
-        0: {
-            slidesPerView: 3,
-          },
-      }
-    });
+    try {
+        var swiper = document.getElementsByClassName("swiper");
+        if (swiper) {
+            Array.prototype.forEach.call(swiper, function(element) {
+                element.classList.remove("loading");
+            });
+        }
+    } catch(e) {
 
+    };
+
+    try {
+        var subnavSwiper = new Swiper(".subnav-swiper", {
+            // slidesPerView: 10,
+            // spaceBetween: 16,
+            // freeMode: true,
+            breakpoints: {
+            950: {
+                slidesPerView: 11,
+            },
+            599: {
+                slidesPerView: 7,
+            },
+            499: {
+                slidesPerView: 6,
+            },
+            399: {
+                slidesPerView: 4,
+            },
+            0: {
+                slidesPerView: 3,
+            },
+        }
+        });
+    } catch(e) {
+        
+    };
 }, false);
 var forEach=function(t,o,r){if("[object Object]"===Object.prototype.toString.call(t))for(var c in t)Object.prototype.hasOwnProperty.call(t,c)&&o.call(r,t[c],c,t);else for(var e=0,l=t.length;l>e;e++)o.call(r,t[e],e,t)};
 function isScrolledIntoView(el) {

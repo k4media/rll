@@ -21,6 +21,9 @@
     list-style-type: none;
     text-align: right;
 }
+.dfdl-countries .countries li span {
+    display: none;
+}
 .other {
     fill:#66948F;
     stroke-linecap:round;
