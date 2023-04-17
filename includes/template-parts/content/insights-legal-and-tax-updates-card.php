@@ -13,7 +13,21 @@
                 <?php echo wp_date( get_option( 'date_format' ), get_post_timestamp($story->ID) ); ?>
             </div>
         </div>
-        <div class="author"><?php echo get_the_author_meta('display_name', $story->post_author); ?></div>
+        <div class="author">
+            <?php
+                //echo $story->post_author
+                //echo get_the_author_meta('display_name', $story->post_author);
+
+                var_dump($story->post_author);
+
+                //if ( function_exists('coauthors') ) {
+                    //coauthors();
+                //} else {
+                    echo get_the_author_meta('display_name', $story->post_author);
+                //}
+                
+            ?>
+        </div>
         <h4><?php echo esc_attr($story->post_title) ?></h4>
     </div>
 </a>
