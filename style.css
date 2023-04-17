@@ -1752,6 +1752,7 @@ header + #results_stage .swiper {
 .subnav-swiper ul {
 	/* align-items: center; */
 	display: block;
+	margin: auto;
 	/* justify-content: space-between;*/
 	white-space: nowrap;
 	width: auto;
@@ -2074,6 +2075,9 @@ input[type='search'] {
 	top: 18px;
 	width: 0%;
 	left: 50%;
+}
+#location-subnav {
+	margin-left: 18px;
 }
 @media print {
 	.header-stage .left,
