@@ -48,13 +48,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
                 header.classList.add("solid");
-                header.classList.add("solid");
             } 
-            if ( rect.top > 80 ) {
             if ( rect.top > 80 ) {
                 subnav.classList.remove("fixed");
                 beacon.classList.remove("stage");
-                header.classList.remove("solid");
                 header.classList.remove("solid");
             } 
         });

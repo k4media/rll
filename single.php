@@ -20,7 +20,6 @@ $primary_categories = array(
 	"Legal and Tax",
 	"Legal and Tax Updates",
 	"News"
-	"News"
 );
 
 foreach( $terms as $term ) {
