@@ -30,6 +30,9 @@ function dfdl_insights() {
         'update_post_term_cache' => false,
    );
    
+   if ( is_admin() ) {
+        $query_args['posts_per_page'] = 4;
+    }
    $sections = dfdl_get_section();
 
     /**
@@ -190,6 +193,9 @@ function dfdl_get_awards( array $args=array() ): string {
     $args['bodies']    = isset($args['bodies']) ? $args['bodies'] : dfdl_get_award_bodies('slug') ;
     $args['years']     = isset($args['years']) ? $args['years'] : dfdl_get_award_years('slug') ;
 
+    rsort($args['years']);
+    sort($args['bodies']);
+
     $types  = array("award", "ranking");
     $output = array() ;
 
@@ -205,8 +211,7 @@ function dfdl_get_awards( array $args=array() ): string {
                     'post_type'              => 'dfdl_awards',
                     'post_status'            => 'publish',
                     'posts_per_page'         => 99,
-                    'orderby'                => 'post_title',
-                    'order'                  => 'ASC',
+                    'orderby'                => array( 'post_title' => 'ASC' ),
                     'no_found_rows'          => true,
                     'ignore_sticky_posts'    => true,
                     'update_post_meta_cache' => false, 
@@ -288,6 +293,36 @@ function dfdl_get_awards( array $args=array() ): string {
                         $title = '<div class="entry">';
                                                 
                         if ( count($pieces) > 1 ) {
+                            
+                            if ( isset($pieces[1]) ) {
+                                $title .= '<span class="solution">' . $pieces[1] . '</span>';
+                            }
+                            if ( isset($pieces[2]) ) {
+                                $title .= '<span class="country">' . $pieces[2] . '</span>';
+                            }
+                            if ( isset($pieces[0]) ) {
+                                $title .= '<span class="rank">' . $pieces[0] . '</span>';
+                            }
+                            
+    
+                        } else {
+                            $title .= '<span class="award-title">' . array_shift($pieces) . '</span>';
+                        }
+                        $output[] = $title;
+                        $output[] = "</div></li>";
+
+
+                        /*
+                        // previous formatting
+                        if ( "award" === $type ) {
+                            $output[] = '<li class="award">';
+                        } else {
+                            $output[] = "<li>";
+                        }
+                        $pieces = explode("–", $p->post_title);
+                        $title = '<div class="entry">';
+                                                
+                        if ( count($pieces) > 1 ) {
                             $title .= '<span>' . array_shift($pieces) . ' –</span>';
                             $title .= '<span>' . implode("– ", $pieces) . '</span>';
                         } else {
@@ -295,6 +330,7 @@ function dfdl_get_awards( array $args=array() ): string {
                         }
                         $output[] = $title;
                         $output[] = "</div></li>";
+                        */
                         
                     }
                 }
@@ -396,13 +432,6 @@ function dfdl_get_insights_years() {
         $options[] = $obj;
     }
 
-    // 'Older' posts
-    // $obj = (object)[];
-    // $obj->term_id = 0;
-    // $obj->name = 'Older';
-    // $obj->slug = 'older';
-    // $options[] = $obj;
-
     return $options;
 
 }
@@ -464,7 +493,7 @@ function dfdl_get_insights_events_sort(): array {
  */
 function dfdl_insights_categories_ids():array {
     /**
-     * Content Hub = 843
+     * Content Hub = 842
      * News        = 667
      * Events      = 668
      * Legal & Tax = 47
@@ -481,6 +510,27 @@ function dfdl_insights_categories_ids():array {
 
     return $cat_ids;
 
+}
+
+/**
+ * Content Hub Categories
+ * 
+ * array of cats & subcats included under Content Hub
+ */
+function dfdl_insights_content_hub_ids():array {
+    /**
+     * Content Hub = 842
+     */
+    $term_ids = array(842);
+    $children = array();
+    foreach ( $term_ids as $id ) {
+        $kids = get_term_children($id, 'category'); 
+        foreach( $kids as $k ) {
+            $children[] = $k;
+        }
+    }
+    $cat_ids = array_merge($term_ids, $children);
+    return $cat_ids;
 }
 
 /** 
@@ -775,6 +825,20 @@ function dfdl_get_permalink( int $post_id ): string {
 }
 
 /**
+ * DFDL Content Hub Category.
+ * 
+ * dfdl_solution tax term for post
+ * 
+ */
+function get_content_hub_cat( int $post_id ) {
+    $solution = wp_get_post_terms($post_id, 'dfdl_solutions');
+    if ( isset($solution[0]) ) {
+        return $solution[0];
+    }
+    return dfdl_post_terms($post_id, array("return"=>"term"));
+}
+
+/**
  * DFDL Post Solution.
  * 
  * dfdl_solution tax term for post
@@ -825,65 +889,6 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
         return array();
     }
 
-    
-
-
-    //$ancestors = get_ancestors($terms[0]->term_id, 'category');
-    /**
-     * Return if only 1 term
-     */
-    /*
-    if ( 0 === count($ancestors) ) {
-        if ( isset($args['return']) && "term" === $args['return'] ) {
-            return $terms[0];
-        } else {
-            return $terms[0]->name;
-        }
-    }
-    */
-    /** else ... we have a problem! deal with it later  */
-    /*
-    if ( count($ancestors) > 0 ) {
-        foreach( $ancestors as $a ) {
-            var_dump($a);
-            $cat = get_term_by('id', $a, 'category');
-            $return[] = $cat->name;
-        }
-    } 
-    */
-    /*
-    $parent_cat = array();
-    $sub_cats = array();
-    foreach( $post_terms as $t ) {
-        if ( 0 === $t->parent ) {
-            $parent = get_term_by('slug', $t->parent, 'category');
-            if ( "content-hub" !== $parent->slug ) {
-                $parent_cat = $t;
-            }
-            
-        } else {
-            $sub_cats[] = $t->slug;
-        }
-    }
-    if ( ! empty($parent_cat) ) {
-        $parent_category = get_term_by('slug', $parent_cat->slug, 'category');
-
-        if ( isset($args['type']) && "category" === $args['type'])
-            return $parent_category;
-
-        //$return .= '<span class="category">' . $parent_category->name . '</span>';
-        if( count($sub_cats) > 0 ) {
-            foreach( $sub_cats as $s ) {
-                $sub_term = get_term_by('slug', $s, 'category');
-                if ( $parent_category->term_id === $sub_term->parent ) {
-                    //$return .= '<span class="separator">|</span><span class="subcategory">' . $sub_term->name . '</span>';
-                    return $sub_term->name;
-                }
-            }
-        }
-        
-    }
-    */
 }
 
 /**
@@ -892,22 +897,55 @@ function dfdl_post_terms( int $post_id, array $args=array() ) {
  * Return post cat name
  * @int post_id
  * 
- * make this obsolete -- use above dfdl_post_category
  */
-function dfdl_content_hub_category( int $post_id ): string {
+function dfdl_content_hub_category( int $post_id ) {
     $post_terms = wp_get_post_terms($post_id, 'category');
-    if ( count($post_terms ) === 1 ) {
-        return $post_terms[0]->name;
+    $content = array("articles", "podcasts", "publications", "web-classes");
+    if ( count($post_terms) === 1 ) {
+        if (isset($post_terms[0]->parent) && $post_terms[0]->parent !== 0 ) {
+            if ( in_array($post_terms[0]->slug, $content) ) {
+                return $post_terms[0];
+            }
+            return get_term_by("ID", $post_terms[0]->parent , 'category');
+        }
+        return $post_terms[0];
     } else {
-        $videos = array("videos", "videos-resources");
         foreach( $post_terms as $p ) {
-            // videos
-            if ( in_array($p->slug, $videos) ) {
-                return "Videos";
+            if ( in_array($p->slug, $content) ) {
+                return $p;
+            }
+            if ( $p->parent ) {
+                return get_term_by("ID", $p->parent , 'category');
             }
         }
     }
-    return "";
+}
+
+/**
+ * Event Category.
+ * 
+ * Return events category name
+ * @int post_id
+ * 
+ */
+function dfdl_event_category($post_id): string {
+
+    // events posts category id = 668
+    $event_terms = get_term_children(668);
+    $event_names = array();
+    foreach( $event_terms as $et ) {
+        $event_names[] = $et->name;
+    }
+
+    $post_terms = wp_get_post_terms($post_id, 'category', array( 'fields' => 'names'));
+    foreach( $post_terms as $pt ) {
+        if ( in_array($pt, $event_names) ) {
+            return $pt;
+        }
+    }
+
+    return "Events";
+
 }
 
 /**
@@ -929,11 +967,14 @@ function get_block_data($post, $block_name = 'core/heading', $field_name = "" ):
 	return $content;
 }
 
+/* 
+ * short bio removed everywhere.
+ * maybe not true. on contact page for now.
+*/
+
 function dfdl_one_liner( string $string ): string {
     return dfdl_short_bio($string);
 }
-
-// 。 <-- need to search for this
 function dfdl_short_bio( string $bio, int $length = 3 ): string {
     $posx = strposX($bio, ".", $length);
     if ( isset($posx) ) {
@@ -941,6 +982,8 @@ function dfdl_short_bio( string $bio, int $length = 3 ): string {
     }
     return "";
 }
+
+
 /**
  * Helper: Find nth occurrence of $needle
  * Used to insert author bio in tax & lelag updates

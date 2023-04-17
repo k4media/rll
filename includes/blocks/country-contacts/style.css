@@ -21,4 +21,7 @@
     margin-top: .15em;
     line-height: 1.5em;
 }
-
+.address a {
+    color: var(--color-white);
+    font-weight: 700;
+}

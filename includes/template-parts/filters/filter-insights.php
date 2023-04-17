@@ -1,16 +1,15 @@
-
 <div id="filters-stage" class="insights-filters-stage filters-stage silo">
     <div class="stage">
         <div class="insights-filters filters">
-            <div class="col col1 award-solutions">
+            <div class="col col1 insights-solutions">
                 <h4>Solutions</h4>
                 <?php do_action("dfdl_filter", "insights_solutions") ?>
             </div>
-            <div class="col col2 award-types">
+            <div class="col col2 insights-types">
                 <h4>News Types</h4>
                 <?php do_action("dfdl_filter", "insights_categories") ?>
             </div>
-            <div class="col col3 award-years">
+            <div class="col col3 insights-years">
                 <h4>Years</h4>
                 <?php do_action("dfdl_filter", "insights_years") ?>
             </div>
@@ -29,4 +28,6 @@ jQuery( document ).ready(function() {
         tags: true
     });
 });
+
+
 </script>

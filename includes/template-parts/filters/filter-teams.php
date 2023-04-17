@@ -1,5 +1,4 @@
-<li class="filter-button"><button id="teams-filters-toggle" class="button filter teams-filter">Filter</button></li>
-<div id="teams-filters-stage" class="teams-filters-stage filters-stage silo">
+<div id="filters-stage" class="teams-filters-stage filters-stage silo">
     <div class="stage">
         <div class="teams-filters filters">
             <div class="col col1 teams-solutions">
@@ -16,6 +15,7 @@
 <script>
 img = new Image();
 img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-filter-active.svg';
+img.src = '<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-search-active.svg';
 jQuery( document ).ready(function() {
     jQuery("#teams_solutions").select2({
         closeOnSelect : false,
@@ -29,7 +29,8 @@ jQuery( document ).ready(function() {
         allowHtml: true,
         allowClear: false,
         placeholder: "All",
-        tags: true
+        tags: true,
+        minimumResultsForSearch: -1
     });
 });
 </script>

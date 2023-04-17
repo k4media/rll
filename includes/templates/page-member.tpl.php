@@ -37,10 +37,10 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country', $
 if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_country_expertise', $meta) ) {
     foreach( $meta['_dfdl_user_country_expertise'] as $c ) {
         $country = get_term( $c, 'dfdl_countries', true);
-        $expertise[] = $country->name;
+        $expertise[] = '<li>' . $country->name. '</li>';
     }
 } else {
-    $expertise[] = "Regional Expert";
+    $expertise[] = "<li>Regional Expert</li>";
 }
 
 // solutions
@@ -48,12 +48,12 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
     foreach( $meta['_dfdl_user_solutions'] as $c ) {
         $solution = get_term( $c, 'dfdl_solutions', true);
         if (isset($solution)) {
-            $solutions[] = $solution->name;
+            $solutions[] = '<li>' . $solution->name . '</li>';
         }
         
     }
 } else {
-    $solutions[] = "General Law Expert";
+    $solutions[] = "<li>General Law Expert</li>";
 }
 ?>
 <nav class="subnav-stage silo">
@@ -76,9 +76,6 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                  <?php if( isset($languages) ) : ?>
                      <div class="languages"><?php echo $languages ?></div> 
                 <?php endif; ?>
-                <?php /* if( isset($meta['description']) && ! empty($meta['description']) ) : ?>
-                    <div class="bio"><?php //echo dfdl_short_bio($meta['description'][0]) ?></div>
-                <?php endif; */?>
                  <div class="contact-details">
                     <?php if ( isset($meta['tel']) && ! empty($meta['tel'][0]) ) : ?>
                         <div class="telephone"><?php echo $meta['tel'][0] ?></div>
@@ -100,8 +97,8 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
         <div class="text-feature member narrow">
             <div class="columns">
                 <div class="lcol">
-                    <h3>Solutions</h3>
-                    <div class="solutions"><?php echo implode(", ", $solutions) ?></div>
+                    <h3>Expertise</h3>
+                    <div class="solutions"><ul><?php echo implode($solutions) ?></ul></div>
                 </div>
                 <div class="rcol">
                     <?php if ( count($expertise) > 1 ) : ?>
@@ -109,7 +106,7 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                     <?php else: ?>
                         <h3>Country of expertise</h3>
                     <?php endif; ?>
-                    <div class="countries"><?php echo implode(", ", $expertise) ?></div>
+                    <div class="countries"><ul><?php echo implode($expertise) ?></ul></div>
                 </div>
             </div>
             <div class="bio">

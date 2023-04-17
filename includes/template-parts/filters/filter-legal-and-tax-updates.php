@@ -1,4 +1,3 @@
-<!--<li class="filter-button"><button id="filters-toggle" class="button filter legal-and-tax-updates-filter">Filter</button></li>-->
 <div id="filters-stage" class="legal-and-tax-updates-filters-stage filters-stage silo">
     <div class="stage">
         <div class="legal-and-tax-updates-filters filters">

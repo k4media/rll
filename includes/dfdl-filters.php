@@ -3,10 +3,10 @@
 /**
  * Author URL
  */
-add_filter( 'author_link', 'dfdl_author_link', 10, 2 );
-function dfdl_author_link( $link, $user_id ) {  
-    $first = strtolower(get_user_meta($user_id, 'first_name', true));
-    $last  = strtolower(get_user_meta($user_id, 'last_name', true));
+add_filter( 'author_link', 'dfdl_author_link', 99, 2 );
+function dfdl_author_link( $link, $user_id ) {
+    $first = trim(str_replace(" ", "-", strtolower(get_user_meta($user_id, 'first_name', true))));
+    $last  = trim(str_replace(" ", "-", strtolower(get_user_meta($user_id, 'last_name', true))));
     $link  = get_home_url('', 'teams/members/' . esc_attr($first) . '-' . esc_attr($last) . '/' . $user_id . '/');
     return $link;              
 }
@@ -40,6 +40,7 @@ function dfdl_sign_in_menu_item($items) {
     }
     return $items;
 }
+
 /**
  * Insights Archive Title
  */
@@ -78,10 +79,38 @@ function dfdl_story_lead( string $content )  {
                 $front = str_replace("<p", "<p class='lead' ", $front);
                 return $front . $back;
             }
-            
         }
     }
     
+    return $content;
+}
+
+/**
+ * Insert event registration link
+ */
+add_filter( 'the_content', 'dfdl_event_registration', 10, 2);
+function dfdl_event_registration( string $content )  {   
+
+    /**
+     * Only add link to Events 
+     */
+    if ( function_exists('get_field') && has_category(668) ) {
+        $link = get_field('link');
+        if ( empty($link) ) {
+            return $content;
+        }
+    } else {
+        return $content;
+    }
+    
+    $insert = strposX($content, "</p>", 1);
+    $front  = substr($content, 0, $insert+4);
+    $back   = substr($content, $insert);
+    
+    $content = $front;
+    $content .= '<div class="registration"><a class="button register" href="' . $link . '">R.S.V.P to Reserve Your Spot</a></div>';
+    $content .= $back;
+
     return $content;
 }
 
@@ -99,22 +128,35 @@ function dfdl_author_callout( string $content )  {
 
     /**
      * Only add author box to legal-and-tax posts
+     * of if Key Contact is set
      */
-    $terms = wp_get_post_terms($post->ID, 'category');
-    $slugs = array();
-    foreach( $terms as $t ) { $slugs[] = $t->slug; }
-    if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
-        return $content;
+
+    // check for key contact 
+    if ( function_exists('get_field')) {
+        $user = get_field('contact');
+        if ( ! empty($user) ) {
+            $user = get_user_by('ID', $user['ID']);
+        }
+        
     }
 
-    $user = get_user_by('ID', $post->post_author);
-
+    //  check if legal & tax article
+    if ( empty($user) ) {
+        $terms = wp_get_post_terms($post->ID, 'category');
+        $slugs = array();
+        foreach( $terms as $t ) { $slugs[] = $t->slug; }
+        if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
+            return $content;
+        }
+        $user = get_user_by('ID', $post->post_author);
+    }
+    
     $author = array();
     $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
     $author['name']     = esc_attr($user->data->display_name);
     $author['position'] = get_user_meta( $user->data->ID, 'position', true);
     $author['location'] = '';
-    $author['bio']      = dfdl_short_bio(get_the_author_meta('description'), $user->data->ID);
+    //$author['bio']      = dfdl_short_bio( get_the_author_meta('description'), 1 );
     $author['link']     = get_author_posts_url($user->data->ID);
     // some links have spaces, maybe from import?
     $author['link']     = str_replace(" ", "-", $author['link']);
@@ -147,19 +189,18 @@ function dfdl_author_callout( string $content )  {
  */
 add_filter( 'excerpt_length', 'dfdl_excerpt_filter');
 function dfdl_excerpt_filter( $length ) {
-	if ( is_admin() ) {
+	if ( is_admin() && ! defined('DOING_AJAX') ) {
 		return $length;
 	}
 	return 20;
 }
-add_filter( 'excerpt_more', 'wpshout_change_and_link_excerpt');
-function wpshout_change_and_link_excerpt( $more ) {
-	if ( is_admin() ) {
+add_filter( 'excerpt_more', 'dfdl_link_excerpt_jump');
+function dfdl_link_excerpt_jump( $more ) {
+	if ( is_admin() && ! defined('DOING_AJAX') ) {
 		return $more;
 	}
 	return ' &hellip;';
  }
-
 
 /**
  * Disable Gutenberg for dfdl_contact_forms CPT

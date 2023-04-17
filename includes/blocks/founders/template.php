@@ -19,8 +19,8 @@
           <div class="founders-stage">
           <?php 
                if ( isset($founders) ) {
-                    foreach( $founders as $user ) {
-                         set_query_var("user", $user);
+                    foreach( $founders as $founder ) {
+                         set_query_var("user", $founder);
                          get_template_part( 'includes/template-parts/content/founder' );
                     }
                }

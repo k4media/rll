@@ -1,6 +1,13 @@
 <div id="menu-side">
     <div class="stage silo">
-        <div id="menu-side-close"><img src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/icon-close.svg"></div>
+        <div id="menu-side-close">
+            <div id="hamburger-close">
+				<span></span>
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+        </div>
         <nav id="side-navigation">
             <?php
                 wp_nav_menu(

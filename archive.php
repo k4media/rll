@@ -6,7 +6,7 @@
 	 *
 	 */
 
-	global $wp;  
+	global $wp, $wp_query;  
 
 	get_header();
 
@@ -21,32 +21,33 @@
 		$term    = get_term_by("slug", $pieces[1], 'category');
 	}
 ?>
-<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive">
+<section id="insights" class="<?php echo esc_attr($term->slug) ?> archive silo">
 	<?php
 		/**
 		 * Country Navigation
 		 */
 		do_action('dfdl_solutions_country_nav');
-		/**
-         * Add hidden field for country
-         */
-        if ( isset($wp_query->query['dfdl_country']) ) {
-            echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
-        }
 	?>
+	<input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
+	<input type="hidden" id="insights_term" name="insights_term" value="<?php echo esc_attr($term->term_id) ?>">
+	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">
+    <?php if ( isset($wp_query->query['dfdl_country'])) : ?>
+        <input type="hidden" id="insights_country" name="insights_country" value="<?php echo $wp_query->query['dfdl_country'] ?>" />
+     <?php else: ?>
+        <input type="hidden" id="insights_country" name="insights_country" value="" />
+     <?php endif; ?>
 
 	<header class="title">
 		<?php the_archive_title( '<h2 class="page-title">', '</h2>' ); ?>
 	</header><!-- .page-header -->
-
-	<div id="results_stage" class="silo"><div>
+	<div id="results_stage" class=""><div>
 		<?php
 			/**
 			 * Swiper Slider
 			 */
             do_action("dfdl_insights_swiper", array('category' => $term->term_id) );
         ?>
-		<div class="posts">
+		<div id="insights-posts" class="posts">
 			<?php if ( have_posts() ) : ?>
 				<?php while ( have_posts() ) : ?>
 					<?php the_post(); ?>
@@ -59,8 +60,12 @@
 							if ( isset($startdate) ) {
 								$show_date = mysql2date( get_option( 'date_format' ), $startdate );
 							}
+							$dateline = get_post_meta( $post->ID, 'dateline', true);
+							if ( empty($dateline) ) {
+								$dateline = "Past Event" ;
+							}
 							set_query_var("sponsor", get_post_meta( $post->ID, 'sponsor', true));
-							set_query_var("dateline", get_post_meta( $post->ID, 'dateline', true));
+							set_query_var("dateline", $dateline);
 							set_query_var("timeline", get_post_meta( $post->ID, 'timeline', true));
 							set_query_var("show_date", $show_date);
 						}
@@ -77,14 +82,17 @@
 				<?php get_template_part( 'includes/template-parts/content/content-none' ); ?>
 			<?php endif; ?>
 		</div>
-
-		<!--<div class="pagination"><?php echo paginate_links(); ?>	</div>-->
+		<?php if ( $wp_query->found_posts > $wp_query->post_count ) : ?>
+			<div class="see-more">
+				<button id="insights-all-see-more" class="button green ghost see-more">See More<span></span></button>
+			</div>
+		<?php endif; ?>
 	</div>
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var myswiper = new Swiper('.swiper', {
-        loop: true,
+    var swiper = new Swiper('.swiper', {
+        loop: FontFaceSetLoadEvent,
         preloadImages: false,
         slidesPerView: 1.1,
         navigation: {

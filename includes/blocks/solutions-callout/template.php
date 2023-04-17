@@ -34,9 +34,8 @@
           $page_title = get_the_title($pid);
           $page_slug  = sanitize_title($page_title);
           $solution = '<div class="solution ' . $page_slug . ' ">';
-          $solution .= '<span>&#x2022;</span>';
           $solution .= '<a href="' . get_permalink($pid) . '">'  ;
-          $solution .= $page_title;
+          $solution .= '<span>&#x2022;</span>' . $page_title;
           $solution .= '</a>';
           $solution .= '</div>';
           $solutions[] = $solution;

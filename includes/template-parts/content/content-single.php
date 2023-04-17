@@ -6,22 +6,33 @@
  *
  */
 
+/**
+ * Handle Co-Authors
+ * https://github.com/Automattic/Co-Authors-Plus
+ * 
+ * Only show authors on Legal and Tax Updates (cat_id = 47)
+ */
+if (has_category(47)) {
+	$authors = get_the_author_meta('display_name');
+	if (function_exists('coauthors_posts_links')) {
+		// $authors = coauthors_posts_links(", ", null, null, null, false);
+		$authors = coauthors(", ", null, null, null, false);
+	}
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-	</header><!-- .entry-header -->
-
+	</header>
 	<div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author">Written by <?php echo get_the_author_meta('display_name'); ?></div>
+		<?php if (has_category(47)) : ?>
+			<div class="author">Written by <?php echo $authors; ?></div>
+		<?php endif; ?>
 	</div>
-	
 	<div class="entry-content">
 		<?php the_content(); ?>
-
 		<?php
 
 			if ( function_exists('get_field')) {
@@ -29,7 +40,6 @@
 				$direct_download = get_field('direct_download', $post->ID);
 				$direct_link = get_field('download_link', $post->ID);
 			}
-
 			if(! isset($form) || $direct_download) {
 				//$_SESSION['pre_url'] = $url; ?>
 					<div class="publication-download">
@@ -44,33 +54,18 @@
 								<?php endif; ?>
 							</div>
 						<?php endif; ?>
-							<div class="pub-download"><?php
-								$file_size = get_field('file_size');
-								$download_ids = get_field('download_ids');
-								$second_title = get_field('second_title');
-								//if(empty($second_title)){
-									//$second_title = $post->post_title;
-								//} ?>
-								<h3>
-									<?php if($direct_download): ?>
-										<a href="<?php echo $direct_link ?>">
-									<?php endif; ?>
-									<?php echo $second_title; ?>
-									<?php if($direct_download): ?>
-										</a>
-									<?php endif; ?>
-								</h3>
-								<p>
-									<span>Date: <?php the_time('d/m/Y'); ?></span><br/>
-									<?php if(!empty($file_size)): ?>
-									<span>Size: (<?php echo $file_size; ?>)</span>
-									<?php endif; ?>
-								</p>
-								<?php if(!empty($download_ids) && !$direct_download): ?>
-									<a class="download" href="?form=1">Next step</a>
-								<?php endif; ?>
+							<div class="pub-download">
+								<?php
+									$file_size = get_field('file_size');
+									$download_ids = get_field('download_ids');
+									$second_title = get_field('second_title');
+								?>
 								<?php if($direct_download): ?>
-									<a class="button green download" href="<?php echo $direct_link ?>">Download</a>
+									<h3><a href="<?php echo $direct_link ?>">
+								<?php endif; ?>
+								<?php echo $second_title; ?>
+								<?php if($direct_download): ?>
+									</a></h3>
 								<?php endif; ?>
 							</div>
 						</div>

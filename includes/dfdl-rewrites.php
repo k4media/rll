@@ -38,7 +38,7 @@ function dfdl_add_rewrite_rules() {
 
     /* /locations/[country]/teams/ rewrite */
 	add_rewrite_rule(
-        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/teams/?$',
+        '^locations/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/teams/?$',
         'index.php?pagename=countryteam&dfdl_country=$matches[1]',
         'top'
     );
@@ -52,21 +52,21 @@ function dfdl_add_rewrite_rules() {
 
     /* locations/[country]/awards/ */
 	add_rewrite_rule(
-        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/awards/?$',
+        '^locations/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/awards/?$',
         'index.php?pagename=country_awards&dfdl_country=$matches[1]',
         'top'
     );
 
     /* locations/[country]/contact-us/ */
 	add_rewrite_rule(
-        '^locations/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/contact-us/?$',
+        '^locations/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/contact-us/?$',
         'index.php?pagename=country_contact&dfdl_country=$matches[1]',
         'top'
     );
 
     /** content hub */
     add_rewrite_rule(
-        'insights/content-hub/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'insights/content-hub/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
         'index.php?pagename=dfdl_contenthub&dfdl_category=content-hub&dfdl_country=$matches[1]',
         'top'
     );
@@ -79,26 +79,26 @@ function dfdl_add_rewrite_rules() {
 
      /* insights/[country]/ */
 	add_rewrite_rule(
-        'insights/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'insights/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
         'index.php?pagename=dfdl_insights_country&dfdl_country=$matches[1]',
         'top'
     );
 
     /* insights/[category]/[country]/ */
 	add_rewrite_rule(
-        'insights/(.*)/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
+        'insights/(.*)/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/?$',
         'index.php?pagename=dfdl_insights&dfdl_category=$matches[1]&dfdl_country=$matches[2]',
         'top'
     );
 
     /** insights pagination */
     add_rewrite_rule(
-        'insights/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/page/?([0-9]{1,})/?$',
+        'insights/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/page/?([0-9]{1,})/?$',
         'index.php?pagename=dfdl_insights&dfdl_country=$matches[1]&page=$matches[2]',
         'top'
     );
     add_rewrite_rule(
-        'insights/(.*)/(bangladesh|cambodia|indonesia|laos-pdr|myanmar|philippines|singapore|thailand|vietnam)/page/?([0-9]{1,})/?$',
+        'insights/(.*)/(bangladesh|cambodia|indonesia|lao-pdr|myanmar|philippines|singapore|thailand|vietnam)/page/?([0-9]{1,})/?$',
         'index.php?pagename=dfdl_insights&dfdl_category=$matches[1]&dfdl_country=$matches[2]&page=$matches[3]',
         'top'
     );

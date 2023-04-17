@@ -196,6 +196,13 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
                     echo '<input type="checkbox" id="' . esc_attr($s->slug) . '" name="solutions[]" value="' . esc_attr($s->term_id) . '" class="checkbox" ' .  $checked . '>' . esc_attr($s->name) ;
                     echo '</label>';
                 }
+                $checked = "";
+                if ( isset($_POST['solutions']) && ! empty($_POST['solutions']) ) {
+                    if ( in_array( "other", $_POST['solutions'])) {
+                        $checked = "checked";
+                    }
+                }
+                echo '<label class="checkbox-control"><input type="checkbox" id="solutions_other" name="solutions[]" value="other" class="checkbox" ' .  $checked . '>Other</label>';
             ?>
         </div>
 

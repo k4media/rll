@@ -63,7 +63,7 @@
                     <!-- <div class="ranking"><?php echo $position ?></div>-->
                 <?php endif; ?>
                 <?php if ( isset($expertise) && count($expertise) > 0 ) : ?>
-                    <h4>Key Services</h4>
+                    <h4>Expertise</h4>
                     <ul>
                     <?php 
                         foreach( $expertise as $e ) {
@@ -73,7 +73,11 @@
                     </ul>
                 <?php endif; ?>
                 <?php if ( isset($country_expertise) && count($country_expertise) > 0 ) : ?>
-                    <h4>Key Countries</h4>
+                    <?php if ( count($country_expertise) === 1 ) : ?>
+                        <h4>Country of Expertise</h4>
+                    <?php else : ?>
+                        <h4>Countries of Expertise</h4>
+                    <?php endif; ?>
                     <ul>
                     <?php 
                         foreach( $country_expertise as $c ) {

@@ -5,7 +5,7 @@
 }
 .countup-box-stage.frontpage {
     background: var(--color-green) url('../../../assets/media/countup-art.svg') no-repeat 0 100%;
-    background-size: 20%;
+    background-size: 200px 200px;
 }
 .countup-boxes {
     display: flex;

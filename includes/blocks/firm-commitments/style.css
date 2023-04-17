@@ -11,23 +11,16 @@
 #firm-commitments .commitments-stage {
     margin:auto;
     width: 100%;
+    columns: 2;
+    column-fill: balance;
+    column-gap: 24px;
 }
 #firm-commitments .commitment {
     background-color: var(--color-white);
     box-shadow: 0 0 6px rgb(200 200 200 / 50%);
-    float: left;
-    height: auto;
     line-height: 1.4em;
-    margin: 0 0 20px 0;
+    margin: 0 0 24px 0;
     overflow: hidden;
     padding: 2.5em 1.5em 2.5em 1.5em;
-    width: 460px;
+    width: calc(100% - 3em);
 }
-
-/* clearfix */
-.commitments-stage:after {
-    content: '';
-    display: block;
-    clear: both;
-  }
-

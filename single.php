@@ -9,16 +9,6 @@
 get_header();
 
 /**
- * Back URL
- */
-//$sections = dfdl_get_section();
-//$category = end($sections);
-//$term = get_category_by_slug($category);
-//$url  = get_category_link($term);
-
-
-
-/**
  * post classes
  */
 global $post;
@@ -26,10 +16,10 @@ $terms = wp_get_post_terms($post->ID, 'category');
 
 $classes = array();
 $primary_categories = array(
-	"News",
 	"Events",
 	"Legal and Tax",
 	"Legal and Tax Updates",
+	"News"
 );
 
 foreach( $terms as $term ) {
@@ -39,24 +29,23 @@ foreach( $terms as $term ) {
 	 */
 	if ( in_array($term->name, $primary_categories ) ) {
 		$single_category = $term->name;
-		$template_slug = str_replace(" ", "-", strtolower($single_category));
 	}
 
 	/**
-	 * Set subcategory
+	 * If parent, set parent/child as category/subcategory
 	 */
 	if ($term->parent) {
+		$parent = get_term_by( "id", $term->parent, 'category');
+		$classes[] = esc_attr($parent->slug);
+		$single_category = $parent->name;
 		$single_subcategory = $term->name;
 	}
-
 	$classes[] = esc_attr($term->slug);
 
 }
 
 ?>
-
 <a id="scroll-to-top" class="single jump" href="#top"></a>
-
 <div id="insights" class="<?php echo implode(" ", $classes) ?> silo">
 	<nav class="country-subnav-stage">
 		<ul class="country-nav">
@@ -74,21 +63,51 @@ foreach( $terms as $term ) {
 			</div>
 		<?php endif; ?>
 		<?php
+
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
-
-				if ( isset($template_slug) ) {
-					get_template_part( 'includes/template-parts/content/content', $template_slug );
-				} else {
+				//if ( isset($template_slug) ) {
+					//get_template_part( 'includes/template-parts/content/content', $template_slug );
+				//} else {
 					get_template_part( 'includes/template-parts/content/content-single' );
-				}
-				
-
+				//}
 			endwhile; // End of the loop.
+
 		?>
-		<?php get_template_part( 'includes/template-parts/content/single-social-share' ); ?>
+		<?php if ( ! has_category(668) ) : ?>
+			<div class="article-meta">
+				<?php
+					get_template_part( 'includes/template-parts/content/single-social-share' );
+					if ( function_exists('get_field')) {
+						//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
+						$direct_download = get_field('direct_download', $post->ID);
+						$direct_link = get_field('download_link', $post->ID);
+					}
+					if ( isset($direct_link) && ! empty($direct_link) ) {
+						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+					}
+				?>
+			</div>
+		<?php endif; ?>
 	</div>
+
+	<?php if ( has_category(668) ) : ?>
+		<?php do_action("dfdl_event_speakers"); ?>
+		<div class="article-meta single narrow">
+				<?php
+					get_template_part( 'includes/template-parts/content/single-social-share' );
+					if ( function_exists('get_field')) {
+						//$email_subject = str_replace(array("\r", "\n"), '', get_field('email_subject', $post->ID));
+						$direct_download = get_field('direct_download', $post->ID);
+						$direct_link = get_field('download_link', $post->ID);
+					}
+					if ( isset($direct_link) && ! empty($direct_link) ) {
+						echo '<a class="button download" href="' . $direct_link . '">Download</a>';
+					}
+				?>
+			</div>
+	<?php endif; ?>
 	<?php do_action("dfdl_related_stories"); ?>
 </div>
 <?php get_footer();
