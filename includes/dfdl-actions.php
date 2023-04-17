@@ -39,14 +39,12 @@ function dfdl_event_speakers(): void  {
             $html = ob_get_clean();
             $html = str_replace("{speakers}", $speakers, $html);
 
+            echo '<div id="event-speakers-stage">';
+            echo  $html;
+            echo '</div>';
+
         }
-
-        echo '<div id="event-speakers-stage">';
-        echo  $html;
-        echo '</div>';
-
     }
-
 }
 
 /**
