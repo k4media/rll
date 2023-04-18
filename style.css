@@ -115,7 +115,8 @@ a:hover, .callout .stage a:hover,
 .responsive-table a:hover,
 #colophon nav a:hover, .legal-nav a:hover,
 .contact-stage .copy-stage .copy a:hover,
-#page-lead .lead a:hover {
+#page-lead .lead a:hover,
+.country-contacts .contact a {
 	color: var(--color-bright-green);
 }
 .posts .card h4 a:hover {

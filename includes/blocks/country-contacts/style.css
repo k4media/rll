@@ -25,3 +25,6 @@
     color: var(--color-white);
     font-weight: 700;
 }
+.country-contacts .contact a {
+    color: var(--color-white);
+}
