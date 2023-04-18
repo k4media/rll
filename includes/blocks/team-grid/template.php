@@ -32,7 +32,12 @@ if ( "teams" === $sections[0] ) {
 if ( "teams" === $sections[0] ) {
      $jump = get_home_url(null, '/teams/all/');
 } else {
-     $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+     if ( is_array($sections) && isset($sections[1]) ) {
+          $jump = get_home_url(null, $sections[0] . '/' . $sections[1] . '/teams/');
+     } else {
+          $jump="#";
+     }
+     
 }
 
 /*

@@ -14,15 +14,11 @@
  */
 add_filter( 'dfdl_event_speakers', 'dfdl_event_speakers');
 function dfdl_event_speakers(): void  {   
-
     global $post;
-
     if ( function_exists('get_field') && has_category(668) ) {
-
         $speakers = get_field('speakers', $post->ID);
-
         if ( null !== $speakers && false !== $speakers && count($speakers) > 0 ) {
-
+            $title = (count($speakers) > 1 ) ? "Key Speakers" : "Key Speaker" ;
             ob_start();
             foreach ( $speakers as $speaker ) {
                 $position = get_user_meta($speaker['speaker']['ID'], 'position', true);
@@ -33,16 +29,14 @@ function dfdl_event_speakers(): void  {
                 get_template_part( 'includes/template-parts/content/event', 'speaker' );
             }
             $speakers = ob_get_clean();
-            
             ob_start();
+                set_query_var("title", $title);
                 get_template_part( 'includes/template-parts/content/event', 'speakers' );
             $html = ob_get_clean();
             $html = str_replace("{speakers}", $speakers, $html);
-
             echo '<div id="event-speakers-stage">';
             echo  $html;
             echo '</div>';
-
         }
     }
 }
