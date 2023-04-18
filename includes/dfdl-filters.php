@@ -155,8 +155,13 @@ function dfdl_author_callout( string $content )  {
     }
     */
     
-    $user = get_user_by('ID', $post->post_author);
-
+    $cos = get_coauthors();
+    if ( is_array($cos) ) {
+        $user = $cos[0];
+    } else {
+        $user = get_user_by('ID', $post->post_author);
+    }
+   
     $author = array();
     $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
     $author['name']     = esc_attr($user->data->display_name);
