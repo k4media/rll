@@ -9,6 +9,12 @@
             <?php if( isset($author['location']) && "" !== $author['location']) : ?>
                 <div class="location"><?php echo esc_attr($author['location']) ?></div>
             <?php endif; ?>
+            <?php if( isset($languages) ) : ?>
+                <div class="languages"><?php echo $languages ?></div> 
+            <?php endif; ?>
+            <?php if( isset($author['bio']) ) : ?>
+                <div class="bio"><?php echo $author['bio'] ?></div> 
+            <?php endif; ?>
             <?php if( isset($author['link']) && "" !== $author['link'] ) : ?>
                 <div class="link"><a href="<?php echo esc_url($author['link']) ?>">View Profile</a></div>
             <?php endif; ?>

@@ -142,6 +142,7 @@ function dfdl_author_callout( string $content )  {
         }
     }
     */
+
     //  check if legal & tax article
     if ( empty($authors) ) {
         $terms = wp_get_post_terms($post->ID, 'category');
@@ -154,21 +155,23 @@ function dfdl_author_callout( string $content )  {
     }
     
     $cos = get_coauthors();
+
+    
+
     if ( is_array($cos) ) {
         $user = $cos[0];
     } else {
         return;
-        // $user = get_user_by('ID', $post->post_author);
     }
-   
+
     $author = array();
     $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
     $author['name']     = esc_attr($user->data->display_name);
     $author['position'] = get_user_meta( $user->data->ID, 'position', true);
     $author['location'] = '';
-    //$author['bio']      = dfdl_short_bio( get_the_author_meta('description'), 1 );
+    $author['bio']      = dfdl_short_bio( get_the_author_meta('description', $user->data->ID), 1 );
     $author['link']     = get_author_posts_url($user->data->ID);
-    // some links have spaces, maybe from import?
+    // some old user links may have spaces
     $author['link']     = str_replace(" ", "-", $author['link']);
 
     /** Locations */
@@ -182,7 +185,10 @@ function dfdl_author_callout( string $content )  {
         $author['location'] = implode(", ", $locations);
     }
     
+    $meta = get_user_meta($user->data->ID);
+
     set_query_var("author", $author);
+    set_query_var("meta", $meta);
     ob_start();
         get_template_part( 'includes/template-parts/content/author', 'callout' );
     $author_box_html = ob_get_clean();
