@@ -24,6 +24,7 @@ function dfdl_insights() {
         'posts_per_page' => 8,
         'orderby'        => 'date',
         'order'          => 'DESC',
+        'category__not_in' => array(839,673),
         'no_found_rows'          => true,
         'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
