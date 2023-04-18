@@ -126,22 +126,25 @@ function dfdl_author_callout( string $content )  {
         return $content;
     }
 
-    /**
-     * Only add author box to legal-and-tax posts
-     * of if Key Contact is set
-     */
-
-    // check for key contact 
-    if ( function_exists('get_field')) {
-        $user = get_field('contact');
-        if ( ! empty($user) ) {
-            $user = get_user_by('ID', $user['ID']);
+    // get coauthors
+    //$authors = get_the_author_meta('display_name');
+    //if (function_exists('coauthors_posts_links')) {
+        //$authors = coauthors(", ", null, null, null, false);
+    //}
+    /*
+    if ( ! isset($authors) ) {
+        // check for key contact 
+        if ( function_exists('get_field')) {
+            $user = get_field('contact');
+            if ( ! empty($user) ) {
+                $user = get_user_by('ID', $user['ID']);
+            }
         }
-        
     }
-
+    */
     //  check if legal & tax article
-    if ( empty($user) ) {
+    /*
+    if ( empty($authors) ) {
         $terms = wp_get_post_terms($post->ID, 'category');
         $slugs = array();
         foreach( $terms as $t ) { $slugs[] = $t->slug; }
@@ -150,7 +153,10 @@ function dfdl_author_callout( string $content )  {
         }
         $user = get_user_by('ID', $post->post_author);
     }
+    */
     
+    $user = get_user_by('ID', $post->post_author);
+
     $author = array();
     $author['avatar']   = get_avatar_url($user->data->ID, array('size' => 240));
     $author['name']     = esc_attr($user->data->display_name);
