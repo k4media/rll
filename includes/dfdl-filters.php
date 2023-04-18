@@ -143,7 +143,6 @@ function dfdl_author_callout( string $content )  {
     }
     */
     //  check if legal & tax article
-    /*
     if ( empty($authors) ) {
         $terms = wp_get_post_terms($post->ID, 'category');
         $slugs = array();
@@ -153,7 +152,6 @@ function dfdl_author_callout( string $content )  {
         }
         $user = get_user_by('ID', $post->post_author);
     }
-    */
     
     $cos = get_coauthors();
     if ( is_array($cos) ) {
