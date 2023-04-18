@@ -156,6 +156,8 @@ if ( ! empty( $user_query->get_results() ) ) :
                          } else {
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
+
+                         var_dump($sections);
                     ?>
                     <?php if ( is_page('teams') ) : ?>
                          <div class="see-more">
