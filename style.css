@@ -1331,17 +1331,18 @@ header.main {
 }
 .select2-results__option:before,
 input[type=checkbox] {
-	content: "";
-	display: inline-block;
-	position: relative;
-	height: 16px;
-	width: 16px;
+	background-color: #fff;
 	border: 2px solid  var(--color-gray);
 	border-radius: 4px;
-	background-color: #fff;
-	margin-right: 10px;
-	vertical-align: middle;
+	content: "";
+	display: inline-block;
+	height: 14px;
 	margin-left: 1.5em;
+	margin-right: 10px;
+	position: relative;
+	top: -2px;
+	vertical-align: middle;
+	width: 14px;
 }
 .select2-results__option[aria-selected=true]:before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 63% 60%;
@@ -1435,6 +1436,7 @@ input[type=checkbox] {
 }
 .contact-form .solutions label {
 	cursor: pointer;
+	text-indent: 28px;
 }
 .contact-form h4 {
 	font-family: var(--setting-body-font);
@@ -1461,9 +1463,9 @@ input {
 	font-family: var(--setting-body-font);
 }
 .checkbox-control {
-	display: grid;
 	grid-template-columns: 1em auto;
 	gap: 0.75em;
+	position: relative;
 }
 input[type=checkbox] {
 	-webkit-appearance: none;
@@ -1474,24 +1476,17 @@ input[type=checkbox] {
 	font: inherit;
 	color: currentColor;
 	cursor: pointer;
-	width: 21px;
-	height: 21px;
+	width: 18px;
+	height: 18px;
+	position: relative;
 	border: 2px solid var(--color-gray);
 	border-radius: 4px;
 	display: grid;
 	place-content: center;
   }
-  input[type=checkbox]::before {
-	/*background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 60% 60%;
-	content: "";
-	
-	width: 0.65em;
-	height: 0.65em;
-	-webkit-clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-			clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-	transform: scale(0);
-	box-shadow: inset 1em 1em var(--color-green);
-	background-color: CanvasText; */
+  .solutions input[type=checkbox] {
+	top: 0px;
+    position: absolute;
   }
 input[type=checkbox]:checked {
 	border: solid 2px var(--color-green);
@@ -1499,8 +1494,8 @@ input[type=checkbox]:checked {
 input[type=checkbox]:checked::before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 60% 60%;
     background-size: 90%;
-	width: 17px;
-	height: 17px;
+	width: 14px;
+	height: 14px;
 	content: "";
 }
 input[type=checkbox]:hover {

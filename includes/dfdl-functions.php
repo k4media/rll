@@ -566,6 +566,7 @@ function dfdl_get_solutions( string $return="" ): array {
     $args = array(
         'post_type'      => 'page',
         'posts_per_page' => -1,
+        'post_status'    => array('publish'),
         'post_parent'    => $solutions->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',
