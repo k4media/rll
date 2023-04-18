@@ -20,12 +20,23 @@ if ( isset($details['startdate']) ) {
 // remove empty values
 $details = array_filter($details);
 
+$authors = get_the_author_meta('display_name');
+if (function_exists('coauthors_posts_links')) {
+	$authors = coauthors(", ", null, null, null, false);
+}
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
+
+	<div class="entry-meta">
+		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
+		<div class="author">Insights by <?php echo $authors; ?></div>
+	</div>
+	
 	<?php if ( count($details) > 0 ) : ?>
 		<div class="event-details">
 			<?php if ( ! empty($details['sponsor']) ) : ?>

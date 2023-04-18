@@ -12,13 +12,12 @@
  * 
  * Only show authors on Legal and Tax Updates (cat_id = 47)
  */
-//if (has_category(47)) {
-	$authors = get_the_author_meta('display_name');
-	if (function_exists('coauthors_posts_links')) {
-		// $authors = coauthors_posts_links(", ", null, null, null, false);
-		$authors = coauthors(", ", null, null, null, false);
-	}
-//}
+
+$authors = get_the_author_meta('display_name');
+if (function_exists('coauthors_posts_links')) {
+	$authors = coauthors(", ", null, null, null, false);
+}
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -27,9 +26,7 @@
 	</header>
 	<div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<?php //if (has_category(47)) : ?>
-			<div class="author">Insights by <?php echo $authors; ?></div>
-		<?php //endif; ?>
+		<div class="author">Insights by <?php echo $authors; ?></div>
 	</div>
 	<div class="entry-content">
 		<?php the_content(); ?>

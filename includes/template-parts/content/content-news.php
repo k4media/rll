@@ -5,7 +5,10 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  */
-
+$authors = get_the_author_meta('display_name');
+if (function_exists('coauthors_posts_links')) {
+	$authors = coauthors(", ", null, null, null, false);
+}
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -16,7 +19,7 @@
 
     <div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author">Written by <?php echo get_the_author_meta('display_name'); ?></div>
+		<div class="author">Insights by <?php echo $authors; ?></div>
 	</div>
 
 	<div class="entry-content">
