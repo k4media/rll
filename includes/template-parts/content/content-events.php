@@ -31,11 +31,6 @@ if (function_exists('coauthors_posts_links')) {
 	<header class="entry-header">
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 	</header><!-- .entry-header -->
-
-	<div class="entry-meta">
-		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
-		<div class="author">Insights by <?php echo $authors; ?></div>
-	</div>
 	
 	<?php if ( count($details) > 0 ) : ?>
 		<div class="event-details">
