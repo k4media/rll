@@ -508,7 +508,7 @@ function dfdl_written_by() {
         $news = ob_get_clean();
         
         echo '<section id="dfdl-written-by" class="xtra callout silo">';
-        echo '<header><h2 class="title">Written by ' . esc_attr($author->display_name) . '</h2></header>';
+        echo '<header><h2 class="title">Insights by ' . esc_attr($author->display_name) . '</h2></header>';
         echo '<div class="posts">' . $news . '</div>';
         echo '</section>';
 
