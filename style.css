@@ -1183,6 +1183,7 @@ header.main {
 }
 .award-stage > div ul li {
 	list-style-type: none;
+	margin: 1em 0 1em 0;
 }
 .award-stage > div .award {
 	font-weight: 700;
@@ -1227,6 +1228,9 @@ header.main {
 	margin: auto;
 	text-align: center;
 	width: 18px;
+}
+#results_stage.award-stage {
+	margin-bottom: 80px;
 }
 #searchpage .not-found::before {
 	background: var(--color-white) url(assets/media/icon-exclamation.svg) no-repeat 50% 50%;

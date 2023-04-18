@@ -11,7 +11,8 @@ $K4->fragment_cache( $key, function() {
 ?>
 <div class="award-grid-stage">
      <div class="award-grid silo">
-          <?php do_action("dfdl_solutions_country_nav") ?>
+          <div id="beacon"></div>
+          <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
           <div id="results_stage" class="award-stage">
                <div>
                     <?php echo $awards; ?>
