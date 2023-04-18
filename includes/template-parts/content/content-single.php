@@ -15,7 +15,6 @@
 if (has_category(47)) {
 	$authors = get_the_author_meta('display_name');
 	if (function_exists('coauthors_posts_links')) {
-		// $authors = coauthors_posts_links(", ", null, null, null, false);
 		$authors = coauthors(", ", null, null, null, false);
 	}
 }
@@ -28,7 +27,7 @@ if (has_category(47)) {
 	<div class="entry-meta">
 		<div class="date"><?php echo wp_date( get_option( 'date_format' ), get_post_timestamp() ); ?></div>
 		<?php if (has_category(47)) : ?>
-			<div class="author">Insights by <?php echo $authors; ?></div>
+			<div class="author">Written by <?php echo $authors; ?></div>
 		<?php endif; ?>
 	</div>
 	<div class="entry-content">
