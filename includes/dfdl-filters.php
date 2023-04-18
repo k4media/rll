@@ -156,6 +156,9 @@ function dfdl_author_callout( string $content )  {
     */
     
     $cos = get_coauthors();
+
+    var_dump($cos);
+
     if ( is_array($cos) ) {
         $user = $cos[0];
     } else {
