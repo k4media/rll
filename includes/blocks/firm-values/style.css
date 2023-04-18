@@ -9,8 +9,8 @@
     grid-template-columns: repeat(3, 1fr);
 }
 #firm-values .col {
-    margin: auto;
-    max-width: 240px;
+    /* margin: auto; */
+    /* max-width: 240px; */
     text-align: center;
 }
 #firm-values h2 {
