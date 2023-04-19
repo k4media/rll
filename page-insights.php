@@ -29,12 +29,10 @@
         </ul>
     </nav>
     -->
-    <?php
-        /**
-         * Country Navigation
-         */
-        do_action('dfdl_solutions_country_nav');   
-    ?>
+    
+    <div id="beacon"></div>
+    <div id="subnav-stage"><?php do_action('dfdl_solutions_country_nav'); ?></div>
+
     <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
 	<input type="hidden" id="insights_term" name="insights_term" value="667">
 	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">

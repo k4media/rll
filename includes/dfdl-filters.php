@@ -118,50 +118,57 @@ function dfdl_event_registration( string $content )  {
  * Insert author box into content
  */
 add_filter( 'the_content', 'dfdl_author_callout', 100, 2);
-function dfdl_author_callout( string $content )  {       
+function dfdl_author_callout( string $content ): string  {       
     
     global $post;
 
-    if ( ! isset($post) ) {
+    /**
+     * Bail if no post
+     */
+    if ( ! isset($post) ) 
         return $content;
-    }
+    
+    /**
+     * Bail if not in Insights
+     */
+    $sections = dfdl_get_section();
+    if ( ! is_array($sections) && $sections[0] !== "insights")
+        return $content;
 
-    // get coauthors
-    //$authors = get_the_author_meta('display_name');
-    //if (function_exists('coauthors_posts_links')) {
-        //$authors = coauthors(", ", null, null, null, false);
-    //}
-    /*
-    if ( ! isset($authors) ) {
-        // check for key contact 
+    /**
+     * If Tax & Legal Updates (cat id 47)
+     * Use author for callout box
+     */
+    if ( has_category(47) ) {
+        
+        /**
+         * Check Coauthors Plus plugin
+         */
+        if ( function_exists('get_coauthors') ) {
+            $cos = get_coauthors();
+            if ( is_array($cos) ) {
+                $user = $cos[0];
+            } else {
+                $user = get_user_by('ID', $post->post_author);
+            }
+        } else {
+            $user = get_user_by('ID', $post->post_author);
+        }
+        
+    } else {
+
+        /**
+         * Use Key Contact if set
+         */
         if ( function_exists('get_field')) {
             $user = get_field('contact');
-            if ( ! empty($user) ) {
+            if ( null !== $user && false !== $user ) {
                 $user = get_user_by('ID', $user['ID']);
-            }
+            } else {
+                return $content;
+            }    
         }
-    }
-    */
 
-    //  check if legal & tax article
-    if ( empty($authors) ) {
-        $terms = wp_get_post_terms($post->ID, 'category');
-        $slugs = array();
-        foreach( $terms as $t ) { $slugs[] = $t->slug; }
-        if ( ! in_array( 'legal-and-tax-updates', $slugs) ) {
-            return $content;
-        }
-        $user = get_user_by('ID', $post->post_author);
-    }
-    
-    $cos = get_coauthors();
-
-    
-
-    if ( is_array($cos) ) {
-        $user = $cos[0];
-    } else {
-        return;
     }
 
     $author = array();
@@ -171,6 +178,7 @@ function dfdl_author_callout( string $content )  {
     $author['location'] = '';
     $author['bio']      = dfdl_short_bio( get_the_author_meta('description', $user->data->ID), 1 );
     $author['link']     = get_author_posts_url($user->data->ID);
+    
     // some old user links may have spaces
     $author['link']     = str_replace(" ", "-", $author['link']);
 

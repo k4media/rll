@@ -88,21 +88,10 @@ get_header();
 
 ?>
 <section id="insights" class="<?php echo esc_attr($category->slug) ?> archive-insights callout silo">
-	<?php
+	
+    <div id="beacon"></div>
+    <div id="subnav-stage"><?php do_action('dfdl_solutions_country_nav'); ?>
 
-		/**
-		 * Country Navigation
-		 */
-		do_action('dfdl_solutions_country_nav');
-
-        /**
-         * Add hidden field for country
-         */
-        //if ( isset($wp_query->query['dfdl_country']) ) {
-            //echo '<input type="hidden" name="insights_country" id="insights_country" value="' . $wp_query->query['dfdl_country'] . '">';
-        //}
-
-	?>
     <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
     <input type="hidden" id="insights_term" name="insights_term" value="<?php echo esc_attr($category->term_id) ?>">
 	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">

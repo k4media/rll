@@ -1226,8 +1226,10 @@ header.main {
 	display: block;
 	height: 18px;
 	margin: auto;
+	position: relative;
 	text-align: center;
-	width: 18px;
+	top: -16px;
+	width: 18px;  
 }
 #results_stage.award-stage {
 	margin-bottom: 80px;
