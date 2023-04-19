@@ -61,10 +61,10 @@
                               <?php endif; ?>
                               <?php 
                               if ( isset($user->user_email) && ! empty($user->user_email) && $user->user_email !== "") : ?>
-                                   <div class="email"><a href="mailto:<?php echo $user->user_email ?>">Email</a></div>
+                                   <a href="mailto:<?php echo $user->user_email ?>"><div class="email">Email</div></a>
                               <?php endif; ?>
                               <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) && $meta['linkedin'][0] !== "") : ?>
-                                   <div class="linkedin"><a href="<?php echo $meta['linkedin'][0] ?>">LinkedIn</a></div>
+                                   <a href="<?php echo $meta['linkedin'][0] ?>"><div class="linkedin">LinkedIn</div></a>
                               <?php endif; ?>
                          </div>
                     </div>

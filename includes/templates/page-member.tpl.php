@@ -84,10 +84,10 @@ if ( isset($meta) && is_array($meta) && array_key_exists('_dfdl_user_solutions',
                         <div class="mobile"><?php echo $meta['mob'][0] ?></div>
                     <?php endif; */ ?>
                     <?php if ( isset($user->user_email) && ! empty($user->user_email) ) : ?>
-                        <div class="email"><a href="mailto:<?php echo $user->user_email ?>">email</a></div>
+                        <a href="mailto:<?php echo $user->user_email ?>"><div class="email">email</div></a>
                     <?php endif; ?>
                     <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) ) : ?>
-                        <div class="linkedin"><a href="<?php echo $meta['linkedin'][0] ?>">linkedIn</a></div>
+                        <a href="<?php echo $meta['linkedin'][0] ?>"><div class="linkedin">linkedIn</div></a>
                     <?php endif; ?>
                  </div>
              </div>
