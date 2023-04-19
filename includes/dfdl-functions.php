@@ -18,13 +18,16 @@ function dfdl_insights() {
 
     $debug = false;
 
+    /**
+     * Exclude Webinars and Podcasts categories: 717, 839
+     */
     $query_args = array(
         'post_type'      => array('post'),
         'post_status'    => array("publish"),
         'posts_per_page' => 8,
         'orderby'        => 'date',
         'order'          => 'DESC',
-        'category__not_in' => array(839,673),
+        'cat'            => array(-717,-839),
         'no_found_rows'          => true,
         'ignore_sticky_posts'    => false,
         'update_post_meta_cache' => false, 
