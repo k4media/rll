@@ -2,6 +2,9 @@
 	background-color: var(--color-green-10);
 	padding: 120px 0 120px 0 ;
 }
+.text-feature-stage + .team-lead-stage {
+	margin-top: 120px
+}
 .team-lead-stage.desks {
 	background-color: transparent;
 }

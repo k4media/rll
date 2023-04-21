@@ -45,6 +45,9 @@
 .team-lead-stage + .team-grid-stage > .team-grid {
     padding-top: 0;
 }
+.team-member-stage + .team-grid-stage {
+    margin-top: 0;
+}
 #team-grid-swiper {
     position: relative;
 }

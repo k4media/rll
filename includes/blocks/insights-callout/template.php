@@ -9,13 +9,17 @@
  */
 global $wp, $wp_query;  
 
-$title    = "Insights";
-$subtitle = "";
-
 // get fields
 if ( function_exists('get_fields') ) {
      $title = get_field('title');
      $subtitle = get_field('subtitle');
+}
+
+if ( empty($title) ) {
+     $title = "Insights";
+}
+if ( empty($subtitle) ) {
+     $subtitle = "Intelligence from the DFDL legal team";
 }
 
 $insights = dfdl_insights();

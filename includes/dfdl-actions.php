@@ -2102,7 +2102,7 @@ function dfdl_solutions_country_nav() {
     $locations = get_page_by_path("locations");
     $args = array(
         'post_type'      => 'page',
-        'posts_per_page' => 12,
+        'posts_per_page' => 16,
         'post_parent'    => $locations->ID,
         'order'          => 'ASC',
         'orderby'        => 'menu_order',

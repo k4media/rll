@@ -8,9 +8,9 @@
  * 
  */
 
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
+// error_reporting(E_ALL);
 
 /**
  * DFDL FRAGMENT CACHE
@@ -33,7 +33,7 @@ define('DFDL_SECTONS', array( "awards", "desks", "insights", "locations", "solut
  * Array of valid country slugs, used mostly for validation.
  * Ex: locations, solutions, teams, insights, etc.
  */
-define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "laos-pdr", "myanmar", "philippines", "singapore", "thailand", "vietnam") );
+define('DFDL_COUNTRIES', array( "bangladesh", "cambodia", "indonesia", "lao-pdr", "myanmar", "philippines", "singapore", "thailand", "vietnam") );
 
 /**
  * DFDL DESKS

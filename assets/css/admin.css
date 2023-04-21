@@ -113,6 +113,9 @@ html :where(.wp-block) {
 .callout .button {
     margin-top: 1em;
 }
+.insights-callout-stage {
+    padding: 0; 
+}
 .solutions-callout-stage {
     background-color: #F4F7F7;
     padding: 1em;
@@ -219,6 +222,12 @@ html :where(.wp-block) {
 }
 .team-grid .button {
 	margin-top: 0;
+}
+#team-grid-swiper .swiper-wrapper {
+    column-gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 24px;
 }
 .country-team-lead-stage,
 .team-member-stage,

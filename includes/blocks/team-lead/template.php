@@ -1,27 +1,25 @@
 <?php
 
-     $title    = "";
-     $subtitle = "";
      $user     = "";
 
      // get fields
      if ( function_exists('get_fields') ) {
           $title    = get_field('title');
-
-          $subtitle = get_field('subtitle');
+          //$subtitle = get_field('subtitle');
           $user     = ( get_field('user') ) ? get_field('user') : 1 ;
-
-          $user = get_user_by("id", $user);
-          $meta = get_user_meta($user->ID);
-
-          $locations   = array();
+          $user     = get_user_by("id", $user);
+          $meta     = get_user_meta($user->ID);
+          $locations = array();
           if ( isset($meta['_dfdl_user_country']) ) {
                foreach( $meta['_dfdl_user_country'] as $c ) {
                     $country = get_term( $c, 'dfdl_countries', true);
                     $locations[] = $country->name;
                }
           }
-          
+     }
+
+     if ( empty($title) ) {
+          $title = "Key Contact";
      }
 
      $section = dfdl_get_section();
@@ -50,7 +48,10 @@
 <div class="team-lead-stage callout <?php echo $style; ?>">
      <div class="team-lead narrow">
           <h2><?php echo $title ?></h2>
-          <h3><?php echo $subtitle ?></h3>
+          <?php if ( isset($subtitle) ) : ?>
+               <h3><?php echo $subtitle ?></h3>
+          <?php endif; ?>
+          
           <div class="lead-team-member dfdl-single-member">
                <div class="avatar"><a href="<?php echo get_author_posts_url($user->ID) ?>"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></a></div>
                <div class="details-stage">
