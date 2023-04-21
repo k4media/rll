@@ -449,8 +449,12 @@ function dfdl_get_insights_years() {
  */
 function dfdl_get_insights_categories_sort(): array {
     $return  = array();
-    $term_id = array( 842, 667);
+    // $term_id = array( 842, 667);
+    $term_id = array( 47, 667, 668, 717, 744, 839);
     foreach ( $term_id as $id ) {
+         $t = get_term_by("ID", $id, 'category') ;
+         $return[] = $t;
+        /*
         $terms = get_terms(array(
             'taxonomy'   => 'category',
             'child_of'    => $id,
@@ -461,6 +465,7 @@ function dfdl_get_insights_categories_sort(): array {
         foreach ( $terms as $t ) {
             $return[] = $t;
         }
+        */
     }
     usort($return,function($first,$second){
         return strtolower($first->name) <=> strtolower($second->name);

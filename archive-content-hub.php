@@ -18,6 +18,10 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 <?php endif; ?>
 
 <section id="insights" class="archive content-hub silo">
+
+    <div id="beacon"></div>
+    <div id="subnav-stage"><?php do_action('dfdl_solutions_country_nav'); ?></div>
+
     <input type="hidden" name="content_hub" id="content_hub" value="content_hub">
 	<input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
 	<input type="hidden" id="insights_term" name="insights_term" value="">
@@ -27,12 +31,6 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
      <?php else: ?>
         <input type="hidden" id="insights_country" name="insights_country" value="" />
      <?php endif; ?>
-    <?php
-        /**
-         * Country Navigation
-         */
-        do_action('dfdl_solutions_country_nav');
-    ?>
     <div id="results_stage"><div>
         <?php do_action("dfdl_insights_swiper", array('category' => 'content-hub') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'articles') ); ?>
