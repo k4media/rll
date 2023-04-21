@@ -1129,13 +1129,17 @@ header.main {
 	margin: 60px 0 60px;
 }
 .award-grid.narrow .award-stage > div, .award-stage > div {
+
+	break-inside: avoid-region;
+
+
 	color: var(--color-gray);
 	column-fill: balance;
 	column-gap: 4em;
 	columns: 2;
 	font-size: var(--font-size-small);
 	line-height: 1.4em;
-	margin: 60px 0 0 0;
+	margin: 32px 0 0 0;
 	opacity: 1;
 	transition: all .5s;
 }
@@ -1150,7 +1154,10 @@ header.main {
 	text-align: center;
 }
 #results_stage.award-stage > div > div {
-	display: inline-block;
+	display: block;
+	-webkit-column-break-inside: avoid;
+          page-break-inside: avoid;
+               break-inside: avoid;
 }
 .award-stage > div h4 {
 	color: var(--color-green);
