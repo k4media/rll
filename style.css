@@ -1173,9 +1173,11 @@ header.main {
 	list-style-type: none;
 	margin: 1em 0 1em 0;
 }
+/*
 .award-stage > div .award {
 	font-weight: 700;
 }
+*/
 .award-stage > div .entry span {
 	display: block;
 }
@@ -1396,6 +1398,15 @@ input[type=checkbox] {
 .select2-search__field:placeholder-shown {
     width: 100% !important; 
 }
+.select2-selection--multiple:before {
+    content: "";
+    position: absolute;
+    right: 7px;
+    top: 42%;
+    border-top: 5px solid #888;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
 .contact-stage .copy-stage {
 	display: flex;
 	margin: 64px 0 0 0;
@@ -1542,10 +1553,7 @@ input[type=checkbox]:hover {
 	position: relative;
 }
 article + #insights {
-	margin: 60px auto 60px auto;
-}
-article + #insights {
-	margin: 60px auto 60px auto;
+	margin: 60px auto 100px auto;
 }
 #insights > header h2 {
 	font-size: var(--font-size-huge);
@@ -1557,7 +1565,7 @@ article + #insights {
 	position: relative;
 }
 #insights .callout {
-	padding: 60px 0 60px 0;
+	padding: 32px 0 32px 0;
 }
 #dfdl-written-by header {
 	margin-top: 60px;
@@ -1899,8 +1907,12 @@ header + #results_stage .swiper {
 	max-width: 600px;
 }
 #insights .callout .swiper-card h2 {
-	line-height: 1.4em;
 	text-align: center;
+}
+#insights .callout .swiper-card h2 a {
+	font-size: var(--font-size-larger);
+	line-height: 1.4em;
+	
 }
 .swiper-card .excerpt {
 	color: var(--color-gray);

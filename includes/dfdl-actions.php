@@ -678,8 +678,10 @@ function dfdl_content_hub_callout() {
      * Podcast          839
      * Publication      744
      * Web Class        717
+     * 
+     * Exclude Webinars and Podcasts categories: 717, 839
      */
-    $query_args['cat'] = array(670,839,744,717);
+    $query_args['cat'] = array(670,744);
 
     /**
      * Set query country
