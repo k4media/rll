@@ -1,7 +1,7 @@
 <?php
 
      // get solutions pages
-     $page = get_page_by_path( 'solutions' );
+     $page = get_page_by_path( 'locations' );
      $args = array(
           'post_type'      => 'page',
           'posts_per_page' => 16,

@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-locations-grid",
+    "title": "Locations Grid",
+    "description": "Grid of all locations",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "grid-view",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
