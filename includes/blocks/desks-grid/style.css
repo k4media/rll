@@ -1,0 +1,40 @@
+.solutions-grid-stage .solutions.stage {
+    display: grid;
+    column-gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    margin: 120px 0 120px 0;
+    row-gap: 24px;
+    /* text-align: left; */
+}
+.solutions-grid-stage .solution {
+    box-shadow: 0 0 6px rgb(200 200 200 / 50%);
+    display: block;
+    height: 175px;
+}
+.solutions-grid-stage .solution .thumbnail {
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    height: 90px;
+    position: relative;
+}
+.solutions-grid-stage .solution .overlay {
+    bottom: 0;
+    left:0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+.solutions-grid-stage .solution h3 {
+    color: var(--color-black);
+    font-size: var(--font-size-large);
+    margin: 1em;
+}
+.solutions-grid-stage a:hover h3 {
+    color: var(--color-white);
+}
+.solutions-grid-stage a:hover .solution {
+    background-color: var(--color-green);
+}
