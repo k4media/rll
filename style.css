@@ -2124,6 +2124,9 @@ a:hover .event-speaker .position {
 #contact-dfdl .dirty.invalid textarea {
 	border: solid 1px var(--color-error-dark);
 }
+#contact-dfdl + #colophon {
+	margin-top: 120px;
+}
 .page-wrapper, #event-speakers-stage {
 	margin: 120px auto 120px auto;
 }
