@@ -131,6 +131,10 @@ document.addEventListener('DOMContentLoaded', function () {
     img.src = ajax_object.stylesheet_uri + "/icon-search-active.svg";
     img.src = ajax_object.stylesheet_uri + "/icon-back-arrow-active.svg";
     img.src = ajax_object.stylesheet_uri + "/icon-linkedin-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/icon-facebook-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/icon-twitter-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/icon-print-active.svg";
+    img.src = ajax_object.stylesheet_uri + "/icon-link-active.svg";
     img.src = ajax_object.stylesheet_uri + "/icon-email-active.svg";
 
 }, false);

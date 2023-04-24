@@ -1549,11 +1549,14 @@ input[type=checkbox]:hover {
 	display: block;
 }
 #insights {
-	margin: 120px auto 60px auto;
+	margin: 120px auto 120px auto;
 	position: relative;
 }
 article + #insights {
-	margin: 60px auto 100px auto;
+	margin: 60px auto 120px auto;
+}
+#results_stage > div > .callout:last-child {
+	padding-bottom: 0;
 }
 #insights > header h2 {
 	font-size: var(--font-size-huge);
@@ -1814,7 +1817,7 @@ header + #results_stage .swiper {
 .single .entry-content > p:first-child,
 .single .entry-content .lead {
 	font-size: var(--font-size-big);
-	line-height: 1.5em;
+	line-height: 1.35em;
 }
 .single h1, h2, h3, h4, h5 {
 	line-height: 1.4em;
@@ -1876,8 +1879,14 @@ header + #results_stage .swiper {
 	padding: 0 .5em 0 .5em;
 	width: 16px;
 }
+.linked-in:hover .share-icon {
+	fill: var(--color-bright-green);
+}
 .related-posts {
 	margin: 4em 0 4em 0;
+}
+#insights .callout.related-posts {
+	padding-bottom: 0;
 }
 .search-teams .team-stage > div {
 	margin-top: 0;
