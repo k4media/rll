@@ -744,6 +744,9 @@ header.main {
 	padding: 1.5em;
 	position: relative;
 }
+.single .dfdl-single-member .details-stage {
+	margin-left: 0;
+}
 .dfdl-single-member.author .name {
 	margin-bottom: 1em;
 }
