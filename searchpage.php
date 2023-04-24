@@ -23,9 +23,7 @@
         </header><!-- .page-header -->
         <?php do_action("dfdl_search") ?>
     <?php else : ?>
-        <div class="empty-search" style="text-align: center">
-            What can we help you find?
-        </div>
+        <div class="empty-search" style="text-align: center"></div>
     <?php endif; ?>
 </div>
 <?php get_footer(); ?>

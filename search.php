@@ -8,12 +8,8 @@
 
 get_header();
 ?>
-
-SEARCH.PHP
 <div id="searchpage" class="search page page-wrapper silo">
-
 	<div class="searchpage-searchform"><?php get_search_form(); ?></div>
-
 <?php
 if ( have_posts() ) {
 	?>

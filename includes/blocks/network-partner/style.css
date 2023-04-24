@@ -32,6 +32,7 @@
 }
 .network-partner .details .name {
     margin-bottom: 1em;
+    margin-top: 0;
 }
 .network-partner .details .name a {
     font-size: var(--font-size-large);
