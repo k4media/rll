@@ -13,11 +13,10 @@
         <header class="page-header alignwide">
             <h1 class="page-title">
                 <?php
-                printf(
-                    /* translators: %s: Search term. */
+                /* printf(
                     esc_html__( 'Results for "%s"', 'dfdl' ),
                     '<span class="page-description search-term">' . esc_html( $_REQUEST['q'] ) . '</span>'
-                );
+                ); */
                 ?>
             </h1>
         </header><!-- .page-header -->

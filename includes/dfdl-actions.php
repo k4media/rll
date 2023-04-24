@@ -67,11 +67,19 @@ function dfdl_search() {
 
     } else {
 
+        //dfdl_search_generic();
+
         echo '<p class="no-insights not-found">Nothing found.</p>';
 
     }
 
 }
+
+
+/**
+ * Generic Search
+ */
+function dfdl_search_generic() {}
 
 /**
  * Search Insights

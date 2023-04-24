@@ -1229,12 +1229,18 @@ header.main {
 #results_stage.award-stage {
 	margin-bottom: 80px;
 }
+#searchpage .not-found {
+	margin: 120px auto 0 auto;
+	position: relative;
+	text-align: center;
+	width: 8em;
+ }
 #searchpage .not-found::before {
 	background: var(--color-white) url(assets/media/icon-exclamation.svg) no-repeat 50% 50%;
 	content: " ";
-	display: inline-block;
+	display: block;
 	height: 18px;
-	margin-right: 8px;
+	margin: 0 auto 16px auto;
 	vertical-align: middle;
 	width: 18px;
 }
@@ -2126,6 +2132,9 @@ a:hover .event-speaker .position {
 .searchpage-searchform {
 	margin: auto;
 	width: 42em;
+}
+#searchpage {
+	width: 100%;
 }
 #searchpage > header {
 	margin-top: 60px;
