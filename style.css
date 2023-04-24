@@ -2512,9 +2512,6 @@ input[type='search']:focus-visible + input {
 	.awards-callout-stage {
 		padding: 60px 0 60px 0;
 	}
-
-
-
 	.text-feature-stage {
 		padding-top: 60px;
 	}
@@ -2538,9 +2535,6 @@ input[type='search']:focus-visible + input {
 	.award-grid.narrow .award-stage > div, .award-stage > div {
 		margin-top: 2em;
 	}
-
-
-
 	.contact-stage + .team-lead-stage {
 		padding-top: 120px;
 	}
