@@ -28,9 +28,14 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 	<input type="hidden" id="insights_all_page" name="insights_all_page" value="1">
     <?php if ( isset($wp_query->query['dfdl_country'])) : ?>
         <input type="hidden" id="insights_country" name="insights_country" value="<?php echo $wp_query->query['dfdl_country'] ?>" />
-     <?php else: ?>
+    <?php else: ?>
         <input type="hidden" id="insights_country" name="insights_country" value="" />
-     <?php endif; ?>
+    <?php endif; ?>
+
+    <header class="title">
+        <h2 class="page-title"><?php _e("Content Hub", 'dfdl') ?></h2>
+    </header><!-- .page-header -->
+
     <div id="results_stage"><div>
         <?php do_action("dfdl_insights_swiper", array('category' => 'content-hub') ); ?>
         <?php do_action("dfdl_insights_callout", array('category' => 'articles') ); ?>
