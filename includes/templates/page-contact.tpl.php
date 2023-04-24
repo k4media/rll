@@ -103,12 +103,12 @@ if ( $contacts[$country]["contact"] ) {
                                     </div>
                                     <div class="email">
                                         <?php if ( isset($meta['email']) && ! empty($meta['email'][0]) ) : ?>
-                                            <a href="mailto:<?php echo $meta['email'][0] ?>">Email</a>
+                                            <a href="mailto:<?php echo $meta['email'][0] ?>"><div class="email">Email</div></a>
                                         <?php endif; ?>
                                     </div>
                                     <div class="linkedin">
                                         <?php if ( isset($meta['linkedin']) && ! empty($meta['linkedin'][0]) ) : ?>
-                                            <a href="<?php echo $meta['linkedin'][0] ?>">LinkedIn</a>
+                                            <a href="<?php echo $meta['linkedin'][0] ?>"><div class="linkedin">LinkedIn</div></a>
                                         <?php endif; ?>
                                     </div>
                                 </div>
