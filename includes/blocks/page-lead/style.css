@@ -26,3 +26,13 @@
 #page-lead .narrow p:last-child {
     margin-bottom: 0;
 }
+#page-lead .testimonials {
+    margin-top: 4em;
+}
+#page-lead .testimonials p {
+    border-left: solid 1px var(--color-white);
+    font-style: italic;
+    margin-bottom: 2em;
+    padding-left: 2em;
+
+}

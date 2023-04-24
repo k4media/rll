@@ -13,6 +13,14 @@ $K4->fragment_cache( $key, function() {
      if ( function_exists('get_field') ) {
           $lead   = get_field('lead');
           $text   = get_field('text');
+          $testimonials = get_field('testimonials');
+
+          $quotes = array();
+          if ( null !== $testimonials && is_array($testimonials) ) {
+               foreach ( $testimonials as $t ) {
+                    $quotes[] = "<p>" . esc_attr($t['testimonial']) . "</p>";
+               }
+          }
      }
 ?>
 <div id="page-lead" class="<?php echo $post->post_name ?>">
@@ -22,6 +30,9 @@ $K4->fragment_cache( $key, function() {
           <?php endif; ?>
           <?php if( isset($text) ) : ?>
                <?php echo apply_filters( 'the_content', wp_kses_post( $text ) ); ?>
+          <?php endif; ?>
+          <?php if ( null !== $testimonials && is_array($testimonials) ) : ?>
+               <div class="testimonials"><?php echo implode($quotes) ?></div>
           <?php endif; ?>
      </div>
 </div>
