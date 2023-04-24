@@ -1,12 +1,8 @@
 <?php
-
      $name  = "";
      $desc  = "";
      $image = "";
      $url   = "";
-     
-
-     // get fields
      if ( function_exists('get_fields') ) {
           $name  = get_field('name');
           $desc  = get_field('description');

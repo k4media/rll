@@ -6,6 +6,9 @@
     padding: 24px;
     width: 100%;
 }
+#page-hero + .network-partner {
+    margin-top: 120px;
+}
 .network-partner .brand {
     flex: 1 1 15%;
     margin-right: 16px;
