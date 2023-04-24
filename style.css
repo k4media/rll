@@ -1515,6 +1515,9 @@ input[type=checkbox]:checked::before {
 input[type=checkbox]:hover {
 	border: solid 2px var(--color-bright-green);
 }
+.contact-stage .contact-form {
+	margin-bottom: 120px;
+}
 .contact-form .details,
 .contact-form .solutions {
 	column-gap: 1.5em;
@@ -1524,9 +1527,6 @@ input[type=checkbox]:hover {
 }
 .contact-form .solutions {
 	padding-top: 1.5em;
-}
-#contact-dfdl .team-lead-stage {
-	margin-top: 120px;
 }
 #contact-dfdl .team-lead-stage .dfdl-single-member {
 	margin: 0;
@@ -2124,9 +2124,7 @@ a:hover .event-speaker .position {
 #contact-dfdl .dirty.invalid textarea {
 	border: solid 1px var(--color-error-dark);
 }
-#contact-dfdl + #colophon {
-	margin-top: 120px;
-}
+
 .page-wrapper, #event-speakers-stage {
 	margin: 120px auto 120px auto;
 }
