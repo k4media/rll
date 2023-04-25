@@ -73,7 +73,7 @@ $K4->fragment_cache( $key, function() {
                               <li>Solution 3</li>
                          </ul>
                     </div>
-                    <object id="dfdl-map" type="image/svg+xml" data="<?php echo get_stylesheet_directory_uri() ?>/assets/media/dfdl-map.svg"></object>
+                    <object id="dfdl-map" type="image/svg+xml" data="<?php echo get_stylesheet_directory_uri() ?>/assets/media/dfdl-map-2023.svg"></object>
                </div>
                <div id="country-list" class="countries">
                     <ul><?php echo implode($output) ?></ul>
@@ -161,11 +161,18 @@ window.addEventListener("load", function() {
           var pin_half  = pin.width/2;
           var pin_center = pin.x + pin_half;
           var box_half  = popup_coords.width/2;
+          if ( el.getAttribute('data-country') == "bangladesh" ) {
+               popup.style.left = pin_center - 20 + "px";
+          } else if ( el.getAttribute('data-country') == "myanmar") {
+               popup.style.left = pin_center - 80 + "px";
+          } else {
+               popup.style.left = pin_center - box_half + "px";
+          }
           popup.style.top =  pin.top + pin.height + 4 + "px";
-          popup.style.left = pin_center - box_half + "px";
           popup.innerHTML = popups[el.id];
           popup.classList.add("show"); 
      }
 });
+
 </script>
 <?php }); // close K4 fragment ?>
