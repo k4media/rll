@@ -41,7 +41,8 @@
 }
 .founders-stage a {
     align-items: stretch;
-    display: flex;
+    max-width: 320px;
+    /* display: flex; */
 }
 .founders-stage > article {
     background-color: var(--color-white);
