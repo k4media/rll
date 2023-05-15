@@ -33,7 +33,12 @@
     stroke-linecap:round;
     transition: all .25s;
 }
-.other.disabled {
+.other1 {
+    fill:#004C45;
+    stroke-linecap:round;
+    transition: all .25s;
+}
+.other.disabled, .other1.disabled {
     fill:#ececec;
     transition: all .25s;
 }
@@ -52,7 +57,7 @@
     fill: #77DD77;
     
 }
-.map-pin {
+.map-pin, .hilite .map-pin path {
     cursor: pointer;
     fill: #77DD77;
 }

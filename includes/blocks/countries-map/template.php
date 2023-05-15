@@ -92,7 +92,7 @@ window.addEventListener("load", function() {
           'cambodia': ['phnom_penh'],
           'indonesia': ['jakarta'],
           'lao_pdr': ['vientiane'],
-          'myanmar': [ 'naypyidaw', 'yangoon' ],
+          'myanmar': [ 'yangoon', 'naypyidaw' ],
           'philippines': ['manilla'],
           'singapore' : ['singapore_city'],
           'thailand' : [ 'bangkok' ],
@@ -105,14 +105,15 @@ window.addEventListener("load", function() {
           el && el.addEventListener("mouseover", function() {
                var country = this.getAttribute('data-country');
                var country_pin = svg.getElementById( dfdl_offices[country][0] );
-               do_map( country_pin );
+               // do_map( country_pin );
+               hilite(country);
           });
      });
      document.querySelectorAll('#country-list ul a').forEach(function(el) {
           el && el.addEventListener("mouseleave", function() {
                var country = this.getAttribute('data-country');
                var country_pin = svg.getElementById( dfdl_offices[country][0] );
-               reset_map( country_pin );
+               reset_map(country_pin);
           });
      });  
      svg.querySelectorAll('.map-pin').forEach(function(el) {
@@ -125,12 +126,34 @@ window.addEventListener("load", function() {
                reset_map(this);
           });
      });
+     function hilite(country) {
+          svg.querySelectorAll('.country').forEach(function(el) {
+               el.classList.add("disabled");
+          });
+          svg.querySelectorAll('.other').forEach(function(el) {
+               el.classList.add("disabled");
+          });
+          svg.querySelectorAll('.other1').forEach(function(el) {
+               el.classList.add("disabled");
+          });
+          svg.querySelectorAll('.map-pin').forEach(function(el) {
+               el.classList.add("disabled");
+          });
+          svg.getElementById(country).classList.remove("disabled");
+          svg.querySelectorAll( "#" + country + " .map-pin ").forEach(function(el) {
+               el.classList.remove("disabled");
+          });
+     };
+
 
      function do_map(el) {
           svg.querySelectorAll('.country').forEach(function(el) {
                el.classList.add("disabled");
           });
           svg.querySelectorAll('.other').forEach(function(el) {
+               el.classList.add("disabled");
+          });
+          svg.querySelectorAll('.other1').forEach(function(el) {
                el.classList.add("disabled");
           });
           svg.querySelectorAll('.map-pin').forEach(function(el) {
