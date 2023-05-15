@@ -10,7 +10,12 @@
  */
 $sections = dfdl_get_section();
 $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
+$send_to  = array("info@dfdl.com");
 
+
+/**
+ * Process form submission
+ */
 if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit'])) ) {
 
     /** validate form nonce */
@@ -28,13 +33,16 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     $elements['company']   = $_POST['company'];
     $elements['position']  = $_POST['position'];
     $elements['message']   = $_POST['message'];
-    
+    $elements['country']   = $_POST['form_country'];
+
     /** Sanitize input */
     $clean_elements = array_map('sanitize_text_field', $elements);
 
     /** Sanitize Solutions */
-    $clean_solutions = array_map('intval', $_POST['solutions']);
-
+    if ( isset($_POST['solutions']) ) {
+        $clean_solutions = array_map('intval', $_POST['solutions']);
+    }
+    
     /** Validate input */
     $error_messages = array();
     foreach( $clean_elements as $key => $value ) {
@@ -58,9 +66,10 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             'post_status' => 'private'
         );
 
+        /** insert new custom post */
         $new_post = wp_insert_post($args);
 
-        update_field( "field_64035670e27ac", sanitize_text_field($_POST['form_country']), $new_post );
+        update_field( "field_64035670e27ac", $clean_elements['country'], $new_post );
         update_field( "field_6403527fff8d6", $clean_elements['firstname'] , $new_post );
         update_field( "field_64035293ff8d7", $clean_elements['lastname'] , $new_post );
         update_field( "field_6403529bff8d8", $clean_elements['email'] , $new_post );
@@ -75,6 +84,41 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         /** insert flag */
         $submitted = true;
 
+        /** Compose email */
+        $message = '<h4>Someone submitted a Contact Form for ' . ucwords($clean_elements['country']) . '</h4>';
+        $message .= '<p>Name: ' . $clean_elements['firstname'] . '  ' . $clean_elements['lastname'] . '<br>';
+        $message .= 'Email: ' . $clean_elements['email'] . '<br>';
+        $message .= 'Phone: ' . $clean_elements['telephone'] . '<br>';
+        $message .= 'Company: ' . $clean_elements['company'] . '<br>';
+        $message .= 'Position: ' . $clean_elements['position'] . '</p>';
+        if ( isset($clean_solutions) && count($clean_solutions) > 0 ) {
+            $message .= "<h4>SOLUTIONS</h4><ul>";
+            foreach( $clean_solutions as $solution ) {
+                $tax = get_term_by('ID', $solution, 'dfdl_solutions');
+                $message .= "<li>" . esc_attr($tax->name) . "</li>";
+            }
+            $message .= "</ul>";
+        }
+        $message .= "<h4>MESSAGE</h4>";
+        $message .= '<p>' . nl2br($elements['message']) . '</p>';
+
+        $admin_link = get_admin_url('', 'post.php?post=' . $new_post . '&action=edit');
+        $message .= '<p>You can view this form online at <a href="' . $admin_link . '">' . $admin_link . '</a></p>';
+
+        /** Send Email */
+        $headers = array('Content-Type: text/html; charset=UTF-8');
+
+        /** Lookup country contact email */
+        if ( function_exists('get_field') ) {
+            $contacts = get_field("countries", "options");
+            if ( $contacts[$clean_elements['country']]["contact"] ) {
+                $user = get_user_by("id", $contacts[$country]["contact"]);
+                $send_to[] = $user->data->user_email;
+            }
+        }
+
+        $send_mail = wp_mail($send_to, 'DFDL ' . esc_attr(ucwords($clean_elements['country'])) . ' | Contact Form Submission', $message, $headers);
+
     }
 
 }
@@ -85,7 +129,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     
     <div class="contact-form submitted">
         <h2>Thanks!</h2>
-        <p>We have received your submission and will follow up shortly.</p>
+        <p>We have received your submission. We will follow up shortly.</p>
     </div>
 
 <?php else : ?>

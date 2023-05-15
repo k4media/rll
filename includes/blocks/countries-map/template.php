@@ -92,7 +92,7 @@ window.addEventListener("load", function() {
           'cambodia': ['phnom_penh'],
           'indonesia': ['jakarta'],
           'lao_pdr': ['vientiane'],
-          'myanmar': [ 'yangoon' ],
+          'myanmar': [ 'naypyidaw', 'yangoon' ],
           'philippines': ['manilla'],
           'singapore' : ['singapore_city'],
           'thailand' : [ 'bangkok' ],

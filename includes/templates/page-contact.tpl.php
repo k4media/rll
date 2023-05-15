@@ -15,7 +15,7 @@ $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBA
  */
 $key = "contact-" . $country;
 $K4 = new K4;
-$K4->fragment_cache( $key, function() { 
+$K4->fragment_cache( $key, function() {
 
 $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;
 $contacts = get_field("countries", "options");

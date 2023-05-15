@@ -7,11 +7,12 @@
     row-gap: 24px;
     /* text-align: left; */
 }
+/*
 .solutions-grid-stage .solution {
     box-shadow: 0 0 6px rgb(200 200 200 / 50%);
     display: block;
     height: 175px;
-}
+} */
 .solutions-grid-stage .solution .thumbnail {
     background-repeat: no-repeat;
     background-size: cover;
@@ -27,14 +28,15 @@
     top: 0;
     width: 100%;
 }
+/*
 .solutions-grid-stage .solution h3 {
     color: var(--color-black);
     font-size: var(--font-size-large);
     margin: 1em;
-}
+} 
 .solutions-grid-stage a:hover h3 {
     color: var(--color-white);
-}
+} */
 .solutions-grid-stage a:hover .solution {
     background-color: var(--color-green);
 }

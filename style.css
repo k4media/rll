@@ -1033,6 +1033,23 @@ header.main {
 	margin-left: 0;
 	margin-right: 0;
 }
+
+
+.solutions-grid-stage .solution h3 {
+    color: var(--color-black);
+    font-size: var(--font-size-large);
+    margin: 1em;
+}
+.solutions-grid-stage a:hover h3 {
+    color: var(--color-white);
+}
+.solutions-grid-stage .solution {
+    box-shadow: 0 0 6px rgb(200 200 200 / 50%);
+    display: block;
+    /* height: 175px; */
+	height: 100%;
+}
+
 #dfdl-member-xtra {
 	background-color: var(--color-green-70);
 	padding-bottom: 120px;
@@ -1421,7 +1438,7 @@ input[type=checkbox] {
 }
 .contact-stage .copy-stage {
 	display: flex;
-	margin: 64px 0 0 0;
+	margin: 64px 0 120px 0;
 }
 .contact-stage .copy-stage .copy {
 	flex: 1 1 30%;
@@ -1515,9 +1532,6 @@ input[type=checkbox]:checked::before {
 }
 input[type=checkbox]:hover {
 	border: solid 2px var(--color-bright-green);
-}
-.contact-stage .contact-form {
-	margin-bottom: 120px;
 }
 .contact-form .details,
 .contact-form .solutions {
@@ -2510,12 +2524,24 @@ input[type='search']:focus-visible + input {
 	#page-lead .lead {
 		font-size: var(--font-size-larger);
 	}
+	.contact-callout-stage.solutions {
+		padding-top: 0;
+	}
 	#page-lead,
 	#event-speakers-stage,
 	#event-speakers-stage,
 	.team-lead-stage,
 	.awards-callout-stage {
 		padding: 60px 0 60px 0;
+	}
+	/* 	.team-grid, */
+	.team-member-stage,
+	.insights-callout-stage,
+	#our-founders {
+		padding: 60px 0 60px 0;
+	}
+	.team-lead-stage, .team-member-stage {
+		padding-bottom: 54px;
 	}
 	.text-feature-stage {
 		padding-top: 60px;
@@ -2524,13 +2550,8 @@ input[type='search']:focus-visible + input {
 	.text-feature-stage + .awards-callout-stage {
 		padding-top: 40px;
 	}
-	.team-member-stage,
-	.insights-callout-stage,
-	.team-grid,
-	#our-founders {
-		padding: 60px 0 60px 0;
-	}
-	.text-feature-stage + .team-lead-stage {
+	/*.text-feature-stage + .team-lead-stage,*/
+	.awards-callout-stage + .team-lead-stage {
 		margin-top: 60px;
 	}
 	.text-feature-stage + .awards-callout-stage #results_stage {
@@ -2546,12 +2567,9 @@ input[type='search']:focus-visible + input {
 	.contact-stage + .team-lead-stage {
 		padding-top: 120px;
 	}
-	/*
-	.text-feature-stage + .awards-callout-stage #results_stage {
-		padding-bottom: 0;
-	}
-	*/
-	.dfdl-single-member, .team-grid-stage.teams {
+	.dfdl-single-member,
+	.team-grid-stage.teams,
+	.solutions-grid-stage .solutions.stage {
 		margin: 60px 0 60px 0;
 	}
 	.team-lead-stage.callout .lead-team-member {
@@ -2605,9 +2623,11 @@ input[type='search']:focus-visible + input {
 		grid-template-columns: repeat(2, 1fr);
 		width: 100%;
 	}
+	/*
 	.solutions-grid .solution {
 		height: 200px;
-	}
+		overflow: hidden;
+	} */
 	.solution .thumbnail {
 		height: 115px;
 	}
@@ -2617,9 +2637,6 @@ input[type='search']:focus-visible + input {
 	.solutions-callout-stage .solutions.stage {
 		width: 100%;
 	}
-	.contact-callout-stage.solutions {
-		padding: 60px 0 0 0;
-	}
 	.contact-callout {
 		display: block;
 		flex: none;
@@ -2627,8 +2644,15 @@ input[type='search']:focus-visible + input {
 	.contact-callout img {
 		min-width: 100%;
 	}
+	.contact-stage .copy-stage {
+		margin: 0;
+		padding: 0;
+	}
 	.copy-stage {
-		padding-bottom: 32px;
+		padding: 60px 0 60px 0;
+	}
+	.contact-callout h2 {
+		margin-top: 0;
 	}
 	#results_stage .posts, .callout .posts {
 		grid-template-columns: repeat(2, 1fr);
@@ -2805,7 +2829,7 @@ input[type='search']:focus-visible + input {
 	}
 	.solutions-callout h2 {
 		font-size: var(--font-size-larger);
-		margin-bottom: 32px;
+		margin: 16px 0 16px 0;
 		text-align: left;
 	}
 	.solutions-callout h3 {
@@ -2984,6 +3008,9 @@ input[type='search']:focus-visible + input {
 	.solutions-grid-stage .solution .thumbnail {
 		height: 115px;
 	}
+	.award-entry:last-child {
+		margin: 0;
+	}
 	.award-grid.narrow .award-stage > div,
 	.award-stage > div {
 		columns: 1;
@@ -3041,7 +3068,7 @@ input[type='search']:focus-visible + input {
 		max-width: 100%;
 	}
 	.our-desks-callout-stage {
-		padding: 60px 16px 60px 16px;
+		padding: 56px 16px 60px 16px;
 	}
 	.network-partner {
 		flex-direction: column;
@@ -3070,6 +3097,9 @@ input[type='search']:focus-visible + input {
 	.executives-stage {
 		align-items: center;
 		grid-template-columns: repeat(3, 1fr);
+	}
+	.insights-callout-stage {
+		padding-top: 54px;
 	}
 }
 

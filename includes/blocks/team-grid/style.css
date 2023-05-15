@@ -6,7 +6,7 @@
 }
 #subnav-stage {
     background-color: var(--color-white);
-    padding: 16px 0 16px 0;
+    padding: 0 0 16px 0;
     position: relative;
     z-index: 11;
 }
