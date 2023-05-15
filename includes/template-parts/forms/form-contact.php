@@ -10,7 +10,7 @@
  */
 $sections = dfdl_get_section();
 $country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
-$send_to  = array("info@dfdl.com");
+$send_to  = array('info@dfdl.com', 'robert@k4media.com');
 
 
 /**
