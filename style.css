@@ -676,10 +676,21 @@ header.main {
 .country-subnav-stage .back a,
 #insights .subnav-stage .back a {
 	background: transparent url(assets/media/icon-back-arrow.svg) center left no-repeat;
+	background-size: 8px;
 	color: var(--color-black);
 	font-weight: 900;
 	padding-left: 1.5em;
 }
+.subnav-stage.silo a:hover,
+.country-subnav-stage .back a:hover,
+#insights .subnav-stage .back a:hover,
+#page-hero .subnav-stage .back a:hover {
+    background: transparent url(assets/media/icon-back-arrow-active.svg) center left no-repeat;
+    background-size: 8px;
+    color: var(--color-bright-green);
+}
+
+
 .country-subnav-stage .filter-button {
 	margin-right: 0;
 }

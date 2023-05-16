@@ -40,19 +40,11 @@
     top: 120px;
     z-index: 1;
 }
-#page-hero .subnav-stage .back a {
+#page-hero.solutions .subnav-stage .back a {
     background: transparent url(../../../assets/media/icon-back-arrow-white.svg) center left no-repeat;
     background-size: 8px;
-	color: var(--color-white);
-    display: none;
+    color: var(--color-white);
+    display: block;
     font-weight: 900;
 	padding-left: 1.5em;
-}
-#page-hero .subnav-stage .back a:hover {
-    background: transparent url(../../../assets/media/icon-back-arrow-active.svg) center left no-repeat;
-    background-size: 8px;
-    color: var(--color-bright-green);
-}
-#page-hero.solutions .subnav-stage .back a {
-    display: block;
 }
