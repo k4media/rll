@@ -24,6 +24,7 @@
 .text-feature-stage.single-column .columns {
     display: block;
     justify-content: center;
+    overflow: hidden;
 }
 .text-feature-stage.double-column .columns {
     display: flex;
