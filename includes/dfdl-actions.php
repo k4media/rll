@@ -17,7 +17,7 @@ function dfdl_event_speakers(): void  {
     global $post;
     if ( function_exists('get_field') && has_category(668) ) {
         $speakers = get_field('speakers', $post->ID);
-        if ( null !== $speakers && false !== $speakers && count($speakers) > 0 ) {
+        if ( null !== $speakers && false !== $speakers && count($speakers) > 0 && false !== $speakers[0]['speaker'] ) {
             $title = (count($speakers) > 1 ) ? "Key Speakers" : "Key Speaker" ;
             ob_start();
             foreach ( $speakers as $speaker ) {
