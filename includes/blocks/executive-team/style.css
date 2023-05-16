@@ -1,0 +1,27 @@
+#dfdl-ret {
+    text-align: center;
+}
+.executives-stage {
+    column-gap: 24px;
+    display: inline-grid;
+    grid-template-columns: repeat(4, 1fr) ;
+    margin-top: 32px;
+    row-gap: 24px;
+    width: 980px;
+}
+.executives-stage .executive {
+    text-align: center;
+}
+.executives-stage img {
+    border-radius: 100%;
+    margin: auto;
+}
+.executives-stage .details-stage {
+    justify-content: center;
+    margin-top: 12px;
+}
+.executives-stage a {
+    color: var(--color-black);
+    font-size: var(--font-size-large);
+
+}

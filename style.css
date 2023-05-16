@@ -440,8 +440,9 @@ header.main {
 }
 .callout h2 {
     font-size: var(--font-size-huge);
-	text-align: center;
+	line-height: 1em;
 	margin: auto;
+	text-align: center;
 }
 .callout h3 {
     color: var(--color-gray);

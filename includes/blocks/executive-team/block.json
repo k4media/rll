@@ -1,0 +1,14 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "name": "acf/dfdl-executive-team",
+    "title": "Executive Team",
+    "description": "Row(s) of selected Team Members",
+    "style": [ "file:./style.css" ],
+    "category": "dfdl-block",
+    "icon": "groups",
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "template.php"
+    },
+    "align": "full"
+}
