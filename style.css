@@ -672,6 +672,7 @@ header.main {
 	left: 0;
 	position: absolute;
 }
+.subnav-stage .back a,
 .subnav-stage.silo a,
 .country-subnav-stage .back a,
 #insights .subnav-stage .back a {
@@ -689,7 +690,13 @@ header.main {
     background-size: 8px;
     color: var(--color-bright-green);
 }
-
+.subnav-stage .back a {
+	background: transparent url(assets/media/icon-back-arrow-white.svg) center left no-repeat;
+	background-size: 8px;
+	color: var(--color-white);
+	font-weight: 900;
+	padding-left: 1.5em;
+}
 
 .country-subnav-stage .filter-button {
 	margin-right: 0;
