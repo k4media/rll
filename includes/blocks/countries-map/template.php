@@ -95,7 +95,7 @@ window.addEventListener("load", function() {
           'myanmar': [ 'yangoon', 'naypyidaw' ],
           'philippines': ['manilla'],
           'singapore' : ['singapore_city'],
-          'thailand' : [ 'bangkok' ],
+          'thailand' : [ 'bangkok', 'koh_samui' ],
           'vietnam' : [ 'hanoi', 'ho_chi_minh' ],
      }
      var svgObject = document.getElementById('dfdl-map').contentDocument;
