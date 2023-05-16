@@ -2500,7 +2500,6 @@ input[type='search']:focus-visible + input {
 	}
 	
 }
-
 @media screen and ( max-width: 900px ) { 
 	#site-navigation-left,
 	#side-navigation,
@@ -2618,9 +2617,7 @@ input[type='search']:focus-visible + input {
 		padding-left: 0;
     	padding-right: 0;
 	}
-
 }
-
 @media screen and ( max-width: 800px ) {
 	.narrow {
 		padding-left: 60px;
@@ -2774,6 +2771,9 @@ input[type='search']:focus-visible + input {
 	}
 	.country-contacts {
 		flex-direction: column;
+	}
+	.executives-stage a {
+		width: 33%;
 	}
 }
 
@@ -3112,6 +3112,9 @@ input[type='search']:focus-visible + input {
 	}
 	.insights-callout-stage {
 		padding-top: 54px;
+	}
+	.executives-stage a {
+		width: 50%;
 	}
 }
 

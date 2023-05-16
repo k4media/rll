@@ -7,7 +7,7 @@
         $locations[] = $country->name;
     }
 ?>
-<a href="<?php echo esc_url(get_author_posts_url($user['user']['ID'])) ?>" class="swiper-slide">
+<a href="<?php echo esc_url(get_author_posts_url($user['user']['ID'])) ?>" >
     <article <?php post_class("executive-loop executive"); ?>>
         <div class="executive">
             <img src="<?php echo esc_url(get_avatar_url($user['user']['ID'], array('size' => 120))) ?>">
