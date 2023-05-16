@@ -40,6 +40,19 @@
     top: 120px;
     z-index: 1;
 }
+#page-hero .subnav-stage {
+    display: none;
+}
+#page-hero.solutions .subnav-stage {
+    display: block;
+}
+#page-hero.solutions .subnav-stage .back a {
+	background: transparent url(../../../assets/media/icon-back-arrow-white.svg) center left no-repeat;
+	background-size: 8px;
+	color: var(--color-white);
+	font-weight: 900;
+	padding-left: 1.5em;
+}
 #page-hero.solutions .subnav-stage .back a {
     background: transparent url(../../../assets/media/icon-back-arrow-white.svg) center left no-repeat;
     background-size: 8px;
