@@ -2550,9 +2550,10 @@ input[type='search']:focus-visible + input {
 	#our-founders {
 		padding: 60px 0 60px 0;
 	}
+	/*
 	.team-lead-stage, .team-member-stage {
-		padding-bottom: 54px;
-	}
+		padding-bottom: 50px;
+	} */
 	.text-feature-stage {
 		padding-top: 60px;
 	}
@@ -2560,7 +2561,7 @@ input[type='search']:focus-visible + input {
 	.text-feature-stage + .awards-callout-stage {
 		padding-top: 40px;
 	}
-	/*.text-feature-stage + .team-lead-stage,*/
+	.text-feature-stage + .team-lead-stage,
 	.awards-callout-stage + .team-lead-stage {
 		margin-top: 60px;
 	}
@@ -2667,13 +2668,14 @@ input[type='search']:focus-visible + input {
 	}
 	.newsletter-signup {
 		justify-content: left;
-		margin-top: 16px;
+		margin-top: 32px;
 	}
 	.footer-nav {
 		height: 32px;
 	}
 	.footer-nav > nav,
-	.country-subnav-stage .back {
+	.country-subnav-stage .back,
+	#page-hero.solutions .subnav-stage {
 		display: none;
 	}
 	.site-info {
@@ -2778,7 +2780,7 @@ input[type='search']:focus-visible + input {
 
 @media screen and ( max-width: 700px ) {
 	.callout h3 {
-		margin-bottom: 32px;
+		margin-bottom: 16px;
 		color: var(--color-dark-gray);
 	}
 	.callout .stage a {
@@ -2926,6 +2928,9 @@ input[type='search']:focus-visible + input {
 		display: inline-block;
 		margin-right: 24px;
 		max-width: 320px;
+	}
+	#team-grid-swiper .see-more {
+		display: none;
 	}
 	#firm-commitments .commitments-stage {
 		columns: 1;
@@ -3108,9 +3113,6 @@ input[type='search']:focus-visible + input {
 	.executives-stage {
 		align-items: center;
 		grid-template-columns: repeat(3, 1fr);
-	}
-	.insights-callout-stage {
-		padding-top: 54px;
 	}
 	.executives-stage a {
 		width: 50%;

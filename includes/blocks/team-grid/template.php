@@ -127,7 +127,6 @@ $post_class = ( $user_query->get_results() > 0  ) ? "" : "no-results" ;
 if ( ! empty( $user_query->get_results() ) ) :
 
 ?>
-
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
      <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
      <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
@@ -136,6 +135,10 @@ if ( ! empty( $user_query->get_results() ) ) :
      <?php else: ?>
           <input type="hidden" id="dfdl_teams_country" name="dfdl_teams_country" value="" />
      <?php endif; ?>
+     <?php if ( isset($sections[0]) && "solutions" === $sections[0] ) : ?>
+          <input type="hidden" id="teams_solutions" name="teams_solutions" value="<?php echo $sections[1] ?>" />
+     <?php endif; ?>
+
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
           <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>

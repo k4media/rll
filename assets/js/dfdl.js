@@ -239,16 +239,30 @@ function filterInsights() {
 }
 
 function teamsSeeMore() {
+
     var wrap = document.getElementById("swiper-wrapper");
     var teams_more = document.getElementById("teams-all-see-more");
     teams_more.classList.add("disabled", "loading");
+
+    var teams_solutions = "";
+    if ( jQuery('#teams_solutions').hasClass("select2-hidden-accessible") ) {
+        teams_solutions = jQuery('#teams_solutions').select2("val");
+    } else {
+        teams_solutions = document.getElementById("teams_solutions").value || '';
+    }
+
+    var teams_sort = "";
+    if ( jQuery('#teams_sort').hasClass("select2-hidden-accessible") ) {
+        teams_sort = jQuery('#teams_sort').select2("val");
+    }
+
     postAjax(
         ajax_object.ajaxurl, {
             action: "teams_more",
             nonce: ajax_object.teams_see_more,
             permalink: ajax_object.permalink,
-            solutions:jQuery('#teams_solutions').select2("val") || '',
-            sort: jQuery('#teams_sort').select2("val") || '',
+            solutions:teams_solutions,
+            sort: teams_sort,
             country: document.getElementById("dfdl_teams_country").value,
             page: document.getElementById("teams_all_page").value
         }, function(data){
