@@ -44,16 +44,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (beacon && subnav) {
         window.addEventListener("scroll", function(){
             rect = beacon.getBoundingClientRect();
-            if ( rect.top <= 80 ) {
+            if ( rect.top <= 80 && rect.top > -400 ) {
                 subnav.classList.add("fixed");
                 beacon.classList.add("stage");
                 header.classList.add("solid");
-            } 
-            if ( rect.top > 80 ) {
+            } else {
                 subnav.classList.remove("fixed");
                 beacon.classList.remove("stage");
                 header.classList.remove("solid");
-            } 
+
+            }
         });
     }
 
