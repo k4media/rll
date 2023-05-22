@@ -1,11 +1,8 @@
 <?php
-
      $title    = null;
      $subtitle = null;
      $output   = array();
      $counter  = 0;
-
-     // get fields
      if ( function_exists('get_fields') ) {
           $title       = get_field('title');
           $subtitle    = get_field('subtitle');
@@ -14,11 +11,10 @@
                $counter++;
                $output[] = '<div class="commitment commitment' . $counter . '">';
                $output[] = '<h2 class="title">' . $c['title'] . '</h2>';
-               $output[] = '<div class="excerpt">' . $c['text']. '</div>';
+               $output[] = '<div class="excerpt">' . nl2br($c['text']). '</div>';
                $output[] = '</div>';
           }
      }
-
 ?>
 <div id="firm-commitments" class="callout">
      <div class="narrow">
