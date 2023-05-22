@@ -1617,7 +1617,7 @@ article + #insights {
 	margin-bottom: 120px;
 }
 #insights .callout {
-	padding: 32px 0 32px 0;
+	padding: 60px 0 60px 0;
 }
 #dfdl-in-the-news {
 	padding-bottom: 120px;
@@ -1660,7 +1660,7 @@ article + #insights {
 }
 #page-lead + .award-grid-stage,
 #page-lead + .award-grid-stage,
-#results_stage > div > .swiper,
+/*#results_stage > div > .swiper,*/
 .swiper + .posts
 /* , #results_stage .posts */ {
 	margin-top: 60px;
@@ -2149,14 +2149,18 @@ a:hover .event-speaker .position {
 	margin: 120px auto 120px auto;
 }
 #search-stage.filters-stage .search-form,
-#search-stage.filters-stage .search-form,
+#search-stage.filters-stage .search-form {
+	margin: auto;
+	width: 42em;
+}
 .searchpage-searchform {
 	margin: auto;
 	width: 42em;
 }
+/*
 #searchpage {
 	width: 100%;
-}
+} */
 #searchpage > header {
 	margin-top: 60px;
 }
@@ -2440,7 +2444,7 @@ input[type='search']:focus-visible + input {
 	.dfdl-single-member .contact-details.partial > div:first-child {
 		width: 100%;
 	}
-	.wp-block-table /*, .entry-content p */ {
+	.wp-block-table , .entry-content p {
 		margin-left: 16px;
 		margin-right: 16px;
 	}
@@ -2490,6 +2494,9 @@ input[type='search']:focus-visible + input {
 	.executives-stage {
 		width: 100%;
 	}
+	.subnav-swiper ul {
+		margin-left: 16px;
+	}
 }
 @media screen and ( max-width: 900px ) { 
 	#site-navigation-left,
@@ -2533,6 +2540,7 @@ input[type='search']:focus-visible + input {
 	#event-speakers-stage,
 	#event-speakers-stage,
 	.team-lead-stage,
+	.team-grid,
 	.awards-callout-stage,
 	.dfdl-single-member-stage .xtra {
 		padding: 60px 0 60px 0;
@@ -2606,7 +2614,7 @@ input[type='search']:focus-visible + input {
 	}
 	#insights .callout {
 		padding-bottom: 0;
-		padding-top: 60px;
+		/* padding-top: 60px; */
 	}
 	#results_stage > div > .swiper + .posts {
 		margin-top: 60px;
@@ -2617,6 +2625,13 @@ input[type='search']:focus-visible + input {
 	}
 	#subnav-stage + .team-grid {
 		padding: 32px 16px 60px 16px;
+	}
+	#insights .callout {
+		padding: 32px 0 32px 0;
+	}
+	#event-speakers-stage,
+	article + #insights {
+		margin: 60px auto 60px auto;
 	}
 }
 @media screen and ( max-width: 800px ) {
@@ -2644,8 +2659,12 @@ input[type='search']:focus-visible + input {
 	.solutions-grid .solution h3 {
 		margin: 2em 1em 2em 1em;
 	}
-	.solutions-callout-stage .solutions.stage {
+	.solutions-callout-stage .solutions.stage,
+	.searchpage-searchform {
 		width: 100%;
+	}
+	#searchpage {
+		margin: 120px 0 120px 0;
 	}
 	.contact-callout {
 		display: block;
@@ -2675,9 +2694,12 @@ input[type='search']:focus-visible + input {
 		height: 32px;
 	}
 	.footer-nav > nav,
-	.country-subnav-stage .back,
+	/* .country-subnav-stage .back, */
 	#page-hero.solutions .subnav-stage {
 		display: none;
+	}
+	.country-subnav-stage {
+		height: 3em;
 	}
 	.site-info {
 		display: block;
@@ -2734,6 +2756,10 @@ input[type='search']:focus-visible + input {
 	#firm-values .col {
 		max-width: 66%;
 	}
+	#firm-commitments {
+		margin-top: 60px;
+		padding: 60px 0 60px 0;
+	}
 	#contact-dfdl .team-lead-stage {
 		margin-top: 60px;
 	}
@@ -2776,6 +2802,9 @@ input[type='search']:focus-visible + input {
 	}
 	.executives-stage a {
 		width: 33%;
+	}
+	.country-contacts-stage {
+		padding: 60px 0 60px 0;
 	}
 }
 
@@ -3110,8 +3139,8 @@ input[type='search']:focus-visible + input {
 		flex-direction: column-reverse;
 		margin-top: 1em;
 	}
-	.social-share {
-		margin-top: 4em;
+	article + .article-meta > .social-share {
+		margin-top: 60px;
 	}
 	.executives-stage {
 		align-items: center;
@@ -3119,6 +3148,9 @@ input[type='search']:focus-visible + input {
 	}
 	.executives-stage a {
 		width: 50%;
+	}
+	#insights .callout {
+		padding: 0 0 0 0;
 	}
 }
 

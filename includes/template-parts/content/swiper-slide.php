@@ -12,7 +12,7 @@
             <div class="excerpt">
                 <?php
                     // echo get_the_excerpt($story->ID);
-                    echo wp_trim_words(get_the_excerpt($story->ID), 28);
+                    echo wp_trim_words(get_the_excerpt($story->ID), 22);
                     ?>
                 </div>
             <a class="button green ghost" href="<?php echo get_the_permalink($story->ID) ?>">Read More</a>
