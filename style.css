@@ -1130,7 +1130,7 @@ header.main {
 }
 .button.see-more, .button.see-all {
 	background: transparent;
-    margin: 4em auto auto auto;
+    margin: 60px auto auto auto;
 }
 .see-more.disabled {
 	color: var(--color-gray-disabled);
@@ -2536,25 +2536,35 @@ input[type='search']:focus-visible + input {
 	.contact-callout-stage.solutions {
 		padding-top: 0;
 	}
+	
+	#event-speakers-stage,
+	#event-speakers-stage,
+	#our-founders,
 	#page-lead,
-	#event-speakers-stage,
-	#event-speakers-stage,
 	.team-lead-stage,
-	.team-grid,
+	/*.team-grid,*/
 	.awards-callout-stage,
-	.dfdl-single-member-stage .xtra {
+	.dfdl-single-member-stage .xtra,
+	.team-member-stage,
+	.insights-callout-stage {
 		padding: 60px 0 60px 0;
 	}
-	/* 	.team-grid, */
+	/* 	.team-grid, 
 	.team-member-stage,
 	.insights-callout-stage,
 	#our-founders {
 		padding: 60px 0 60px 0;
 	}
+	*/
 	/*
 	.team-lead-stage, .team-member-stage {
 		padding-bottom: 50px;
 	} */
+
+	.team-grid {
+		padding-bottom: 60px;
+		padding-top: 60px;
+	}
 	.text-feature-stage {
 		padding-top: 60px;
 	}
@@ -2566,7 +2576,8 @@ input[type='search']:focus-visible + input {
 		padding-top: 40px;
 	}
 	.text-feature-stage + .team-lead-stage,
-	.awards-callout-stage + .team-lead-stage {
+	.awards-callout-stage + .team-lead-stage,
+	#searchpage > section {
 		margin-top: 60px;
 	}
 	.text-feature-stage + .awards-callout-stage #results_stage {
@@ -2933,7 +2944,7 @@ input[type='search']:focus-visible + input {
 		max-width: 320px;
 		padding: 0;
 	}
-	#team-grid-swiper .swiper-wrapper {
+	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
 		column-gap: 0;
 		display: flex;
 		grid-template-columns: none;
@@ -2945,7 +2956,7 @@ input[type='search']:focus-visible + input {
 	.swiper.callout + .posts {
 		margin-top: 0;
 	}
-	#team-grid-swiper .swiper-wrapper {
+	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
 		align-items: stretch;
 		display: flex;
 		flex-wrap: nowrap;
@@ -2954,7 +2965,7 @@ input[type='search']:focus-visible + input {
 	#team-grid-swiper .swiper-slide {
 		height: auto;
 	}
-	#team-grid-swiper .swiper-wrapper > a {
+	#team-grid-swiper:not(.search-teams) .swiper-wrapper > a {
 		display: inline-block;
 		margin-right: 24px;
 		max-width: 320px;
@@ -3189,7 +3200,8 @@ input[type='search']:focus-visible + input {
 		font-size: var(--font-size-large);
 	}
 	#results_stage.team-stage.all .swiper-wrapper,
-	#results_stage.team-stage.country .swiper-wrapper {
+	#results_stage.team-stage.country .swiper-wrapper,
+	#team-grid-swiper.search-teams .swiper-wrapper {
 		grid-template-columns: repeat(1, 1fr);
 	}
 	#team-grid-swiper .team-swiper .swiper-wrapper a {
