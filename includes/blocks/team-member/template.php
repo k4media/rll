@@ -42,12 +42,12 @@
                <div class="avatar"><a href="<?php echo get_author_posts_url($user->ID) ?>"><img src="<?php echo get_avatar_url($user->ID, array('size' => 320)) ?>"></a></div>
                <div class="details-stage">
                     <div class="member">
-                         <div class="slug">
-                              <?php if ($post->post_title): ?>
-                                   <?php echo esc_attr($post->post_title); ?>
-                              <?php endif; ?>
+                         <!--<div class="slug">
+                              <?php //if ($post->post_title): ?>
+                                   <?php //echo esc_attr($post->post_title); ?>
+                              <?php //endif; ?>
                               Key Contact
-                         </div>
+                         </div>-->
                          <div class="name"><a href="<?php echo get_author_posts_url($user->ID) ?>"><?php echo $user->display_name ?></a></div>
                          <?php if( isset($meta['position'][0]) ) : ?>
                               <div class="position"><?php echo $meta['position'][0] ?></div> 
