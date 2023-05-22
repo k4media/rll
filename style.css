@@ -230,14 +230,20 @@ nav ul li {
 	border: solid 1px var(--color-bright-green);
 	color: var(--color-bright-green);
 }
-.button.mobile-filter:hover:before,
+.button.mobile-filter:hover:before {
+	background-image: url(assets/media/icon-filter-active.svg);
+}
+.button.filter:hover:before{
+	background-image: url(assets/media/icon-filter-active.svg);
+}
+
+.button.filter.is-active:before,
 .button.mobile-filter.is-active:before {
-	background-image: url(assets/media/icon-filter-active.svg);
+	background-image: url(assets/media/icon-filter-close-hilite.svg);
+	background-size: 12px;
 }
-.button.filter:hover:before,
-.button.filter.is-active:before {
-	background-image: url(assets/media/icon-filter-active.svg);
-}
+
+
 .button.green.solid:hover {
 	border: solid 1px var(--color-green);
 	color: var(--color-bright-green);
