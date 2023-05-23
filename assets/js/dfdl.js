@@ -32,13 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } 
         });
     }
-    var swiper = document.getElementsByClassName("swiper");
-    if (swiper) {
-        Array.prototype.forEach.call(swiper, function(element) {
-            element.classList.remove("loading");
-        });
-    }
-
+    
     var header = document.getElementById("header"); 
     var beacon = document.getElementById("beacon");
     if (beacon) {
@@ -53,39 +47,37 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     try {
-        var swiper = document.getElementsByClassName("swiper");
-        if (swiper) {
-            Array.prototype.forEach.call(swiper, function(element) {
-                element.classList.remove("loading");
-            });
-        }
-    } catch(e) {
-
-    };
-
-    try {
         var subnavSwiper = new Swiper(".subnav-swiper", {
+            freeMode: {
+                enabled: true,
+                sticky: true,
+            },
             breakpoints: {
-            950: {
-                slidesPerView: 11,
-            },
-            599: {
-                slidesPerView: 7,
-            },
-            499: {
-                slidesPerView: 6,
-            },
-            399: {
-                slidesPerView: 4,
-            },
-            0: {
-                slidesPerView: 3,
-            },
-        }
+                950: {
+                    slidesPerView: 11,
+                },
+                599: {
+                    slidesPerView: 7,
+                },
+                499: {
+                    slidesPerView: 6,
+                },
+                399: {
+                    slidesPerView: 4,
+                },
+                0: {
+                    slidesPerView: 3,
+                },
+            }
         });
     } catch(e) {
         
     };
+    
+    function swiperResize() {
+        subnavSwiper.slideTo(swiper.activeIndex, 0);
+    }
+    window.addEventListener("resize", swiperResize);
 
     document.addEventListener("click", function(e){
         const teams_more = e.target.closest("#teams-all-see-more"); 

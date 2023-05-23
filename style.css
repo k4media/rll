@@ -718,10 +718,12 @@ header.main {
     display: flex;
 	justify-content: center;
 }
-.dfdl-single-member,
-#results_stage.team-stage.all,
-#results_stage.team-stage.country {
+.dfdl-single-member {
 	margin: 120px auto 120px auto;
+}
+#results_stage.team-stage.country,
+#results_stage.team-stage.all {
+	margin: 60px auto 120px auto;
 }
 .lead-team-member.dfdl-single-member {
 	margin-bottom: 0;
