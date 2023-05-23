@@ -11,6 +11,9 @@
     top: 80px;
     z-index: 9;
 }
+.admin-bar #subnav-stage { 
+    top: 110px;
+}
 /*
 #subnav-stage.fixed {
 	left: 0;
