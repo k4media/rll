@@ -6,6 +6,9 @@ global $post;
 wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
 wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
+// Enqueue intersect observer
+wp_enqueue_script('intersect-observer', get_stylesheet_directory_uri() . '/assets/js/intersection-observer.js' );
+
 $sections = dfdl_get_section();
 
 /**
@@ -125,7 +128,6 @@ if ( is_admin() ) {
 $user_query = new WP_User_Query($args);
 $post_class = ( $user_query->get_results() > 0  ) ? "" : "no-results" ; 
 if ( ! empty( $user_query->get_results() ) ) :
-
 ?>
 <div class="team-grid-stage <?php echo implode(" ", $block_classes) ?>">
      <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
@@ -138,7 +140,6 @@ if ( ! empty( $user_query->get_results() ) ) :
      <?php if ( isset($sections[0]) && "solutions" === $sections[0] ) : ?>
           <input type="hidden" id="teams_solutions" name="teams_solutions" value="<?php echo $sections[1] ?>" />
      <?php endif; ?>
-
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
           <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>

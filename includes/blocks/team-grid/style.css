@@ -7,9 +7,11 @@
 #subnav-stage {
     background-color: var(--color-white);
     padding: 0 0 16px 0;
-    position: relative;
-    z-index: 11;
+    position: sticky;
+    top: 80px;
+    z-index: 9;
 }
+/*
 #subnav-stage.fixed {
 	left: 0;
 	margin-top: 0;
@@ -17,7 +19,7 @@
 	position: fixed;
     right: 0;
 	top: 80px;
-}
+}*/
 #beacon.stage {
     height: 72px;
 }

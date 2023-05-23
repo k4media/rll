@@ -38,21 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
             element.classList.remove("loading");
         });
     }
+
     var header = document.getElementById("header"); 
     var beacon = document.getElementById("beacon");
-    var subnav = document.getElementById("subnav-stage");
-    if (beacon && subnav) {
+    if (beacon) {
         window.addEventListener("scroll", function(){
             rect = beacon.getBoundingClientRect();
-            if ( rect.top <= 80 && rect.top > -400 ) {
-                subnav.classList.add("fixed");
-                beacon.classList.add("stage");
+            if ( rect.top <= 80 ) {
                 header.classList.add("solid");
             } else {
-                subnav.classList.remove("fixed");
-                beacon.classList.remove("stage");
                 header.classList.remove("solid");
-
             }
         });
     }
@@ -70,9 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     try {
         var subnavSwiper = new Swiper(".subnav-swiper", {
-            // slidesPerView: 10,
-            // spaceBetween: 16,
-            // freeMode: true,
             breakpoints: {
             950: {
                 slidesPerView: 11,
@@ -143,7 +135,6 @@ function isScrolledIntoView(el) {
     const { top, bottom } = el.getBoundingClientRect()
     return top >= 0 && bottom <= window.innerHeight
 }
-
 if (jQuery().jquery) {
     jQuery("#award_years, #award_solutions, #award_bodies").on("change", debounce(function() {
         updateAwards()
