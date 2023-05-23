@@ -150,7 +150,6 @@ if (document.getElementById("ajax_count")) {
     var counter = document.getElementById("ajax_count").value;
     console.log("ajax_count = " + counter );
 }
-
 function insightsSeeMore() {
     var wrap = document.getElementById("insights-posts");
     var insights_more = document.getElementById("insights-all-see-more");
