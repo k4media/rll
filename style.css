@@ -2484,7 +2484,8 @@ input[type='search']:focus-visible + input {
 	.executives-stage {
 		width: 100%;
 	}
-	.subnav-swiper ul {
+	.subnav-swiper ul,
+	.subnav-swiper.swiper-free-mode >.swiper-wrapper {
 		margin-left: 16px;
 	}
 }
@@ -2526,7 +2527,6 @@ input[type='search']:focus-visible + input {
 	.contact-callout-stage.solutions {
 		padding-top: 0;
 	}
-	
 	#event-speakers-stage,
 	#event-speakers-stage,
 	#our-founders,
@@ -2612,6 +2612,9 @@ input[type='search']:focus-visible + input {
 	}
 	.award-stage > div, #our-founders + .team-grid-stage {
 		margin-bottom: 0;
+	}
+	#insights {
+		margin-bottom: 60px;
 	}
 	#insights .callout {
 		padding-bottom: 0;
