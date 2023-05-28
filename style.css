@@ -3150,9 +3150,9 @@ input[type='search']:focus-visible + input {
 	.executives-stage a {
 		width: 50%;
 	}
-	#insights .callout {
+	/* #insights .callout {
 		padding: 0 0 0 0;
-	}
+	} */
 }
 
 @media screen and ( max-width: 500px ) {
