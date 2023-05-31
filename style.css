@@ -400,7 +400,7 @@ header.main {
 	text-decoration: none;
 }
 .header-stage .left a {
-	margin-right: 1.5em;
+	margin-right: 1em;
 }
 .header-stage .right a {
 	margin-left: 1.5em;
@@ -2484,15 +2484,19 @@ input[type='search']:focus-visible + input {
 	.executives-stage {
 		width: 100%;
 	}
-	.subnav-swiper ul,
-	.subnav-swiper.swiper-free-mode >.swiper-wrapper {
+	.page-id-55 .subnav-swiper.swiper-free-mode >.swiper-wrapper,
+	.subnav-swiper ul {
 		margin-left: 16px;
 	}
+
+	#site-navigation-left {
+		display: none;
+	}
 }
+
 @media screen and ( max-width: 900px ) { 
-	#site-navigation-left,
 	#side-navigation,
-	#secondary li:nth-child(n+2),
+	/* #secondary li:nth-child(n+2),*/
 	#menu-side .art,
 	#menu-side .copyright-notice,
 	#menu-side .legal-nav {
@@ -2567,6 +2571,7 @@ input[type='search']:focus-visible + input {
 	}
 	.text-feature-stage + .team-lead-stage,
 	.awards-callout-stage + .team-lead-stage,
+	#page-hero + .network-partner,
 	#searchpage > section {
 		margin-top: 60px;
 	}
@@ -2613,7 +2618,7 @@ input[type='search']:focus-visible + input {
 	.award-stage > div, #our-founders + .team-grid-stage {
 		margin-bottom: 0;
 	}
-	#insights {
+	#insights, #post-545 {
 		margin-bottom: 60px;
 	}
 	#insights .callout {
@@ -2823,7 +2828,10 @@ input[type='search']:focus-visible + input {
 	.callout a.button {
 		margin-top: 2em;
 	}
-	.dfdl-countries .map {
+	.dfdl-countries .map,
+	#secondary li:nth-child(n+2),
+	.solutions-callout h3,
+	#team-grid-swiper .see-more {
 		display: none;
 	}
 	.dfdl-countries .countries {
@@ -2879,9 +2887,10 @@ input[type='search']:focus-visible + input {
 		margin: 16px 0 16px 0;
 		text-align: left;
 	}
+	/*
 	.solutions-callout h3 {
 		display: none;
-	}
+	} */
 	.solutions.stage {
 		display: block;
 	}
@@ -2963,9 +2972,9 @@ input[type='search']:focus-visible + input {
 		margin-right: 24px;
 		max-width: 320px;
 	}
-	#team-grid-swiper .see-more {
+	/* #team-grid-swiper .see-more {
 		display: none;
-	}
+	} */
 	#firm-commitments .commitments-stage {
 		columns: 1;
 	}
@@ -3131,6 +3140,9 @@ input[type='search']:focus-visible + input {
 	.team-lead-stage.locations,
 	.team-grid-stage.locations {
 		background: var(--color-white);
+	}
+	.team-grid-stage.locations .team-grid {
+		padding-bottom: 16px;
 	}
 	.button.see-more {
 		margin-top: 32px;
