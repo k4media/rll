@@ -105,7 +105,6 @@ function dfdl_search_insights() {
     /**
      * Date query: limit results to last 2 years
      */
-    /*
     $limit = array(
         'year'  => date("Y") - 2,
         'month' => date("m"),
@@ -116,7 +115,6 @@ function dfdl_search_insights() {
             'after' => $limit
         )
     );
-    */
 
     if ( function_exists('relevanssi_do_query') ) {
         $query = new WP_Query();
