@@ -33,7 +33,9 @@ $user_query = new WP_User_Query($args);
 
 ?>
 <div id="team-all" class="silo">
-    <?php do_action("dfdl_solutions_country_nav"); ?>
+    <div id="beacon"></div>
+    <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
+    <?php //do_action("dfdl_solutions_country_nav"); ?>
     <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
     <input type="hidden" id="teams_all_page" name="teams_all_page" value="1">
     <?php if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country'])) : ?>

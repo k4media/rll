@@ -547,6 +547,37 @@ function dfdl_insights_content_hub_ids():array {
  *
  * @return array of terms
 */
+/*
+function dfdl_get_award_years( string $return="" ): array {
+
+    $terms = get_terms(array(
+        'taxonomy' => 'dfdl_award_years',
+        'hide_empty' => false,
+        'orderby'  => 'id',
+        'order'    => 'DESC'
+    ));
+
+    $sections = dfdl_get_section();
+    if ( is_array($sections) && "awards" === $sections[0] ) {
+        $slugs = array();
+        foreach( $terms as $t ) {
+            $slugs[] = $t->slug;
+        }
+        return $slugs;
+    }
+
+
+    $year = date("Y");
+    if ( "slug" === $return ) {
+        return array($year);
+    }
+
+    return array();
+
+    // return get_term_by("slug", $year, 'dfdl_award_years');
+}
+*/
+
 function dfdl_get_award_years( string $return="" ): array {
     $terms = get_terms(array(
         'taxonomy' => 'dfdl_award_years',
@@ -563,6 +594,7 @@ function dfdl_get_award_years( string $return="" ): array {
     }
     return $terms;
 }
+
 
 /*
 * DFDL Solutions.

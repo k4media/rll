@@ -29,6 +29,8 @@ $K4->fragment_cache( $key, function() {
           }
      }
 
+     $args['years'] = array(date("Y"));
+
      if ( is_array($args) ) {
           $awards = dfdl_get_awards($args);
      }
