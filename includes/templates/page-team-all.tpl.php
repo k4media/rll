@@ -8,9 +8,9 @@
  * All Members
  */
 $args = array(
-    'number'    => get_option('posts_per_page'),
-    'role__in' => array('dfdl_member'),
-    'orderby'   => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' )
+    'number'  => get_option('posts_per_page'),
+    'role'    => array('dfdl_member'),
+    'orderby' => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' )
 );
 
 /**

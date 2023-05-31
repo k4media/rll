@@ -54,7 +54,7 @@ $exclude[] = get_block_data($post, 'acf/dfdl-team-member', 'user');
  */
 $args = array(
      'number'   =>  get_option('posts_per_page'),
-     'role__in' => array('dfdl_member'),
+     'role'     => array('dfdl_member'),
      'exclude'  => $exclude,
      'orderby'  => array( 'dfdl_rank' => 'ASC', 'last_name' => 'ASC' ),
      'no_found_rows'          => false,
