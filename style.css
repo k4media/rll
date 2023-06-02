@@ -1299,10 +1299,10 @@ header.main {
 .filters-stage.is-active {
 	display: block;
 }
-/*
-.filters-stage.is-active {
+
+#insights .filters-stage.is-active {
 	margin-bottom: 120px;
-} */
+}
 
 
 .filters-stage .filters {
