@@ -8,7 +8,7 @@ Description: Custom WordPress Theme for DFDL
 Requires at least: 6.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Version: 1.0
+Version: 1.0.0
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: dfdl
@@ -210,7 +210,7 @@ nav ul li {
 .button.filter:before,
 .button.download:before {
 	background-image: url(assets/media/icon-filter.svg);
-	background-position: 0 0;
+	background-position: 4px 0;
 	background-repeat: no-repeat;
 	background-size: 16px;
 	content: " ";
@@ -905,6 +905,23 @@ header.main {
 	margin-top: 120px;
     overflow: hidden;
 }
+#award-grid-stage #subnav-stage,
+.award-grid-stage #subnav-stage {
+    padding-bottom: 32px;
+	background-color: var(--color-white);
+	overflow: hidden;
+    padding: 0 0 16px 0;
+    position: sticky;
+    top: 80px;
+    z-index: 9;
+}
+#award-grid-stage .award-grid.silo #subnav-stage {
+	top: 0;
+}
+.award-grid .filter-button {
+	margin-left: 1em;
+}
+
 .country-subnav-stage.desks-subnav {
 	margin-top: 100px;
 	text-align: center;
@@ -1282,6 +1299,12 @@ header.main {
 .filters-stage.is-active {
 	display: block;
 }
+/*
+.filters-stage.is-active {
+	margin-bottom: 120px;
+} */
+
+
 .filters-stage .filters {
 	text-align: right;
 }
@@ -2441,6 +2464,9 @@ input[type='search']:focus-visible + input {
 	.single.narrow {
 		width: auto;
 	}
+	.awards-country-nav {
+		margin-left: 6px;
+	}
 }
 
 @media screen and ( max-width: 1000px ) {
@@ -3164,6 +3190,13 @@ input[type='search']:focus-visible + input {
 	}
 	.executives-stage a {
 		width: 50%;
+	}
+	#award-grid-stage #subnav-stage,
+	.award-grid-stage #subnav-stage {
+		padding-bottom: 0;
+	}
+	#award-grid-stage .awards-filters-stage {
+		padding-bottom: 0;
 	}
 	/* #insights .callout {
 		padding: 0 0 0 0;

@@ -12,6 +12,9 @@
     top: 80px;
     z-index: 9;
 }
+#team-all #subnav-stage {
+    top: 0;
+}
 .admin-bar #subnav-stage { 
     top: 110px;
 }
