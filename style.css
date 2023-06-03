@@ -104,7 +104,6 @@ a {
 #colophon nav a:hover,
 #insights .callout header a:hover,
 #side-navigation .menu li a:hover,
-#side-navigation .menu li a:hover,
 #mobile-navigation .menu li a:hover,
 #colophon nav a:hover,
 a:hover, .callout .stage a:hover,
@@ -236,14 +235,11 @@ nav ul li {
 .button.filter:hover:before{
 	background-image: url(assets/media/icon-filter-active.svg);
 }
-
 .button.filter.is-active:before,
 .button.mobile-filter.is-active:before {
 	background-image: url(assets/media/icon-filter-close-hilite.svg);
 	background-size: 12px;
 }
-
-
 .button.green.solid:hover {
 	border: solid 1px var(--color-green);
 	color: var(--color-bright-green);
@@ -616,9 +612,6 @@ header.main {
 	height: 16px;
 	width: 16px;
 }
-
-
-
 .member-search {
 	cursor: pointer;
 }
@@ -900,7 +893,6 @@ header.main {
 #team-all,
 #contact-dfdl,
 #award-grid-stage,
-#award-grid-stage,
 .teams-country-stage {
 	margin-top: 120px;
     overflow: hidden;
@@ -1050,8 +1042,6 @@ header.main {
 	margin-left: 0;
 	margin-right: 0;
 }
-
-
 .solutions-grid-stage .solution h3 {
     color: var(--color-black);
     font-size: var(--font-size-large);
@@ -1169,10 +1159,7 @@ header.main {
 	margin: 60px 0 60px;
 }
 .award-grid.narrow .award-stage > div, .award-stage > div {
-
 	break-inside: avoid-region;
-
-
 	color: var(--color-gray);
 	column-fill: balance;
 	column-gap: 4em;
@@ -1276,7 +1263,6 @@ header.main {
 	display: block;
 	height: 18px;
 	margin: 0 auto 16px auto;
-	vertical-align: middle;
 	width: 18px;
 }
 .country-nav {
@@ -1667,7 +1653,6 @@ article + #insights {
 	grid-template-columns: repeat(4, 1fr);
 	/* margin-bottom: 120px; */
 }
-#page-lead + .award-grid-stage,
 #page-lead + .award-grid-stage,
 /*#results_stage > div > .swiper,*/
 .swiper + .posts
@@ -2200,18 +2185,13 @@ a:hover .event-speaker .position {
 #search-stage .search-form {
 	border: solid 1px #aaa;
 }
-
-input[type='search'] {
-	background: transparent;
-	border: 0;
-	display: flex;
-}
 #search-stage .search-form {
 	border: solid 1px #aaa;
 }
 input[type='search'] {
 	background: transparent;
 	border: 0;
+	display: flex;
 	font-size: var(--font-size-large);
 	height: 44px;
 	padding: 7px;
@@ -2546,7 +2526,6 @@ input[type='search']:focus-visible + input {
 	.contact-callout-stage.solutions {
 		padding-top: 0;
 	}
-	#event-speakers-stage,
 	#event-speakers-stage,
 	#our-founders,
 	#page-lead,
