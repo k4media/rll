@@ -921,7 +921,6 @@ header.main {
 .award-grid .filter-button {
 	margin-left: 1em;
 }
-
 .country-subnav-stage.desks-subnav {
 	margin-top: 100px;
 	text-align: center;
@@ -1462,7 +1461,7 @@ input[type=checkbox] {
 }
 .contact-stage .copy-stage {
 	display: flex;
-	margin: 64px 0 120px 0;
+	margin: 60px 0 0 0;
 }
 .contact-stage .copy-stage .copy {
 	flex: 1 1 30%;
@@ -1481,7 +1480,7 @@ input[type=checkbox] {
 }
 .contact-stage .copy-stage .form {
 	flex: 1 1 70%;
-	margin: 0 0 0 4em;
+	margin: 0 0 120px 120px;
 }
 .contact-form .details label,
 .contact-form h4 {
@@ -2486,12 +2485,6 @@ input[type='search']:focus-visible + input {
 	.dfdl-single-member .avatar {
 		max-width: 280px;
 	}
-	.contact-stage .copy-stage {
-		display: block;
-	}
-	.contact-stage .copy-stage .form {
-		margin: 60px 0 0 0 ;
-	}
 	.award-stage > div {
 		columns: 3;
 	}
@@ -2499,7 +2492,7 @@ input[type='search']:focus-visible + input {
 		display: block;
 	}
 	.contact-stage .copy-stage .form {
-		margin: 60px 0 0 0 ;
+		margin: 60px 0 60px 0 ;
 	}
 	.award-stage > div {
 		columns: 3;
@@ -2511,7 +2504,6 @@ input[type='search']:focus-visible + input {
 	.subnav-swiper ul {
 		margin-left: 16px;
 	}
-
 	#site-navigation-left {
 		display: none;
 	}
@@ -2606,9 +2598,6 @@ input[type='search']:focus-visible + input {
 	#page-lead .lead + p,
 	.award-grid.narrow .award-stage > div, .award-stage > div {
 		margin-top: 2em;
-	}
-	.contact-stage + .team-lead-stage {
-		padding-top: 120px;
 	}
 	.contact-stage + .team-lead-stage {
 		padding-top: 120px;
@@ -2794,9 +2783,6 @@ input[type='search']:focus-visible + input {
 		margin-top: 60px;
 		padding: 60px 0 60px 0;
 	}
-	#contact-dfdl .team-lead-stage {
-		margin-top: 60px;
-	}
 	.team-lead-stage + .team-member-stage,
 	.team-member-stage + .team-grid-stage {
 		margin-top: 0;
@@ -2820,9 +2806,6 @@ input[type='search']:focus-visible + input {
 	}
 	#firm-values .col {
 		max-width: 100%;
-	}
-	#contact-dfdl .team-lead-stage {
-		margin-top: 60px;
 	}
 	.team-lead-stage + .team-member-stage,
 	.team-member-stage + .team-grid-stage {
