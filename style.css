@@ -1299,12 +1299,9 @@ header.main {
 .filters-stage.is-active {
 	display: block;
 }
-
 #insights .filters-stage.is-active {
-	margin-bottom: 120px;
+	margin-bottom: 60px;
 }
-
-
 .filters-stage .filters {
 	text-align: right;
 }
