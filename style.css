@@ -2595,7 +2595,9 @@ input[type='search']:focus-visible + input {
 	.text-feature-stage + .team-lead-stage,
 	.awards-callout-stage + .team-lead-stage,
 	#page-hero + .network-partner,
-	#searchpage > section {
+	#searchpage > section,
+	.team-lead-stage + #dfdl-ret,
+	#dfdl-ret + .team-grid-stage {
 		margin-top: 60px;
 	}
 	.text-feature-stage + .awards-callout-stage #results_stage {
