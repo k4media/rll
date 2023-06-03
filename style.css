@@ -1682,9 +1682,6 @@ header + #results_stage .swiper {
 	font-size: var(--font-size-large);
 	width: 100%;
 }
-.posts  .card h4 {
-	font-size: var(--font-size-large);
-}
 .posts .card.media {
 	padding: 0;
 }
@@ -1729,35 +1726,6 @@ header + #results_stage .swiper {
 .posts .card .author {
 	font-size: var(--font-size-small);
 	margin: 1em 0 1em 0;
-}
-.card-hover {
-	display: flex;
-	height: 100%;
-}
-.card-hover .author,
-.card-hover .dateline {
-	color: var(--color-black);
-}
-.card-hover h4 {
-	color: var(--color-green);
-}
-.card-hover:hover .card {
-	background-color: var(--color-green);
-}
-.card:hover .play {
-	background-color: var(--color-green-70);
-}
-.card-hover:hover .taxonomy,
-.card-hover:hover .date,
-.card-hover:hover .category,
-.card-hover:hover .subcategory,
-.card-hover:hover .excerpt,
-.card-hover:hover h4 {
-	color: var(--color-white);
-}
-.card-hover:hover .author,
-.card-hover:hover .dateline {
-	color: var(--color-white);
 }
 .card-hover {
 	display: flex;
@@ -1889,7 +1857,6 @@ header + #results_stage .swiper {
 	color: var(--color-whisper);
 	padding: .25em;
 }
-
 .article-meta {
 	display: flex;
 	justify-content: space-between;
