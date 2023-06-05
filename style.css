@@ -28,9 +28,7 @@ DFDL Theme, (C) 2022 DFDL
     font-weight: normal;
     font-style: normal;
 }
-/* Variables */
 :root {
-	/* Colors */
 	--color-black: #000;
 	--color-dark-gray: #131313;
 	--color-gray: #7D7D7D;
