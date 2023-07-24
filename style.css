@@ -143,7 +143,17 @@ nav ul li {
 }
 #site-navigation-left ul {
 	position: relative;
-	left: 46px;
+}
+#secondary {
+	position: relative;
+}
+#secondary .sub-menu {
+	background: var(--color-white);
+    padding: 1em 1em 1em 0;
+	position: absolute;
+}
+#secondary .sub-menu li {
+	display: block;
 }
 .button,
 .entry-content input[type="submit"] {
