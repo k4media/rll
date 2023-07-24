@@ -1049,8 +1049,8 @@ header.main {
 .contact-callout > div {
     flex: 1 1 50%;
 }
-.contact-callout img {
-    max-width: 100%;
+.contact-callout .image {
+	background-size: cover;
 }
 .contact-callout .copy-stage {
     align-items: center;
@@ -2647,20 +2647,11 @@ input[type='search']:focus-visible + input {
 		padding-left: 60px;
 		padding-right: 60px;
 	}
-	/*
-	.solutions-grid-stage .solutions.stage {
-		margin: 60px 0 0 0;
-	}*/
 	.solutions.stage,
 	.solutions-grid-stage .solutions.stage {
 		grid-template-columns: repeat(2, 1fr);
 		width: 100%;
 	}
-	/*
-	.solutions-grid .solution {
-		height: 200px;
-		overflow: hidden;
-	} */
 	.solution .thumbnail {
 		height: 115px;
 	}
@@ -2690,6 +2681,9 @@ input[type='search']:focus-visible + input {
 	}
 	.contact-callout h2 {
 		margin-top: 0;
+	}
+	.contact-callout .image {
+		height: 320px;
 	}
 	#results_stage .posts, .callout .posts {
 		grid-template-columns: repeat(2, 1fr);
