@@ -142,7 +142,7 @@ if ( ! empty( $user_query->get_results() ) ) :
      <?php endif; ?>
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
-          <div id="subnav-stage"><?php do_action("dfdl_solutions_country_nav") ?></div>
+          <div id="subnav-stage"><?php // do_action("dfdl_solutions_country_nav") ?></div>
      <?php endif; ?>  
      <div id="team-grid" class="team-grid silo">
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">
@@ -164,21 +164,6 @@ if ( ! empty( $user_query->get_results() ) ) :
                               echo '<div class="no-team-members not-found"><p>No Team Members Found.</p></div>';
                          }
                     ?>
-                    <?php if ( is_page('teams') ) : ?>
-                         <div class="see-more">
-                              <a id="teams-see-all" href="<?php echo get_home_url("", "/teams/all/") ?>" class="button green ghost see-more">See All</a>
-                         </div>
-                    <?php elseif ( isset($sections) && "locations" === $sections[0] ) : ?>
-                         <?php if ( $user_query->get_total() > count($user_query->results)) : ?>
-                              <div class="see-more">
-                                   <a id="teams-see-all" href="<?php echo $jump ?>" class="button green ghost see-more">See All</a>
-                              </div>
-                         <?php endif; ?>
-                    <?php elseif ( $user_query->get_total() > count($user_query->results)) : ?>
-                         <div class="see-more">
-                              <button id="teams-all-see-more" class="button green ghost see-more">See More<span></span></button>
-                         </div>
-                    <?php endif; ?>
                     </div>
                </div>
           </div>
