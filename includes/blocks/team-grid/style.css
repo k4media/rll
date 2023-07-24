@@ -33,17 +33,15 @@
 .team-grid-stage.locations,
 .team-grid-stage.solutions {
     background-color: var(--color-green-10);
-}/*
-.team-grid-stage.teams {
-    padding-top: 120px;
-} */
+}
 .team-grid {
     padding: 120px 0 120px 0;
     text-align: center;
 }
+/*
 .team-grid-stage {
     margin: 120px 0 0 0;
-}
+} */
 #subnav-stage + .team-grid {
     padding-top: 60px;
 }
