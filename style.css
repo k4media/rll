@@ -164,6 +164,12 @@ nav ul li {
 	display: inline-block;
 	height: 2em;
 }
+#secondary .locations > a {
+	border: solid 1px;
+	display: inline-block;
+	line-height: 80px;
+	margin-left: 1.5em;
+}
 #secondary .locations:hover > .sub-menu {
 	left: 0;
 }
