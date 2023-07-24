@@ -149,6 +149,7 @@ nav ul li {
 }
 #secondary .sub-menu {
 	background: var(--color-green);
+	left: -9999em;
     padding: 1em 2em 1em 0;
 	position: absolute;
 }
@@ -158,6 +159,9 @@ nav ul li {
 #secondary .sub-menu li a {
 	color: var(--color-white);
 	line-height: 2em;
+}
+#secondary .locations:hover > .sub-menu {
+	left: 0;
 }
 
 
