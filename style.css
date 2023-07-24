@@ -166,6 +166,7 @@ nav ul li {
 #secondary .locations {
 	display: inline-block;
 	padding: 16px;
+	width: 100px;
 }
 #secondary .locations:hover  a {
 	color: var(--color-white);
