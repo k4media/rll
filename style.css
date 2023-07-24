@@ -1076,6 +1076,7 @@ header.main {
 	border: solid 1px var(--color-green);
 	height: 38px;
     margin-top: 2em;
+	margin-right: 5px;
 }
 .contact-callout .copy-stage .copy p {
 	line-height: 1.4em;
