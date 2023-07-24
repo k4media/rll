@@ -1050,7 +1050,7 @@ header.main {
     flex: 1 1 50%;
 }
 .contact-callout .image {
-	background-size: cover;
+	background-size: cover !important;
 }
 .contact-callout .copy-stage {
     align-items: center;
