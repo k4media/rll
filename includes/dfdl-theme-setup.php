@@ -319,12 +319,12 @@ function dfdl_customize_register($wp_customize) {
 /*
  * Create a theme options page with ACF
  */
-add_action( 'admin_menu', 'dfdl_settings_page' );
-function dfdl_settings_page() {
+add_action( 'admin_menu', 'rll_settings_page' );
+function rll_settings_page() {
 	if( function_exists('acf_add_options_page') ) {
 		acf_add_options_page(array(
-			'page_title' 	=> "DFDL Settings",
-			'menu_title'	=> "DFDL",
+			'page_title' 	=> "RLL Settings",
+			'menu_title'	=> "RLL",
 			'menu_slug' 	=> 'dfdl-settings',
 			'capability'	=> 'edit_posts',
 			'redirect'		=> false
