@@ -172,7 +172,7 @@ nav ul li {
 	margin-left: 8px;
 }
 #secondary .locations:hover a,
-#secondary .sub-menu li a:hover {
+#secondary .sub-menu a:hover {
 	color: var(--color-bright-green);
 }
 #secondary .locations:hover {
