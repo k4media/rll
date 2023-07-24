@@ -152,9 +152,11 @@ nav ul li {
 	left: -9999em;
     padding: 1em 2em 1em 0;
 	position: absolute;
+	width: 132px;
 }
 #secondary .sub-menu li {
 	display: block;
+	width: 100px;
 }
 #secondary .sub-menu li a {
 	color: var(--color-white);
@@ -162,7 +164,7 @@ nav ul li {
 }
 #secondary .locations {
 	display: inline-block;
-	height: 2em;
+	padding: 16px;
 }
 #secondary .locations:hover {
 	background: var(--color-green);
