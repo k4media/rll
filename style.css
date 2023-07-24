@@ -161,6 +161,7 @@ nav ul li {
 #secondary .sub-menu li a {
 	color: var(--color-white);
 	line-height: 2em;
+	margin-left: 1.5em;
 }
 #secondary .locations {
 	display: inline-block;
