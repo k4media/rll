@@ -35,6 +35,8 @@
                     <?php if ( isset($button_link, $button_text) ) : ?>
                          <a class="button green solid" href="<?php echo esc_url($button_link) ?>"><?php echo esc_attr($button_text) ?></a>
                     <?php endif; ?>
+                    <a class="button green solid" href="#">Join Us</a>
+                    <a class="button green solid" href="https://dfdl.us2.list-manage.com/subscribe?u=93756f829bfe5a9c6f2b4b655&id=f87f27907b">Subscribe</a>
                </div>
           </div>
      </div>
