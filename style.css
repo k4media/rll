@@ -160,6 +160,10 @@ nav ul li {
 	color: var(--color-white);
 	line-height: 2em;
 }
+#secondary .locations {
+	display: inline-block;
+	height: 2em;
+}
 #secondary .locations:hover > .sub-menu {
 	left: 0;
 }
