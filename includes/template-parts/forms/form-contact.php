@@ -224,32 +224,6 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
                 </label>
             </div>
         </div>
-
-        <h4>Solutions</h4>
-        <div class="solutions">
-            <?php
-                $solutions = dfdl_get_solutions_tax();
-                foreach( $solutions as $s ) {
-                    $checked = "";
-                    if ( isset($_POST['solutions']) && ! empty($_POST['solutions']) ) {
-                        if ( in_array( $s->term_id, $_POST['solutions'])) {
-                            $checked = "checked";
-                        }
-                    }
-                    echo '<label class="checkbox-control">';
-                    echo '<input type="checkbox" id="' . esc_attr($s->slug) . '" name="solutions[]" value="' . esc_attr($s->term_id) . '" class="checkbox" ' .  $checked . '>' . esc_attr($s->name) ;
-                    echo '</label>';
-                }
-                $checked = "";
-                if ( isset($_POST['solutions']) && ! empty($_POST['solutions']) ) {
-                    if ( in_array( "other", $_POST['solutions'])) {
-                        $checked = "checked";
-                    }
-                }
-                echo '<label class="checkbox-control"><input type="checkbox" id="solutions_other" name="solutions[]" value="other" class="checkbox" ' .  $checked . '>Other</label>';
-            ?>
-        </div>
-
         <?php
             $error_class = "";
             if ( isset($error_messages['message'])) {
