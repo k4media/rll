@@ -2868,6 +2868,7 @@ input[type='search']:focus-visible + input {
 	}
 	.solutions-callout-stage.callout {
 		background: transparent;
+		margin-bottom: 60px;
 		padding: 0;
 	}
 	.solutions-callout-stage .solutions.stage {

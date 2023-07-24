@@ -22,7 +22,7 @@
 <div class="contact-callout-stage <?php dfdl_section_class(); ?>">
      <div class="contact-callout">
           <?php if ( isset($image['url']) ) : ?>
-               <div class="image"><img src="<?php echo $image['url'] ?>"></div>
+               <div class="image" style="background: url(<?php echo $image['url'] ?>)"></div>
           <?php endif; ?>
           <div class="copy-stage">
                <div class="copy">
