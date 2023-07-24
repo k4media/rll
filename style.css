@@ -167,6 +167,9 @@ nav ul li {
 	display: inline-block;
 	padding: 16px;
 }
+#secondary .locations:hover  a {
+	color: var(--color-white);
+}
 #secondary .locations:hover {
 	background: var(--color-green);
 	color: var(--color-white);
@@ -175,6 +178,7 @@ nav ul li {
 	left: 0;
 	top: 51px;
 }
+
 
 
 .button,
@@ -431,8 +435,7 @@ header.main {
 .header-stage .right a {
 	margin-left: 1.5em;
 }
-.header-stage .left a:hover,
-.header-stage .right a:hover {
+.header-stage .left a:hover {
 	color: var(--color-bright-green);
 }
 .header-stage .current_page_item a,
