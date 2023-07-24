@@ -148,13 +148,19 @@ nav ul li {
 	position: relative;
 }
 #secondary .sub-menu {
-	background: var(--color-white);
-    padding: 1em 1em 1em 0;
+	background: var(--color-green);
+    padding: 1em 2em 1em 0;
 	position: absolute;
 }
 #secondary .sub-menu li {
 	display: block;
 }
+#secondary .sub-menu li a {
+	color: var(--color-white);
+	line-height: 2em;
+}
+
+
 .button,
 .entry-content input[type="submit"] {
 	border: solid 1px;
