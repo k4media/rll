@@ -1041,7 +1041,7 @@ header.main {
 }
 .contact-callout {
     background-color: var(--color-bright-green);
-	background: var(--color-bright-green) url(assets/media/logo-art-reverse.svg) no-repeat bottom right;
+	/* background: var(--color-bright-green) url(assets/media/logo-art-reverse.svg) no-repeat bottom right; */
     background-size: 200px 200px;
     display: flex;
     position: relative;
