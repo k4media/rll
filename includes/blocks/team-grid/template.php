@@ -142,7 +142,7 @@ if ( ! empty( $user_query->get_results() ) ) :
      <?php endif; ?>
      <?php if ( "locations" !== $sections[0] && "desks" !== $sections[0] && "solutions" !== $sections[0] ) : ?>
           <div id="beacon"></div>
-          <div id="subnav-stage"><?php // do_action("dfdl_solutions_country_nav") ?></div>
+          <!-- <div id="subnav-stage"><?php // do_action("dfdl_solutions_country_nav") ?></div> -->
      <?php endif; ?>  
      <div id="team-grid" class="team-grid silo">
           <div id="results_stage" class="team-stage <?php echo $post_class ?>">
