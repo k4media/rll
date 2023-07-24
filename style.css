@@ -173,7 +173,7 @@ nav ul li {
 }
 #secondary .locations:hover a,
 #secondary .sub-menu a:hover {
-	color: var(--color-bright-green);
+	color: var(--color-white);
 }
 #secondary .locations:hover {
 	background: var(--color-green);
