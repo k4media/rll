@@ -171,8 +171,9 @@ nav ul li {
 #secondary .locations > a {
 	margin-left: 8px;
 }
-#secondary .locations:hover  a {
-	color: var(--color-white);
+#secondary .locations:hover a,
+#secondary .sub-menu li a:hover {
+	color: var(--color-bright-green);
 }
 #secondary .locations:hover {
 	background: var(--color-green);
