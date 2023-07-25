@@ -17,9 +17,9 @@ $K4->fragment_cache( "page-footer", function() { ?>
                 <?php do_action('footer_logo') ?>
                 <?php do_action('footer_text') ?>
             </div>
-            <div class="newsletter-signup">
-                <?php do_action('newsletter_signup') ?>
-            </div>
+            <!-- <div class="newsletter-signup">
+                <?php //do_action('newsletter_signup') ?>
+            </div> -->
         </div>
         <?php do_action('footer_nav') ?>
         <div class="fineprint">
