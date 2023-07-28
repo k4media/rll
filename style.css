@@ -152,7 +152,7 @@ nav ul li {
 	left: -9999em;
     padding: 1em 2em 1em 0;
 	position: absolute;
-	width: 132px;
+	width: 152px;
 }
 #secondary .sub-menu li {
 	display: block;
@@ -166,7 +166,7 @@ nav ul li {
 #secondary .locations {
 	display: inline-block;
 	padding: 16px;
-	width: 100px;
+	width: 120px;
 }
 #secondary .locations > a {
 	margin-left: 8px;
