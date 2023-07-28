@@ -1,12 +1,12 @@
 #page-lead {
     background-color: var(--color-green);
     color: var(--color-white);
-    padding: 80px 0 120px 0;
+    padding: 60px 0 120px 0;
 }
 #page-lead .lead p {
     font-size: var(--font-size-big);
     line-height: 1.5em;
-    margin: 0 auto 0 auto;
+    margin: 1em auto 1em auto;
 }
 #page-lead .lead a {
     border-bottom: solid 1px var(--color-white);
