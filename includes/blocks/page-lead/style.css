@@ -4,7 +4,7 @@
     padding: 60px 0 120px 0;
 }
 #page-lead .lead p {
-    font-size: var(--font-size-big);
+    font-size: var(--font-size-larger);
     line-height: 1.5em;
     margin: 1em auto 1em auto;
 }
