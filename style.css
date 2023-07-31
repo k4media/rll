@@ -2285,6 +2285,7 @@ input[type='search']:focus-visible + input {
 	z-index: 110;
 }
 #hamburger {
+	display: none;
 	width: 18px;
 	height: 12px;
 	pointer-events:all;  
@@ -2501,7 +2502,8 @@ input[type='search']:focus-visible + input {
 	.award-stage > div {
 		columns: 3;
 	}
-	.contact-stage .copy-stage {
+	.contact-stage .copy-stage,
+	#hamburger {
 		display: block;
 	}
 	.contact-stage .copy-stage .form {
