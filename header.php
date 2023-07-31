@@ -23,7 +23,7 @@
 $K4 = new K4;
 $K4->fragment_cache( "page-header", function() { ?>
 <?php get_template_part("includes/template-parts/menus/menu", "side"); ?>
-<!--
+
 <div class="hamburger-stage"><div class="silo">
 	<div id="hamburger">
 		<span></span>
@@ -32,7 +32,7 @@ $K4->fragment_cache( "page-header", function() { ?>
 		<span></span>
 	</div>
 </div></div>
--->
+
 <header id="header" class="main">
 	<div class="header-stage silo">
 		<div class="left">

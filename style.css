@@ -2517,7 +2517,8 @@ input[type='search']:focus-visible + input {
 	.subnav-swiper ul {
 		margin-left: 16px;
 	}
-	#site-navigation-left {
+	#site-navigation-left,
+	#secondary .locations {
 		display: none;
 	}
 }
@@ -2570,18 +2571,6 @@ input[type='search']:focus-visible + input {
 	.insights-callout-stage {
 		padding: 60px 0 60px 0;
 	}
-	/* 	.team-grid, 
-	.team-member-stage,
-	.insights-callout-stage,
-	#our-founders {
-		padding: 60px 0 60px 0;
-	}
-	*/
-	/*
-	.team-lead-stage, .team-member-stage {
-		padding-bottom: 50px;
-	} */
-
 	.team-grid {
 		padding-bottom: 60px;
 		padding-top: 60px;
@@ -3255,5 +3244,8 @@ input[type='search']:focus-visible + input {
 @media screen and ( max-width: 400px ) { 
 	#results_stage.team-stage.country .swiper-wrapper {
 		grid-template-columns: repeat(1, 1fr);
+	}
+	.contact-callout .button {
+		margin-bottom: 1em;
 	}
 }
