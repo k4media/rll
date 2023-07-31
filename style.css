@@ -2359,6 +2359,30 @@ input[type='search']:focus-visible + input {
 #location-subnav {
 	overflow: hidden;
 }
+
+#rll-privacy ol {
+	list-style-type: none;
+	counter-reset: item;
+	margin: 0;
+	padding: 0;
+}
+#rll-privacy ol > li {
+	display: table;
+	counter-increment: item;
+	margin-bottom: 0.6em;
+}
+#rll-privacy ol > li:before {
+	content: counters(item, ".") ". ";
+	display: table-cell;
+	padding-right: 0.6em;    
+}
+#rll-privacy li ol > li {
+	margin: 0;
+}
+#rll-privacy li ol > li:before {
+	content: counters(item, ".") " ";
+}
+
 @media print {
 	.header-stage .left,
 	.header-stage .right,
