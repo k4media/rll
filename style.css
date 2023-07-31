@@ -2503,7 +2503,7 @@ input[type='search']:focus-visible + input {
 		columns: 3;
 	}
 	.contact-stage .copy-stage,
-	#hamburger {
+	#hamburger, #mobile-navigation {
 		display: block;
 	}
 	.contact-stage .copy-stage .form {
