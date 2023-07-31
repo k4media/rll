@@ -33,9 +33,9 @@
             ?>
         </nav>
         <div class="footer">
-            <img class="art" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/menu-side-art.svg">
+            <!--<img class="art" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/menu-side-art.svg">
             <img class="art-tablet" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/menu-side-art-tablet.svg">  
-            <img class="art-mobile" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/menu-side-art-mobile.svg">     
+            <img class="art-mobile" src="<?php echo get_stylesheet_directory_uri() ?>/assets/media/menu-side-art-mobile.svg"> -->    
             <div class="fineprint">
                 <?php do_action('copyright_notice') ?>
                 <?php do_action('social_links') ?>
