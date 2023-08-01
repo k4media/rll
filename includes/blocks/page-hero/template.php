@@ -44,11 +44,11 @@ $K4->fragment_cache( $key, function() {
           <div class="overlay" style="background-color:<?php echo $overlay ?>"></div>
      <?php endif; ?>
      <div class="stage silo">
-          <nav class="subnav-stage">
+          <!--<nav class="subnav-stage">
                <ul>
                     <li class="back"><a href="<?php echo get_home_url(null, '/solutions/') ?>">Back</a></li>
                </ul>
-          </nav>
+          </nav>-->
           <h2><?php echo $title ?></h2>
      </div>
      
