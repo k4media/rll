@@ -2383,7 +2383,9 @@ input[type='search']:focus-visible + input {
 #rll-privacy li ol > li:before {
 	content: counters(item, ".") " ";
 }
-
+.social-links object {
+    pointer-events: none;
+}
 @media print {
 	.header-stage .left,
 	.header-stage .right,
