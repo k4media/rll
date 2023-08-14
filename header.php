@@ -14,6 +14,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="google-site-verification" content="3QPW51nG0zbRexH1c-u_HYsIkZz4OvTwJmWgT9GERXg" />
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
