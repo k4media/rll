@@ -9,6 +9,10 @@ global $wp, $wp_query;
 wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
 wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
+// Select2
+wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
+wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
+
 /**
  * Get country, category
  */
@@ -90,7 +94,7 @@ get_header();
 <section id="insights" class="<?php echo esc_attr($category->slug) ?> archive-insights callout silo">
 	
     <div id="beacon"></div>
-    <div id="subnav-stage"><?php do_action('dfdl_solutions_country_nav'); ?></div>
+    <div id="subnav-stage"><?php // do_action('dfdl_solutions_country_nav'); ?></div>
 
     <input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
     <input type="hidden" id="insights_term" name="insights_term" value="<?php echo esc_attr($category->term_id) ?>">

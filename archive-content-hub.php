@@ -9,6 +9,9 @@ get_header();
 wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
 wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
+// Select2
+wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
+wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
 ?>
 <?php if ( have_posts() ) : ?>
 	<?php while ( have_posts() ) : ?>
@@ -20,7 +23,7 @@ wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/s
 <section id="insights" class="archive content-hub silo">
 
     <div id="beacon"></div>
-    <div id="subnav-stage"><?php do_action('dfdl_solutions_country_nav'); ?></div>
+    <div id="subnav-stage"><?php // do_action('dfdl_solutions_country_nav'); ?></div>
 
     <input type="hidden" name="content_hub" id="content_hub" value="content_hub">
 	<input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">

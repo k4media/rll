@@ -14,6 +14,10 @@
 	wp_enqueue_script('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.js' );
 	wp_enqueue_style('swiper', get_stylesheet_directory_uri() . '/assets/js/swiper/swiper-bundle.min.css');
 
+	// Select2
+	wp_enqueue_style('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.css', null, null, 'all');
+	wp_enqueue_script('select2', get_stylesheet_directory_uri() . '/assets/js/select2/select2.min.js', array("jquery"), null, true );
+
 	if ( ! empty(get_query_var('cat')) ) {
 		$term = get_category(get_query_var('cat'));
 	} else {
@@ -26,7 +30,7 @@
 		/**
 		 * Country Navigation
 		 */
-		do_action('dfdl_solutions_country_nav');
+		//do_action('dfdl_solutions_country_nav');
 	?>
 	<input type="hidden" id="ajax_count" name="ajax_count" value="<?php echo get_option('posts_per_page') ?>">
 	<input type="hidden" id="insights_term" name="insights_term" value="<?php echo esc_attr($term->term_id) ?>">
