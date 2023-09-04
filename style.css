@@ -8,7 +8,7 @@ Description: Custom WordPress Theme for DFDL
 Requires at least: 6.0
 Tested up to: 6.2
 Requires PHP: 7.4
-Version: 1.0.1
+Version: 1.0.2
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: rll
@@ -1860,7 +1860,7 @@ header + #results_stage .swiper {
 }
 .single .entry-content > p:first-child,
 .single .entry-content .lead {
-	font-size: var(--font-size-big);
+	font-size: var(--font-size-larger);
 	line-height: 1.35em;
 }
 .single h1, h2, h3, h4, h5 {
@@ -1868,6 +1868,7 @@ header + #results_stage .swiper {
 	margin: 2rem 0 0 0;
 }
 .single h1 {
+	color: var(--color-green);
 	font-size: var(--font-size-huge);
 }
 .single h2 {
