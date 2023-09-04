@@ -35,7 +35,7 @@ DFDL Theme, (C) 2022 DFDL
 	--color-gray-disabled: #C8C8C8;
 	--color-light-gray: #F6F6F6;
 	--color-whisper: #E7E7E7;
-	--color-green: #004C45;
+	--color-dfdl-green: #004C45;
 	--color-green-10: #F4F7F7;
 	--color-green-70:#66948F;
 	--color-bright-green: #77DD77;
@@ -116,10 +116,10 @@ a:hover, .callout .stage a:hover,
 	color: var(--color-bright-green);
 }
 .posts .card h4 a:hover {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .posts .card h4 a:hover {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 nav ul {
 	margin: 0;
@@ -148,7 +148,7 @@ nav ul li {
 	position: relative;
 }
 #secondary .sub-menu {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 	left: -9999em;
     padding: 1em 2em 1em 0;
 	position: absolute;
@@ -176,7 +176,7 @@ nav ul li {
 	color: var(--color-white);
 }
 #secondary .locations:hover {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 	color: var(--color-white);
 }
 #secondary .locations:hover > .sub-menu {
@@ -201,8 +201,8 @@ nav ul li {
 	text-decoration: none;
 }
 .button.green {
-	border: solid 1px var(--color-green);
-	color: var(--color-green);
+	border: solid 1px var(--color-dfdl-green);
+	color: var(--color-dfdl-green);
 	transition: all .15s;
 }
 .button.green:hover {
@@ -217,13 +217,13 @@ nav ul li {
 }
 .button.green.solid,
 .entry-content input[type="submit"] {
-	background-color: var(--color-green);
+	background-color: var(--color-dfdl-green);
 	color: var(--color-white);
 }
 .button.filter {
 	background: transparent;
 	border: solid 1px var(--color-green-70);
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	cursor: pointer;
 	font-family: "Calibri", sans-serif;
 	height: 40px;
@@ -239,7 +239,7 @@ nav ul li {
 .button.mobile-filter {
 	background: transparent;
 	border: 0;
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	cursor: pointer;
 	height: 40px;
 	position: relative;
@@ -280,7 +280,7 @@ nav ul li {
 	background-size: 12px;
 }
 .button.green.solid:hover {
-	border: solid 1px var(--color-green);
+	border: solid 1px var(--color-dfdl-green);
 	color: var(--color-bright-green);
 }
 .button.disabled,
@@ -305,7 +305,7 @@ nav ul li {
 	line-height: 2em;
 }
 .button.download:hover, .button.register:hover {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 }
 .button.download:before {
 	background-image: url(assets/media/icon-download.svg);
@@ -341,7 +341,7 @@ nav ul li {
 	line-height: 2em;
 }
 .button.download:hover, .button.register:hover {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 }
 .button.download:before {
 	background-image: url(assets/media/icon-download.svg);
@@ -410,7 +410,7 @@ header.main {
 	transition: all .15s;
 }
 .header-stage .right .cta-button a:hover {
-	background-color: var(--color-green);
+	background-color: var(--color-dfdl-green);
 	color: var(--color-white);
 	transition: all .15s;
 }
@@ -446,12 +446,12 @@ header.main {
 }
 .header-stage .current_page_item a,
 .header-stage .current-page-parent {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-weight: 700;
 }
 .menu .current-page-ancestor,
 .menu .current-page-ancestor a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-weight: 700;
 }
 .header-stage .search {
@@ -501,12 +501,12 @@ header.main {
     text-decoration: none;
 }
 .callout a.button {
-    color: var(--color-green);
+    color: var(--color-dfdl-green);
 	font-size: var(--font-size-body);
 	margin: 4em auto 0 auto;
 }
 #colophon {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 	color: var(--color-white);
 	margin-top: auto;
 	padding: 4em 0 32px 0 ;
@@ -788,7 +788,7 @@ header.main {
 	margin-bottom: 1em;
 }
 .dfdl-single-member.author .bio {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	columns: 1;
 	font-size: var(--font-size-body);
 	margin: 1em 0 1em 0;
@@ -797,7 +797,7 @@ header.main {
 	margin-top: 1em;
 }
 .dfdl-single-member.author .link a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: var(--font-size-body);
 	font-weight: 900;	
 }
@@ -820,13 +820,13 @@ header.main {
 	width: 100%;
 }
 .dfdl-single-member .name {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: var(--font-size-larger);
 	font-family: 'praxis_lt_regularbold';
 	margin-bottom: .5em;
 }
 .dfdl-single-member .name a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .dfdl-single-member .position,
 .dfdl-single-member .location,
@@ -836,11 +836,11 @@ header.main {
 	line-height: 1.5em;
 }
 .dfdl-single-member .member .bio {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	margin-top: 1em;
 }
 .dfdl-single-member .contact-details {
-	border-top: solid 1px var(--color-green);
+	border-top: solid 1px var(--color-dfdl-green);
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1em;
@@ -860,13 +860,13 @@ header.main {
 }
 /* .dfdl-single-member .contact-details > div { width: 25%; } */
 .dfdl-single-member .contact-details a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .dfdl-single-member .contact-details .telephone,
 .dfdl-single-member .contact-details .mobile,
 .dfdl-single-member .contact-details .email,
 .dfdl-single-member .contact-details .linkedin {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	text-indent: 1.5em;
 }
 .dfdl-single-member .telephone, .contact-stage .telephone {
@@ -907,7 +907,7 @@ header.main {
 	position: relative;
 }
 .member-loop .rollover {
-	background-color: var(--color-green);
+	background-color: var(--color-dfdl-green);
 	display: flex;
 	height: 100%;
 	left: -9999em;
@@ -963,7 +963,7 @@ header.main {
 }
 .team-member .details-stage {
     align-items: center;
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
     display: flex;
     padding: 1.5em;
     text-align: left;
@@ -982,7 +982,7 @@ header.main {
 	margin-top: 0;
 }
 #menu-side {
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 	bottom: 0;
 	color: var(--color-white);
 	display: none;
@@ -1070,11 +1070,11 @@ header.main {
 	padding-bottom: .0125em;
 }
 .contact-callout p > a:hover {
-	border-bottom: solid 1px var(--color-green);
-	color: var(--color-green);
+	border-bottom: solid 1px var(--color-dfdl-green);
+	color: var(--color-dfdl-green);
 }
 .contact-callout .button {
-	border: solid 1px var(--color-green);
+	border: solid 1px var(--color-dfdl-green);
 	height: 38px;
     margin-top: 2em;
 	margin-right: 5px;
@@ -1229,7 +1229,7 @@ header.main {
                break-inside: avoid;
 }
 .award-stage > div h4 {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: 16px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -1254,7 +1254,7 @@ header.main {
 	margin: 0;
 }
 .award-entry {
-	border-left: solid 1px var(--color-green);
+	border-left: solid 1px var(--color-dfdl-green);
 	margin-bottom: 3em;
 	margin-left: 1em;
 	padding-left: 1em;
@@ -1266,7 +1266,7 @@ header.main {
 	margin: 0.5em 0 0.5em 0;
 }
 .award-entry .solution, .award-entry .award-title {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	text-transform: uppercase;
 }
 .award-entry .country {
@@ -1424,7 +1424,7 @@ input[type=checkbox] {
 .select2-results__option[aria-selected=true]:before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 63% 60%;
 	background-size: 90%;
-	border: solid 2px var(--color-green);
+	border: solid 2px var(--color-dfdl-green);
 	content: " ";
 	color: var(--color-white);
 	display: inline-block;
@@ -1504,7 +1504,7 @@ input[type=checkbox] {
 	text-indent: 24px;
 }
 .contact-stage .copy-stage .copy a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .contact-stage .copy-stage .form {
 	flex: 1 1 70%;
@@ -1572,7 +1572,7 @@ input[type=checkbox] {
     position: absolute;
   }
 input[type=checkbox]:checked {
-	border: solid 2px var(--color-green);
+	border: solid 2px var(--color-dfdl-green);
 }
 input[type=checkbox]:checked::before {
 	background: var(--color-white) url(assets/media/icon-checkbox-check.svg) no-repeat 60% 60%;
@@ -1670,7 +1670,7 @@ article + #insights {
 #insights .callout header a,
 #dfdl-written-by header a,
 #dfdl-in-the-news header a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-weight: 700;
 }
 #insights .callout h2,
@@ -1715,7 +1715,7 @@ header + #results_stage .swiper {
 	padding-right: 0;
 }
 .posts .card {
-	border-top: solid 2px var(--color-green);
+	border-top: solid 2px var(--color-dfdl-green);
 	box-shadow: 0 0 6px rgba(200,200,200, .5);
 	padding: 1.5em;
 	width: 100%;
@@ -1778,10 +1778,10 @@ header + #results_stage .swiper {
 	color: var(--color-black);
 }
 .card-hover h4 {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .card-hover:hover .card {
-	background-color: var(--color-green);
+	background-color: var(--color-dfdl-green);
 }
 .card:hover .play {
 	background-color: var(--color-green-70);
@@ -1838,7 +1838,7 @@ header + #results_stage .swiper {
 .single .category,
 .single .separator,
 .single .subcategory {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: var(--font-size-large);
 }
 .taxonomy .separator {
@@ -1851,8 +1851,8 @@ header + #results_stage .swiper {
 	position: relative;
 }
 .single .entry-content a:not(.button) {
-	border-bottom: solid 1px var(--color-green);
-	color: var(--color-green);
+	border-bottom: solid 1px var(--color-dfdl-green);
+	color: var(--color-dfdl-green);
 }
 .single .entry-content a:not(.button):hover {
 	border-bottom: solid 1px var(--color-bright-green);
@@ -1868,7 +1868,7 @@ header + #results_stage .swiper {
 	margin: 2rem 0 0 0;
 }
 .single h1 {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: var(--font-size-huge);
 }
 .single h2 {
@@ -1975,7 +1975,7 @@ header + #results_stage .swiper {
 	margin-top: 2em;
 }
 .swiper-card .taxonomy {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	font-size: var(--font-size-small);
 	margin-bottom: 2em;
 	text-transform: uppercase;
@@ -2138,7 +2138,7 @@ a:hover .event-speaker .position {
 }
 #contact-dfdl .dirty.valid input,
 #contact-dfdl .dirty.valid textarea {
-	border: solid 1px var(--color-green);
+	border: solid 1px var(--color-dfdl-green);
 }
 #contact-dfdl .dirty.invalid,
 #contact-dfdl .dirty.invalid h4 {
@@ -2256,7 +2256,7 @@ input[type='search']:focus-visible + input {
 	padding-top: 0;
 }
 .responsive-table a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .our-desks-callout-stage + .text-feature-stage {
 	padding-top: 0;
@@ -2312,7 +2312,7 @@ input[type='search']:focus-visible + input {
 	position: absolute;
 	height: 2px;
 	width: 100%;
-	background: var(--color-green);
+	background: var(--color-dfdl-green);
 	opacity: 1;
 	left: 0;
 	-webkit-transform: rotate(0deg);
