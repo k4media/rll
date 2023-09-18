@@ -68,9 +68,9 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     if ( $clean_elements['company'] == $clean_elements['lastname']) {
         $error_messages['spam'] = true;
     }
-    if ( count($clean_solutions) > 6 ) {
-        $error_messages['spam'] = true;
-    }
+    //if ( count($clean_solutions) > 6 ) {
+        //$error_messages['spam'] = true;
+    //}
 
     if ( count($error_messages) === 0 ) {
 
@@ -268,7 +268,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             ?>
         </div>
 
-        
+
         <?php
             $error_class = "";
             if ( isset($error_messages['message'])) {
