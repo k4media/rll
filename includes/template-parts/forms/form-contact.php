@@ -56,6 +56,22 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         $error_messages['email'] = true;
     }
 
+    /**
+     * SPAM CHECKING
+     */
+    if ( $clean_elements['firstname'] == $clean_elements['lastname']) {
+        $error_messages['spam'] = true;
+    }
+    if ( $clean_elements['firstname'] == $clean_elements['position']) {
+        $error_messages['spam'] = true;
+    }
+    if ( $clean_elements['company'] == $clean_elements['lastname']) {
+        $error_messages['spam'] = true;
+    }
+    if ( count($clean_solutions) > 6 ) {
+        $error_messages['spam'] = true;
+    }
+
     if ( count($error_messages) === 0 ) {
 
         $nice_date = wp_date("M d, Y, H:i:s");
@@ -235,7 +251,30 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             <textarea id="message" name="message" class="message"><?php if (isset($_POST['message'])) { echo esc_attr(trim($_POST['message'])); } ?></textarea>
             <span class="error-message">Please tell us a little bit about your enquiry</span>
         </div>
-        <button id="contact-submit" name="contact-submit" type="submit"  value="contact-form-submit" class="button green solid submit disabled">Submit</button>
+        <button id="contact-submit"
+                name="contact-submit"
+                type="submit"
+                value="contact-form-submit"
+                data-sitekey="6LcuMQIoAAAAALi5Rjl6ZBLemCnl9KHpfTPwih1A" 
+                data-callback='onSubmit' 
+                data-action='submit'
+                class="button green solid submit disabled g-recaptcha">Submit</button>
     </div>
 
+    <script>function onSubmit(token) { document.getElementById("dfdl-contact").submit(); }</script>
+    <style>
+        .grecaptcha-badge { visibility: hidden; }
+        .recaptcha-notice {
+            color: #999;
+            font-size: x-small;
+            margin-top: 2em;
+            max-width: 16em;
+        }
+        .recaptcha-notice a {
+            color: var(--color-dfdl-green);
+        }
+    </style>
+    <div class="recaptcha-notice notice">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>
+
+    
 <?php endif; ?>
