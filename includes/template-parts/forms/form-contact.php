@@ -101,12 +101,13 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         $submitted = true;
 
         /** Compose email */
-        $message = '<h4>Someone submitted a Contact Form for ' . ucwords($clean_elements['country']) . '</h4>';
+        $message = '<h4>Someone submitted a Contact Form on Robin Lynn & Lee</h4>';
         $message .= '<p>Name: ' . $clean_elements['firstname'] . '  ' . $clean_elements['lastname'] . '<br>';
         $message .= 'Email: ' . $clean_elements['email'] . '<br>';
         $message .= 'Phone: ' . $clean_elements['telephone'] . '<br>';
         $message .= 'Company: ' . $clean_elements['company'] . '<br>';
         $message .= 'Position: ' . $clean_elements['position'] . '</p>';
+        /*
         if ( isset($clean_solutions) && count($clean_solutions) > 0 ) {
             $message .= "<h4>SOLUTIONS</h4><ul>";
             foreach( $clean_solutions as $solution ) {
@@ -115,6 +116,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             }
             $message .= "</ul>";
         }
+        */
         $message .= "<h4>MESSAGE</h4>";
         $message .= '<p>' . nl2br($elements['message']) . '</p>';
 
@@ -276,5 +278,5 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     </style>
     <div class="recaptcha-notice notice">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.</div>
 
-    
+
 <?php endif; ?>
