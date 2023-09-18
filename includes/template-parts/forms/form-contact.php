@@ -8,8 +8,8 @@
  * Page Section & Country
  * Used to create and validate nonce
  */
-$sections = dfdl_get_section();
-$country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
+// $sections = dfdl_get_section();
+$country  = "Malaysia" ;
 $send_to  = array('info@dfdl.com', 'robert@k4media.com');
 
 
@@ -107,7 +107,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         $message .= 'Phone: ' . $clean_elements['telephone'] . '<br>';
         $message .= 'Company: ' . $clean_elements['company'] . '<br>';
         $message .= 'Position: ' . $clean_elements['position'] . '</p>';
-        /*
+        
         if ( isset($clean_solutions) && count($clean_solutions) > 0 ) {
             $message .= "<h4>SOLUTIONS</h4><ul>";
             foreach( $clean_solutions as $solution ) {
@@ -116,7 +116,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             }
             $message .= "</ul>";
         }
-        */
+        
         $message .= "<h4>MESSAGE</h4>";
         $message .= '<p>' . nl2br($elements['message']) . '</p>';
 
@@ -164,7 +164,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             
         <?php
             //$sections = dfdl_get_section();
-            //$country  = ( isset($sections[1]) ) ? $sections[1] : "regional" ;
+            $country = "Malaysia" ;
             wp_nonce_field( 'comment-form_' . $country );
         ?>
         <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
@@ -242,6 +242,33 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
                 </label>
             </div>
         </div>
+
+        <h4>Solutions</h4>
+        <div class="solutions">
+            <?php
+                $solutions = dfdl_get_solutions_tax();
+                foreach( $solutions as $s ) {
+                    $checked = "";
+                    if ( isset($_POST['solutions']) && ! empty($_POST['solutions']) ) {
+                        if ( in_array( $s->term_id, $_POST['solutions'])) {
+                            $checked = "checked";
+                        }
+                    }
+                    echo '<label class="checkbox-control">';
+                    echo '<input type="checkbox" id="' . esc_attr($s->slug) . '" name="solutions[]" value="' . esc_attr($s->term_id) . '" class="checkbox" ' .  $checked . '>' . esc_attr($s->name) ;
+                    echo '</label>';
+                }
+                $checked = "";
+                if ( isset($_POST['solutions']) && ! empty($_POST['solutions']) ) {
+                    if ( in_array( "other", $_POST['solutions'])) {
+                        $checked = "checked";
+                    }
+                }
+                echo '<label class="checkbox-control"><input type="checkbox" id="solutions_other" name="solutions[]" value="other" class="checkbox" ' .  $checked . '>Other</label>';
+            ?>
+        </div>
+
+        
         <?php
             $error_class = "";
             if ( isset($error_messages['message'])) {
