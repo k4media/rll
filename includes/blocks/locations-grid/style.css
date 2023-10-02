@@ -38,5 +38,5 @@
     color: var(--color-white);
 } */
 .solutions-grid-stage a:hover .solution {
-    background-color: var(--color-green);
+    background-color: var(--color-dfdl-green);
 }

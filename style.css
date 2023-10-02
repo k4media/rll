@@ -1441,7 +1441,7 @@ input[type=checkbox] {
 	height: 36px !important;
 }
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-	background-color: var(--color-green) !important;
+	background-color: var(--color-dfdl-green) !important;
 	border: 0 !important;
 	border-radius: 16px !important;
 	color: var(--color-white);
@@ -2134,7 +2134,7 @@ a:hover .event-speaker .position {
 #contact-dfdl .dirty.valid,
 #contact-dfdl .dirty.valid h4,
 #contact-dfdl .dirty.valid textarea {
-	color: var(--color-green)
+	color: var(--color-dfdl-green)
 }
 #contact-dfdl .dirty.valid input,
 #contact-dfdl .dirty.valid textarea {

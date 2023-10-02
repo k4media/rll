@@ -35,8 +35,8 @@ html :where(.wp-block) {
 	text-decoration: none;
 }
 .button.green {
-	border: solid 1px var(--color-green);
-	color: var(--color-green);
+	border: solid 1px var(--color-dfdl-green);
+	color: var(--color-dfdl-green);
 }
 #page-hero {
     align-items: center;
@@ -68,7 +68,7 @@ html :where(.wp-block) {
 	font-size: var(--font-size-jumbo);
 }
 .countup-box-stage {
-    background-color: var(--color-green);
+    background-color: var(--color-dfdl-green);
     color: var(--color-white);
     padding: 1em;
 }
@@ -167,7 +167,7 @@ html :where(.wp-block) {
 	display: flex;
 }
 .dfdl-single-member .details-stage {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 	margin: 0 2em 0 2em;
 }
 .dfdl-single-member .avatar {
@@ -189,14 +189,14 @@ html :where(.wp-block) {
 	margin-top: 1em;
 }
 .dfdl-single-member .contact-details {
-	border-top: solid 1px var(--color-green);
+	border-top: solid 1px var(--color-dfdl-green);
 	display: flex;
 	justify-content: space-between;
 	margin-top: 1em;
 	padding-top: 1em;
 }
 .dfdl-single-member .contact-details a {
-	color: var(--color-green);
+	color: var(--color-dfdl-green);
 }
 .dfdl-single-member .contact-details .telephone,
 .dfdl-single-member .contact-details .mobile,

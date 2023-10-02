@@ -15,7 +15,7 @@
 }
 .network-partner .brand a,
 .network-partner .details .name a {
-    color: var(--color-green);
+    color: var(--color-dfdl-green);
     font-weight: 700;
 }
 .network-partner .brand img {

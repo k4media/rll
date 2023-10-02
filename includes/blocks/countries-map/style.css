@@ -71,11 +71,11 @@
     color: var(--color-dark-gray);
 }
 .callout .stage .countries ul a:hover {
-    color: var(--color-green);
+    color: var(--color-dfdl-green);
     color: var(--color-dark-gray);
 }
 .callout .stage .countries ul a:hover {
-    color: var(--color-green);
+    color: var(--color-dfdl-green);
 }
 #popup {
     background-color: var(--color-white);

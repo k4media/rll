@@ -1,10 +1,10 @@
 .countup-box-stage {
-    background-color: var(--color-green);
+    background-color: var(--color-dfdl-green);
     color: var(--color-white);
     padding: 120px 0 120px 0;
 }
 .countup-box-stage.frontpage {
-    background: var(--color-green) url('../../../assets/media/countup-art.svg') no-repeat 0 100%;
+    background: var(--color-dfdl-green) url('../../../assets/media/countup-art.svg') no-repeat 0 100%;
     background-size: 200px 200px;
 }
 .countup-boxes {
