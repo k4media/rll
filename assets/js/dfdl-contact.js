@@ -1,5 +1,5 @@
 var firstname = document.getElementById("firstname");
-firstname && firstname.addEventListener("blur", function() {
+firstname && firstname.addEventListener("keyup", function() {
     firstname.parentElement.classList.add("dirty");
     if ( ! firstname.value ) {
         set_input_status(firstname, "invalid");
@@ -8,7 +8,7 @@ firstname && firstname.addEventListener("blur", function() {
     }
 });
 var lastname = document.getElementById("lastname");
-lastname && lastname.addEventListener("blur", function() {
+lastname && lastname.addEventListener("keyup", function() {
     lastname.parentElement.classList.add("dirty");
     if ( ! lastname.value ) {
         set_input_status(lastname, "invalid");
@@ -17,7 +17,7 @@ lastname && lastname.addEventListener("blur", function() {
     }
 });
 var email = document.getElementById("email");
-email && email.addEventListener("blur", function() {
+email && email.addEventListener("keyup", function() {
     email.parentElement.classList.add("dirty");
     if ( validateEmail(email.value) == false || ! email.value ) {
         set_input_status(email, "invalid");
@@ -26,7 +26,7 @@ email && email.addEventListener("blur", function() {
     }
 });
 var telephone = document.getElementById("telephone");
-telephone && telephone.addEventListener("blur", function() {
+telephone && telephone.addEventListener("keyup", function() {
     telephone.parentElement.classList.add("dirty");
     if ( ! telephone.value ) {
         set_input_status(telephone, "invalid");
@@ -35,7 +35,7 @@ telephone && telephone.addEventListener("blur", function() {
     }
 });
 var company = document.getElementById("company");
-company && company.addEventListener("blur", function() {
+company && company.addEventListener("keyup", function() {
     company.parentElement.classList.add("dirty");
     if ( ! company.value ) {
         set_input_status(company, "invalid");
@@ -44,7 +44,7 @@ company && company.addEventListener("blur", function() {
     }
 });
 var position = document.getElementById("position");
-position && position.addEventListener("blur", function() {
+position && position.addEventListener("keyup", function() {
     position.parentElement.classList.add("dirty");
     if ( ! position.value ) {
         set_input_status(position, "invalid");
@@ -53,9 +53,9 @@ position && position.addEventListener("blur", function() {
     }
 });
 var message = document.getElementById("message");
-message && message.addEventListener("blur", function() {
+message && message.addEventListener("keyup", function() {
     message.parentElement.classList.add("dirty");
-    if ( ! message.value ) {
+    if ( ! message.value || parseInt(message.value.length) < 16 ) {
         set_input_status(message, "invalid");
     } else {
         set_input_status(message, "valid");
@@ -63,14 +63,13 @@ message && message.addEventListener("blur", function() {
 });
 var form_inputs = document.querySelectorAll("#dfdl-contact input[type=text], #dfdl-contact input[type=email], #dfdl-contact textarea");
 form_inputs.forEach((el) => {
-    el.addEventListener('blur', () => {
+    el.addEventListener('keyup', () => {
         form_validate();
     });
     el.classList.add("clean");
 });
 function set_input_status(el, status) {
-    el.classList.remove("clean");
-    el.classList.remove("valid", "invalid");
+    el.classList.remove("clean", "valid", "invalid");
     el.parentElement.classList.remove("valid", "invalid");
     el.classList.add(status);
     el.parentElement.classList.add(status);
