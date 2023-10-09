@@ -66,7 +66,12 @@ form_inputs.forEach((el) => {
     el.addEventListener('keyup', () => {
         form_validate();
     });
-    el.classList.add("clean");
+    if ( document.getElementById("contact_form_submitted").value == "false" ) {
+        el.classList.add("clean");
+    } else if ( document.getElementById("contact_form_submitted").value == "true" ) {
+        el.classList.remove("clean");
+        el.classList.add("dirty");
+    }
 });
 function set_input_status(el, status) {
     el.classList.remove("clean", "valid", "invalid");
@@ -90,4 +95,8 @@ function form_validate() {
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
-  }
+}
+var form_status = document.getElementById("contact_form_submitted");
+if ( form_status && form_status.value == "true" ) {
+    document.getElementById("contact-submit").classList.remove("disabled");
+}

@@ -4,6 +4,8 @@
  * Process Contact Form
  */
 
+require( get_template_directory() .'/rll-config.php');
+
 /**
  * Page Section & Country
  * Used to create and validate nonce
@@ -11,7 +13,6 @@
 // $sections = dfdl_get_section();
 $country  = "Malaysia" ;
 $send_to  = array('info@dfdl.com', 'robert@k4media.com');
-
 
 /**
  * Process form submission
@@ -44,16 +45,37 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     }
     
     /** Validate input */
+    $errors = array();
+    $errors['count'] = 0;
     $error_messages = array();
     foreach( $clean_elements as $key => $value ) {
         if ( "" === $value ) {
-            $error_messages[$key] = true;
+            $errors[$key] = true;
+            $errors['count']++;
         }
     }
 
     /** Sanitize email */
     if (! filter_var($clean_elements['email'], FILTER_VALIDATE_EMAIL)) {
-        $error_messages['email'] = true;
+        $errors['count']++;
+        $error_messages['email'] = "Invalid email address";
+    }
+
+    /**
+     * for email field, let's actually check it
+     * take a given email address and split it into 
+     * the username and domain.
+     */
+    list($userName, $mailDomain) = explode("@", $clean_elements['email']);
+   
+    /**
+     * use php checkdnsr to see if email/domain is valid
+     * this only works on unix servers though
+     * so check to se we are on the live server
+     */
+    if (!@checkdnsrr($mailDomain, "MX")) {
+        $errors['count']++;
+        $error_messages['email'] = "Invalid email address";
     }
 
     /**
@@ -68,11 +90,25 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
     if ( $clean_elements['company'] == $clean_elements['lastname']) {
         $error_messages['spam'] = true;
     }
-    //if ( count($clean_solutions) > 6 ) {
-        //$error_messages['spam'] = true;
-    //}
+    if ( strlen($clean_elements['message']) < 16 ) {
+        $errors['count']++;
+    }
 
-    if ( count($error_messages) === 0 ) {
+    /**
+     * GOOGLE CAPTCHA CHECK
+     */
+    $captcha = $_POST['g-recaptcha-response'];
+    if ( empty( $_POST['g-recaptcha-response'] ) ) {
+        $errors['count']++;
+    } else {
+        $is_captcha_valid = validate_google_captcha($_POST['g-recaptcha-response'], $googleApiSecret);
+        if ( ! $is_captcha_valid == 1 ) {
+            $errors['count']++;
+            $error_messages['spam'] = "Expired ReCaptcha. Please reload the page and try again.";
+        }
+    }
+
+    if ( $errors['count'] === 0 ) {
 
         $nice_date = wp_date("M d, Y, H:i:s");
 
@@ -95,7 +131,9 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         update_field( "field_640352cbff8dc", $clean_elements['message'] , $new_post );
 
         /** set solutions cpt */
-        $result = wp_set_object_terms($new_post, $clean_solutions, 'dfdl_solutions');
+        if (! empty($clean_solutions) ) {
+            $result = wp_set_object_terms($new_post, $clean_solutions, 'dfdl_solutions');
+        }
 
         /** insert flag */
         $submitted = true;
@@ -152,11 +190,26 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
 
 <?php else : ?>
 
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
     <div class="contact-form">
 
-    <?php if ( isset($error_messages) && count($error_messages) > 0 ) : ?>
-        
-        <p class='error-banner'>You missed some fields. Please review the form and try again.</p>
+    <?php if ( isset($errors['count']) && $errors['count'] > 0 ) : ?>
+    
+        <input type="hidden" name="contact_form_submitted" id="contact_form_submitted" value="true">
+        <div class='error-banner'>
+            <p>You missed some fields. Please review the form and try again.</p>
+            <?php
+                if ( isset($error_messages) && count($error_messages) > 0 ) {
+                    echo '<ul>';
+                    foreach ($error_messages as $message) {
+                        echo '<li>' . $message . '</li>';
+                    }
+                    echo '</ul>';
+                }
+
+            ?>
+        </div>
 
     <?php endif; ?>
 
@@ -168,6 +221,7 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
             wp_nonce_field( 'comment-form_' . $country );
         ?>
         <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
+        <input type="hidden" name="contact_form_submitted" id="contact_form_submitted" value="false">
         <div class="details">
             <div>
                 <?php
