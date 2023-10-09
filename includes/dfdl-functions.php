@@ -1,5 +1,32 @@
 <?php
 
+/** 
+ * Validate Google Captcha
+ */
+function validate_google_captcha($response, $googleApiSecret): string {
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array(
+        'secret' => $googleApiSecret,
+        'response' => $response
+    );
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method' => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) {
+        // Error handling for API request failure
+        return false;
+    } else {
+        $responseJson = json_decode($result);
+        return $responseJson->success;
+    }
+}
+
 /**
  * Insights filter pagination links
  */

@@ -10,17 +10,18 @@ require( get_template_directory() .'/rll-config.php');
  * Page Section & Country
  * Used to create and validate nonce
  */
-// $sections = dfdl_get_section();
-$country  = "Malaysia" ;
+
+$country  = "regional" ;
 $send_to  = array('info@dfdl.com', 'robert@k4media.com');
 
 /**
  * Process form submission
  */
-if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit'])) ) {
+
+if ( isset($_POST['form_country']) && ! empty(isset($_POST['form_country'])) ) {
 
     /** validate form nonce */
-    if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'comment-form_' . $country )) {
+    if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'contact-form_malaysia' )) {
         echo "<p>Failed security check. Please refresh the page and try again.</h4>";
         exit;
     }
@@ -216,11 +217,9 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
         <form id="dfdl-contact" method="post">
             
         <?php
-            //$sections = dfdl_get_section();
-            $country = "Malaysia" ;
-            wp_nonce_field( 'comment-form_' . $country );
+            wp_nonce_field( 'contact-form_malaysia' );
         ?>
-        <input type="hidden" id="form_country" name="form_country" value="<?php echo $country ?>">
+        <input type="hidden" id="form_country" name="form_country" value="regional">
         <input type="hidden" name="contact_form_submitted" id="contact_form_submitted" value="false">
         <div class="details">
             <div>
