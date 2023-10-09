@@ -82,13 +82,13 @@ if ( isset($_POST['contact-submit']) && ! empty(isset($_POST['contact-submit']))
      * SPAM CHECKING
      */
     if ( $clean_elements['firstname'] == $clean_elements['lastname']) {
-        $error_messages['spam'] = true;
+        $errors['count']++;
     }
     if ( $clean_elements['firstname'] == $clean_elements['position']) {
-        $error_messages['spam'] = true;
+        $errors['count']++;
     }
     if ( $clean_elements['company'] == $clean_elements['lastname']) {
-        $error_messages['spam'] = true;
+        $errors['count']++;
     }
     if ( strlen($clean_elements['message']) < 16 ) {
         $errors['count']++;
