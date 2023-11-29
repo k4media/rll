@@ -1625,6 +1625,9 @@ input[type=checkbox]:hover {
 #contact-dfdl .error-banner {
 	display: block;
 }
+#contact-dfdl .error-banner li {
+	text-indent: 0;
+}
 #insights {
 	margin: 120px auto 120px auto;
 	position: relative;
