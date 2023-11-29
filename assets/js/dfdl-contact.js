@@ -1,69 +1,22 @@
-var firstname = document.getElementById("firstname");
-firstname && firstname.addEventListener("keyup", function() {
-    firstname.parentElement.classList.add("dirty");
-    if ( ! firstname.value ) {
-        set_input_status(firstname, "invalid");
-    } else {
-        set_input_status(firstname, "valid");
-    }
-});
-var lastname = document.getElementById("lastname");
-lastname && lastname.addEventListener("keyup", function() {
-    lastname.parentElement.classList.add("dirty");
-    if ( ! lastname.value ) {
-        set_input_status(lastname, "invalid");
-    } else {
-        set_input_status(lastname, "valid");
-    }
-});
-var email = document.getElementById("email");
-email && email.addEventListener("keyup", function() {
-    email.parentElement.classList.add("dirty");
-    if ( validateEmail(email.value) == false || ! email.value ) {
-        set_input_status(email, "invalid");
-    } else {
-        set_input_status(email, "valid");
-    }
-});
-var telephone = document.getElementById("telephone");
-telephone && telephone.addEventListener("keyup", function() {
-    telephone.parentElement.classList.add("dirty");
-    if ( ! telephone.value ) {
-        set_input_status(telephone, "invalid");
-    } else {
-        set_input_status(telephone, "valid");
-    }
-});
-var company = document.getElementById("company");
-company && company.addEventListener("keyup", function() {
-    company.parentElement.classList.add("dirty");
-    if ( ! company.value ) {
-        set_input_status(company, "invalid");
-    } else {
-        set_input_status(company, "valid");
-    }
-});
-var position = document.getElementById("position");
-position && position.addEventListener("keyup", function() {
-    position.parentElement.classList.add("dirty");
-    if ( ! position.value ) {
-        set_input_status(position, "invalid");
-    } else {
-        set_input_status(position, "valid");
-    }
-});
-var message = document.getElementById("message");
-message && message.addEventListener("keyup", function() {
-    message.parentElement.classList.add("dirty");
-    if ( ! message.value || parseInt(message.value.length) < 16 ) {
-        set_input_status(message, "invalid");
-    } else {
-        set_input_status(message, "valid");
-    }
-});
+var firstname   = document.getElementById("firstname");
+var lastname    = document.getElementById("lastname");
+var email       = document.getElementById("email");
+var telephone   = document.getElementById("telephone");
+var company     = document.getElementById("company");
+var position    = document.getElementById("position");
+var message     = document.getElementById("message");
 var form_inputs = document.querySelectorAll("#dfdl-contact input[type=text], #dfdl-contact input[type=email], #dfdl-contact textarea");
+let count = 0;
 form_inputs.forEach((el) => {
-    el.addEventListener('keyup', () => {
+    if( count == 0 ) {
+        el.classList.add("clean");
+    }
+    el && el.addEventListener('keyup', () => {
+        set_clean_dirty(el,"dirty");
+        form_validate();
+    });
+    el && el.addEventListener('blur', () => {
+        set_clean_dirty(el,"dirty");
         form_validate();
     });
     if ( document.getElementById("contact_form_submitted").value == "false" ) {
@@ -73,20 +26,62 @@ form_inputs.forEach((el) => {
         el.classList.add("dirty");
     }
 });
-function set_input_status(el, status) {
-    el.classList.remove("clean", "valid", "invalid");
-    el.parentElement.classList.remove("valid", "invalid");
+count++;
+function set_clean_dirty(el, status) {
+    el.classList.remove("clean", "dirty");
     el.classList.add(status);
+    el.parentElement.classList.remove("clean", "dirty");
+    el.parentElement.classList.add(status);
+}
+function set_input_status(el, status) {
+    el.classList.remove("valid", "invalid");
+    el.classList.add(status);
+    el.parentElement.classList.remove("valid", "invalid");
     el.parentElement.classList.add(status);
 }
 function form_validate() {
     var invalid = 0;
+    var valid   = 0;
     form_inputs.forEach((el) => {
-        if ( el.classList.contains("invalid") || el.classList.contains("clean") ) {
+        if ( el.classList.contains("dirty") && el.value ) {
+            if ( el.id === "email" ) {
+                if ( validateEmail(el.value) == true  ) {
+                    set_input_status(email, "valid");
+                    valid++;
+                } else {
+                    set_input_status(email, "invalid");
+                    invalid++;
+                }
+            } else if ( el.id === "telephone" ) {
+                if ( el.value.length > 8  ) {
+                    set_input_status(telephone, "valid");
+                    valid++;
+                } else {
+                    set_input_status(telephone, "invalid");
+                    invalid++;
+                }
+            } else if ( el.id === "message" ) {
+                if ( el.value.length > 16  ) {
+                    set_input_status(message, "valid");
+                    valid++;
+                } else {
+                    set_input_status(message, "invalid");
+                    invalid++;
+                }
+            } else if ( el.value.length > 1 ) {
+                set_input_status(el, "valid");
+                valid++;
+            } else {
+                set_input_status(el, "invalid");
+                invalid++;
+            }
+        } if ( el.classList.contains("dirty") && ! el.value ) {
+            el.classList.remove("valid", "invalid");
+            el.parentElement.classList.remove("valid", "invalid");
             invalid++;
         }
     });
-    if ( invalid == 0 ) {
+    if ( invalid == 0 && valid == 7 ) {
         document.getElementById("contact-submit").classList.remove("disabled");
     } else {
         document.getElementById("contact-submit").classList.add("disabled");
