@@ -3225,9 +3225,19 @@ input[type='search']:focus-visible + input {
 	#page-lead.solutions .lead {
 		font-size: var(--font-size-large);
 	}
+
+	/*
+	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
+		column-gap: 0;
+		display: flex;
+		grid-template-columns: none;
+	} */
+
+
 	#results_stage.team-stage.all .swiper-wrapper,
 	#results_stage.team-stage.country .swiper-wrapper,
-	#team-grid-swiper.search-teams .swiper-wrapper {
+	#team-grid-swiper.search-teams .swiper-wrapper,
+	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
 		grid-template-columns: repeat(1, 1fr);
 	}
 	#team-grid-swiper .team-swiper .swiper-wrapper a {
