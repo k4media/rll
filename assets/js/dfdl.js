@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     };
     
     function swiperResize() {
-        if ( subnavSwiper && subnavSwiper.slidesGrid.length() > 0 ) {
+        if ( subnavSwiper && subnavSwiper.slidesGrid.length > 0 ) {
             // js error debug
             console.log(subnavSwiper);
             subnavSwiper.slideTo(subnavSwiper.activeIndex, 0); 
