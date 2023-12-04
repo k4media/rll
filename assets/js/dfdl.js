@@ -76,6 +76,8 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function swiperResize() {
         if (subnavSwiper) {
+            // js error debug
+            console.log(subnavSwiper);
             subnavSwiper.slideTo(subnavSwiper.activeIndex, 0); 
         }
     }

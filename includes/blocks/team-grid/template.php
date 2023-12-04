@@ -175,6 +175,7 @@ if ( ! empty( $user_query->get_results() ) ) :
      </div>
 </div>
 <script>
+/*
 document.addEventListener('DOMContentLoaded', function () {
      swiperInit = false;
      function swiperCard() {
@@ -205,5 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
      swiperCard();
      window.addEventListener("resize", swiperCard);
 });
+*/
 </script>
 <?php endif; ?>
