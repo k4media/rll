@@ -76,11 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function swiperResize() {
         if ( subnavSwiper && subnavSwiper.slidesGrid.length > 0 ) {
-            // js error debug
-            console.log(subnavSwiper);
             subnavSwiper.slideTo(subnavSwiper.activeIndex, 0); 
-        } else {
-            console.log("Slider has no slides");
         }
     }
     window.addEventListener("resize", swiperResize);

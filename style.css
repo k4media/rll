@@ -2958,11 +2958,12 @@ input[type='search']:focus-visible + input {
 		max-width: 320px;
 		padding: 0;
 	}
+	/*
 	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
 		column-gap: 0;
 		display: flex;
 		grid-template-columns: none;
-	}
+	} */
 	.team-grid {
 		padding: 60px 16px 60px 16px;
 		overflow: hidden;
@@ -2970,6 +2971,7 @@ input[type='search']:focus-visible + input {
 	.swiper.callout + .posts {
 		margin-top: 0;
 	}
+	/*
 	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
 		align-items: stretch;
 		display: flex;
@@ -2983,7 +2985,7 @@ input[type='search']:focus-visible + input {
 		display: inline-block;
 		margin-right: 24px;
 		max-width: 320px;
-	}
+	} */
 	/* #team-grid-swiper .see-more {
 		display: none;
 	} */
