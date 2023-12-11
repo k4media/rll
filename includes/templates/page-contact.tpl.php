@@ -5,7 +5,23 @@
 
 // validation
 wp_enqueue_script('dfdl-contact-validation', get_stylesheet_directory_uri() . '/assets/js/dfdl-contact.js', null, null, true );
- 
+
+// Define a custom function to filter the HTML title
+function dfdl_custom_filter_wp_title($title_parts) {
+
+    if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
+        $title_parts['title'] = 'DFDL ' . ucwords($GLOBALS['wp_query']->query_vars['dfdl_country']). ' Contact';
+    } else {
+        $title_parts['title'] = 'DFDL Contact';
+    }
+
+    // Return the modified title parts
+    return $title_parts;
+}
+
+// Hook into the wp_title filter
+add_filter('document_title_parts', 'dfdl_custom_filter_wp_title', 10, 2);
+
 get_header();
 
 $country  = ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) ? $GLOBALS['wp_query']->query_vars['dfdl_country'] : "regional" ;

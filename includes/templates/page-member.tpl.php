@@ -5,6 +5,24 @@
 
 global $wp;
 
+global $wp;
+
+// Define a custom function to filter the HTML title
+function dfdl_custom_filter_wp_title($title_parts) {
+
+    $user = get_user_by('id', $GLOBALS['wp_query']->query_vars['dfdl_member']) ;
+    
+    if ( isset($user->data->display_name) ) {
+        $title_parts['title'] = esc_attr($user->data->display_name) . ' at DFDL';
+    }
+
+    // Return the modified title parts
+    return $title_parts;
+}
+
+// Hook into the wp_title filter
+add_filter('document_title_parts', 'dfdl_custom_filter_wp_title', 10, 2);
+
 get_header();
 
 $position  = "";
