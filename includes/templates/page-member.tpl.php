@@ -13,7 +13,7 @@ function dfdl_custom_filter_wp_title($title_parts) {
     $user = get_user_by('id', $GLOBALS['wp_query']->query_vars['dfdl_member']) ;
     
     if ( isset($user->data->display_name) ) {
-        $title_parts['title'] = esc_attr($user->data->display_name) . ' at DFDL';
+        $title_parts['title'] = esc_attr($user->data->display_name) . ' at Robin Lynn Lee';
     }
 
     // Return the modified title parts

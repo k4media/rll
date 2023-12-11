@@ -10,9 +10,9 @@ wp_enqueue_script('dfdl-contact-validation', get_stylesheet_directory_uri() . '/
 function dfdl_custom_filter_wp_title($title_parts) {
 
     if ( isset($GLOBALS['wp_query']->query_vars['dfdl_country']) ) {
-        $title_parts['title'] = 'DFDL ' . ucwords($GLOBALS['wp_query']->query_vars['dfdl_country']). ' Contact';
+        $title_parts['title'] = 'Robin Lynn Lee ' . ucwords($GLOBALS['wp_query']->query_vars['dfdl_country']). ' Contact';
     } else {
-        $title_parts['title'] = 'DFDL Contact';
+        $title_parts['title'] = 'Robin Lynn Lee Contact';
     }
 
     // Return the modified title parts
