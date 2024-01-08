@@ -2665,6 +2665,12 @@ input[type='search']:focus-visible + input {
 	article + #insights {
 		margin: 60px auto 60px auto;
 	}
+	.hero.page.landing {
+		height: 450px;
+	}
+	.hero.page, .hero.front-page  {
+		height: 420px;
+	}
 }
 @media screen and ( max-width: 800px ) {
 	.narrow {
@@ -2825,6 +2831,12 @@ input[type='search']:focus-visible + input {
 	}
 	.country-contacts-stage {
 		padding: 60px 0 60px 0;
+	}
+	.hero.page.landing {
+		height: 400px;
+	}
+	.hero.page, .hero.front-page {
+		height: 300px;
 	}
 }
 
