@@ -2836,7 +2836,7 @@ input[type='search']:focus-visible + input {
 		height: 400px;
 	}
 	.hero.page, .hero.front-page {
-		height: 300px;
+		height: 350px;
 	}
 }
 
