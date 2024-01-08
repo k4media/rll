@@ -2672,7 +2672,7 @@ input[type='search']:focus-visible + input {
 		height: 420px;
 	}
 	.hero.front-page  {
-		height: 720px;
+		height: 620px;
 	}
 }
 @media screen and ( max-width: 800px ) {
@@ -2835,9 +2835,6 @@ input[type='search']:focus-visible + input {
 	.country-contacts-stage {
 		padding: 60px 0 60px 0;
 	}
-	.hero.page.landing {
-		height: 400px;
-	}
 	.hero.page {
 		height: 350px;
 	}
@@ -2914,10 +2911,6 @@ input[type='search']:focus-visible + input {
 		margin: 16px 0 16px 0;
 		text-align: left;
 	}
-	/*
-	.solutions-callout h3 {
-		display: none;
-	} */
 	.solutions.stage {
 		display: block;
 	}
@@ -2973,12 +2966,6 @@ input[type='search']:focus-visible + input {
 		max-width: 320px;
 		padding: 0;
 	}
-	/*
-	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
-		column-gap: 0;
-		display: flex;
-		grid-template-columns: none;
-	} */
 	.team-grid {
 		padding: 60px 16px 60px 16px;
 		overflow: hidden;
@@ -2986,24 +2973,6 @@ input[type='search']:focus-visible + input {
 	.swiper.callout + .posts {
 		margin-top: 0;
 	}
-	/*
-	#team-grid-swiper:not(.search-teams) .swiper-wrapper {
-		align-items: stretch;
-		display: flex;
-		flex-wrap: nowrap;
-		grid-template-columns: repeat(2, 1fr);
-	}
-	#team-grid-swiper .swiper-slide {
-		height: auto;
-	}
-	#team-grid-swiper:not(.search-teams) .swiper-wrapper > a {
-		display: inline-block;
-		margin-right: 24px;
-		max-width: 320px;
-	} */
-	/* #team-grid-swiper .see-more {
-		display: none;
-	} */
 	#firm-commitments .commitments-stage {
 		columns: 1;
 	}
@@ -3021,6 +2990,9 @@ input[type='search']:focus-visible + input {
 	}
 	.member .bio {
 		columns: 1;
+	}
+	.hero.front-page  {
+		height: 450px;
 	}
 }
 
