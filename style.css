@@ -2666,10 +2666,13 @@ input[type='search']:focus-visible + input {
 		margin: 60px auto 60px auto;
 	}
 	.hero.page.landing {
-		height: 450px;
+		height: 350px;
 	}
-	.hero.page, .hero.front-page  {
+	.hero.page {
 		height: 420px;
+	}
+	.hero.front-page  {
+		height: 720px;
 	}
 }
 @media screen and ( max-width: 800px ) {
@@ -2835,7 +2838,7 @@ input[type='search']:focus-visible + input {
 	.hero.page.landing {
 		height: 400px;
 	}
-	.hero.page, .hero.front-page {
+	.hero.page {
 		height: 350px;
 	}
 }
